@@ -1,0 +1,39 @@
+body{
+  /*background:radial-gradient(circle, linen, white);*/
+  font-family: 'Dosis' !important;
+}
+
+.navbar-customized{
+  border-bottom: 1px linen solid;
+  background: linear-gradient(270deg, #F0F0F0  , white); /* Standard syntax */
+}
+
+.navSearch{
+  border-top-left-radius:20px;
+  border-bottom-left-radius:20px;
+
+  border-top-right-radius:20px;
+  border-bottom-right-radius:20px;
+}
+
+.navbar-nav .active{
+  background-color:#add8e6;
+  border-bottom-right-radius:10px;
+  border-bottom-left-radius:10px;
+  color: #3A8AD3;
+}
+
+.navbar-nav .active > a:focus{
+  background-color:#add8e6;
+  border-bottom-right-radius:10px;
+  border-bottom-left-radius:10px;
+  color: #3A8AD3;
+}
+
+
+.navbar-nav .active > a:focus{
+  background-color:#add8e6;
+  border-bottom-right-radius:10px;
+  border-bottom-left-radius:10px;
+  color: #3A8AD3;
+}
