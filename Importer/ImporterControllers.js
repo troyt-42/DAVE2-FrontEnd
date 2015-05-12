@@ -1,20 +1,27 @@
-var ImporterControllers = angular.module("ImporterControllers",["formly","formlyBootstrap"]);
+var ImporterControllers = angular.module("ImporterApp");
 
-ImporterControllers.controller("ImporterUploadCtrl", ["$http","$scope", function($http, $scope){
-  $scope.formModel={};
+ImporterControllers.controller("ImporterUploadCtrl", ["$http","$scope","FileUploader", function($http, $scope, FileUploader){
+
+
+  $scope.formModel={
+  };
   $scope.formFields=[
     {
-      type:"input",
-      key:"File Name",
-      templateOptions:{
-        label:"File Name"
-      }
-    },
-    {
-      template:"<input type='file'>",
-      templateOptions:{
-        label:"Chose A file"
-      }
+      type:"uploadForm",
+      key:"uploadInfo"
     }
   ];
+  $scope.formOptions={
+    formState:{
+      testProperty: true
+    }
+
+  };
+
+  $scope.optionStatus= {
+    firstOpen : true,
+    secondOpen: false,
+    thirdOpen: false,
+    fourthOpen: false
+  };
 }]);

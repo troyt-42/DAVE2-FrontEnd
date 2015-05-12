@@ -1,4 +1,4 @@
-var Dave2AppControllers = angular.module("Dave2AppControllers",[]);
+var Dave2AppControllers = angular.module("Dave2App");
 
 
 Dave2AppControllers.controller('Dave2Ctrl', ['$scope','$location', function($scope, $location){
