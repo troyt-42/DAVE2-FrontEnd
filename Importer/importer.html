@@ -1,7 +1,50 @@
 <div class="container-fluid" ng-controller="ImporterUploadCtrl">
   <div class="row">
-    <div class="col-md-3">
-      <formly-form model="formModel" fields="formFields"></formly-form>
+    <div class="col-md-3" id="importerOptions">
+
+
+      <accordion close-others="oneAtATime">
+
+        <accordion-group is-open="optionStatus.firstOpen" id="importerOptionsFirst" >
+          <accordion-heading>
+            <span style="font-size:150%;font-weight:bold;color:white">Upload A File</span>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.firstOpen, 'glyphicon-chevron-right': !optionStatus.firstOpen}" style="font-size:150%;color:white"></i>
+          </accordion-heading>
+          <formly-form model="formModel" fields="formFields" options="formOptions"></formly-form>
+        </accordion-group>
+
+        <accordion-group is-open="optionStatus.secondOpen" id="importerOptionsSecond">
+          <accordion-heading>
+            <span style="font-size:150%;font-weight:bold;color:white">Create New Importer</span>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.secondOpen, 'glyphicon-chevron-right': !optionStatus.secondOpen}" style="font-size:150%;color:white"></i>
+          </accordion-heading>
+          New Importer Info
+        </accordion-group>
+
+        <accordion-group is-open="optionStatus.thirdOpen" id="importerOptionsThird">
+          <accordion-heading>
+            <span style="font-size:150%;font-weight:bold;color:white">Default Display Setting</span>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.thirdOpen, 'glyphicon-chevron-right': !optionStatus.thirdOpen}" style="font-size:150%;color:white"></i>
+
+          </accordion-heading>
+          Default Setting Info
+        </accordion-group>
+
+        <accordion-group is-open="optionStatus.fourthOpen" id="importerOptionsFourth">
+          <accordion-heading>
+            <span style="font-size:150%;font-weight:bold;color:white">Help</span>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.fourthOpen, 'glyphicon-chevron-right': !optionStatus.fourthOpen}" style="font-size:150%;color:white"></i>
+
+          </accordion-heading>
+          Help Info
+        </accordion-group>
+
+      </accordion>
+
+    </div>
+    <div class="col-md-9" >
+      <div id="importerPanel">
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,21 @@
+
+
+<div class="input-group" style="margin-top:10px">
+  <span class="input-group-addon" id="basic-addon1">File Name</span>
+  <input type="text" class="form-control" placeholder="example.csv" ng-model="model[options.key].fileName">
+</div>
+
+<div class="input-group"  style="margin-top:10px">
+  <span class="input-group-addon" id="basic-addon1">Select A File</span>
+  <input type="file" class="form-control" nv-file-select uploader="uploader">
+  <ul>
+    <li ng-repeat="item in uploader.queue">
+      Name: <span ng-bind="item.file.name"></span><br/>
+      <button ng-click="item.upload()">upload</button>
+    </li>
+  </ul>
+</div>
+
+<!--<div>
+  <pre ng-repeat="(key, val) in this" ng-if="key !== 'uploader'">$scope.{{key}} = {{val | json}}</pre>
+</div>-->

@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
   <link rel="stylesheet" type= "text/css" href = "http://fonts.googleapis.com/css?family=Dosis:400,600"/>
   <link rel="stylesheet" type= "text/css" href = "index.css"/>
+  <link rel="stylesheet" type= "text/css" href = "Importer/importer.css"/>
 </head>
 
 
@@ -17,9 +18,9 @@
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <span class="icon-bar" style="background-color:red"></span>
+          <span class="icon-bar" style="background-color:red"></span>
+          <span class="icon-bar" style="background-color:red"></span>
         </button>
         <div  class="navbar-brand" style="padding-top:0px;height:70px"><img src = "imgs/dave_logo2.png" alt="Brand" height="70px"/></div>
       </div>
@@ -52,11 +53,13 @@
   <script src="/bower_components/angular-animate/angular-animate.js"  ></script>                                    <!--ngAnimate-->
   <script src="/bower_components/angular-file-upload/angular-file-upload.js"></script>                              <!--angularFileUpload-->
   <script src="/bower_components/angular-socket-io/socket.js"></script>                                             <!--scoketio-->
+  <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>                                             <!--scoketio-->
+
 
   <script src="/bower_components/api-check/dist/api-check.js"></script>                                             <!-- must appear before formly.js -->
   <script src="/bower_components/angular-formly/dist/formly.js"></script>                                           <!--angular formly-->
   <script src="//rawgit.com/formly-js/angular-formly-templates-bootstrap/master/dist/angular-formly-templates-bootstrap.js"></script>
-  
+
   <script src="Dave2App.js"></script>                                                                               <!--Dave2App.js-->
   <script src="Dave2AppControllers.js"></script>                                                                    <!--Dave2AppControllers.js-->
   <script src="Importer/ImporterApp.js"></script>                                                                   <!--ImpoterApp.js-->
