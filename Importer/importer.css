@@ -11,14 +11,20 @@
 }
 
 #importerOptions #importerOptionsFourth .panel-heading  {
-  background:linear-gradient(90deg, red, darkgray);
+  background:linear-gradient(90deg, red, orange);
 }
+
+
 
 #importerPanel{
   height:500px;
 
   background-color: #add8e6;
-  box-shadow: 4px 4px 0px peru;
+  box-shadow: 4px 4px 0px orange;
 
   border-radius:20px;
+}
+
+textarea {
+   resize: vertical;
 }

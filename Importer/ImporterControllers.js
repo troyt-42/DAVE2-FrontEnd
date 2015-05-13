@@ -1,7 +1,9 @@
 var ImporterControllers = angular.module("ImporterApp");
 
-ImporterControllers.controller("ImporterUploadCtrl", ["$http","$scope","FileUploader", function($http, $scope, FileUploader){
-
+ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scope", function($timeout, $http, $scope){
+  var upload = {};
+  $scope.stepOne = true;
+  $scope.stepTwo = false;
 
   $scope.formModel={
   };
@@ -24,4 +26,18 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$http","$scope","FileUplo
     thirdOpen: false,
     fourthOpen: false
   };
+
+  $scope.fileUploadProgress = 0;
+
+
+  $scope.$on("stepTwo",function(){
+    $scope.stepOne = false;
+    $scope.stepTwo = true;
+  });
+
+  $scope.$on("uploadProgress", function(event, data){
+    console.log(data);
+    $scope.fileUploadProgress = data;
+  });
+
 }]);
