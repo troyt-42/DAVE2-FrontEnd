@@ -15,7 +15,10 @@ ImporterApp.run(["formlyConfig", function(formlyConfig){
 
           upload = Upload.upload({
             url : "/Importer/uploadFile",
-            file: $scope.uploadfile
+            file: $scope.uploadfile,
+            fields:{
+              uploadInfo: $scope.model[$scope.options.key]
+            }
           }).progress(function(evt) {
             var progress = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + progress + '% file :'+ evt.config.file.name);
@@ -44,4 +47,12 @@ ImporterApp.run(["formlyConfig", function(formlyConfig){
       };
     }]
   });
+
+  formlyConfig.setType({
+    name:"fieldForm",
+    templateUrl:"/Importer/fieldFormTemplate.html",
+    defaultOptions:{}
+
+  });
+
 }]);

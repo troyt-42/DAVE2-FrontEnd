@@ -1,4 +1,6 @@
+
 <div class="container-fluid" ng-controller="ImporterUploadCtrl">
+
   <div class="row">
     <div class="col-md-3" id="importerOptions">
 
@@ -42,15 +44,154 @@
       </accordion>
 
     </div>
+
     <div class="col-md-9" >
       <div id="importerPanel">
-        <div class="col-md-6 col-md-offset-3" style="margin-top:240px;text-align:center">
-          <span ng-show="stepOne"style="font-size:200%">Importer System</span>
+        <div class="col-md-6 col-md-offset-3" ng-hide="stepThree" style="margin-top:240px;text-align:center">
+          <div class="importerSystemTitle" ng-show="stepOne"><span style="font-size:300%;color:black;">Importer System</span><span ng-show="stepOne" style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
           <progressbar ng-show="stepTwo" max = "100" style="height:3em" class="progress-striped active" value="fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
         </div>
 
+        <div ng-show="stepThree">
+
+          <!-- <div class="col-md-4">
+
+            <div class="col-md-12" style="position:relative;top:15px;text-align:center;border:1px solid #8AC007;background:white"><span style="font-size:200%">Avaliable Fields</span></div>
+            <div class="col-md-12 well" style="postion:relative;top:20px;overflow-y:scroll;height:430px;border-right:1px linen solid;background:linen;border-radius:0px;background:#add8e6;">
+
+
+            </div>
+          </div> -->
+
+
+            <!--<div class="col-md-4" style="position:relative">
+              <formly-form model="formModel2" fields="formFields2"></formly-form>
+            </div>
+            <div class="col-md-4" style="position:relative">
+              <formly-form model="formModel2" fields="formFields2"></formly-form>
+            </div>-->
+
+
+
+        </div>
       </div>
       {{formModel}}
     </div>
   </div>
 </div>
+
+
+<script>/* ---- particles.js config ---- */
+
+particlesJS("particles-js", {
+  "particles": {
+    "number": {
+      "value": 150,
+      "density": {
+        "enable": true,
+        "value_area": 800
+      }
+    },
+    "color": {
+      "value": "#ffffff"
+    },
+    "shape": {
+      "type": "circle",
+      "stroke": {
+        "width": 0,
+        "color": "#000000"
+      },
+      "polygon": {
+        "nb_sides": 5
+      },
+      "image": {
+        "src": "img/github.svg",
+        "width": 100,
+        "height": 100
+      }
+    },
+    "opacity": {
+      "value": 1,
+      "random": false,
+      "anim": {
+        "enable": false,
+        "speed": 1,
+        "opacity_min": 0.1,
+        "sync": false
+      }
+    },
+    "size": {
+      "value": 3,
+      "random": true,
+      "anim": {
+        "enable": false,
+        "speed": 40,
+        "size_min": 0.1,
+        "sync": false
+      }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#8AC007",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 1,
+      "direction": "right",
+      "random": true,
+      "straight": false,
+      "out_mode": "out",
+      "bounce": false,
+      "attract": {
+        "enable": false,
+        "rotateX": 600,
+        "rotateY": 1200
+      }
+    }
+  },
+  "interactivity": {
+    "detect_on": "canvas",
+    "events": {
+      "onhover": {
+        "enable": false,
+        "mode": "grab"
+      },
+      "onclick": {
+        "enable": false,
+        "mode": "push"
+      },
+      "resize": false
+    },
+    "modes": {
+      "grab": {
+        "distance": 140,
+        "line_linked": {
+          "opacity": 1
+        }
+      },
+      "bubble": {
+        "distance": 400,
+        "size": 40,
+        "duration": 2,
+        "opacity": 8,
+        "speed": 3
+      },
+      "repulse": {
+        "distance": 200,
+        "duration": 0.4
+      },
+      "push": {
+        "particles_nb": 4
+      },
+      "remove": {
+        "particles_nb": 2
+      }
+    }
+  },
+  "retina_detect": true
+});
+
+</script>

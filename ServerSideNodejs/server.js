@@ -24,8 +24,18 @@ app.post("/Importer/uploadFile", function(req,res){
   form.on('part', function(part) {
 
     if (!part.filename) {
+      var uploadInfo;
       // filename is not defined when this is a field and not a file
       console.log('got field named ' + part.name);
+      part.on('data', function(chunk){
+        uploadInfo += chunk;
+      });
+
+      part.on('end', function(){
+        console.log(uploadInfo);
+        console.log(part.name + " is received");
+      });
+
       // ignore field's content
       part.resume();
     }
@@ -61,10 +71,10 @@ app.post("/Importer/uploadFile", function(req,res){
     res.end('Received ' + count + ' files');
   });
 
-  form.on('progress', function(bytesReceived, bytesExpected){
-    var progress =bytesReceived / bytesExpected * 100;
-    console.log("Progress: " + progress.toFixed(2) + "%");
-  });
+  // form.on('progress', function(bytesReceived, bytesExpected){
+  //   var progress =bytesReceived / bytesExpected * 100;
+  //   console.log("Progress: " + progress.toFixed(2) + "%");
+  // });
   form.parse(req);
 });
 
