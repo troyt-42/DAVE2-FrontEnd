@@ -1,6 +1,8 @@
 body{
   /*background:radial-gradient(circle, linen, white);*/
   font-family: 'Dosis' !important;
+  overflow:hidden;
+  background-color:white;
 }
 
 .navbar-customized{
