@@ -17,21 +17,13 @@
 
 <div class="input-group"  style="margin-top:10px">
   <span class="input-group-addon" id="basic-addon1" style="color:#3A8AD3">Select A File</span>
-  <input type="file" class="form-control" ngf-select  ngf-change="fileSelected($files, $event)" ng-model="uploadfile">
-  <ul class="list-unstyled">
-    <li ng-repeat="item in uploader.queue">
-      <div class="row">
-        <div class="col-md-1 col-md-offset-1"><i class="glyphicon glyphicon-remove" style="color:#3A8AD3;size:75%"></i></div>
-        <div class="col-md-10"><span ng-bind="item.file.name"></span></div>
-      </div>
-    </li>
-  </ul>
+  <input type="file" class="form-control" accept=".csv" ngf-select  ngf-change="fileSelected($files, $event)" ng-model="uploadfile">
 </div>
 
 
 
 <div class="col-md-6">
-  <button type="button" ng-click = "submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
+  <button type="button" ng-disabled = "model[options.key] === {}" ng-click = "submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
 </div>
 <div class="col-md-6">
   <button type="button" ng-click = "cancelFile()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>

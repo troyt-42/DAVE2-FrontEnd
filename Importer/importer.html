@@ -2,12 +2,12 @@
 <div class="container-fluid" ng-controller="ImporterUploadCtrl">
 
   <div class="row">
-    <div class="col-md-3" id="importerOptions">
+    <div class="col-md-3 well" id="importerOptions" style="background:white;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0">
 
 
-      <accordion close-others="oneAtATime">
+      <accordion close-others="true" >
 
-        <accordion-group is-open="optionStatus.firstOpen" id="importerOptionsFirst" >
+        <accordion-group is-open="optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black">
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Upload A File</span>
             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.firstOpen, 'glyphicon-chevron-right': !optionStatus.firstOpen}" style="font-size:150%;color:white"></i>
@@ -15,7 +15,7 @@
           <formly-form model="formModel" fields="formFields"></formly-form>
         </accordion-group>
 
-        <accordion-group is-open="optionStatus.secondOpen" id="importerOptionsSecond">
+        <accordion-group is-open="optionStatus.secondOpen" id="importerOptionsSecond" style="border-color:black">
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Create New Importer</span>
             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.secondOpen, 'glyphicon-chevron-right': !optionStatus.secondOpen}" style="font-size:150%;color:white"></i>
@@ -23,7 +23,7 @@
           New Importer Info
         </accordion-group>
 
-        <accordion-group is-open="optionStatus.thirdOpen" id="importerOptionsThird">
+        <accordion-group is-open="optionStatus.thirdOpen" id="importerOptionsThird" style="border-color:black">
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Default Display Setting</span>
             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.thirdOpen, 'glyphicon-chevron-right': !optionStatus.thirdOpen}" style="font-size:150%;color:white"></i>
@@ -32,7 +32,7 @@
           Default Setting Info
         </accordion-group>
 
-        <accordion-group is-open="optionStatus.fourthOpen" id="importerOptionsFourth">
+        <accordion-group is-open="optionStatus.fourthOpen" id="importerOptionsFourth" style="border-color:black">
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Help</span>
             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.fourthOpen, 'glyphicon-chevron-right': !optionStatus.fourthOpen}" style="font-size:150%;color:white"></i>
@@ -47,13 +47,23 @@
 
     <div class="col-md-9" >
       <div id="importerPanel">
-        <div class="col-md-6 col-md-offset-3" ng-hide="stepThree" style="margin-top:240px;text-align:center">
-          <div class="importerSystemTitle" ng-show="stepOne"><span style="font-size:300%;color:black;">Importer System</span><span ng-show="stepOne" style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
+        <div class="col-md-6 col-md-offset-3" ng-hide="stepThree" style="margin-top:300px;text-align:center">
+          <div class="importerSystemTitle" ng-show="stepOne"><span style="font-size:300%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
           <progressbar ng-show="stepTwo" max = "100" style="height:3em" class="progress-striped active" value="fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
         </div>
 
         <div ng-show="stepThree">
+          <div class="row" style="border-radius:5px;background:#3A8AD3;text-align:left;box-shadow:0px 0px 0px #3A8AD3;
+          border:0px solid gray;margin-left:10px">
+            <div class="col-md-9">
+              <span style="font-size:300%;color:white;font-weight:bold">Avaliable Fields</span>
+            </div>
 
+            <div class="col-md-3">
+              <button class="btn " ng-disabled="true" style="position:relative;bottom:-10px;font-size:150%;background:white;color:black;">Decide</button>
+              <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="cancelImport()">Cancel</button>
+            </div>
+          </div>
           <!-- <div class="col-md-4">
 
             <div class="col-md-12" style="position:relative;top:15px;text-align:center;border:1px solid #8AC007;background:white"><span style="font-size:200%">Avaliable Fields</span></div>
@@ -76,7 +86,10 @@
         </div>
       </div>
       {{formModel}}
+      <!-- <div class="col-md-12 well"></div> -->
     </div>
+
+
   </div>
 </div>
 
@@ -93,7 +106,7 @@ particlesJS("particles-js", {
       }
     },
     "color": {
-      "value": "#ffffff"
+      "value": "#000000"
     },
     "shape": {
       "type": "circle",
@@ -111,7 +124,7 @@ particlesJS("particles-js", {
       }
     },
     "opacity": {
-      "value": 1,
+      "value": 0.5,
       "random": false,
       "anim": {
         "enable": false,
@@ -133,7 +146,7 @@ particlesJS("particles-js", {
     "line_linked": {
       "enable": true,
       "distance": 150,
-      "color": "#8AC007",
+      "color": "#000000",
       "opacity": 0.4,
       "width": 1
     },

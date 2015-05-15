@@ -6,6 +6,8 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
   $scope.stepOne = true;
   $scope.stepTwo = false;
   $scope.stepThree = false;
+
+  
   $scope.formModel={
   };
   $scope.formFields=[
@@ -71,4 +73,11 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
     {name: "fake field", index: 9},
     {name: "fake field", index: 10}
   ];
+
+  $scope.cancelImport = function(){
+    $scope.stepOne = true;
+    $scope.stepTwo = false;
+    $scope.stepThree = false;
+    $scope.fileUploadProgress = 0;
+  };
 }]);
