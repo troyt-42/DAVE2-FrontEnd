@@ -35,4 +35,5 @@ Dave2AppControllers.controller('Dave2Ctrl', ['$scope','$location','$modal', func
       console.log(data);
     });
   };
+  
 }]);

@@ -1,5 +1,10 @@
 #importerOptions #importerOptionsFirst .panel-heading  {
   background:linear-gradient(90deg, #3A8AD3, darkgray);
+  
+}
+
+#importerOptions #importerOptionsFirst .panel-body  {
+  background:lightgrey;
 
 }
 
@@ -45,10 +50,16 @@ textarea {
 }
 
 .importerSystemTitle{
+  text-align:center;
   background-color:white;
   border-radius:50px;
   box-shadow:0px 3px 0px #ff6600;
   border-bottom:1px solid white;
+}
+
+.footer{
+  height:150px;
+  background:white;
 }
 
 
@@ -66,6 +77,17 @@ canvas {
   width: 100%;
   height: 100%;
   background-color: #8AC007;
+  background-image: url("");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+
+#particles-js-2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: orange;
   background-image: url("");
   background-repeat: no-repeat;
   background-size: cover;

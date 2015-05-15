@@ -34,10 +34,15 @@ ImporterApp.run(["formlyConfig", function(formlyConfig){
         $scope.$emit("stepTwo");
       };
 
+      $scope.importInfoMissing = true;
+      
       $scope.cancelFile = function(){
+        $scope.model[$scope.options.key] = {};
+        $scope.uploadfile = {};
       };
 
       $scope.fileSelected = function(file, event){
+
         if((file[0] !== undefined) && (file[0] !== null)){
           if(($scope.model[$scope.options.key] === undefined) || ($scope.model[$scope.options.key] === null)){
             $scope.model[$scope.options.key] = { file: ""};
