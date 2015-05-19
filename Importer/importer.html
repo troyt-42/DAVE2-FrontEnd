@@ -2,17 +2,23 @@
 <div class="container-fluid" ng-controller="ImporterUploadCtrl">
 
   <div class="row">
-    <div class="col-md-3 well" id="importerOptions" style="background:white;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0">
+    <div class="col-md-3 well" id="importerOptions" style="background:white;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0;overflow-y:scroll;max-height:700px">
 
 
       <accordion close-others="true" >
 
-        <accordion-group is-open="optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black">
+        <accordion-group is-open="optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black;" >
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Upload A File</span>
             <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.firstOpen, 'glyphicon-chevron-right': !optionStatus.firstOpen}" style="font-size:150%;color:white"></i>
           </accordion-heading>
           <formly-form model="formModel" fields="formFields"></formly-form>
+          <div class="col-md-6">
+            <button type="button" ng-disabled = "!formModel['Select A File']" ng-click = "submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
+          </div>
+          <div class="col-md-6">
+            <button type="button" ng-click = "cancelFile()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
+          </div>
         </accordion-group>
 
         <accordion-group is-open="optionStatus.secondOpen" id="importerOptionsSecond" style="border-color:black">
@@ -53,44 +59,40 @@
         </div>
 
         <div ng-show="stepThree">
+
           <div class="row" style="border-radius:5px;background:#3A8AD3;text-align:left;box-shadow:0px 0px 0px #3A8AD3;
           border:0px solid gray;margin-left:10px">
-            <div class="col-md-9">
-              <span style="font-size:300%;color:white;font-weight:bold">Avaliable Fields</span>
-            </div>
+          <div class="col-md-9">
+            <span style="font-size:300%;color:white;font-weight:bold">Avaliable Fields</span>
+          </div>
 
-            <div class="col-md-3">
-              <button class="btn " ng-disabled="true" style="position:relative;bottom:-10px;font-size:150%;background:white;color:black;">Decide</button>
-              <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="cancelImport()">Cancel</button>
+          <div class="col-md-3">
+            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:white;color:black;">Decide</button>
+            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="cancelImport()">Cancel</button>
+          </div>
+        </div>
+        <div class = "row" style="margin-left:10px;margin-top:10px">
+
+          <div class = "col-md-4" ng-repeat="field in fakeFieldsInfo" >
+            <div class="panel panel-default">
+              <div class="panel-heading" style="background:linen;font-size:125%">
+                {{field.name}}<input type="checkbox" style="float:right" ng-model="stepThreeFormModelCollection[$index].checked">
+              </div>
+              <div class="panel-body" style="height:200px;overflow-y:scroll" smart-disable="stepThreeFieldsCollection[$index]" content-checked="stepThreeFormModelCollection[$index].checked">
+                <formly-form model="stepThreeFormModelCollection[$index]" fields="stepThreeFieldsCollection[$index]" ng-disabled="!fakeFieldsInfo[$index].checked"></formly-form>
+              </div>
             </div>
           </div>
-          <!-- <div class="col-md-4">
-
-            <div class="col-md-12" style="position:relative;top:15px;text-align:center;border:1px solid #8AC007;background:white"><span style="font-size:200%">Avaliable Fields</span></div>
-            <div class="col-md-12 well" style="postion:relative;top:20px;overflow-y:scroll;height:430px;border-right:1px linen solid;background:linen;border-radius:0px;background:#add8e6;">
-
-
-            </div>
-          </div> -->
-
-
-            <!--<div class="col-md-4" style="position:relative">
-              <formly-form model="formModel2" fields="formFields2"></formly-form>
-            </div>
-            <div class="col-md-4" style="position:relative">
-              <formly-form model="formModel2" fields="formFields2"></formly-form>
-            </div>-->
-
-
 
         </div>
       </div>
-      {{formModel}}
-      <!-- <div class="col-md-12 well"></div> -->
     </div>
-
-
+    {{formModel}}
+    <!-- <div class="col-md-12 well"></div> -->
   </div>
+
+
+</div>
 </div>
 
 
