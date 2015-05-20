@@ -1,10 +1,10 @@
 var ImporterControllers = angular.module("ImporterApp");
 
-ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scope", "Upload", function($timeout, $http, $scope,Upload){
+ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scope", "Upload","FormSettingParseService", function($timeout, $http, $scope,Upload,FormSettingParseService){
 
-  $scope.stepOne = true;
+  $scope.stepOne = false;
   $scope.stepTwo = false;
-  $scope.stepThree = false;
+  $scope.stepThree = true;
 
   $scope.formModel={
   };
@@ -128,16 +128,24 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
 
   $scope.fakeFieldsInfo=[{
     name:"Fermenter Sample HPLC Ethanol",
+    checked: true,
     avaliableOptions:[
       {
         name:"Percision", value: 2, type:"number"
       },
       {
         name:"Unit", value: "meter", type:"select", options:["centimeter", "millimeter", "litre", "gram", "kilogram"]
+      },
+      {
+        name:"Status", value: "ACTIVE", type:"text"
+      },
+      {
+        name:"Note", type:"textarea"
       }
     ]
   }, {
     name: "Fermenter Sample %Solids",
+    checked: true,
     avaliableOptions:[
       {
         name: "Percision", value: 2, type:"number"
@@ -146,68 +154,22 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
   },
   {
     name: "Date",
+    checked: true,
     avaliableOptions:[]
   }, {
     name: "Fermenter Sample ID",
+    checked: true,
     avaliableOptions:[]
   }];
 
-  $scope.stepThreeFieldsCollection = [ [{
-    type:'select',
-    key: 'Unit',
-    defaultValue: "meter",
-    data:{
-      options:["centimeter", "millimeter", "litre", "gram", "kilogram"]
-    },
-    expressionProperties:{
-      "templateOptions.disabled":'!model.checked'
-    }
-  },{
-    type:'input',
-    key: 'Percision',
-    data:{
-      inputType: "number"
-    },
-    defaultValue: 2,
-    expressionProperties:{
-      "templateOptions.disabled":'!model.checked'
-    }
-  },
-  {
-    type:'input',
-    key: 'Status',
-    defaultValue: "ACTIVE",
-    expressionProperties:{
-      "templateOptions.disabled":'!model.checked'
-    }
-  },{
-    type:'textarea',
-    key:"Note",
-    expressionProperties:{
-      "templateOptions.disabled":'!model.checked'
-    }
-  }],[
-    {
-      type:'input',
-      key: 'Percision',
-      data:{
-        inputType: "number"
-      },
-      defaultValue: 2,
-      expressionProperties:{
-        "templateOptions.disabled":'!model.checked'
-      }
-    }
-  ], [],[]];
 
-  $scope.stepThreeFormModelCollection = [{
-    checked: true
-  },{
-    checked: true
-  },{
-    checked: true
-  },{
-    checked: true
-  }];
+  $scope.stepThreeFieldsCollection = FormSettingParseService.fieldsParsing($scope.fakeFieldsInfo);
 
+  $scope.stepThreeFormModelCollection = FormSettingParseService.modelsParsing($scope.fakeFieldsInfo);
+  console.log($scope.stepThreeFormModelCollection);
+  $scope.extendContent = function(index){
+    var temp = $scope.stepThreeFieldsCollection[0];
+    $scope.stepThreeFieldsCollection[0] = $scope.stepThreeFieldsCollection[index];
+    $scope.stepThreeFieldsCollection[index] = temp;
+  };
 }]);

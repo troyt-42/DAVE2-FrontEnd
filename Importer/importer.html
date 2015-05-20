@@ -2,7 +2,7 @@
 <div class="container-fluid" ng-controller="ImporterUploadCtrl">
 
   <div class="row">
-    <div class="col-md-3 well" id="importerOptions" style="background:white;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0;overflow-y:scroll;max-height:700px">
+    <div class="col-md-3 well" id="importerOptions" style="background:white;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0;;max-height:700px">
 
 
       <accordion close-others="true" >
@@ -53,7 +53,7 @@
 
     <div class="col-md-9" >
       <div id="importerPanel">
-        <div class="col-md-6 col-md-offset-3" ng-hide="stepThree" style="margin-top:300px;text-align:center">
+        <div class="col-md-6 col-md-offset-3" ng-hide="stepThree" style="margin-top:250px;text-align:center">
           <div class="importerSystemTitle" ng-show="stepOne"><span style="font-size:300%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
           <progressbar ng-show="stepTwo" max = "100" style="height:3em" class="progress-striped active" value="fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
         </div>
@@ -71,20 +71,22 @@
             <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="cancelImport()">Cancel</button>
           </div>
         </div>
-        <div class = "row" style="margin-left:10px;margin-top:10px">
 
+
+        <div class = "row well" style="margin-left:10px;margin-top:10px;overflow:scroll;max-height:600px;background:#5F9EA0">
           <div class = "col-md-4" ng-repeat="field in fakeFieldsInfo" >
             <div class="panel panel-default">
               <div class="panel-heading" style="background:linen;font-size:125%">
-                {{field.name}}<input type="checkbox" style="float:right" ng-model="stepThreeFormModelCollection[$index].checked">
+                {{field.name}}<input type="checkbox" style="float:right" ng-model="stepThreeFormModelCollection[field.name].checked">
               </div>
-              <div class="panel-body" style="height:200px;overflow-y:scroll" smart-disable="stepThreeFieldsCollection[$index]" content-checked="stepThreeFormModelCollection[$index].checked">
-                <formly-form model="stepThreeFormModelCollection[$index]" fields="stepThreeFieldsCollection[$index]" ng-disabled="!fakeFieldsInfo[$index].checked"></formly-form>
+              <div class="panel-body" style="height:200px;overflow-y:auto;" smart-disable="stepThreeFieldsCollection[$index]" content-checked="stepThreeFormModelCollection[field.name].checked">
+                <formly-form model="stepThreeFormModelCollection[field.name]" fields="stepThreeFieldsCollection[$index]"></formly-form>
               </div>
             </div>
           </div>
-
         </div>
+
+
       </div>
     </div>
     {{formModel}}

@@ -72,9 +72,6 @@ div .formly-field button{
   border:1px solid green;
 }
 
-:disabled{
-  background:black;
-}
 /*----------------------*/
 
 canvas {

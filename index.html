@@ -10,9 +10,9 @@
 </head>
 
 
-<body>
-  <div id="particles-js">    </div>
-  <nav class="navbar navbar-customized" role = "navigation" ng-controller="Dave2Ctrl" style="opacity:0.92">
+<body  ng-controller="Dave2Ctrl">
+  <div id="particles-js" ng-show="dynamicBackground">    </div>
+  <nav class="navbar navbar-customized" role = "navigation" style="opacity:0.92">
 
       <div class="container">
         <div class="navbar-header">
@@ -65,5 +65,7 @@
   <script src="Importer/ImporterApp.js"></script>                                                                   <!--ImpoterApp.js-->
   <script src="Importer/ImporterControllers.js"></script>                                                           <!--ImporterAppControllers.js-->
   <script src="Importer/ImporterDirectives.js"></script>                                                            <!--ImporterAppDirectives.js-->
+  <script src="Importer/ImporterServices.js"></script>                                                              <!--ImporterAppServices.js-->
+
 </body>
 </html>

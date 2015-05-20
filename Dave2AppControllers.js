@@ -35,5 +35,9 @@ Dave2AppControllers.controller('Dave2Ctrl', ['$scope','$location','$modal', func
       console.log(data);
     });
   };
-  
+
+  $scope.dynamicBackground = false;
+  $scope.$on("stepTwo", function(){
+    $scope.dynamicBackground = false;
+  });
 }]);
