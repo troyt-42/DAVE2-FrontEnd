@@ -1,47 +1,47 @@
 
-<div class="container-fluid" ng-controller="ImporterUploadCtrl">
+<div class="container-fluid">
 
   <div class="row">
-    <div class="col-md-3 well" id="importerOptions" style="background:white;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0;;max-height:700px">
+    <div class="col-md-3 well " id="importerOptions" style="background:white;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0;;max-height:700px">
 
 
       <accordion close-others="true" >
 
-        <accordion-group is-open="optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black;" >
+        <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black;" >
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Upload A File</span>
-            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.firstOpen, 'glyphicon-chevron-right': !optionStatus.firstOpen}" style="font-size:150%;color:white"></i>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.firstOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.firstOpen}" style="font-size:150%;color:white"></i>
           </accordion-heading>
-          <formly-form model="formModel" fields="formFields"></formly-form>
+          <formly-form model="importerUploadCtrl.formModel" fields="importerUploadCtrl.formFields"></formly-form>
           <div class="col-md-6">
-            <button type="button" ng-disabled = "!formModel['Select A File']" ng-click = "submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
+            <button type="button" ng-disabled = "!importerUploadCtrl.formModel['Select A File']" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
           </div>
           <div class="col-md-6">
-            <button type="button" ng-click = "cancelFile()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
+            <button type="button" ng-click = "importerUploadCtrl.cancelFile()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
           </div>
         </accordion-group>
 
-        <accordion-group is-open="optionStatus.secondOpen" id="importerOptionsSecond" style="border-color:black">
+        <accordion-group is-open="importerUploadCtrl.optionStatus.secondOpen" id="importerOptionsSecond" style="border-color:black">
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Create New Importer</span>
-            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.secondOpen, 'glyphicon-chevron-right': !optionStatus.secondOpen}" style="font-size:150%;color:white"></i>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.secondOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.secondOpen}" style="font-size:150%;color:white"></i>
           </accordion-heading>
           New Importer Info
         </accordion-group>
 
-        <accordion-group is-open="optionStatus.thirdOpen" id="importerOptionsThird" style="border-color:black">
+        <accordion-group is-open="importerUploadCtrl.optionStatus.thirdOpen" id="importerOptionsThird" style="border-color:black">
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Default Display Setting</span>
-            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.thirdOpen, 'glyphicon-chevron-right': !optionStatus.thirdOpen}" style="font-size:150%;color:white"></i>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.thirdOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.thirdOpen}" style="font-size:150%;color:white"></i>
 
           </accordion-heading>
           Default Setting Info
         </accordion-group>
 
-        <accordion-group is-open="optionStatus.fourthOpen" id="importerOptionsFourth" style="border-color:black">
+        <accordion-group is-open="importerUploadCtrl.optionStatus.fourthOpen" id="importerOptionsFourth" style="border-color:black">
           <accordion-heading>
             <span style="font-size:150%;font-weight:bold;color:white">Help</span>
-            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': optionStatus.fourthOpen, 'glyphicon-chevron-right': !optionStatus.fourthOpen}" style="font-size:150%;color:white"></i>
+            <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.fourthOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.fourthOpen}" style="font-size:150%;color:white"></i>
 
           </accordion-heading>
           Help Info
@@ -53,12 +53,12 @@
 
     <div class="col-md-9" >
       <div id="importerPanel">
-        <div class="col-md-6 col-md-offset-3" ng-hide="stepThree" style="margin-top:250px;text-align:center">
-          <div class="importerSystemTitle" ng-show="stepOne"><span style="font-size:300%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
-          <progressbar ng-show="stepTwo" max = "100" style="height:3em" class="progress-striped active" value="fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
+        <div class="col-md-6 col-md-offset-3" ng-hide="importerUploadCtrl.stepThree" style="margin-top:250px;text-align:center">
+          <div class="importerSystemTitle" ng-show="importerUploadCtrl.stepOne"><span style="font-size:300%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
+          <progressbar ng-show="importerUploadCtrl.stepTwo" max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
         </div>
 
-        <div ng-show="stepThree">
+        <div ng-show="importerUploadCtrl.stepThree">
 
           <div class="row" style="border-radius:5px;background:#3A8AD3;text-align:left;box-shadow:0px 0px 0px #3A8AD3;
           border:0px solid gray;margin-left:10px">
@@ -67,19 +67,19 @@
           </div>
 
           <div class="col-md-3">
-            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:white;color:black;" ng-click="decideImport()">Decide</button>
-            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="cancelImport()">Cancel</button>
+            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:white;color:black;" ng-click="importerUploadCtrl.decideImport()">Decide</button>
+            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="importerUploadCtrl.cancelImport()">Cancel</button>
           </div>
         </div>
 
 
         <div class = "row well" style="margin-left:10px;margin-top:10px;overflow:scroll;max-height:600px;background:#5F9EA0">
-          <div class = "col-md-4" ng-repeat="(name, form) in stepThreeFormCollection" >
+          <div class = "col-md-4" ng-repeat="(name, form) in importerUploadCtrl.stepThreeFormCollection" >
             <div class="panel panel-default">
               <div class="panel-heading" style="background:linen;font-size:125%">
                 {{name}}<input type="checkbox" style="float:right" ng-model="form.checked">
               </div>
-              <div class="panel-body" style="height:200px;overflow-y:auto;" smart-disable="form.fields" content-checked="form.checked">
+              <div class="panel-body" style="height:200px;overflow-y:auto;" dave-smart-disable="form.fields" dave-content-checked="form.checked">
                 <formly-form model="form" fields="form.fields"></formly-form>
               </div>
             </div>
@@ -89,7 +89,7 @@
 
       </div>
     </div>
-    {{formModel}}
+    {{importerUploadCtrl.formModel}}
     <!-- <div class="col-md-12 well"></div> -->
   </div>
 
