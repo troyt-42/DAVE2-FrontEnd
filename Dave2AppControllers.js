@@ -36,8 +36,12 @@ Dave2AppControllers.controller('Dave2Ctrl', ['$scope','$location','$modal', func
     });
   };
 
-  $scope.dynamicBackground = false;
-  $scope.$on("stepTwo", function(){
+  $scope.dynamicBackground = true;
+  $scope.$on("dynamicBackground", function(){
+    $scope.dynamicBackground = true;
+  });
+
+  $scope.$on("removeDynamicBackground", function(){
     $scope.dynamicBackground = false;
   });
 }]);

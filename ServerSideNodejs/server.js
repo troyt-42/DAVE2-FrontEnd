@@ -12,32 +12,43 @@ var socket = io.listen(server);
 
 app.use(express.static(__dirname + '/../'));
 
-var fakeFieldsInfo=[
-  {
-    name: "Date",
-    avaliableOptions:[]
-  }, {
-    name: "Fermenter Sample ID",
-    avaliableOptions:[]
-  }, {
-    name: "Fermenter Sample %Solids",
-    avaliableOptions:[
-      {
-        name: "Percision", value: 2, type:"number"
-      }
-    ]
-  }, {
-    name:"Fermenter Sample HPLC Ethanol",
-    avaliableOptions:[
-      {
-        name:"Percision", value: 2, type:"number"
-      },
-      {
-        name:"Unit", value: "meter", type:"select", options:["centimeter", "millimeter", "litre", "gram", "kilogram"]
-      }
-    ]
-  }
-];
+var fakeFieldsInfo=[{
+  name:"Fermenter Sample HPLC Ethanol",
+  checked: true,
+  avaliableOptions:[
+    {
+      name:"Percision", value: 2, type:"number"
+    },
+    {
+      name:"Unit", value: "meter", type:"select", options:["centimeter", "millimeter", "litre", "gram", "kilogram"]
+    },
+    {
+      name:"Status", value: "ACTIVE", type:"text"
+    },
+    {
+      name:"Note", type:"textarea"
+    }
+  ]
+}, {
+  name: "Fermenter Sample %Solids",
+  checked: true,
+  avaliableOptions:[
+    {
+      name: "Percision", value: 2, type:"number"
+    }
+  ]
+},
+{
+  name: "Date",
+  checked: true,
+  avaliableOptions:[]
+}, {
+  name: "Fermenter Sample ID",
+  checked: true,
+  avaliableOptions:[]
+}];
+
+
 app.post("/Importer/uploadFile", function(req,res){
   var form = new multiparty.Form();
   var file;
@@ -104,5 +115,10 @@ app.post("/Importer/uploadFile", function(req,res){
   form.parse(req);
 });
 
+
+app.post("/Importer/decideImport",bodyparser.json(), function(req, res){
+  console.log(JSON.stringify(req.body));
+  res.end();
+});
 server.listen(3000);
 console.log("Express Server Is Listenning at 3000");
