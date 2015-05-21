@@ -2,9 +2,9 @@ var ImporterControllers = angular.module("ImporterApp");
 
 ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scope", "Upload","FormSettingParseService", function($timeout, $http, $scope,Upload,FormSettingParseService){
 
-  $scope.stepOne = false;
+  $scope.stepOne = true;
   $scope.stepTwo = false;
-  $scope.stepThree = true;
+  $scope.stepThree = false;
 
   $scope.formModel={
   };
@@ -75,7 +75,11 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
         var progress = parseInt(100.0 * evt.loaded / evt.total);
         $scope.$emit("uploadProgress", progress);
       }).success(function(data, status, headers, config) {
-        $scope.availableFields = data;
+
+
+        $scope.stepThreeFormCollection = FormSettingParseService(data);
+
+        console.log($scope.stepThreeFormCollection);
       }).error(function(err){
         alert(err);
       });
@@ -125,51 +129,53 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
     $scope.fileUploadProgress = 0;
   };
 
+  $scope.decideImport = function(){
+    var finalFormToUpload = {};
 
-  $scope.fakeFieldsInfo=[{
-    name:"Fermenter Sample HPLC Ethanol",
-    checked: true,
-    avaliableOptions:[
-      {
-        name:"Percision", value: 2, type:"number"
-      },
-      {
-        name:"Unit", value: "meter", type:"select", options:["centimeter", "millimeter", "litre", "gram", "kilogram"]
-      },
-      {
-        name:"Status", value: "ACTIVE", type:"text"
-      },
-      {
-        name:"Note", type:"textarea"
+    for(var key in $scope.stepThreeFormCollection){
+      finalFormToUpload[key] = {
+        fields:[]
+      };
+      for(var key2 in $scope.stepThreeFormCollection[key])
+      switch (key2) {
+        case "fields":
+        break;
+        case "checked":
+        finalFormToUpload[key].checked = $scope.stepThreeFormCollection[key][key2];
+        break;
+        default:
+        var option = {};
+        option[key2] = $scope.stepThreeFormCollection[key][key2];
+        finalFormToUpload[key].fields.push(option);
+        break;
       }
-    ]
-  }, {
-    name: "Fermenter Sample %Solids",
-    checked: true,
-    avaliableOptions:[
-      {
-        name: "Percision", value: 2, type:"number"
-      }
-    ]
-  },
-  {
-    name: "Date",
-    checked: true,
-    avaliableOptions:[]
-  }, {
-    name: "Fermenter Sample ID",
-    checked: true,
-    avaliableOptions:[]
-  }];
-
-
-  $scope.stepThreeFieldsCollection = FormSettingParseService.fieldsParsing($scope.fakeFieldsInfo);
-
-  $scope.stepThreeFormModelCollection = FormSettingParseService.modelsParsing($scope.fakeFieldsInfo);
-  console.log($scope.stepThreeFormModelCollection);
-  $scope.extendContent = function(index){
-    var temp = $scope.stepThreeFieldsCollection[0];
-    $scope.stepThreeFieldsCollection[0] = $scope.stepThreeFieldsCollection[index];
-    $scope.stepThreeFieldsCollection[index] = temp;
+    }
+    console.log(finalFormToUpload);
+    $http.post("/Importer/decideImport", finalFormToUpload).
+    success(function(data, status, headers, config) {
+      // this callback will be called asynchronously
+      // when the response is available
+      alert("Importer Has Been Created");
+      $scope.stepOne = true;
+      $scope.stepTwo = false;
+      $scope.stepThree = false;
+    }).
+    error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      alert("Something Wents Wrong");
+    });
   };
+
+  $scope.$watch(function(){
+    return $scope.stepOne;
+  }, function(newValue){
+    if(newValue === true){
+      $scope.$emit("dynamicBackground");
+    } else if ( newValue === false){
+      $scope.$emit("removeDynamicBackground");
+    }
+  });
+
+
 }]);

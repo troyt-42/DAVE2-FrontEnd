@@ -2,10 +2,9 @@ var ImporterServices = angular.module("ImporterApp");
 
 
 ImporterApp.factory("FormSettingParseService",[function(){
-  return {
-    fieldsParsing: function(dataToParse){
+  return function(dataToParse){
       if(dataToParse){
-        var formCollection = [];
+        var formCollection = {};
         for(var i = 0; i < dataToParse.length; i++){
           var singleForm = [];
           for(var p = 0; p < dataToParse[i].avaliableOptions.length; p++){
@@ -30,7 +29,7 @@ ImporterApp.factory("FormSettingParseService",[function(){
               translatedField.data = {options : rawOption.options};
               break;
               case "textarea":
-              translatedField.type = "textarea";
+              translatedField.type = "textarea2";
               break;
               default:
               break;
@@ -38,21 +37,11 @@ ImporterApp.factory("FormSettingParseService",[function(){
 
             singleForm.push(translatedField);
           }
-          formCollection.push(singleForm);
+          formCollection[dataToParse[i].name] = { fields : singleForm, checked : dataToParse[i].checked};
 
         }
         console.log(formCollection);
         return formCollection;
       }
-    },
-    modelsParsing: function(dataToParse){
-      if(dataToParse){
-        var modelCollection={};
-        for(var i = 0; i < dataToParse.length; i++){
-          modelCollection[dataToParse[i].name] = { checked : dataToParse[i].checked};
-        }
-        return modelCollection;
-      }
-    }
-  };
+    };
 }]);
