@@ -1,14 +1,40 @@
-var ImporterControllers = angular.module("ImporterApp");
+(function(){'use strict';
+angular
+.module("Dave2App.Importer")
+.controller("ImporterUploadCtrl" ,ImporterUploadCtrl);
 
-ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scope", "Upload","FormSettingParseService", function($timeout, $http, $scope,Upload,FormSettingParseService){
+ImporterUploadCtrl.$inject = [
+  "$timeout",
+  "$http",
+  "$scope",
+  "Upload",
+  "FormSettingParseService"
+];
 
-  $scope.stepOne = true;
-  $scope.stepTwo = false;
-  $scope.stepThree = false;
+function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseService){
+  var vm = this;
 
-  $scope.formModel={
+
+  vm.submitFile = submitFile;
+  vm.cancelFile = cancelFile;
+  vm.cancelImport = cancelImport;
+  vm.decideImport = decideImport;
+
+  vm.stepOne = true;
+  vm.stepTwo = false;
+  vm.stepThree = false;
+  vm.formModel={};
+  vm.fileUploadProgress = 0;
+  vm.availableFields = {};
+
+  vm.optionStatus = {
+    firstOpen : true,
+    secondOpen: false,
+    thirdOpen: false,
+    fourthOpen: false
   };
-  $scope.formFields=[
+
+  vm.formFields = [
     {
       type:"input",
       key:"Name"
@@ -53,22 +79,54 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
     }
   ];
 
-  $scope.submitFile = function(){
-    console.log($scope.formModel);
-    var uploadfile = $scope.formModel["Select A File"][0];
+
+
+  $scope.$watch(function(){
+    return vm.stepOne;
+  }, function(newValue){
+    if(newValue === true){
+      $scope.$emit("dynamicBackground");
+    } else if ( newValue === false){
+      $scope.$emit("removeDynamicBackground");
+    }
+  });
+
+  $scope.$on("stepTwo",function(){
+    vm.stepOne = false;
+    vm.stepTwo = true;
+  });
+
+
+  $scope.$on("uploadProgress", function(event, data){
+    console.log(data);
+    vm.fileUploadProgress = data;
+    if(data >= 100){
+      $timeout(function(){
+        vm.stepOne = false;
+        vm.stepTwo = false;
+        vm.stepThree = true;
+      }, 1000);
+    }
+  });
+
+  ///////////////////////////
+
+  function submitFile(){
+    console.log(vm.formModel);
+    var uploadfile = vm.formModel["Select A File"][0];
     console.log(uploadfile);
 
     if(uploadfile !== {}){
 
-      upload = Upload.upload({
+      Upload.upload({
         url : "/Importer/uploadFile",
         file: uploadfile,
         fields:{
           'uploadInfo': {
-            'name' : $scope.formModel.Name,
-            'filename': $scope.formModel["Select A File"][0].name,
-            'location': $scope.formModel.Location,
-            'description': $scope.formModel.Description
+            'name' : vm.formModel.Name,
+            'filename': vm.formModel["Select A File"][0].name,
+            'location': vm.formModel.Location,
+            'description': vm.formModel.Description
           }
         }
       }).progress(function(evt) {
@@ -77,9 +135,9 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
       }).success(function(data, status, headers, config) {
 
 
-        $scope.stepThreeFormCollection = FormSettingParseService(data);
+        vm.stepThreeFormCollection = FormSettingParseService(data); // jshint ignore:line
 
-        console.log($scope.stepThreeFormCollection);
+        console.log(vm.stepThreeFormCollection);
       }).error(function(err){
         alert(err);
       });
@@ -87,65 +145,36 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
       alert("Please Select A File");
     }
     $scope.$emit("stepTwo");
-  };
+  }
 
-  $scope.$on("uploadProgress", function(event, data){
-    console.log(data);
-    $scope.fileUploadProgress = data;
-    if(data >= 100){
-      $timeout(function(){
-        $scope.stepOne = false;
-        $scope.stepTwo = false;
-        $scope.stepThree = true;
-      }, 1000);
-    }
-  });
+  function cancelFile(){
+    vm.formModel= {};
+  }
 
-  $scope.cancelFile = function(){
-    $scope.formModel= {};
-  };
+  function cancelImport(){
+    vm.stepOne = true;
+    vm.stepTwo = false;
+    vm.stepThree = false;
+    vm.fileUploadProgress = 0;
+  }
 
-  $scope.optionStatus= {
-    firstOpen : true,
-    secondOpen: false,
-    thirdOpen: false,
-    fourthOpen: false
-  };
-
-  $scope.fileUploadProgress = 0;
-
-  $scope.availableFields = {};
-
-  $scope.$on("stepTwo",function(){
-    $scope.stepOne = false;
-    $scope.stepTwo = true;
-  });
-
-
-  $scope.cancelImport = function(){
-    $scope.stepOne = true;
-    $scope.stepTwo = false;
-    $scope.stepThree = false;
-    $scope.fileUploadProgress = 0;
-  };
-
-  $scope.decideImport = function(){
+  function decideImport(){
     var finalFormToUpload = {};
 
-    for(var key in $scope.stepThreeFormCollection){
+    for(var key in vm.stepThreeFormCollection){
       finalFormToUpload[key] = {
         fields:[]
       };
-      for(var key2 in $scope.stepThreeFormCollection[key])
+      for(var key2 in vm.stepThreeFormCollection[key])
       switch (key2) {
         case "fields":
         break;
         case "checked":
-        finalFormToUpload[key].checked = $scope.stepThreeFormCollection[key][key2];
+        finalFormToUpload[key].checked = vm.stepThreeFormCollection[key][key2];
         break;
         default:
         var option = {};
-        option[key2] = $scope.stepThreeFormCollection[key][key2];
+        option[key2] = vm.stepThreeFormCollection[key][key2];
         finalFormToUpload[key].fields.push(option);
         break;
       }
@@ -156,26 +185,15 @@ ImporterControllers.controller("ImporterUploadCtrl", ["$timeout", "$http","$scop
       // this callback will be called asynchronously
       // when the response is available
       alert("Importer Has Been Created");
-      $scope.stepOne = true;
-      $scope.stepTwo = false;
-      $scope.stepThree = false;
+      vm.stepOne = true;
+      vm.stepTwo = false;
+      vm.stepThree = false;
     }).
     error(function(data, status, headers, config) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
       alert("Something Wents Wrong");
     });
-  };
-
-  $scope.$watch(function(){
-    return $scope.stepOne;
-  }, function(newValue){
-    if(newValue === true){
-      $scope.$emit("dynamicBackground");
-    } else if ( newValue === false){
-      $scope.$emit("removeDynamicBackground");
-    }
-  });
-
-
-}]);
+  }
+}
+})();

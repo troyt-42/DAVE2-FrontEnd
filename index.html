@@ -10,8 +10,8 @@
 </head>
 
 
-<body  ng-controller="Dave2Ctrl">
-  <div id="particles-js" ng-show="dynamicBackground">    </div>
+<body  ng-controller="Dave2Ctrl as dave2ctrl">
+  <div id="particles-js" ng-show="dave2ctrl.dynamicBackground">    </div>
   <nav class="navbar navbar-customized" role = "navigation" style="opacity:0.92">
 
       <div class="container">
@@ -27,12 +27,12 @@
 
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
-            <li style="padding-top:10px" ng-class="navClass('/Import')"><a href="#/Import">Import</a></li>
-            <li style="padding-top:10px" ng-class="navClass('/Export')"><a href="#/Export">Export</a></li>
-            <li style="padding-top:10px" ng-class="navClass('/Status')"><a href="#/Status">Status</a></li>
-            <li style="padding-top:10px" ng-class="navClass('/Analysis')"><a href="#/Analysis">Analysis</a></li>
-            <li style="padding-top:10px" ng-class="navClass('/Account')"><a href="#/Account">Account</a></li>
-            <li style="padding-top:10px"><a style="color:green;cursor:pointer" ng-click="signIn()">Sign In</a></li>
+            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Import')"><a href="#/Import">Import</a></li>
+            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Export')"><a href="#/Export">Export</a></li>
+            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Status')"><a href="#/Status">Status</a></li>
+            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Analysis')"><a href="#/Analysis">Analysis</a></li>
+            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Account')"><a href="#/Account">Account</a></li>
+            <li style="padding-top:10px"><a style="color:green;cursor:pointer" ng-click="dave2ctrl.signIn()">Sign In</a></li>
             <li style="padding-top:18px" >
               <input type="text" class="form-control navSearch" placeholder="Search">
             </li>
