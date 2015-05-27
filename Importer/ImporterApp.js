@@ -5,6 +5,8 @@
     "ui.bootstrap",
     "ngFileUpload",
     "ngAnimate",
-    "angularFormlyDaveLib"
+    "angularFormlyDaveLib",
+    "highcharts-ng",
+    "btford.socket-io"
   ]);
 })();

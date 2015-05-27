@@ -1,8 +1,11 @@
 (function(){'use strict';
-  angular.module("Dave2App.Importer")
-  .factory("FormSettingParseService",FormSettingParseService);
+  angular
+  .module("Dave2App.Importer")
+  .factory("FormSettingParseService",FormSettingParseService)
+  .factory("ImporterSocket", ImporterSocket);
 
-
+  FormSettingParseService.$inject = [];
+  ImporterSocket.$inject = ["socketFactory"];
   function FormSettingParseService(){
     return function(dataToParse){
         if(dataToParse){
@@ -46,5 +49,11 @@
           return formCollection;
         }
       };
+  }
+  function ImporterSocket(socketFactory){
+    var myIoSocket = io.connect('10.3.83.58:3000/importer');
+    return socketFactory({
+      ioSocket : myIoSocket
+    });
   }
 })();

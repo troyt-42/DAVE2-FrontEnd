@@ -3,11 +3,12 @@
   .module("Dave2App")
   .controller('Dave2Ctrl', Dave2Ctrl);
 
+  Dave2Ctrl.$inject = ['$scope','$location','$modal','userSocket'];
 
-  Dave2Ctrl.$inject = ['$scope','$location','$modal'];
-
-  function Dave2Ctrl($scope, $location,$modal){
-
+  function Dave2Ctrl($scope, $location,$modal, userSocket){
+    userSocket.on("some", function(){
+      console.log("test");
+    });
     var vm = this;
 
     vm.navClass = navClass;

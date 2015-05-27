@@ -12,9 +12,9 @@
 
 <body  ng-controller="Dave2Ctrl as dave2ctrl">
   <div id="particles-js" ng-show="dave2ctrl.dynamicBackground">    </div>
-  <nav class="navbar navbar-customized" role = "navigation" style="opacity:0.92">
+  <nav class="navbar navbar-customized" role = "navigation">
 
-      <div class="container">
+      <div class="container" >
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -50,10 +50,15 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"  ></script>                               <!--Bootstrap-->
   <script src="/bower_components/angular-route/angular-route.js"  ></script>                                        <!--ngRoute-->
   <script src="/bower_components/angular-animate/angular-animate.js"  ></script>                                    <!--ngAnimate-->
-  <script src="/bower_components/angular-socket-io/socket.js"></script>                                             <!--scoketio-->
+  <script src="/socket.io/socket.io.js"></script>                                                                   <!--socketio-->
+  <script src="/bower_components/angular-socket-io/socket.js"></script>                                             <!--angularsocketio-->
   <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>                                       <!--angularUIBootstrap-->
   <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>                                        <!--ngFileUpload-->
-  <script src="/bower_components/particles.js/particles.js"></script>
+  <script src="/bower_components/particles.js/particles.js"></script>                                               <!--particlesjs-->
+  <script src="http://code.highcharts.com/stock/highstock.src.js"></script>                                         <!--hightchartsjs-->
+  <script src="/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>                                     <!--particlesjs-->
+
+
 
   <script src="/bower_components/api-check/dist/api-check.js"></script>                                             <!-- must appear before formly.js -->
   <script src="/bower_components/angular-formly/dist/formly.js"></script>                                           <!--angular formly-->
@@ -61,6 +66,7 @@
 
   <script src="Dave2App.js"></script>                                                                               <!--Dave2App.js-->
   <script src="Dave2AppControllers.js"></script>                                                                    <!--Dave2AppControllers.js-->
+  <script src="Dave2AppServices.js"></script>                                                                       <!--Dave2AppControllers.js-->
   <script src="angularFormlyBasicTemplates/angularFormlyDaveLib.js"></script>                                       <!--angularFormlyDaveLib.js-->
   <script src="Importer/ImporterApp.js"></script>                                                                   <!--ImpoterApp.js-->
   <script src="Importer/ImporterControllers.js"></script>                                                           <!--ImporterAppControllers.js-->

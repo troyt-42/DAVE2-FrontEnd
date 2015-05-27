@@ -8,12 +8,12 @@ ImporterUploadCtrl.$inject = [
   "$http",
   "$scope",
   "Upload",
-  "FormSettingParseService"
+  "FormSettingParseService",
+  "ImporterSocket"
 ];
 
-function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseService){
+function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseService, ImporterSocket){
   var vm = this;
-
 
   vm.submitFile = submitFile;
   vm.cancelFile = cancelFile;
@@ -22,11 +22,15 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
 
   vm.stepOne = true;
   vm.stepTwo = false;
+  vm.stepTwoB = false;
   vm.stepThree = false;
+
   vm.formModel={};
   vm.fileUploadProgress = 0;
   vm.availableFields = {};
-
+  vm.importerList = {};
+  vm.importerListCurrentPage = 1;
+  vm.search = {};
   vm.optionStatus = {
     firstOpen : true,
     secondOpen: false,
@@ -94,6 +98,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
   $scope.$on("stepTwo",function(){
     vm.stepOne = false;
     vm.stepTwo = true;
+    vm.stepTwoB = false;
+    vm.stepThree = false;
   });
 
 
@@ -104,10 +110,13 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
       $timeout(function(){
         vm.stepOne = false;
         vm.stepTwo = false;
+        vm.stepTwoB = false;
         vm.stepThree = true;
       }, 1000);
     }
   });
+
+  activate();
 
   ///////////////////////////
 
@@ -154,29 +163,24 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
   function cancelImport(){
     vm.stepOne = true;
     vm.stepTwo = false;
+    vm.stepTwoB = false;
     vm.stepThree = false;
     vm.fileUploadProgress = 0;
   }
 
   function decideImport(){
     var finalFormToUpload = {};
-
+    console.log(vm.stepThreeFormCollection);
     for(var key in vm.stepThreeFormCollection){
-      finalFormToUpload[key] = {
-        fields:[]
-      };
-      for(var key2 in vm.stepThreeFormCollection[key])
-      switch (key2) {
-        case "fields":
-        break;
-        case "checked":
-        finalFormToUpload[key].checked = vm.stepThreeFormCollection[key][key2];
-        break;
-        default:
-        var option = {};
-        option[key2] = vm.stepThreeFormCollection[key][key2];
-        finalFormToUpload[key].fields.push(option);
-        break;
+      finalFormToUpload[key] = {};
+      for(var key2 in vm.stepThreeFormCollection[key]){
+        switch(key2){
+          case "fields":
+          break;
+          default:
+          finalFormToUpload[key][key2] = vm.stepThreeFormCollection[key][key2];
+          break;
+        }
       }
     }
     console.log(finalFormToUpload);
@@ -187,6 +191,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
       alert("Importer Has Been Created");
       vm.stepOne = true;
       vm.stepTwo = false;
+      vm.stepTwoB = false;
       vm.stepThree = false;
     }).
     error(function(data, status, headers, config) {
@@ -194,6 +199,17 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
       // or server returns response with an error status.
       alert("Something Wents Wrong");
     });
+  }
+
+  function activate(){
+    $http.get("/Importer/gettable")
+    .success(function(data, status, header, config){
+      vm.importerList = data;
+    })
+    .error(function(data, status, header, config){
+      console.log("error: " + status);
+    });
+
   }
 }
 })();
