@@ -8,7 +8,9 @@
     "ui.bootstrap",
     "btford.socket-io"
   ])
-  .config(["$routeProvider", routeConfig]);
+  .config(routeConfig);
+
+  routeConfig.$inject = ["$routeProvider"];
 
   function routeConfig($routeProvider){
     $routeProvider.when('/Import',{

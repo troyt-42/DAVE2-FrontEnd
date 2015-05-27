@@ -1,0 +1,140 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'kafka-node', '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json Importer-NodeJs-Server@0.0.1 No README data
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'kafka-node', null ]
+7 verbose cache add name=undefined spec="kafka-node" args=["kafka-node",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'kafka-node',
+8 verbose parsed url   path: 'kafka-node',
+8 verbose parsed url   href: 'kafka-node' }
+9 silly lockFile ef99f42e-kafka-node kafka-node
+10 verbose lock kafka-node /Users/touzeyu/.npm/ef99f42e-kafka-node.lock
+11 silly lockFile ef99f42e-kafka-node kafka-node
+12 silly lockFile ef99f42e-kafka-node kafka-node
+13 verbose addNamed [ 'kafka-node', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile a66008d1-kafka-node kafka-node@
+16 verbose lock kafka-node@ /Users/touzeyu/.npm/a66008d1-kafka-node.lock
+17 silly addNameRange { name: 'kafka-node', range: '*', hasData: false }
+18 verbose request where is /kafka-node
+19 verbose request registry https://registry.npmjs.org/
+20 verbose request id a0b9abc0489b54aa
+21 verbose url raw /kafka-node
+22 verbose url resolving [ 'https://registry.npmjs.org/', './kafka-node' ]
+23 verbose url resolved https://registry.npmjs.org/kafka-node
+24 verbose request where is https://registry.npmjs.org/kafka-node
+25 info trying registry request attempt 1 at 15:02:43
+26 verbose etag "DDL7SMH7T9GRXMX94VB90Q2CJ"
+27 http GET https://registry.npmjs.org/kafka-node
+28 http 200 https://registry.npmjs.org/kafka-node
+29 silly registry.get cb [ 200,
+29 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+29 silly registry.get     etag: '"A88N0QJKOLR8ICHNURK2VBDIK"',
+29 silly registry.get     'content-type': 'application/json',
+29 silly registry.get     'cache-control': 'max-age=60',
+29 silly registry.get     'content-length': '66155',
+29 silly registry.get     'accept-ranges': 'bytes',
+29 silly registry.get     date: 'Tue, 26 May 2015 19:02:43 GMT',
+29 silly registry.get     via: '1.1 varnish',
+29 silly registry.get     age: '0',
+29 silly registry.get     connection: 'keep-alive',
+29 silly registry.get     'x-served-by': 'cache-ord1730-ORD',
+29 silly registry.get     'x-cache': 'MISS',
+29 silly registry.get     'x-cache-hits': '0',
+29 silly registry.get     'x-timer': 'S1432666963.161435,VS0,VE237',
+29 silly registry.get     vary: 'Accept' } ]
+30 silly addNameRange number 2 { name: 'kafka-node', range: '*', hasData: true }
+31 silly addNameRange versions [ 'kafka-node',
+31 silly addNameRange   [ '0.0.1',
+31 silly addNameRange     '0.0.2',
+31 silly addNameRange     '0.0.3',
+31 silly addNameRange     '0.0.4',
+31 silly addNameRange     '0.0.5',
+31 silly addNameRange     '0.0.6',
+31 silly addNameRange     '0.0.7',
+31 silly addNameRange     '0.0.8',
+31 silly addNameRange     '0.0.9',
+31 silly addNameRange     '0.1.0',
+31 silly addNameRange     '0.1.1',
+31 silly addNameRange     '0.1.2',
+31 silly addNameRange     '0.1.3',
+31 silly addNameRange     '0.1.4',
+31 silly addNameRange     '0.1.5',
+31 silly addNameRange     '0.1.6',
+31 silly addNameRange     '0.1.7',
+31 silly addNameRange     '0.1.8',
+31 silly addNameRange     '0.1.9',
+31 silly addNameRange     '0.2.0',
+31 silly addNameRange     '0.2.1',
+31 silly addNameRange     '0.2.2',
+31 silly addNameRange     '0.2.3',
+31 silly addNameRange     '0.2.4',
+31 silly addNameRange     '0.2.5',
+31 silly addNameRange     '0.2.6',
+31 silly addNameRange     '0.2.7',
+31 silly addNameRange     '0.2.8',
+31 silly addNameRange     '0.2.9',
+31 silly addNameRange     '0.2.10',
+31 silly addNameRange     '0.2.11',
+31 silly addNameRange     '0.2.12',
+31 silly addNameRange     '0.2.13',
+31 silly addNameRange     '0.2.14',
+31 silly addNameRange     '0.2.15',
+31 silly addNameRange     '0.2.16',
+31 silly addNameRange     '0.2.17',
+31 silly addNameRange     '0.2.18',
+31 silly addNameRange     '0.2.19',
+31 silly addNameRange     '0.2.20',
+31 silly addNameRange     '0.2.21',
+31 silly addNameRange     '0.2.22',
+31 silly addNameRange     '0.2.23',
+31 silly addNameRange     '0.2.24',
+31 silly addNameRange     '0.2.25',
+31 silly addNameRange     '0.2.26',
+31 silly addNameRange     '0.2.27' ] ]
+32 verbose addNamed [ 'kafka-node', '0.2.27' ]
+33 verbose addNamed [ '0.2.27', '0.2.27' ]
+34 silly lockFile 48ddb3af-kafka-node-0-2-27 kafka-node@0.2.27
+35 verbose lock kafka-node@0.2.27 /Users/touzeyu/.npm/48ddb3af-kafka-node-0-2-27.lock
+36 silly lockFile 1a70a709-kafka-node-kafka-node-0-2-27-tgz https://registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz
+37 verbose lock https://registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz /Users/touzeyu/.npm/1a70a709-kafka-node-kafka-node-0-2-27-tgz.lock
+38 verbose addRemoteTarball [ 'https://registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz',
+38 verbose addRemoteTarball   'd4f2bf713c1b320b27970abf20dc1bd6d5495469' ]
+39 info retry fetch attempt 1 at 15:02:43
+40 verbose fetch to= /var/folders/bs/7zjkxhwd6gn06sp_xbkntfch0000gn/T/npm-48851-XdotdneT/registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz
+41 http GET https://registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz
+42 http 200 https://registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz
+43 silly lockFile 1a70a709-kafka-node-kafka-node-0-2-27-tgz https://registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz
+44 silly lockFile 1a70a709-kafka-node-kafka-node-0-2-27-tgz https://registry.npmjs.org/kafka-node/-/kafka-node-0.2.27.tgz
+45 silly lockFile 48ddb3af-kafka-node-0-2-27 kafka-node@0.2.27
+46 silly lockFile 48ddb3af-kafka-node-0-2-27 kafka-node@0.2.27
+47 silly lockFile a66008d1-kafka-node kafka-node@
+48 silly lockFile a66008d1-kafka-node kafka-node@
+49 error Error: EACCES, mkdir '/Users/touzeyu/.npm/kafka-node/0.2.27'
+49 error  { [Error: EACCES, mkdir '/Users/touzeyu/.npm/kafka-node/0.2.27']
+49 error   errno: 3,
+49 error   code: 'EACCES',
+49 error   path: '/Users/touzeyu/.npm/kafka-node/0.2.27',
+49 error   parent: 'Importer-NodeJs-Server' }
+50 error Please try running this command again as root/Administrator.
+51 error System Darwin 14.1.0
+52 error command "node" "/usr/local/bin/npm" "install" "kafka-node" "--save"
+53 error cwd /Applications/MAMP/htdocs/DAVE2_Spring_Version/ServerSideNodejs
+54 error node -v v0.10.33
+55 error npm -v 1.4.28
+56 error path /Users/touzeyu/.npm/kafka-node/0.2.27
+57 error code EACCES
+58 error errno 3
+59 error stack Error: EACCES, mkdir '/Users/touzeyu/.npm/kafka-node/0.2.27'
+60 verbose exit [ 3, true ]

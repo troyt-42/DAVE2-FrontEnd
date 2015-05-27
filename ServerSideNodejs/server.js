@@ -1,14 +1,14 @@
 var express = require('express');
 var http = require('http');
 var fs = require('fs');
-var io = require('socket.io');
+var io = require('socket.io')();
 var bodyparser = require('body-parser');
 var multiparty= require('multiparty');
-
+var kafka = require('kafka-node');
 
 var app = express();
 var server = http.createServer(app);
-var socket = io.listen(server);
+io.listen(server);
 
 app.use(express.static(__dirname + '/../'));
 
@@ -120,5 +120,31 @@ app.post("/Importer/decideImport",bodyparser.json(), function(req, res){
   console.log(JSON.stringify(req.body));
   res.end();
 });
+
+app.get('/Importer/gettable', function(req, res){
+  fs.readFile('table.json', function(err,data){
+    if (err){
+      console.log('Error Reading File');
+      console.log(err);
+      res.writeHead(404,{'Content-Type': 'text/plain'});
+      res.end();
+    } else {
+      res.write(data);
+      res.end();
+    }
+  });
+});
+
+io.on("connection", function(socket){
+  console.log(socket.handshake.address + " has connected! id: " + socket.id);
+});
+
+
+io.of('/importer').on("connection", function(socket){
+  console.log(socket.handshake.address + " has connected! id: " + socket.id + " Namespace: /importer");
+
+
+});
+
 server.listen(3000);
 console.log("Express Server Is Listenning at 3000");

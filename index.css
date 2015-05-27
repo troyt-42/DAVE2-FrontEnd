@@ -2,7 +2,8 @@ body{
   /*background:radial-gradient(circle, linen, white);*/
   font-family: 'Dosis' !important;
   overflow:hidden;
-  background-color: #8AC007;
+  background-image: url("../imgs/diagonal_striped_brick.png");
+  background-repeat: repeat;
 }
 
 .navbar-customized{

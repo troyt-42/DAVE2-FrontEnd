@@ -17,6 +17,7 @@
     "api-check": "~7.2.2",
     "angular-formly": "~6.3.4",
     "ng-file-upload": "~4.2.0",
-    "particles.js": "~2.0.0"
+    "particles.js": "~2.0.0",
+    "highcharts-ng": "~0.0.8"
   }
 }

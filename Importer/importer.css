@@ -4,7 +4,7 @@
 }
 
 #importerOptions #importerOptionsFirst .panel-body  {
-  background:lightgrey;
+  background:white;
 
 }
 
@@ -51,10 +51,11 @@ textarea {
 
 .importerSystemTitle{
   text-align:center;
-  background-color:white;
-  border-radius:50px;
-  box-shadow:0px 3px 0px #ff6600;
-  border-bottom:1px solid white;
+  background-image:url('../imgs/congruent_pentagon.png');
+  border-bottom-left-radius:50px;
+  border-bottom-right-radius:50px;
+  border:1px solid grey;
+  border-top:0;
 }
 
 .footer{
@@ -73,33 +74,20 @@ div .formly-field button{
 }
 
 
-.view-animate.ng-enter, .view-animate.ng-leave {
-  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-
-  width:100%;
-
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
+#importerList > tbody > tr:hover{
+  color:black;
+  cursor:pointer;
 }
 
-.view-animate.ng-enter {
-  left:100%;
-}
-.view-animate.ng-enter.ng-enter-active {
-  left:0;
-}
-.view-animate.ng-leave.ng-leave-active {
-  left:-100%;
-}
 
 /*----------------------*/
 
 canvas {
   display: block;
   vertical-align: bottom;
+
+  background-image: url("../imgs/diagonal_striped_brick.png");
+  background-repeat: repeat;
 }
 
 /* ---- particles.js container ---- */
@@ -108,9 +96,4 @@ canvas {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #8AC007;
-  background-image: url("");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
 }
