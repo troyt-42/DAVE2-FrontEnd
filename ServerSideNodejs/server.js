@@ -139,6 +139,9 @@ io.on("connection", function(socket){
   console.log(socket.handshake.address + " has connected! id: " + socket.id);
 });
 
+io.of('/user', function(socket){
+  console.log("user: " + socket.id + " has logged in successfully");
+});
 
 io.of('/importer').on("connection", function(socket){
   console.log(socket.handshake.address + " has connected! id: " + socket.id + " Namespace: /importer");

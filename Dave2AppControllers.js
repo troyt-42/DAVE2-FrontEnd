@@ -3,9 +3,9 @@
   .module("Dave2App")
   .controller('Dave2Ctrl', Dave2Ctrl);
 
-  Dave2Ctrl.$inject = ['$scope','$location','$modal','userSocket'];
+  Dave2Ctrl.$inject = ['$scope','$location','$modal','userSocket','generalSocket'];
 
-  function Dave2Ctrl($scope, $location,$modal, userSocket){
+  function Dave2Ctrl($scope, $location,$modal, userSocket, generalSocket){
     userSocket.on("some", function(){
       console.log("test");
     });

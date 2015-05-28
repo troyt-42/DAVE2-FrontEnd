@@ -14,7 +14,7 @@
           </accordion-heading>
           <formly-form model="importerUploadCtrl.formModel" fields="importerUploadCtrl.formFields"></formly-form>
           <div class="col-md-6">
-            <button type="button" ng-disabled = "!importerUploadCtrl.formModel['Select A File']" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
+            <button type="button" ng-disabled = "(!importerUploadCtrl.formModel['Select A File']) && importerUploadCtrl.stepOne" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
           </div>
           <div class="col-md-6">
             <button type="button" ng-click = "importerUploadCtrl.cancelFile()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
@@ -89,14 +89,15 @@
 
         </div>
 
-        <div class="col-md-12" ng-show="importerUploadCtrl.stepTwoB"></stepTwoB>
+        <div class="col-md-12" ng-show="importerUploadCtrl.stepTwoB"></div>
+
         <div class="col-md-6 col-md-offset-3" ng-show="importerUploadCtrl.stepTwo" style="margin-top:250px;text-align:center">
           <progressbar ng-show="importerUploadCtrl.stepTwo" max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
         </div>
 
         <div ng-show="importerUploadCtrl.stepThree">
 
-          <div class="row" style="border-radius:5px;background:#3A8AD3;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px">
+          <div class="row" style="border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;background-image:url('../imgs/congruent_outline.png')">
             <div class="col-md-9">
               <span style="font-size:300%;color:white;font-weight:bold">Avaliable Fields</span>
             </div>
@@ -107,20 +108,21 @@
             </div>
           </div>
 
-
-          <div class = "row well" style="margin-left:10px;margin-top:10px;overflow:scroll;max-height:600px;background:#5F9EA0">
-            <div class = "col-md-4" ng-repeat="(name, form) in importerUploadCtrl.stepThreeFormCollection" >
-              <div class="panel panel-default">
-                <div class="panel-heading" style="background:linen;font-size:125%">
-                  {{name}}<input type="checkbox" style="float:right" ng-model="form.checked">
-                </div>
-                <div class="panel-body" style="height:200px;overflow-y:auto;" dave-smart-disable="form.fields" dave-content-checked="form.checked">
-                  <formly-form model="form" fields="form.fields"></formly-form>
+          <div class = "row well" style="background-image:url('../imgs/brushed_alu_dark.png');background-repeat:repeat;border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;">
+            <div class = "col-md-12" style="margin-left:10px;margin-top:10px;overflow:scroll;max-height:600px">
+              <div class = "col-md-4" ng-repeat="(name, form) in importerUploadCtrl.stepThreeFormCollection" >
+                <div class="panel panel-default">
+                  <div class="panel-heading" style="background-image:url('../imgs/congruent_pentagon.png');
+;font-size:125%">
+                    {{name}}<input type="checkbox" style="float:right" ng-model="form.checked">
+                  </div>
+                  <div class="panel-body" style="height:200px;overflow-y:auto;" dave-smart-disable="form.fields" dave-content-checked="form.checked">
+                    <formly-form model="form" fields="form.fields"></formly-form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
 
         </div>
       </div>
