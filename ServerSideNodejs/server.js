@@ -145,7 +145,10 @@ io.of('/user', function(socket){
 
 io.of('/importer').on("connection", function(socket){
   console.log(socket.handshake.address + " has connected! id: " + socket.id + " Namespace: /importer");
-
+  socket.on("requestImporter", function(importer){
+    console.log("Requested Importer Info: " + JSON.stringify(importer));
+    socket.emit("responseImporter", fakeFieldsInfo);
+  });
 
 });
 
