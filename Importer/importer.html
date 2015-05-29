@@ -14,10 +14,10 @@
           </accordion-heading>
           <formly-form model="importerUploadCtrl.formModel" fields="importerUploadCtrl.formFields"></formly-form>
           <div class="col-md-6">
-            <button type="button" ng-disabled = "(!importerUploadCtrl.formModel['Select A File']) && importerUploadCtrl.stepOne" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
+            <button type="button" ng-disabled = "(!importerUploadCtrl.formModel['Select A File']) || (!importerUploadCtrl.stepOne)" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
           </div>
           <div class="col-md-6">
-            <button type="button" ng-click = "importerUploadCtrl.cancelFile()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
+            <button type="button" ng-click = "importerUploadCtrl.cancelFile()" ng-disabled = "!importerUploadCtrl.stepOne" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
           </div>
         </accordion-group>
 
@@ -55,7 +55,7 @@
       <div id="importerPanel">
 
         <div class="col-md-12" ng-show="importerUploadCtrl.stepOne">
-          <div class="well" style="min-height:589px;background-image:url('../imgs/congruent_outline.png');background-repeat:repeat;margin-bottom:0;border:1px lightgrey solid">
+          <div class="well" style="min-height:589px;background-image:url('../imgs/congruent_outline.png');background-repeat:repeat;margin-bottom:0;border:1px lightgrey solid;border-bottom-right-radius:0">
             <table class = "table table-hover" id="importerList">
               <thead>
                 <tr >
@@ -74,7 +74,7 @@
                 </tr>
               </thead>
               <tbody style="color:white">
-                <tr ng-repeat = "importer in importerUploadCtrl.importerList | filter:importerUploadCtrl.search" ng-show="((importerUploadCtrl.importerListCurrentPage * 13 - 13) <= $index) && ($index < (importerUploadCtrl.importerListCurrentPage * 13))">
+                <tr ng-repeat = "importer in importerUploadCtrl.importerList | filter:importerUploadCtrl.search" ng-click="importerUploadCtrl.requestImporter(importer)" ng-show="((importerUploadCtrl.importerListCurrentPage * 13 - 13) <= $index) && ($index < (importerUploadCtrl.importerListCurrentPage * 13))">
                   <td>{{importer["Id"]}}</td>
                   <td>{{importer["Name"]}}</td>
                   <td>{{importer["Location"]}}</td>
@@ -89,47 +89,138 @@
 
         </div>
 
-        <div class="col-md-12" ng-show="importerUploadCtrl.stepTwoB"></div>
+        <div class="col-md-12" ng-show="importerUploadCtrl.stepTwoB">
 
-        <div class="col-md-6 col-md-offset-3" ng-show="importerUploadCtrl.stepTwo" style="margin-top:250px;text-align:center">
-          <progressbar ng-show="importerUploadCtrl.stepTwo" max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
-        </div>
+          <div class="col-md-12" style="margin-left:10px;padding:0">
+            <div class="importerSystemTitle2 col-md-4" ng-show="importerUploadCtrl.stepTwoB"><span style="font-size:200%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
+            <span>
+              <i class="glyphicon glyphicon-chevron-left" style="margin-top:10px;margin-right:5px;font-size:150%;float:left;cursor:pointer"></i>
+              <div class="col-md-2  importerDataItemTabs" style="position:relative"><div style="position:relative;bottom:-13px;font-size:130%;" >Importer List</div></div>
+              <div class="col-md-2  importerDataItemTabs" style="position:relative"><div style="position:relative;bottom:-13px;font-size:130%;color:white">Importer Info</div></div>
+              <div class="col-md-2  importerDataItemTabs" style="position:relative"><div style="position:relative;bottom:-13px;font-size:130%;">Linked Form</div></div>
+              <i class="glyphicon glyphicon-chevron-right" style="margin-top:10px;font-size:150%;cursor:pointer"></i>
 
-        <div ng-show="importerUploadCtrl.stepThree">
-
-          <div class="row" style="border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;background-image:url('../imgs/congruent_outline.png')">
-            <div class="col-md-9">
-              <span style="font-size:300%;color:white;font-weight:bold">Avaliable Fields</span>
-            </div>
-
-            <div class="col-md-3">
-              <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:white;color:black;" ng-click="importerUploadCtrl.decideImport()">Decide</button>
-              <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="importerUploadCtrl.cancelImport()">Cancel</button>
-            </div>
+            </span>
           </div>
 
-          <div class = "row well" style="background-image:url('../imgs/brushed_alu_dark.png');background-repeat:repeat;border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;">
-            <div class = "col-md-12" style="margin-left:10px;margin-top:10px;overflow:scroll;max-height:600px">
-              <div class = "col-md-4" ng-repeat="(name, form) in importerUploadCtrl.stepThreeFormCollection" >
-                <div class="panel panel-default">
-                  <div class="panel-heading" style="background-image:url('../imgs/congruent_pentagon.png');
-;font-size:125%">
-                    {{name}}<input type="checkbox" style="float:right" ng-model="form.checked">
+
+          <div class="well col-md-12" style="background-image:url('../imgs/dark_embroidery.png');background-repeat:repeat;border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;min-height:589px;border-top-left-radius:0">
+            <div class="col-md-4" >
+              <div class="well row" style="background-image:url('../imgs/brushed_alu.png')">
+                <div class="col-md-12"><span style="font-size:150%">ID: </span><span>{{importerUploadCtrl.importerToDisplay.Id}}</span></div>
+                <div class="col-md-12"><span style="font-size:150%">Name: </span><span>{{importerUploadCtrl.importerToDisplay.Name}}</span></div>
+                <div class="col-md-12"><span style="font-size:150%">Location: </span><span>{{importerUploadCtrl.importerToDisplay.Location}}</span></div>
+                <div class="col-md-12"><span style="font-size:150%">Owner: </span><span>{{importerUploadCtrl.importerToDisplay.Owner}}</span></div>
+              </div>
+
+              <div class="row" style="border:2px silver solid;border-radius:5px;background-image:url('../imgs/brushed_alu_dark.png');box-shadow:0px 2px 4px black inset;">
+
+                <div class="col-md-12">
+                  <span style="color:white;font-size:200%">Avaliable Data Items</span>
+                </div>
+                <div class="input-group col-md-9" style=";margin-bottom:5px;margin-left:15px">
+                  <span class="input-group-addon" id="basic-addon1" style="color:#3A8AD3">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </span>
+                  <input type="text" class="form-control" placeholder="Search" ng-model="importerUploadCtrl.serach2">
+                </div>
+
+                <div class="col-md-12" style="height:300px;overflow-y:scroll">
+
+                  <div class="importerFields" ng-repeat = "dataItem in importerUploadCtrl.fakeDataItemData.fields | filter: importerUploadCtrl.serach2">
+                    <div style="margin-top:4px;font-weight:bold;vertical-align:middle">
+                      <span style="color:black">
+                        {{dataItem}}
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.firstOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.firstOpen}" style="color:black;margin-top:3px"></i>
+                      </span>
+                    </div>
                   </div>
-                  <div class="panel-body" style="height:200px;overflow-y:auto;" dave-smart-disable="form.fields" dave-content-checked="form.checked">
-                    <formly-form model="form" fields="form.fields"></formly-form>
-                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 ">
+
+              <div class="well row" style="background-image:url('../imgs/random_grey_variations.png');box-shadow:0px 2px 4px black inset;margin-left:6px;height:563px;background-repeat:repeat">
+                <div class="col-md-12" style="padding-left:0;color:#CBEBFF" >
+                  <span style="font-size:150%;">Fermenter Sample HPLC Ethanol:</span>
+                </div>
+                <button type="button" class="btn fieldButton"><span>Precision: 2</span></button>
+                <button type="button" class="btn fieldButton"><span>Unit: Meter</span></button>
+                <button type="button" class="btn fieldButton"><span>Status: Active</span></button>
+                <button type="button" class="btn fieldButton"><span>Note: A test importer with meaningless content</span></button>
+                <hr style="margin-top:5px;border-color:linen">
+
+                <div class="col-md-7 well" style="padding:0;background:linen;height:430px;overflow-y:scroll">
+                  <table class="table"  style="text-align:center;">
+                    <thead style="font-size:120%">
+                      <th class="col-md-4" style="text-align:center">Date</th>
+                      <th class="col-md-8" style="text-align:center">Fermenter Sample HPLC Ethanol</th>
+                    </thead>
+                    <tbody >
+                      <tr ng-repeat = "entry in importerUploadCtrl.fakeDataItemData.data">
+                        <td>{{entry[0]}}</td>
+                        <td>{{entry[1]}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </table>
+              </div>
+
+              <div class="col-md-5">
+                <div style="margin-bottom:10px">
+                  <span style="color:white">Sample Data Quantity: {{importerUploadCtrl.sampleDataQuantity}}<span>
+                  <input type="range" min="0" max="100" style="margin-top:7px" ng-model="importerUploadCtrl.sampleDataQuantity"></input>
+                </div>
+
+                <div style="margin-bottom:10px">
+                  <span style="color:white">Sample Data Reduction: {{importerUploadCtrl.sampleDataReduction}}<span>
+                  <input type="range" min="0" max="100" style="margin-top:7px" ng-model="importerUploadCtrl.sampleDataReduction"></input>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-md-offset-3" ng-show="importerUploadCtrl.stepTwo" style="margin-top:250px;text-align:center">
+        <progressbar ng-show="importerUploadCtrl.stepTwo" max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
+      </div>
+
+      <div ng-show="importerUploadCtrl.stepThree">
+
+        <div class="row" style="border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;background-image:url('../imgs/congruent_outline.png')">
+          <div class="col-md-9">
+            <span style="font-size:300%;color:white;font-weight:bold">Avaliable Fields</span>
+          </div>
+
+          <div class="col-md-3">
+            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:white;color:black;" ng-click="importerUploadCtrl.decideImport()">Decide</button>
+            <button class="btn" style="position:relative;bottom:-10px;font-size:150%;background:orange" ng-click="importerUploadCtrl.cancelImport()">Cancel</button>
+          </div>
+        </div>
+
+        <div class = "row well" style="background-image:url('../imgs/dark_embroidery.png');background-repeat:repeat;border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;margin-top:10px">
+          <div class = "col-md-12" style="margin-left:10px;margin-top:10px;overflow:scroll;max-height:600px">
+            <div class = "col-md-4" ng-repeat="(name, form) in importerUploadCtrl.stepThreeFormCollection" >
+              <div class="panel panel-default">
+                <div class="panel-heading" style="background-image:url('../imgs/gplaypattern.png');font-size:125%">
+                  {{name}}<input type="checkbox" style="float:right" ng-model="form.checked">
+                </div>
+                <div class="panel-body" style="height:200px;overflow-y:auto;" dave-smart-disable="form.fields" dave-content-checked="form.checked">
+                  <formly-form model="form" fields="form.fields"></formly-form>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
+
       </div>
-      {{importerUploadCtrl.formModel}}
-      <!-- <div class="col-md-12 well"></div> -->
     </div>
-
-
   </div>
+
+
+</div>
 </div>

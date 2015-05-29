@@ -1,3 +1,11 @@
+#importerOptions .panel-heading span{
+  cursor:pointer;
+}
+
+#importerFields{
+  cursor:pointer;
+}
+
 #importerOptions #importerOptionsFirst .panel-heading  {
   background:linear-gradient(90deg, #3A8AD3, darkgray);
 
@@ -20,7 +28,19 @@
   background:linear-gradient(90deg, red, orange);
 }
 
+.importerFields{
+  background-image:url('../imgs/congruent_pentagon.png');
+  overflow-x:scroll;
+  height:40px;
+  border-radius:5px;
+  border:1px solid black;
+  padding:3px 15px;
+  font-weight:bold;
+  font-size:120%;
+  margin-bottom:5px;
+  cursor:pointer;
 
+}
 
 #importerPanel{
   height:500px;
@@ -57,8 +77,42 @@ textarea {
   border:1px solid grey;
   border-top:0;
 }
-=
 
+.importerSystemTitle2{
+  text-align:center;
+  background-image:url('../imgs/gplaypattern.png');
+  border-top-left-radius:50px;
+  border-top-right-radius:50px;
+  border:1px solid black;
+  border-bottom:0;
+}
+
+
+.importerDataItemTabs{
+  font-size:200%;
+  font-weight:bold;
+  text-align:center;
+  font-size:120%;
+  height:41px;
+  overflow-y:scroll;
+  background-image:url('../imgs/gplaypattern2.png');
+  color:grey;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+  border:1px grey solid;
+  border-bottom:0;
+  line-height:90%;
+  cursor:pointer;
+  width:150px;
+  padding:0 10px 0 10px;
+  display:inline-block;
+  margin-right:5px;
+}
+
+
+.importerDataItemTabs:hover{
+  color:white;
+}
 .footer{
   height:150px;
   background:white;
@@ -80,7 +134,28 @@ div .formly-field button{
   cursor:pointer;
 }
 
+.glyphicon-chevron-left:hover{
+  color:#3A8AD3;
+}
 
+.glyphicon-chevron-right:hover{
+  color:#3A8AD3;
+}
+
+.fieldButton{
+  margin-bottom:5px;
+  color:white;
+  background:#3A8AD3;
+}
+.fieldButton:hover{
+  background:orange;
+  color:black;
+}
+
+.fieldButton:focus{
+  color:white;
+  background:#3A8AD3;
+}
 /*----------------------*/
 
 canvas {
