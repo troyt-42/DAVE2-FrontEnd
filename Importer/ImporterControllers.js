@@ -12,6 +12,7 @@ ImporterUploadCtrl.$inject = [
   "ImporterSocket"
 ];
 
+
 function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseService, ImporterSocket){
   var vm = this;
 
@@ -20,6 +21,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
   vm.cancelImport = cancelImport;
   vm.decideImport = decideImport;
   vm.requestImporter = requestImporter;
+  vm.chooseDataItem = chooseDataItem;
+  vm.backToImporterList = backToImporterList;
+  vm.closeAlert = closeAlert;
 
   vm.stepOne = true;
   vm.stepTwo = false;
@@ -29,12 +33,26 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
   vm.formModel={};
   vm.fileUploadProgress = 0;
   vm.availableFields = {};
+
   vm.importerList = {};
   vm.importerListCurrentPage = 1;
   vm.importerToDisplay = {};
   vm.importerToDisplayContent = {};
+  vm.currentDataItem = "Fermenter Sample HPLC Ethanol";
+
+  vm.alerts = {
+    "stepOne":[
+      { type: 'danger', msg: 'Load Item Fails. Please Check Your Internet Connect.' }
+    ],
+    "stepTwoB" :[
+      { type: 'warning', msg: 'Lost Connection (still can manipulate cached data)' }
+    ]
+  };
+
+
   vm.sampleDataQuantity = 50;
   vm.sampleDataReduction = 50;
+
 
   vm.search = {};
   vm.search2 = '';
@@ -149,6 +167,31 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
       }
     });
 
+    $scope.$watch(function(){
+      return vm.sampleDataReduction;
+    }, function(newValue){
+      if(newValue <= 10){
+        vm.sampleDataReductionString = "1 Hour";
+      } else if ((newValue > 10) && (newValue <= 20)){
+        vm.sampleDataReductionString = "2 Hour";
+      } else if ((newValue > 20) && (newValue <= 30)){
+        vm.sampleDataReductionString = "3 Hour";
+      } else if ((newValue > 30) && (newValue <= 40)){
+        vm.sampleDataReductionString = "4 Hour";
+      } else if ((newValue > 40) && (newValue <= 50)){
+        vm.sampleDataReductionString = "5 Hour";
+      } else if ((newValue > 50) && (newValue <= 60)){
+        vm.sampleDataReductionString = "6 Hour";
+      } else if ((newValue > 60) && (newValue <= 70)){
+        vm.sampleDataReductionString = "7 Hour";
+      } else if ((newValue > 70) && (newValue <= 80)){
+        vm.sampleDataReductionString = "8 Hour";
+      } else if ((newValue > 80) && (newValue <= 90)){
+        vm.sampleDataReductionString = "9 Hour";
+      } else if ((newValue > 90) && (newValue <= 100)){
+        vm.sampleDataReductionString = "10 Hour";
+      }
+    });
     activate();
 
     ///////////////////////////
@@ -258,6 +301,21 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
         vm.importerToDisplay = importer;
         vm.importerToDisplayContent = data;
       });
+    }
+
+    function chooseDataItem(dataItem){
+      vm.currentDataItem = dataItem;
+    }
+
+    function backToImporterList(){
+      vm.stepOne = true;
+      vm.stepTwo = false;
+      vm.stepTwoB = false;
+      vm.stepThree = false;
+    }
+
+    function closeAlert(index, position){
+      vm.alerts[position].splice(index, 1);
     }
   }
 })();

@@ -2,9 +2,7 @@
   cursor:pointer;
 }
 
-#importerFields{
-  cursor:pointer;
-}
+
 
 #importerOptions #importerOptionsFirst .panel-heading  {
   background:linear-gradient(90deg, #3A8AD3, darkgray);
@@ -39,9 +37,19 @@
   font-size:120%;
   margin-bottom:5px;
   cursor:pointer;
-
+  color:black;
 }
 
+.importerFields:hover{
+  text-decoration:underline;
+}
+
+.importerFields.active{
+  background-image:url('../imgs/random_grey_variations.png');
+  color:#CBEBFF;
+  border-color:#CBEBFF;
+  text-decoration:none;
+}
 #importerPanel{
   height:500px;
   border-radius:10px;
@@ -156,6 +164,9 @@ div .formly-field button{
   color:white;
   background:#3A8AD3;
 }
+
+
+
 /*----------------------*/
 
 canvas {
