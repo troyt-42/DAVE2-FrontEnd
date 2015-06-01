@@ -8,6 +8,13 @@ var kafka = require('kafka-node');
 
 var app = express();
 var server = http.createServer(app);
+
+var kafkaClient = new kafka.Client("10.222.83.155:2181");
+var HighLevelProducer = kafka.HighLevelProducer;
+var HighLevelConsumer = kafka.HighLevelConsumer;
+
+var kafkaProducer = new HighLevelProducer(kafkaClient);
+
 io.listen(server);
 
 app.use(express.static(__dirname + '/../'));
@@ -137,20 +144,57 @@ app.get('/Importer/gettable', function(req, res){
 
 io.on("connection", function(socket){
   console.log(socket.handshake.address + " has connected! id: " + socket.id);
+
 });
 
-io.of('/user', function(socket){
-  console.log("user: " + socket.id + " has logged in successfully");
-});
+io.of('/user').on("connection", function(socket){
+  kafkaProducer.send([{
+    topic:'__main_in__',
+    messages:[
+      JSON.stringify({
+        session_id: socket.id,
+        username: "troy",
+        password: "1234",
+        return_topic: "troy_out",
+        action:"LOGIN"
+      })]
+    }],function (err, data) {
+      if(err){
+        console.log(err);
+      } else {
+        console.log("user: " + socket.id + " has logged in successfully");
+      }
+    });
 
-io.of('/importer').on("connection", function(socket){
-  console.log(socket.handshake.address + " has connected! id: " + socket.id + " Namespace: /importer");
-  socket.on("requestImporter", function(importer){
-    console.log("Requested Importer Info: " + JSON.stringify(importer));
-    socket.emit("responseImporter", fakeFieldsInfo);
+
   });
 
-});
+  io.of('/importer').on("connection", function(socket){
+    console.log(socket.handshake.address + " has connected! id: " + socket.id + " Namespace: /importer");
+    socket.on("requestImporterList",function(){
+      kafkaProducer.send([{
+        topic:'__importer_stepOne_list_in__',
+        messages: [
+          JSON.stringify({
+            session_id: socket.id,
+            username: "troy",
+            password: "1234",
+            return_topic: "__importer_stepOne_list_out__",
+            location:"brampton",
+            action:"GETALL"
+          })]
+        }], function(err,data){
+          console.log(err);
+          console.log(data);
+        });
+      });
+      socket.on("requestImporter", function(importer){
+        console.log("Requested Importer Info: " + JSON.stringify(importer));
+        socket.emit("responseImporter", fakeFieldsInfo);
+      });
 
-server.listen(3000);
-console.log("Express Server Is Listenning at 3000");
+    });
+
+
+    server.listen(3000);
+    console.log("Express Server Is Listenning at 3000");

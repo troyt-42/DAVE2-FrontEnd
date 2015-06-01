@@ -197,6 +197,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
     ///////////////////////////
 
     function activate(){
+      ImporterSocket.emit("requestImporterList");
       $http.get("/Importer/gettable")
       .success(function(data, status, header, config){
         vm.importerList = data;
@@ -275,11 +276,11 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
       success(function(data, status, headers, config) {
         // this callback will be called asynchronously
         // when the response is available
-        alert("Importer Has Been Created");
-        vm.stepOne = true;
+        vm.stepOne = false;
         vm.stepTwo = false;
-        vm.stepTwoB = false;
+        vm.stepTwoB = true;
         vm.stepThree = false;
+        vm.fileUploadProgress = 0;
       }).
       error(function(data, status, headers, config) {
         // called asynchronously if an error occurs
