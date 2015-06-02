@@ -9,19 +9,7 @@ var kafka = require('kafka-node');
 var app = express();
 var server = http.createServer(app);
 
-var kafkaClient = new kafka.Client("10.222.83.155:2181");
-var HighLevelProducer = kafka.HighLevelProducer;
-var HighLevelConsumer = kafka.HighLevelConsumer;
-
-var kafkaProducer = new HighLevelProducer(kafkaClient);
-var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
-  { topic: '__main_out__' },{topic: '__importer_stepOne_list_out__'}
-],
-{
-  groupId: 'my-group'
-});
-
-
+var id = '';
 io.listen(server);
 
 app.use(express.static(__dirname + '/../'));
@@ -135,6 +123,7 @@ app.post("/Importer/decideImport",bodyparser.json(), function(req, res){
   res.end();
 });
 
+var id = '';
 app.get('/Importer/gettable', function(req, res){
   fs.readFile('table.json', function(err,data){
     if (err){
@@ -143,6 +132,7 @@ app.get('/Importer/gettable', function(req, res){
       res.writeHead(404,{'Content-Type': 'text/plain'});
       res.end();
     } else {
+      io.of('/importer').to(id).emit("importerListData", 2);
       res.write(data);
       res.end();
     }
@@ -150,136 +140,33 @@ app.get('/Importer/gettable', function(req, res){
 });
 
 io.on("connection", function(socket){
- id = socket.id;
+  id = socket.id;
   console.log(socket.handshake.address + " has connected! id: " + socket.id);
-  socket.on("disconnect",function(){
-    kafkaProducer.send([{
-      topic:'__main_in__',
-      messages:[
-        JSON.stringify({
-          session_id: socket.id,
-          username: "troy",
-          password: "1234",
-          return_topic: "troy_out",
-          action:"RELEASE_CONNECTION"
-        })
-      ]
-    }],function (err, data) {
-      if(err){
-        console.log(err);
-      } else {
-        console.log("user: " + socket.id + " has disconnectted successfully");
-      }
-    });
-  });
 });
 
 io.of('/user').on("connection", function(socket){
-  kafkaProducer.send([{
-    topic:'__main_in__',
-    messages:[
-      JSON.stringify({
-        session_id: socket.id,
-        username: "troy",
-        password: "1234",
-        return_topic: "troy_out",
-        action:"LOGIN"
-      })
-    ]
-  }],function (err, data) {
-    if(err){
-      console.log(err);
-    } else {
-      console.log("user: " + socket.id + " has submit info successfully");
-    }
-  });
+
 
 });
-
 
 io.of('/importer').on("connection", function(socket){
   console.log(socket.handshake.address + " has connected! id: " + socket.id + " Namespace: /importer");
   socket.on("requestImporterList",function(){
-    kafkaProducer.send([{
-      topic:'__importer_stepOne_list_in__',
-      messages: [
-        JSON.stringify({
-          session_id: socket.id,
-          username: "troy",
-          password: "1234",
-          return_topic: "__importer_stepOne_list_out__",
-          location:"brampton",
-          action:"GETALL_IMPORTER"
-        })
-      ]
-    }],
-    function(err,data){
-      if(err){
-        console.log(err);
-      } else {
-        console.log("User " + socket.id + " has send importer_list request successfully");
-      }
-    });
+
   });
   socket.on("requestImporter", function(importer){
-    var messageToSend = {
-      session_id: socket.id,
-      return_topic: "__importer_stepTwoB_importer_out__",
-      action: "QUERY_IMPORTER",
-      payload:[{
-        name: importer.name,
-        location: importer.location,
-        list_type: "importer"
-      }]
-    };
-    console.log("Requested Importer Info: " + JSON.stringify(messageToSend));
-    kafkaProducer.send([{
-      topic:'__importer_stepTwoB_importer_in__',
-      messages:[JSON.stringify(messageToSend)]
-    }],function(err,data){
-      if(err){
-        console.log(err);
-      } else {
-        console.log("User " + socket.id + " has send importer request successfully");
-      }
-    });
+    console.log("Requested Importer Info: " + JSON.stringify(importer));
     socket.emit("responseImporter", fakeFieldsInfo);
   });
 
+  socket.on("importerListData", function(data){
+    console.log("1");
+    console.log("received: " + data);
+  });
+
+
 });
 
-
-
-kafkaConsumer.on("message",function(message){
-  if(message.topic === '__main_out__'){
-    var data = JSON.parse(message.value);
-    if(data.status === "SUCCESS"){
-      console.log("User " + data.username + " (id: " + data.session_id + ") " + "has logged in successfully.");
-
-    } else if (data.status === "ERROR"){
-      console.log("User " + data.username + "'s (id: " + data.session_id + ") " + "login failed. Error: " + data.detail);
-    }
-  } else if (message.topic === '__importer_stepOne_list_out__'){
-    var data2 = JSON.parse(message.value);
-
-    if(data2.list_out){
-      io.of('/importer').to(id).emit("importerListData", data2.list_out);
-    }
-  }
-});
-
-process.on('SIGINT', function() {
-  kafkaConsumer.close(function(){
-    console.log("close kafka consumer DONE");
-  });
-  kafkaProducer.close(function(){
-    console.log("close kafka producer DONE");
-  });
-  kafkaClient.close(function(){
-    console.log("close kafkaClient DONE");
-  });
-  process.exit(0);
-});
 
 server.listen(3000);
 console.log("Express Server Is Listenning at 3000");
