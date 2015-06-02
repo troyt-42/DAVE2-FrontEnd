@@ -7,13 +7,14 @@ ImporterUploadCtrl.$inject = [
   "$timeout",
   "$http",
   "$scope",
+  "$modal",
   "Upload",
   "FormSettingParseService",
   "ImporterSocket"
 ];
 
 
-function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseService, ImporterSocket){
+function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingParseService, ImporterSocket){
   var vm = this;
 
   vm.submitFile = submitFile;
@@ -24,17 +25,19 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
   vm.chooseDataItem = chooseDataItem;
   vm.backToImporterList = backToImporterList;
   vm.closeAlert = closeAlert;
+  vm.changeDataItemConfig = changeDataItemConfig;
 
   vm.stepOne = true;
   vm.stepTwo = false;
   vm.stepTwoB = false;
   vm.stepThree = false;
 
+  vm.stepOneLoading = true;
   vm.formModel={};
   vm.fileUploadProgress = 0;
   vm.availableFields = {};
 
-  vm.importerList = {};
+  vm.importerList = [];
   vm.importerListCurrentPage = 1;
   vm.importerToDisplay = {};
   vm.importerToDisplayContent = {};
@@ -192,20 +195,26 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
         vm.sampleDataReductionString = "10 Hour";
       }
     });
+
+    ImporterSocket.on("importerListData", function(data){
+      if(data.length !== 0){
+        vm.importerList = vm.importerList.concat(data);
+        vm.stepOneLoading = false;
+      } else {
+        if(vm.importerList.length < 250){
+          vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
+        } 
+        console.log(vm.importerList);
+      }
+
+    });
+
     activate();
 
     ///////////////////////////
 
     function activate(){
       ImporterSocket.emit("requestImporterList");
-      $http.get("/Importer/gettable")
-      .success(function(data, status, header, config){
-        vm.importerList = data;
-      })
-      .error(function(data, status, header, config){
-        console.log("error: " + status);
-      });
-
     }
 
     function submitFile(){
@@ -317,6 +326,27 @@ function ImporterUploadCtrl($timeout, $http, $scope,Upload, FormSettingParseServ
 
     function closeAlert(index, position){
       vm.alerts[position].splice(index, 1);
+    }
+
+    function changeDataItemConfig(dataItem){
+      var loginInterface = $modal.open({
+        templateUrl:"Importer/changeDataItemModal.html",
+        controller:["$scope","$modalInstance", function($scope, $modalInstance){
+          $scope.dataItem = dataItem;
+          $scope.type = "text";
+          $scope.ok = function(){
+            $modalInstance.close({name:$scope.dataItem.name, value:$scope.dataItem.value});
+          };
+
+          $scope.cancel = function(){
+            $modalInstance.dismiss('cancel');
+          };
+        }]
+      });
+
+      loginInterface.result.then(function(data){
+        console.log(data);
+      });
     }
   }
 })();
