@@ -75,9 +75,9 @@
               </thead>
               <tbody style="color:white">
                 <tr ng-repeat = "importer in importerUploadCtrl.importerList | filter:importerUploadCtrl.search" ng-click="importerUploadCtrl.requestImporter(importer)" ng-show="((importerUploadCtrl.importerListCurrentPage * 13 - 13) <= $index) && ($index < (importerUploadCtrl.importerListCurrentPage * 13))">
-                  <td>{{importer["Name"]}}</td>
-                  <td>{{importer["Location"]}}</td>
-                  <td>{{importer["Owner"]}}</td>
+                  <td>{{importer["name"]}}</td>
+                  <td>{{importer["location"]}}</td>
+                  <td>{{importer["ownerName"]}}</td>
                 </tr>
               </tbody>
             </table>
@@ -105,10 +105,9 @@
           <div class="well col-md-12" style="background-image:url('../imgs/dark_embroidery.png');background-repeat:repeat;border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;min-height:589px;border-top-left-radius:0">
             <div class="col-md-4" >
               <div class="well row" style="background-image:url('../imgs/brushed_alu.png')">
-                <div class="col-md-12"><span style="font-size:150%">ID: </span><span>{{importerUploadCtrl.importerToDisplay.Id}}</span></div>
-                <div class="col-md-12"><span style="font-size:150%">Name: </span><span>{{importerUploadCtrl.importerToDisplay.Name}}</span></div>
-                <div class="col-md-12"><span style="font-size:150%">Location: </span><span>{{importerUploadCtrl.importerToDisplay.Location}}</span></div>
-                <div class="col-md-12"><span style="font-size:150%">Owner: </span><span>{{importerUploadCtrl.importerToDisplay.Owner}}</span></div>
+                <div class="col-md-12"><span style="font-size:150%">Name: </span><span>{{importerUploadCtrl.importerToDisplay.name}}</span></div>
+                <div class="col-md-12"><span style="font-size:150%">Location: </span><span>{{importerUploadCtrl.importerToDisplay.location}}</span></div>
+                <div class="col-md-12"><span style="font-size:150%">Owner: </span><span>{{importerUploadCtrl.importerToDisplay.ownerName}}</span></div>
               </div>
 
               <div class="row" style="border:2px silver solid;border-radius:5px;background-image:url('../imgs/brushed_alu_dark.png');box-shadow:0px 2px 4px black inset;">
@@ -125,10 +124,10 @@
 
                 <div class="col-md-12" style="height:300px;overflow-y:scroll">
 
-                  <div class="importerFields" ng-repeat = "dataItem in importerUploadCtrl.fakeDataItemData.fields | filter: importerUploadCtrl.serach2" ng-class="{'active' : importerUploadCtrl.currentDataItem === dataItem}" ng-click="importerUploadCtrl.chooseDataItem(dataItem)">
+                  <div class="importerFields" ng-repeat = "dataItem in importerUploadCtrl.importerToDisplayContent | filter: importerUploadCtrl.serach2" ng-class="{'active' : importerUploadCtrl.currentDataItem === dataItem}" ng-click="importerUploadCtrl.chooseDataItem(dataItem)">
                     <div style="margin-top:4px;font-weight:bold;vertical-align:middle" >
                       <span>
-                        {{dataItem}}
+                        {{dataItem.fieldName}}
                         <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.currentDataItem !== dataItem, 'glyphicon-chevron-right': importerUploadCtrl.currentDataItem === dataItem}" style="margin-top:3px"></i>
                       </span>
                     </div>
@@ -141,13 +140,11 @@
 
               <div class="well row" style="background-image:url('../imgs/random_grey_variations.png');box-shadow:0px 2px 4px black inset;margin-left:6px;height:563px;background-repeat:repeat">
                 <div class="col-md-12" style="padding-left:0;color:#CBEBFF" >
-                  <span style="font-size:150%;">{{importerUploadCtrl.currentDataItem}}</span>
+                  <span style="font-size:150%;">{{importerUploadCtrl.currentDataItem.fieldName}}</span>
                 </div>
 
-                <button type="button" class="btn fieldButton" ng-click ="importerUploadCtrl.changeDataItemConfig({name:'Precision', value:2})"><span>Precision: 2</span></button>
-                <button type="button" class="btn fieldButton" ng-click ="importerUploadCtrl.changeDataItemConfig({name:'Unit', value:'Meter'})"><span>Unit: Meter</span></button>
-                <button type="button" class="btn fieldButton" ng-click ="importerUploadCtrl.changeDataItemConfig({name:'Status', value:'Active'})"><span>Status: Active</span></button>
-                <button type="button" class="btn fieldButton" ng-click ="importerUploadCtrl.changeDataItemConfig({name:'Note', value:'A test importer with meaningless content'})"><span>Note: A test importer with meaningless content</span></button>
+                <button type="button" class="btn fieldButton" style="margin-right:5px" ng-repeat="(key, config) in importerUploadCtrl.currentDataItem.availableOptions"><span>{{key}}: {{config.value}}</span></button>
+
                 <hr style="margin-top:5px;border-color:linen">
 
                 <div class="col-md-7 well" style="padding:0;background:linen;height:430px;overflow-y:scroll">

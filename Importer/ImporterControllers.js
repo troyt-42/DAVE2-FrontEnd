@@ -40,7 +40,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   vm.importerList = [];
   vm.importerListCurrentPage = 1;
   vm.importerToDisplay = {};
-  vm.importerToDisplayContent = {};
+  vm.importerToDisplayContent = [];
+
+  vm.importerDataItemToDisplay = {};
   vm.currentDataItem = "Fermenter Sample HPLC Ethanol";
 
   vm.alerts = {
@@ -201,12 +203,40 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
         vm.importerList = vm.importerList.concat(data);
         vm.stepOneLoading = false;
       } else {
-        if(vm.importerList.length < 250){
-          vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
-        } 
+        // if(vm.importerList.length < 250){
+        //   vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
+        // }
         console.log(vm.importerList);
       }
 
+    });
+
+  ImporterSocket.on("importerData", function(data){
+      if(data.length !== 0){
+        vm.currentDataItem = data[0];
+        vm.stepOne = false;
+        vm.stepTwo = false;
+        vm.stepTwoB = true;
+        vm.stepThree = false;
+        vm.importerToDisplayContent = data;
+      } else if (data.length === 0){
+        vm.importerToDisplayContent.forEach(function(element, index, array){
+          ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
+        });
+      }
+    });
+
+    ImporterSocket.on("importerDataItemData", function(dataItem){
+      if(dataItem.data.length !== 0){
+        console.log(dataItem.data);
+        if(!vm.importerDataItemToDisplay[dataItem.name]){
+          vm.importerDataItemToDisplay[dataItem.name] = [];
+        }
+
+        vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
+      } else if (dataItem.data.length === 0){
+        console.log(vm.importerDataItemToDisplay);
+      }
     });
 
     activate();
@@ -301,16 +331,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
     function requestImporter(importer){
       console.log(importer);
+      vm.importerToDisplay = importer;
       ImporterSocket.emit("requestImporter", importer);
-      ImporterSocket.on("responseImporter", function(data){
-        console.log(data);
-        vm.stepOne = false;
-        vm.stepTwo = false;
-        vm.stepTwoB = true;
-        vm.stepThree = false;
-        vm.importerToDisplay = importer;
-        vm.importerToDisplayContent = data;
-      });
     }
 
     function chooseDataItem(dataItem){
