@@ -1,0 +1,161 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'redis', '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json Importer-NodeJs-Server@0.0.1 No README data
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ 'redis', null ]
+7 verbose cache add name=undefined spec="redis" args=["redis",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'redis',
+8 verbose parsed url   path: 'redis',
+8 verbose parsed url   href: 'redis' }
+9 silly lockFile b840fc02-redis redis
+10 verbose lock redis /Users/touzeyu/.npm/b840fc02-redis.lock
+11 silly lockFile b840fc02-redis redis
+12 silly lockFile b840fc02-redis redis
+13 verbose addNamed [ 'redis', '' ]
+14 verbose addNamed [ null, '*' ]
+15 silly lockFile fb3bbc27-redis redis@
+16 verbose lock redis@ /Users/touzeyu/.npm/fb3bbc27-redis.lock
+17 silly addNameRange { name: 'redis', range: '*', hasData: false }
+18 verbose request where is /redis
+19 verbose request registry https://registry.npmjs.org/
+20 verbose request id ded14a289dd78976
+21 verbose url raw /redis
+22 verbose url resolving [ 'https://registry.npmjs.org/', './redis' ]
+23 verbose url resolved https://registry.npmjs.org/redis
+24 verbose request where is https://registry.npmjs.org/redis
+25 info trying registry request attempt 1 at 10:09:58
+26 verbose etag "6Z6VLUOVO4W8KFPYD91L8OPYQ"
+27 http GET https://registry.npmjs.org/redis
+28 http 200 https://registry.npmjs.org/redis
+29 silly registry.get cb [ 200,
+29 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+29 silly registry.get     etag: '"170F20IQXEXLI028YTRAVO9QA"',
+29 silly registry.get     'content-type': 'application/json',
+29 silly registry.get     'cache-control': 'max-age=60',
+29 silly registry.get     'content-length': '87745',
+29 silly registry.get     'accept-ranges': 'bytes',
+29 silly registry.get     date: 'Fri, 05 Jun 2015 14:09:57 GMT',
+29 silly registry.get     via: '1.1 varnish',
+29 silly registry.get     age: '0',
+29 silly registry.get     connection: 'keep-alive',
+29 silly registry.get     'x-served-by': 'cache-dfw1834-DFW',
+29 silly registry.get     'x-cache': 'HIT',
+29 silly registry.get     'x-cache-hits': '1',
+29 silly registry.get     'x-timer': 'S1433513397.547470,VS0,VE64',
+29 silly registry.get     vary: 'Accept' } ]
+30 silly addNameRange number 2 { name: 'redis', range: '*', hasData: true }
+31 silly addNameRange versions [ 'redis',
+31 silly addNameRange   [ '0.0.1',
+31 silly addNameRange     '0.0.2',
+31 silly addNameRange     '0.0.3',
+31 silly addNameRange     '0.0.4',
+31 silly addNameRange     '0.0.7',
+31 silly addNameRange     '0.0.8',
+31 silly addNameRange     '0.1.0',
+31 silly addNameRange     '0.1.1',
+31 silly addNameRange     '0.1.2',
+31 silly addNameRange     '0.2.0',
+31 silly addNameRange     '0.2.1',
+31 silly addNameRange     '0.2.2',
+31 silly addNameRange     '0.2.3',
+31 silly addNameRange     '0.2.4',
+31 silly addNameRange     '0.2.6',
+31 silly addNameRange     '0.3.0',
+31 silly addNameRange     '0.3.1',
+31 silly addNameRange     '0.3.2',
+31 silly addNameRange     '0.3.3',
+31 silly addNameRange     '0.3.4',
+31 silly addNameRange     '0.3.5',
+31 silly addNameRange     '0.3.6',
+31 silly addNameRange     '0.3.7',
+31 silly addNameRange     '0.3.9',
+31 silly addNameRange     '0.4.0',
+31 silly addNameRange     '0.4.1',
+31 silly addNameRange     '0.4.2',
+31 silly addNameRange     '0.5.0',
+31 silly addNameRange     '0.5.1',
+31 silly addNameRange     '0.5.2',
+31 silly addNameRange     '0.5.3',
+31 silly addNameRange     '0.5.4',
+31 silly addNameRange     '0.5.5',
+31 silly addNameRange     '0.5.6',
+31 silly addNameRange     '0.5.7',
+31 silly addNameRange     '0.5.8',
+31 silly addNameRange     '0.5.9',
+31 silly addNameRange     '0.5.10',
+31 silly addNameRange     '0.5.11',
+31 silly addNameRange     '0.6.0',
+31 silly addNameRange     '0.6.1',
+31 silly addNameRange     '0.6.2',
+31 silly addNameRange     '0.6.3',
+31 silly addNameRange     '0.6.4',
+31 silly addNameRange     '0.6.5',
+31 silly addNameRange     '0.6.6',
+31 silly addNameRange     '0.6.7',
+31 silly addNameRange     '0.7.0',
+31 silly addNameRange     '0.7.1',
+31 silly addNameRange     '0.7.2',
+31 silly addNameRange     '0.7.3',
+31 silly addNameRange     '0.8.0',
+31 silly addNameRange     '0.8.1',
+31 silly addNameRange     '0.8.2',
+31 silly addNameRange     '0.8.3',
+31 silly addNameRange     '0.8.4',
+31 silly addNameRange     '0.8.5',
+31 silly addNameRange     '0.8.6',
+31 silly addNameRange     '0.9.0',
+31 silly addNameRange     '0.9.1',
+31 silly addNameRange     '0.9.2',
+31 silly addNameRange     '0.10.0',
+31 silly addNameRange     '0.10.1',
+31 silly addNameRange     '0.10.2',
+31 silly addNameRange     '0.10.3',
+31 silly addNameRange     '0.11.0',
+31 silly addNameRange     '0.12.0',
+31 silly addNameRange     '0.12.1' ] ]
+32 verbose addNamed [ 'redis', '0.12.1' ]
+33 verbose addNamed [ '0.12.1', '0.12.1' ]
+34 silly lockFile 5ec46899-redis-0-12-1 redis@0.12.1
+35 verbose lock redis@0.12.1 /Users/touzeyu/.npm/5ec46899-redis-0-12-1.lock
+36 silly lockFile 5db8178b-npmjs-org-redis-redis-0-12-1-tgz https://registry.npmjs.org/redis/-/redis-0.12.1.tgz
+37 verbose lock https://registry.npmjs.org/redis/-/redis-0.12.1.tgz /Users/touzeyu/.npm/5db8178b-npmjs-org-redis-redis-0-12-1-tgz.lock
+38 verbose addRemoteTarball [ 'https://registry.npmjs.org/redis/-/redis-0.12.1.tgz',
+38 verbose addRemoteTarball   '64df76ad0fc8acebaebd2a0645e8a48fac49185e' ]
+39 info retry fetch attempt 1 at 10:09:59
+40 verbose fetch to= /var/folders/bs/7zjkxhwd6gn06sp_xbkntfch0000gn/T/npm-22049-eUs6hqic/registry.npmjs.org/redis/-/redis-0.12.1.tgz
+41 http GET https://registry.npmjs.org/redis/-/redis-0.12.1.tgz
+42 http 200 https://registry.npmjs.org/redis/-/redis-0.12.1.tgz
+43 silly lockFile 5db8178b-npmjs-org-redis-redis-0-12-1-tgz https://registry.npmjs.org/redis/-/redis-0.12.1.tgz
+44 silly lockFile 5db8178b-npmjs-org-redis-redis-0-12-1-tgz https://registry.npmjs.org/redis/-/redis-0.12.1.tgz
+45 silly lockFile 5ec46899-redis-0-12-1 redis@0.12.1
+46 silly lockFile 5ec46899-redis-0-12-1 redis@0.12.1
+47 silly lockFile fb3bbc27-redis redis@
+48 silly lockFile fb3bbc27-redis redis@
+49 error Error: EACCES, mkdir '/Users/touzeyu/.npm/redis/0.12.1'
+49 error  { [Error: EACCES, mkdir '/Users/touzeyu/.npm/redis/0.12.1']
+49 error   errno: 3,
+49 error   code: 'EACCES',
+49 error   path: '/Users/touzeyu/.npm/redis/0.12.1',
+49 error   parent: 'Importer-NodeJs-Server' }
+50 error Please try running this command again as root/Administrator.
+51 error System Darwin 14.1.0
+52 error command "node" "/usr/local/bin/npm" "install" "redis" "--save"
+53 error cwd /Applications/MAMP/htdocs/DAVE2_Spring_Version/ServerSideNodejs
+54 error node -v v0.10.33
+55 error npm -v 1.4.28
+56 error path /Users/touzeyu/.npm/redis/0.12.1
+57 error code EACCES
+58 error errno 3
+59 error stack Error: EACCES, mkdir '/Users/touzeyu/.npm/redis/0.12.1'
+60 verbose exit [ 3, true ]
