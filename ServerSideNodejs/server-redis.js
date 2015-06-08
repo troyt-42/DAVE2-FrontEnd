@@ -28,11 +28,7 @@ client.on('ready', function(){
             client.multi()
             .sadd("importers", element.Id)
             .hmset("importers:" +　element.Id, "Id", element.Id, "Name", element.Name, "Location", element.Location, "Owner", element.Owner)
-            .exec(function (err, replies) {
-              console.log("MULTI got " + replies.length + " replies");
-              replies.forEach(function (reply, index) {
-                console.log("Reply " + index + ": " + reply.toString());
-              });
+            .exec(function (err, replies) {//
             });
           });
         }
@@ -46,15 +42,27 @@ client.on('ready', function(){
           var parsedData = JSON.parse(data);
 
           parsedData.data.forEach(function(element, index, array){
-            client.multi()
-            .zadd("importers:DA-60-CF-2A-24-CF-1H:date", Date.parse(element.Date), Date.parse(element.Date))
-            .hmset("importers:DA-60-CF-2A-24-CF-1H:date:" + Date.parse(element.Date), "Value", element.Value)
-            .exec(function (err, replies) {
-              console.log("MULTI got " + replies.length + " replies");
-              replies.forEach(function (reply, index) {
-                console.log("Reply " + index + ": " + reply.toString());
-              });
+            var dateInMM = Date.parse(element.Date);
+            client.zadd("importers:DA-60-CF-2A-24-CF-1H:date", dateInMM, dateInMM, function(err, data){
+              if(err){
+                console.log(err);
+              } else {
+                client.hmset("importers:DA-60-CF-2A-24-CF-1H:date:"+dateInMM, "Value", element.Value);
+                console.log("importers:DA-60-CF-2A-24-CF-1H:date:"+dateInMM+" has been added");
+              }
             });
+            // client.multi()
+            // .zadd("importers:DA-60-CF-2A-24-CF-1H:date", dateInMM, dateInMM)
+            // .hmset("importers:DA-60-CF-2A-24-CF-1H:date:" + dateInMM, "Value", element.Value)
+            // .exec(function (err, replies) {
+            //   console.log("MULTI got " + replies.length + " replies");
+            //   replies.forEach(function (reply, index) {
+            //
+            //     if((reply.toString() === 0)&&(index === 0)){
+            //       console.log("Reply " + index + ": " + reply.toString());
+            //     }
+            //   });
+            // });
           });
         }
       });
@@ -71,9 +79,11 @@ client.on('ready', function(){
         });
       });
 
-      client.smembers("importers:DA-60-CF-2A-24-CF-1H:date", function(err, data){
+      client.zrange("importers:DA-60-CF-2A-24-CF-1H:date",0, -1, function(err, data){
         data.forEach(function(element, index, array){
           client.hgetall("importers:DA-60-CF-2A-24-CF-1H:date:"+element, function(err, obj){
+            var temp = new Date(Number(element));
+            obj.Date = temp.toDateString();
             console.log(obj);
           });
         });
