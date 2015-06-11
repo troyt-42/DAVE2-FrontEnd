@@ -1,6 +1,6 @@
 (function(){'use strict';
   angular
-  .module("Dave2App")
+  .module("Dave2")
   .factory("generalSocket", generalSocket)
   .factory("userSocket", userSocket);
   generalSocket.$inject = ["socketFactory"];

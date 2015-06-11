@@ -1,13 +1,13 @@
 (function(){'use strict';
 
-angular.module("RedisTest")
-.controller("RedisTestCtrl", RedisTestCtrl);
+angular.module("Dave2.DataItemDisplay")
+.controller("DataItemDisplayCtrl", DataItemDisplayCtrl);
 
-RedisTestCtrl.$inject=['$scope','generalSocket'];
+DataItemDisplayCtrl.$inject=['$scope','$timeout','dataItemDisplaySocket'];
 
-function RedisTestCtrl($scope,generalSocket){
+function DataItemDisplayCtrl($scope,$timeout,dataItemDisplaySocket){
   var vm = this;
-
+  vm.loading = true;
   vm.chartConfig = {
 
     options: {
@@ -56,12 +56,12 @@ function RedisTestCtrl($scope,generalSocket){
 
   // var chart = highchartsContainer.highcharts();
   // chart.showLoading();
-  generalSocket.on('importersInfo', function(data){
+  dataItemDisplaySocket.on('importersInfo', function(data){
     console.log(data);
   });
 
   var highchartsContainer = angular.element("#container");
-  generalSocket.on('importersData', function(data){
+  dataItemDisplaySocket.on('importersData', function(data){
     console.log(data);
     // chart.series[0].setData(data);
     // chart.hideLoading();
@@ -103,7 +103,7 @@ function RedisTestCtrl($scope,generalSocket){
         events:{
           afterSetExtremes: function(){
             highchartsContainer.highcharts().showLoading('Loading data from server...');
-            generalSocket.emit("displayRquest", {min: this.min, max: this.max});
+            dataItemDisplaySocket.emit("displayRquest", {min: this.min, max: this.max});
           }
         },
         minRange: 3600 * 1000 * 24 * 7
@@ -154,12 +154,26 @@ function RedisTestCtrl($scope,generalSocket){
         data:data
       }]
     });
+    var temp = [];
+    for(var i = 0; i < 100; i ++){
+      var date =new Date(data[i][0]);
+      temp.push([date.toUTCString(), data[i][1]]);
+    }
+    vm.tableData = temp;
+    vm.loading = false;
+
   });
 
-  generalSocket.on('displayResponse', function(data){
+  dataItemDisplaySocket.on('displayResponse', function(data){
     console.log(data);
     highchartsContainer.highcharts().series[0].setData(data);
     highchartsContainer.highcharts().hideLoading();
+    var temp = [];
+    for(var i = 0; i < 100; i ++){
+      var date =new Date(data[i][0]);
+      temp.push([date.toUTCString(), data[i][1]]);
+    }
+    vm.tableData = temp;
   });
 
 

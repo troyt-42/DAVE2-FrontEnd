@@ -1,9 +1,10 @@
 (function(){'use strict';
 
   angular
-  .module("Dave2App",[
+  .module("Dave2",[
     "ngRoute",
-    "Dave2App.Importer",
+    "Dave2.Importer",
+    "Dave2.DataItemDisplay",
     "ngAnimate",
     "ui.bootstrap",
     "btford.socket-io"
@@ -17,6 +18,12 @@
       templateUrl : "Importer/importer.html",
       controller: "ImporterUploadCtrl",
       controllerAs: "importerUploadCtrl"
+    });
+
+    $routeProvider.when('/DataItemDisplay',{
+      templateUrl : "DataItemDisplay/DataItemDisplay.html",
+      controller: "DataItemDisplayCtrl",
+      controllerAs: "DataItemDisplayCtrl"
     });
   }
 

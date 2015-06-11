@@ -1,5 +1,5 @@
 (function(){'use strict';
-  angular.module("Dave2App.Importer")
+  angular.module("Dave2.Importer")
   .directive('daveSmartDisable', daveSmartDisableDirective);
 
 

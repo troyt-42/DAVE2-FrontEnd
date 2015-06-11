@@ -1,6 +1,6 @@
 (function(){'use strict';
   angular
-  .module("Dave2App")
+  .module("Dave2")
   .controller('Dave2Ctrl', Dave2Ctrl);
 
   Dave2Ctrl.$inject = ['$scope','$location','$modal','userSocket','generalSocket'];

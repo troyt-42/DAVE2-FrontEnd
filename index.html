@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="Dave2App">
+<html ng-app="Dave2">
 <head>
   <title>DAVE2</title>
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
@@ -29,6 +29,7 @@
         <div class="navbar-collapse collapse navbar-right">
           <ul class="nav navbar-nav">
             <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Import')"><a href="#/Import">Import</a></li>
+            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/DataItemDisplay')"><a href="#/DataItemDisplay">Display</a></li>
             <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Export')"><a href="#/Export">Export</a></li>
             <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Status')"><a href="#/Status">Status</a></li>
             <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Analysis')"><a href="#/Analysis">Analysis</a></li>
@@ -65,14 +66,20 @@
   <script src="/bower_components/angular-formly/dist/formly.js"></script>                                           <!--angular formly-->
   <script src="//rawgit.com/formly-js/angular-formly-templates-bootstrap/master/dist/angular-formly-templates-bootstrap.js"></script>
 
-  <script src="Dave2App.js"></script>                                                                               <!--Dave2App.js-->
-  <script src="Dave2AppControllers.js"></script>                                                                    <!--Dave2AppControllers.js-->
-  <script src="Dave2AppServices.js"></script>                                                                       <!--Dave2AppControllers.js-->
+  <script src="Dave2.js"></script>                                                                                  <!--Dave2.js-->
+  <script src="Dave2Controllers.js"></script>                                                                       <!--Dave2Controllers.js-->
+  <script src="Dave2Services.js"></script>                                                                          <!--Dave2Controllers.js-->
   <script src="angularFormlyBasicTemplates/angularFormlyDaveLib.js"></script>                                       <!--angularFormlyDaveLib.js-->
-  <script src="Importer/ImporterApp.js"></script>                                                                   <!--ImpoterApp.js-->
-  <script src="Importer/ImporterControllers.js"></script>                                                           <!--ImporterAppControllers.js-->
-  <script src="Importer/ImporterDirectives.js"></script>                                                            <!--ImporterAppDirectives.js-->
-  <script src="Importer/ImporterServices.js"></script>                                                              <!--ImporterAppServices.js-->
+  <script src="Importer/Importer.js"></script>                                                                      <!--Impoter.js-->
+  <script src="Importer/ImporterControllers.js"></script>                                                           <!--ImporterControllers.js-->
+  <script src="Importer/ImporterDirectives.js"></script>                                                            <!--ImporterDirectives.js-->
+  <script src="Importer/ImporterServices.js"></script>                                                              <!--ImporterServices.js-->
+
+  <script src="DataItemDisplay/DataItemDisplay.js"></script>                                                                   <!--DataItemDisplay.js-->
+  <script src="DataItemDisplay/DataItemDisplayControllers.js"></script>                                                        <!--DataItemDisplayControllers.js-->
+  <script src="DataItemDisplay/DataItemDisplayServices.js"></script>                                                           <!--DataItemDisplayServices.js-->
+
+  <script src="/highchartsThemes/dark-unica.js"></script>
 
 </body>
 </html>
