@@ -3,6 +3,7 @@
   .module("Dave2App")
   .factory("generalSocket", generalSocket)
   .factory("userSocket", userSocket);
+  generalSocket.$inject = ["socketFactory"];
   userSocket.$inject = ["socketFactory"];
 
   function generalSocket(socketFactory){
