@@ -60,12 +60,13 @@ function RedisTestCtrl($scope,generalSocket){
     console.log(data);
   });
 
+  var highchartsContainer = angular.element("#container");
   generalSocket.on('importersData', function(data){
-    // console.log(data);
+    console.log(data);
     // chart.series[0].setData(data);
     // chart.hideLoading();
 
-    var highchartsContainer = angular.element("#container");
+
     highchartsContainer.highcharts('StockChart',{
       chart:{
         zoomType:'x',
@@ -74,13 +75,20 @@ function RedisTestCtrl($scope,generalSocket){
       title: {
         text: 'Data Item 58-B9-E1-F1-87-89'
       },
+      tooltip:{
+        pointFormat: ' | <span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
+        positioner:function(){
+          return { x: 10, y: 100 };
+        }
+      },
       plotOptions: {
         series: {
           tooltip:{
             dateTimeLabelFormats:{
-              millisecond:"%A, %b %e, %H:%M:%S.%L, %Y"
+              millisecond:"%A, %b %e, %H:%M:%S.%L"
             }
           },
+          animation:false,
           states:{
             hover:false
           }
@@ -91,8 +99,25 @@ function RedisTestCtrl($scope,generalSocket){
         dateTimeLabelFormats: {
           day: '%e  %b %Y',
           month: '%b %Y'
+        },
+        events:{
+          afterSetExtremes: function(){
+            highchartsContainer.highcharts().showLoading('Loading data from server...');
+            generalSocket.emit("displayRquest", {min: this.min, max: this.max});
+          }
+        },
+        minRange: 3600 * 1000 * 24
+      },
+      navigator : {
+        adaptToUpdatedData: false,
+        series : {
+          data : data
         }
       },
+      scrollbar: {
+        liveRedraw: false
+      },
+
       rangeSelector: {
         enabled:true,
         allButtonsEnabled:true,
@@ -120,7 +145,7 @@ function RedisTestCtrl($scope,generalSocket){
           type: 'all',
           text: 'All'
         }],
-        selected: 4
+        selected: 1
       },
 
 
@@ -131,7 +156,11 @@ function RedisTestCtrl($scope,generalSocket){
     });
   });
 
-
+  generalSocket.on('displayResponse', function(data){
+    console.log(data);
+    highchartsContainer.highcharts().series[0].setData(data);
+    highchartsContainer.highcharts().hideLoading();
+  });
 
 
 }
