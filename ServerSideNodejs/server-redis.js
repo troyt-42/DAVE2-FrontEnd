@@ -110,7 +110,7 @@ client.on('ready', function(){
 
         client.zrange("importers:58-B9-E1-F1-87-89:date",0, -1, function(err, data){
           var dataToSend = [];
-          for(var i = 0; i < 50000; i ++){
+          for(var i = 0; i < 250000; i ++){
             var obj =JSON.parse(data[i]);
             var temp = [obj.DATE, obj.VALUE];
             dataToSend[i] = temp;
@@ -119,6 +119,17 @@ client.on('ready', function(){
           console.log("Done");
         });
 
+        socket.on("displayRquest",function(data){
+          client.zrangebyscore("importers:58-B9-E1-F1-87-89:date", data.min, data.max, function(err,data){
+            var dataToSend = [];
+            for(var i = 0; i < data.length; i ++){
+              var obj =JSON.parse(data[i]);
+              var temp = [obj.DATE, obj.VALUE];
+              dataToSend[i] = temp;
+            }
+            socket.emit("displayResponse", dataToSend);
+          });
+        });
 
       });
 
