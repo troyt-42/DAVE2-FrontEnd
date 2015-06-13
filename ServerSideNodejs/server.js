@@ -9,7 +9,7 @@ var kafka = require('kafka-node');
 var app = express();
 var server = http.createServer(app);
 
-var kafkaClient = new kafka.Client('10.222.83.155:2181');
+var kafkaClient = new kafka.Client('10.3.83.74:2181');
 var HighLevelProducer = kafka.HighLevelProducer;
 var HighLevelConsumer = kafka.HighLevelConsumer;
 
@@ -239,6 +239,9 @@ io.of('/importer').on('connection', function(socket){
 
 
 kafkaConsumer.on('message',function(message){
+  if(message.value === "hi"){
+
+  } else
   if(message.topic === '__main_out__'){
     var data = JSON.parse(message.value);
     if(data.status === 'SUCCESS'){
@@ -254,6 +257,7 @@ kafkaConsumer.on('message',function(message){
       io.of('/importer').to(data2.session_id).emit('importerListData', data2.list_out);
     }
   } else if (message.topic === '__importer_stepTwoB_importer_out__'){
+
     var data3 = JSON.parse(message.value);
     if(data3.list_out){
       io.of('/importer').to(data3.session_id).emit('importerData', data3.list_out);
@@ -263,6 +267,8 @@ kafkaConsumer.on('message',function(message){
     if(data4.list_out){
       io.of('/importer').to(data4.session_id).emit('importerDataItemData', {name:data4.payload.name, data: data4.list_out});
     }
+  } else {
+    console.log(message);
   }
 });
 
