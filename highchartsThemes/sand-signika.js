@@ -69,7 +69,7 @@ Highcharts.theme = {
 	},
 	plotOptions: {
 		series: {
-			shadow: true
+			shadow: true,
 		},
 		candlestick: {
 			lineColor: '#404048'

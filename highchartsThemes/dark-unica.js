@@ -10,6 +10,11 @@ Highcharts.createElement('link', {
 	type: 'text/css'
 }, null, document.getElementsByTagName('head')[0]);
 
+// Highcharts.setOptions({
+// 	lang:{
+// 		rangeSelectorZoom:null
+// 	}
+// })
 Highcharts.theme = {
 	colors: ["#3A8AD3", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
 		"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],

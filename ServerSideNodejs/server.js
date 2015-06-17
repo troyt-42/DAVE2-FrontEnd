@@ -86,7 +86,7 @@ app.post('/Importer/uploadFile', function(req,res){
       res.end(err);
     });
 
-    res.end(JSON.stringify(fakeFieldsInfo));
+    res.end();
   });
 
   // form.on('progress', function(bytesReceived, bytesExpected){
@@ -193,9 +193,10 @@ io.of('/importer').on('connection', function(socket){
       return_topic: '__importer_stepTwoB_importer_out__',
       action: 'QUERY_IMPORTER',
       payload:{
-        name: importer.name,
+        importerName: importer.importerName,
         location: importer.location,
-        list_type: 'importer'
+        list_type: 'importer',
+        userName: 'troy'
       }
     };
     console.log('Requested Importer Info: ' + JSON.stringify(messageToSend));
@@ -210,7 +211,6 @@ io.of('/importer').on('connection', function(socket){
       }
     });
   });
-
   socket.on('requestImporterDataItemData', function(dataItem){
     var messageToSend = {
       session_id : socket.id,
@@ -233,6 +233,19 @@ io.of('/importer').on('connection', function(socket){
       }
     });
 
+  });
+  socket.on('createNewImporter',function(importerInfo){
+    importerInfo.session_id = socket.id;
+    kafkaProducer.send([{
+      topic:'__importer_stepOne_createImporter_in__',
+      messages:[JSON.stringify(importerInfo)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent importer creation request successfully:' + JSON.stringify(importerInfo));
+      }
+    });
   });
 });
 
@@ -267,7 +280,10 @@ kafkaConsumer.on('message',function(message){
     if(data4.list_out){
       io.of('/importer').to(data4.session_id).emit('importerDataItemData', {name:data4.payload.name, data: data4.list_out});
     }
-  } else {
+  } else if (message.topic === '__importer_stepOne_createImporter_out__'){
+    var data5 = JSON.parse(message.value);
+    console.log(data5);
+  }else {
     console.log(message);
   }
 });

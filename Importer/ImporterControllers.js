@@ -253,7 +253,16 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       console.log(uploadfile);
 
       if(uploadfile !== {}){
-
+        var importerInfo = {
+          'importerName' : vm.formModel.Name,
+          'fileName': vm.formModel["Select A File"][0].name,
+          'location': vm.formModel.Location,
+          'description': vm.formModel.Description,
+          'source':"csv"
+        };
+        //Upload importerInfo through socket
+        ImporterSocket.emit("createNewImporter",importerInfo );
+        //Upload file through http
         Upload.upload({
           url : "/Importer/uploadFile",
           file: uploadfile,

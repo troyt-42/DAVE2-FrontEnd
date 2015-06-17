@@ -75,7 +75,7 @@
               </thead>
               <tbody style="color:white">
                 <tr ng-repeat = "importer in importerUploadCtrl.importerList | filter:importerUploadCtrl.search" ng-click="importerUploadCtrl.requestImporter(importer)" ng-show="((importerUploadCtrl.importerListCurrentPage * 13 - 13) <= $index) && ($index < (importerUploadCtrl.importerListCurrentPage * 13))">
-                  <td>{{importer["name"]}}</td>
+                  <td>{{importer["importerName"]}}</td>
                   <td>{{importer["location"]}}</td>
                   <td>{{importer["ownerName"]}}</td>
                 </tr>

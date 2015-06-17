@@ -8,21 +8,22 @@
 </div>
 
 <div class = "col-md-9" ng-hide="DataItemDisplayCtrl.loading">
-  <div class="well" style="background:#3e3e40;">
-    <div id="container" style="height:600px;width:950px"></div>
+  <div class="well row" style="background:#3e3e40;height:1300px;border-radius:20px">
+    <div id="container" style="height:600px;width:1040px"></div>
+    <div id="container2" style="height:600px;width:1040px"></div>
   </div>
 </div>
 
-<div class ="col-md-3" ng-hide="DataItemDisplayCtrl.loading">
+<div class ="col-md-3" style="position:fixed;right:0px;top:80px"ng-hide="DataItemDisplayCtrl.loading">
 
-  <div class="well col-md-12" style="height:640px;overflow:scroll;background:orange;">
+  <div class="well col-md-12" style="height:640px;overflow:scroll;background:#3A8AD3;color:white">
     <table class="table table-hover">
-      <thead>
-        <th class="col-md-6">Date</th>
-        <th class="col-md-6">58-B9-E1-F1-87-89</th>
+      <thead style="">
+        <th class="col-md-6" style="color:black">Date</th>
+        <th class="col-md-6"  style="color:black">58-B9-E1-F1-87-89</th>
       </thead>
       <tbody>
-        <tr ng-repeat = "entry in DataItemDisplayCtrl.tableData" style="font-family:'Serif'">
+        <tr ng-repeat = "entry in DataItemDisplayCtrl.tableData" style="">
           <td>{{entry[0]}}</td>
           <td>{{entry[1]}}</td>
         </tr>

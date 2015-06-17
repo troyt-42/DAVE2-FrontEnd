@@ -1,11 +1,14 @@
 body{
   /*background:radial-gradient(circle, linen, white);*/
   font-family: 'Dosis'  ;
-  overflow:hidden;
+  overflow:scroll;
   background-image: url("../imgs/diagonal_striped_brick.png");
   background-repeat: repeat;
 }
 
+g{
+  opacity: 1 !important;
+}
 .navbar-customized{
   border-bottom: 1px linen solid;
   background: linear-gradient(270deg, #F0F0F0  , white); /* Standard syntax */

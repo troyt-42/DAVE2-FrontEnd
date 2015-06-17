@@ -5,9 +5,13 @@
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
   <link rel="stylesheet" type= "text/css" href = "http://fonts.googleapis.com/css?family=Dosis:400,600"/>
+  <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type= "text/css" href = "index.css"/>
   <link rel="stylesheet" type= "text/css" href = "Importer/importer.css"/>
   <link rel="stylesheet" type= "text/css" href = "Importer/silderBar.css"/>
+  <link rel="stylesheet" type= "text/css" href = "DataItemDisplay/DataItemDisplay.css"/>
+
 </head>
 
 
@@ -15,33 +19,33 @@
   <div id="particles-js" ng-show="dave2ctrl.isHome()">    </div>
   <nav class="navbar navbar-customized" role = "navigation">
 
-      <div class="container" >
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar" style="background-color:red"></span>
-            <span class="icon-bar" style="background-color:red"></span>
-            <span class="icon-bar" style="background-color:red"></span>
-          </button>
-          <div  class="navbar-brand" style="padding-top:0px;height:70px"><img src = "imgs/dave_logo2.png" alt="Brand" height="70px"/></div>
-        </div>
-
-        <div class="navbar-collapse collapse navbar-right">
-          <ul class="nav navbar-nav">
-            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Import')"><a href="#/Import">Import</a></li>
-            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/DataItemDisplay')"><a href="#/DataItemDisplay">Display</a></li>
-            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Export')"><a href="#/Export">Export</a></li>
-            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Status')"><a href="#/Status">Status</a></li>
-            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Analysis')"><a href="#/Analysis">Analysis</a></li>
-            <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Account')"><a href="#/Account">Account</a></li>
-            <li style="padding-top:10px"><a style="color:green;cursor:pointer" ng-click="dave2ctrl.signIn()">Sign In</a></li>
-            <li style="padding-top:18px" >
-              <input type="text" class="form-control navSearch" placeholder="Search">
-            </li>
-          </ul>
-        </div>
-
+    <div class="container" >
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar" style="background-color:red"></span>
+          <span class="icon-bar" style="background-color:red"></span>
+          <span class="icon-bar" style="background-color:red"></span>
+        </button>
+        <div  class="navbar-brand" style="padding-top:0px;height:70px"><img src = "imgs/dave_logo2.png" alt="Brand" height="70px"/></div>
       </div>
+
+      <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav">
+          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Import')"><a href="#/Import">Import</a></li>
+          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/DataItemDisplay')"><a href="#/DataItemDisplay">Display</a></li>
+          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Export')"><a href="#/Export">Export</a></li>
+          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Status')"><a href="#/Status">Status</a></li>
+          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Analysis')"><a href="#/Analysis">Analysis</a></li>
+          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Account')"><a href="#/Account">Account</a></li>
+          <li style="padding-top:10px"><a style="color:green;cursor:pointer" ng-click="dave2ctrl.signIn()">Sign In</a></li>
+          <li style="padding-top:18px" >
+            <input type="text" class="form-control navSearch" placeholder="Search">
+          </li>
+        </ul>
+      </div>
+
+    </div>
 
   </nav>
   <div ng-view></div>
@@ -58,6 +62,8 @@
   <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>                                        <!--ngFileUpload-->
   <script src="/bower_components/particles.js/particles.js"></script>                                               <!--particlesjs-->
   <script src="http://code.highcharts.com/stock/highstock.src.js"></script>                                         <!--hightchartsjs-->
+  <script src="http://code.highcharts.com/modules/heatmap.js"></script>                                             <!--(highcharts)heatmap.js-->
+  <script src="http://code.highcharts.com/modules/treemap.js"></script>                                             <!--(highcharts)treemap.js-->
   <script src="/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>                                     <!--particlesjs-->
 
 
