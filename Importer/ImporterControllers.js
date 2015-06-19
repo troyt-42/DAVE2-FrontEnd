@@ -17,34 +17,18 @@ ImporterUploadCtrl.$inject = [
 function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingParseService, ImporterSocket){
   var vm = this;
 
-  vm.submitFile = submitFile;
+  //functions
+  vm.backToImporterList = backToImporterList;
   vm.cancelFile = cancelFile;
   vm.cancelImport = cancelImport;
+  vm.changeDataItemConfig = changeDataItemConfig;
+  vm.chooseDataItem = chooseDataItem;
+  vm.closeAlert = closeAlert;
   vm.decideImport = decideImport;
   vm.requestImporter = requestImporter;
-  vm.chooseDataItem = chooseDataItem;
-  vm.backToImporterList = backToImporterList;
-  vm.closeAlert = closeAlert;
-  vm.changeDataItemConfig = changeDataItemConfig;
+  vm.submitFile = submitFile;
 
-  vm.stepOne = true;
-  vm.stepTwo = false;
-  vm.stepTwoB = false;
-  vm.stepThree = false;
-
-  vm.stepOneLoading = true;
-  vm.formModel={};
-  vm.fileUploadProgress = 0;
-  vm.availableFields = {};
-
-  vm.importerList = [];
-  vm.importerListCurrentPage = 1;
-  vm.importerToDisplay = {};
-  vm.importerToDisplayContent = [];
-
-  vm.importerDataItemToDisplay = {};
-  vm.currentDataItem = "Fermenter Sample HPLC Ethanol";
-
+  //variables
   vm.alerts = {
     "stepOne":[
       { type: 'danger', msg: 'Load Item Fails. Please Check Your Internet Connect.' }
@@ -53,6 +37,29 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       { type: 'warning', msg: 'Lost Connection (still can manipulate cached data)' }
     ]
   };
+  vm.availableFields = {};
+
+  vm.currentDataItem = "Fermenter Sample HPLC Ethanol";
+
+
+  vm.formModel={};
+  vm.fileUploadProgress = 0;
+  vm.importerList = [];
+  vm.importerListCurrentPage = 1;
+  vm.importerToDisplay = {};
+  vm.importerToDisplayContent = [];
+
+  vm.importerDataItemToDisplay = {};
+  vm.importerDataItemData = [];
+  vm.stepOne = true;
+  vm.stepTwo = false;
+  vm.stepTwoB = false;
+  vm.stepThree = false;
+
+  vm.stepOneLoading = true;
+
+  vm.stepThreeFormCollection = [];
+
 
 
   vm.sampleDataQuantity = 50;
@@ -61,6 +68,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   vm.search = {};
   vm.search2 = '';
+
   vm.optionStatus = {
     firstOpen : true,
     secondOpen: false,
@@ -113,271 +121,256 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     }
   ];
 
-  vm.fakeDataItemData = {
-    fields:[
-      "Fermenter Sample HPLC Ethanol",
-      "Fermenter Sample %Solids",
-      "Fermenter Sample ID 17380",
-      "Fermenter Sample ID 17381",
-      "Fermenter Sample ID 17382",
-      "Fermenter Sample ID 17383",
-      "Fermenter Sample ID 17384",
-      "Fermenter Sample ID 17385",
-    ],
-    data:[
-      ["11-11-04 0:00",2.27],
-      ["11-11-04 8:00",6.84],
-      ["11-11-04 22:00",11.94],
-      ["11-11-05 11:00",13.68],
-      ["12-01-01 9:30",0.21],
-      ["12-01-01 19:31",1.93],
-      ["12-01-01 23:10",0.23],
-      ["12-01-01 23:20",1.76],
-      ["12-01-02 3:31",6.34],
-      ["12-01-02 9:10",7.90],
-      ["12-01-02 12:55", 4.32],
-      ["12-01-02 17:10", 1.27],
-      ["12-01-02 17:31", 9.93],
-      ["12-01-02 22:45",2.24]]
-    };
+  vm.waitingMessage = 'File Uploading';
 
-    $scope.$watch(function(){
-      return vm.stepOne;
-    }, function(newValue){
-      if(newValue === true){
-        $scope.$emit("dynamicBackground");
-      } else if ( newValue === false){
-        $scope.$emit("removeDynamicBackground");
-      }
-    });
+  $scope.$watch(function(){
+    return vm.stepOne;
+  }, function(newValue){
+    if(newValue === true){
+      $scope.$emit("dynamicBackground");
+    } else if ( newValue === false){
+      $scope.$emit("removeDynamicBackground");
+    }
+  });
 
-    $scope.$on("stepTwo",function(){
-      vm.stepOne = false;
-      vm.stepTwo = true;
-      vm.stepTwoB = false;
-      vm.stepThree = false;
-    });
+  $scope.$watch(function(){
+    return vm.sampleDataReduction;
+  }, function(newValue){
+    if(newValue <= 10){
+      vm.sampleDataReductionString = "1 Hour";
+    } else if ((newValue > 10) && (newValue <= 20)){
+      vm.sampleDataReductionString = "2 Hour";
+    } else if ((newValue > 20) && (newValue <= 30)){
+      vm.sampleDataReductionString = "3 Hour";
+    } else if ((newValue > 30) && (newValue <= 40)){
+      vm.sampleDataReductionString = "4 Hour";
+    } else if ((newValue > 40) && (newValue <= 50)){
+      vm.sampleDataReductionString = "5 Hour";
+    } else if ((newValue > 50) && (newValue <= 60)){
+      vm.sampleDataReductionString = "6 Hour";
+    } else if ((newValue > 60) && (newValue <= 70)){
+      vm.sampleDataReductionString = "7 Hour";
+    } else if ((newValue > 70) && (newValue <= 80)){
+      vm.sampleDataReductionString = "8 Hour";
+    } else if ((newValue > 80) && (newValue <= 90)){
+      vm.sampleDataReductionString = "9 Hour";
+    } else if ((newValue > 90) && (newValue <= 100)){
+      vm.sampleDataReductionString = "10 Hour";
+    }
+  });
 
+  ImporterSocket.on("importerListData", function(data){
+    if(data.length !== 0){
+      vm.importerList = vm.importerList.concat(data);
+      vm.stepOneLoading = false;
+    } else {
+      // if(vm.importerList.length < 250){
+      //   vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
+      // }
+      console.log(vm.importerList);
+    }
 
-    $scope.$on("uploadProgress", function(event, data){
-      console.log(data);
-      vm.fileUploadProgress = data;
-      if(data >= 100){
-        $timeout(function(){
-          vm.stepOne = false;
-          vm.stepTwo = false;
-          vm.stepTwoB = false;
-          vm.stepThree = true;
-        }, 1000);
-      }
-    });
-
-    $scope.$watch(function(){
-      return vm.sampleDataReduction;
-    }, function(newValue){
-      if(newValue <= 10){
-        vm.sampleDataReductionString = "1 Hour";
-      } else if ((newValue > 10) && (newValue <= 20)){
-        vm.sampleDataReductionString = "2 Hour";
-      } else if ((newValue > 20) && (newValue <= 30)){
-        vm.sampleDataReductionString = "3 Hour";
-      } else if ((newValue > 30) && (newValue <= 40)){
-        vm.sampleDataReductionString = "4 Hour";
-      } else if ((newValue > 40) && (newValue <= 50)){
-        vm.sampleDataReductionString = "5 Hour";
-      } else if ((newValue > 50) && (newValue <= 60)){
-        vm.sampleDataReductionString = "6 Hour";
-      } else if ((newValue > 60) && (newValue <= 70)){
-        vm.sampleDataReductionString = "7 Hour";
-      } else if ((newValue > 70) && (newValue <= 80)){
-        vm.sampleDataReductionString = "8 Hour";
-      } else if ((newValue > 80) && (newValue <= 90)){
-        vm.sampleDataReductionString = "9 Hour";
-      } else if ((newValue > 90) && (newValue <= 100)){
-        vm.sampleDataReductionString = "10 Hour";
-      }
-    });
-
-    ImporterSocket.on("importerListData", function(data){
-      if(data.length !== 0){
-        vm.importerList = vm.importerList.concat(data);
-        vm.stepOneLoading = false;
-      } else {
-        // if(vm.importerList.length < 250){
-        //   vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
-        // }
-        console.log(vm.importerList);
-      }
-
-    });
+  });
 
   ImporterSocket.on("importerData", function(data){
-      if(data.length !== 0){
-        vm.currentDataItem = data[0];
-        vm.stepOne = false;
-        vm.stepTwo = false;
-        vm.stepTwoB = true;
-        vm.stepThree = false;
-        vm.importerToDisplayContent = data;
-      } else if (data.length === 0){
-        vm.importerToDisplayContent.forEach(function(element, index, array){
-          ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
-        });
-      }
-    });
-
-    ImporterSocket.on("importerDataItemData", function(dataItem){
-      if(dataItem.data.length !== 0){
-        console.log(dataItem.data);
-        if(!vm.importerDataItemToDisplay[dataItem.name]){
-          vm.importerDataItemToDisplay[dataItem.name] = [];
-        }
-
-        vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
-      } else if (dataItem.data.length === 0){
-        console.log(vm.importerDataItemToDisplay);
-      }
-    });
-
-    activate();
-
-    ///////////////////////////
-
-    function activate(){
-      ImporterSocket.emit("requestImporterList");
+    if(data.length !== 0){
+      vm.currentDataItem = data[0];
+      vm.stepOne = false;
+      vm.stepTwo = false;
+      vm.stepTwoB = true;
+      vm.stepThree = false;
+      vm.importerToDisplayContent = data;
+    } else if (data.length === 0){
+      vm.importerToDisplayContent.forEach(function(element, index, array){
+        ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
+      });
     }
+  });
 
-    function submitFile(){
-      console.log(vm.formModel);
-      var uploadfile = vm.formModel["Select A File"][0];
-      console.log(uploadfile);
-
-      if(uploadfile !== {}){
-        var importerInfo = {
-          'importerName' : vm.formModel.Name,
-          'fileName': vm.formModel["Select A File"][0].name,
-          'location': vm.formModel.Location,
-          'description': vm.formModel.Description,
-          'source':"csv"
-        };
-        //Upload importerInfo through socket
-        ImporterSocket.emit("createNewImporter",importerInfo );
-        //Upload file through http
-        Upload.upload({
-          url : "/Importer/uploadFile",
-          file: uploadfile,
-          fields:{
-            'uploadInfo': {
-              'name' : vm.formModel.Name,
-              'filename': vm.formModel["Select A File"][0].name,
-              'location': vm.formModel.Location,
-              'description': vm.formModel.Description
-            }
-          }
-        }).progress(function(evt) {
-          var progress = parseInt(100.0 * evt.loaded / evt.total);
-          $scope.$emit("uploadProgress", progress);
-        }).success(function(data, status, headers, config) {
-
-
-          vm.stepThreeFormCollection = FormSettingParseService(data); // jshint ignore:line
-
-          console.log(vm.stepThreeFormCollection);
-        }).error(function(err){
-          alert(err);
-        });
-      } else {
-        alert("Please Select A File");
+  ImporterSocket.on("importerDataItemData", function(dataItem){
+    if(dataItem.data.length !== 0){
+      if(!vm.importerDataItemToDisplay[dataItem.name]){
+        vm.importerDataItemToDisplay[dataItem.name] = [];
       }
-      $scope.$emit("stepTwo");
+      vm.importerDataItemToDisplay[dataItem.name] = vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
+    } else if (dataItem.data.length === 0){
+      vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
+      console.log(vm.importerDataItemData);
     }
+  });
 
-    function cancelFile(){
-      vm.formModel= {};
-    }
-
-    function cancelImport(){
-      vm.stepOne = true;
+  var temp = []; //temporary var for importerCreationResponse event
+  ImporterSocket.on("importerCreationResponse", function(response){
+    if(response.data.length !== 0){
+      temp = temp.concat(response.data);
+    } else {
+      console.log(vm.stepThreeFormCollection);
+      vm.stepThreeFormCollection = FormSettingParseService(temp); //jshint ignore:line
+      vm.importerCreationMeta = {
+        importerName : response.importerName,
+        location : response.location
+      };
+      temp = [];
+      vm.stepOne = false;
       vm.stepTwo = false;
       vm.stepTwoB = false;
+      vm.stepThree = true;
+    }
+
+
+  });
+
+  activate();
+
+  ///////////////////////////
+
+  function activate(){
+    ImporterSocket.emit("requestImporterList");
+  }
+
+  function backToImporterList(){
+    vm.stepOne = true;
+    vm.stepTwo = false;
+    vm.stepTwoB = false;
+    vm.stepThree = false;
+  }
+
+  function cancelFile(){
+    vm.formModel= {};
+  }
+
+  function cancelImport(){
+    vm.stepOne = true;
+    vm.stepTwo = false;
+    vm.stepTwoB = false;
+    vm.stepThree = false;
+    vm.fileUploadProgress = 0;
+  }
+
+
+  function changeDataItemConfig(dataItem){
+    var loginInterface = $modal.open({
+      templateUrl:"Importer/changeDataItemModal.html",
+      controller:["$scope","$modalInstance", function($scope, $modalInstance){
+        $scope.dataItem = dataItem;
+        $scope.type = "text";
+        $scope.ok = function(){
+          $modalInstance.close({name:$scope.dataItem.name, value:$scope.dataItem.value});
+        };
+
+        $scope.cancel = function(){
+          $modalInstance.dismiss('cancel');
+        };
+      }]
+    });
+
+    loginInterface.result.then(function(data){
+      console.log(data);
+    });
+  }
+
+  function chooseDataItem(dataItem){
+    vm.currentDataItem = dataItem;
+    vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
+  }
+
+  function closeAlert(index, position){
+    vm.alerts[position].splice(index, 1);
+  }
+
+  function decideImport(){
+    var finalFormToUpload = [];
+    console.log(vm.stepThreeFormCollection);
+    for(var key in vm.stepThreeFormCollection){
+      var temp = {
+        availableOptions:{}
+      };
+      for(var key2 in vm.stepThreeFormCollection[key]){
+        switch(key2){
+          case "fields":
+          break;
+          case "checked":
+          temp.checked = vm.stepThreeFormCollection[key][key2];
+          break;
+          default:
+          temp.availableOptions[key2] = { name: key2, value:(vm.stepThreeFormCollection[key][key2])} ;
+          break;
+        }
+      }
+      temp.fieldName = key;
+      finalFormToUpload.push(temp);
+    }
+    console.log(finalFormToUpload);
+
+    ImporterSocket.emit('decideImporterCreation',{location : vm.importerCreationMeta.location,data:finalFormToUpload } );
+    $http.post("/Importer/decideImport", finalFormToUpload).
+    success(function(data, status, headers, config) {
+      // this callback will be called asynchronously
+      // when the response is available
+      vm.stepOne = false;
+      vm.stepTwo = false;
+      vm.stepTwoB = true;
       vm.stepThree = false;
       vm.fileUploadProgress = 0;
-    }
+    }).
+    error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      alert("Something Wents Wrong");
+    });
+  }
 
-    function decideImport(){
-      var finalFormToUpload = {};
-      console.log(vm.stepThreeFormCollection);
-      for(var key in vm.stepThreeFormCollection){
-        finalFormToUpload[key] = {};
-        for(var key2 in vm.stepThreeFormCollection[key]){
-          switch(key2){
-            case "fields":
-            break;
-            default:
-            finalFormToUpload[key][key2] = vm.stepThreeFormCollection[key][key2];
-            break;
+  function requestImporter(importer){
+    console.log(importer);
+    vm.importerToDisplay = importer;
+    ImporterSocket.emit("requestImporter", importer);
+  }
+
+  function submitFile(){
+    console.log(vm.formModel);
+    var uploadfile = vm.formModel["Select A File"][0];
+    console.log(uploadfile);
+
+    if(uploadfile !== {}){
+      var importerInfo = {
+        'importerName' : vm.formModel.Name,
+        'fileName': vm.formModel["Select A File"][0].name,
+        'location': vm.formModel.Location,
+        'description': vm.formModel.Description,
+        'userName': 'troy'
+
+      };
+      //Upload file through http
+      Upload.upload({
+        url : "/Importer/uploadFile",
+        file: uploadfile,
+        fields:{
+          'uploadInfo': {
+            'name' : vm.formModel.Name,
+            'filename': vm.formModel["Select A File"][0].name,
+            'location': vm.formModel.Location,
+            'description': vm.formModel.Description
           }
         }
-      }
-      console.log(finalFormToUpload);
-      $http.post("/Importer/decideImport", finalFormToUpload).
-      success(function(data, status, headers, config) {
-        // this callback will be called asynchronously
-        // when the response is available
-        vm.stepOne = false;
-        vm.stepTwo = false;
-        vm.stepTwoB = true;
-        vm.stepThree = false;
-        vm.fileUploadProgress = 0;
-      }).
-      error(function(data, status, headers, config) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-        alert("Something Wents Wrong");
+      }).progress(function(evt) {
+        var progress = parseInt(100.0 * evt.loaded / evt.total);
+        console.log(progress);
+        vm.fileUploadProgress = progress;
+        if(progress >= 100){
+
+          vm.waitingMessage = 'Waiting response from server';
+          console.log(vm.waitingMessage);
+        }
+      }).success(function(data, status, headers, config) {
+        //Upload importerInfo through socket
+        ImporterSocket.emit("createNewImporter",importerInfo );
+        console.log("uploadSuccess");
+      }).error(function(err){
+        alert(err);
       });
-    }
-
-
-    function requestImporter(importer){
-      console.log(importer);
-      vm.importerToDisplay = importer;
-      ImporterSocket.emit("requestImporter", importer);
-    }
-
-    function chooseDataItem(dataItem){
-      vm.currentDataItem = dataItem;
-    }
-
-    function backToImporterList(){
-      vm.stepOne = true;
-      vm.stepTwo = false;
-      vm.stepTwoB = false;
-      vm.stepThree = false;
-    }
-
-    function closeAlert(index, position){
-      vm.alerts[position].splice(index, 1);
-    }
-
-    function changeDataItemConfig(dataItem){
-      var loginInterface = $modal.open({
-        templateUrl:"Importer/changeDataItemModal.html",
-        controller:["$scope","$modalInstance", function($scope, $modalInstance){
-          $scope.dataItem = dataItem;
-          $scope.type = "text";
-          $scope.ok = function(){
-            $modalInstance.close({name:$scope.dataItem.name, value:$scope.dataItem.value});
-          };
-
-          $scope.cancel = function(){
-            $modalInstance.dismiss('cancel');
-          };
-        }]
-      });
-
-      loginInterface.result.then(function(data){
-        console.log(data);
-      });
+    } else {
+      alert("Please Select A File");
     }
   }
+}
 })();

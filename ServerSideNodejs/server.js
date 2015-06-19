@@ -16,9 +16,10 @@ var HighLevelConsumer = kafka.HighLevelConsumer;
 var kafkaProducer = new HighLevelProducer(kafkaClient);
 var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__main_out__' },
-  {topic: '__importer_stepOne_list_out__'},
-  {topic: '__importer_stepTwoB_importer_out__'},
-  {topic: '__importer_stepTwoB_dataItem_out__'}
+  { topic: '__importer_stepOne_list_out__'},
+  { topic: '__importer_stepTwoB_importer_out__'},
+  { topic: '__importer_stepTwoB_dataItem_out__'},
+  { topic: '__importer_stepOne_createImporter_out__'}
 ],
 {
   groupId: 'my-group'
@@ -51,8 +52,7 @@ app.post('/Importer/uploadFile', function(req,res){
       });
 
       part.on('end', function(){
-        console.log(fileInfo);
-        console.log(part.name + ' is received');
+        console.log(part.name + ' is received: ' + fileInfo);
       });
 
       // ignore field's content
@@ -82,7 +82,7 @@ app.post('/Importer/uploadFile', function(req,res){
   form.on('close', function() {
     console.log('Upload completed!');
 
-    fs.writeFile(__dirname + '/upload_files/' + filename,file, function(err){
+    fs.writeFile(__dirname + '/importerfiles/' + filename,file, function(err){
       res.end(err);
     });
 
@@ -98,7 +98,7 @@ app.post('/Importer/uploadFile', function(req,res){
 
 
 app.post('/Importer/decideImport',bodyparser.json(), function(req, res){
-  console.log(JSON.stringify(req.body));
+  //console.log(JSON.stringify(req.body));
   res.end();
 });
 
@@ -236,6 +236,9 @@ io.of('/importer').on('connection', function(socket){
   });
   socket.on('createNewImporter',function(importerInfo){
     importerInfo.session_id = socket.id;
+    importerInfo.action = 'CREATE_IMPORTER';
+    importerInfo.return_topic = '__importer_stepOne_createImporter_out__';
+    importerInfo.type = 'csv';
     kafkaProducer.send([{
       topic:'__importer_stepOne_createImporter_in__',
       messages:[JSON.stringify(importerInfo)]
@@ -247,6 +250,26 @@ io.of('/importer').on('connection', function(socket){
       }
     });
   });
+
+  socket.on('decideImporterCreation', function(decision){
+    var temp = {
+      session_id : socket.id,
+      return_topic : '__importer_stepTwo_decideCreation_out__',
+      action : 'DECIDE_CREATION',
+      location : decision.location,
+      list_out : decision.data
+    };
+    kafkaProducer.send([{
+      topic:'__importer_stepTwo_decideCreation_in__',
+      messages:[JSON.stringify(temp)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent importer creation decision successfully');
+      }
+    });
+  });
 });
 
 
@@ -254,8 +277,9 @@ io.of('/importer').on('connection', function(socket){
 kafkaConsumer.on('message',function(message){
   if(message.value === "hi"){
 
-  } else
-  if(message.topic === '__main_out__'){
+  } else if(message.value[1] !== '\"'){
+    console.log(message.value[1]);
+  } else if(message.topic === '__main_out__'){
     var data = JSON.parse(message.value);
     if(data.status === 'SUCCESS'){
       console.log('User ' + data.username + ' (id: ' + data.session_id + ') ' + 'has logged in successfully.');
@@ -282,8 +306,14 @@ kafkaConsumer.on('message',function(message){
     }
   } else if (message.topic === '__importer_stepOne_createImporter_out__'){
     var data5 = JSON.parse(message.value);
-    console.log(data5);
-  }else {
+    if(data5.list_out){
+      io.of('/importer').to(data5.session_id).emit('importerCreationResponse',{
+        importerName:data5.importerName,
+        location:data5.location,
+        data: data5.list_out
+      });
+    }
+  } else {
     console.log(message);
   }
 });

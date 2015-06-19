@@ -105,7 +105,7 @@
           <div class="well col-md-12" style="background-image:url('../imgs/dark_embroidery.png');background-repeat:repeat;border-radius:5px;text-align:left;box-shadow:0px 0px 0px #3A8AD3;border:0px solid gray;margin-left:10px;min-height:589px;border-top-left-radius:0">
             <div class="col-md-4" >
               <div class="well row" style="background-image:url('../imgs/brushed_alu.png')">
-                <div class="col-md-12"><span style="font-size:150%">Name: </span><span>{{importerUploadCtrl.importerToDisplay.name}}</span></div>
+                <div class="col-md-12"><span style="font-size:150%">Name: </span><span>{{importerUploadCtrl.importerToDisplay.importerName}}</span></div>
                 <div class="col-md-12"><span style="font-size:150%">Location: </span><span>{{importerUploadCtrl.importerToDisplay.location}}</span></div>
                 <div class="col-md-12"><span style="font-size:150%">Owner: </span><span>{{importerUploadCtrl.importerToDisplay.ownerName}}</span></div>
               </div>
@@ -151,11 +151,11 @@
                   <table class="table"  style="text-align:center;">
                     <thead style="font-size:120%">
                       <th class="col-md-4" style="text-align:center">Date</th>
-                      <th class="col-md-8" style="text-align:center">Fermenter Sample HPLC Ethanol</th>
+                      <th class="col-md-8" style="text-align:center">{{importerUploadCtrl.currentDataItem.fieldName}}</th>
                     </thead>
                     <tbody >
-                      <tr ng-repeat = "entry in importerUploadCtrl.fakeDataItemData.data">
-                        <td>{{entry[0]}}</td>
+                      <tr ng-repeat = "entry in importerUploadCtrl.importerDataItemData">
+                        <td>{{entry[0] | date : 'yyyy/MM/dd HH:mm:ss.sss'}}</td>
                         <td>{{entry[1]}}</td>
                       </tr>
                     </tbody>
@@ -183,7 +183,7 @@
         </div>
 
         <div class="col-md-6 col-md-offset-3" ng-show="importerUploadCtrl.stepTwo" style="margin-top:250px;text-align:center">
-          <progressbar ng-show="importerUploadCtrl.stepTwo" max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><i style="line-height:3.5em"><span>Progress</span></i></progressbar>
+          <progressbar ng-show="importerUploadCtrl.stepTwo" max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="success"><i style="line-height:3.5em"><span style="  font-size: 130%;font-style: normal;color: #3A8AD3;font-weight: bold;">{{importerUploadCtrl.waitingMessage}}</span></i></progressbar>
         </div>
 
         <div ng-show="importerUploadCtrl.stepThree">

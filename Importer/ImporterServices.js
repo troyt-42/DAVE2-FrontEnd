@@ -12,8 +12,8 @@
           var formCollection = {};
           for(var i = 0; i < dataToParse.length; i++){
             var singleForm = [];
-            for(var p = 0; p < dataToParse[i].avaliableOptions.length; p++){
-              var rawOption = dataToParse[i].avaliableOptions[p];
+            for(var p in dataToParse[i].availableOptions){
+              var rawOption = dataToParse[i].availableOptions[p];
               var translatedField = {};
 
               translatedField.key = rawOption.name;
@@ -21,19 +21,19 @@
               translatedField.expressionProperties = {
                 "templateOptions.disabled":'!model.checked'
               };
-              switch(rawOption.type) {
-                case "text":
+              switch(rawOption.name) {
+                case "flexibleFieldName":
                 translatedField.type = "input2";
                 break;
-                case "number":
+                case "precision":
                 translatedField.type = "input2";
                 translatedField.data = { inputType : "number"};
                 break;
-                case "select":
+                case "unit":
                 translatedField.type = "select";
                 translatedField.data = {options : rawOption.options};
                 break;
-                case "textarea":
+                case "note":
                 translatedField.type = "textarea2";
                 break;
                 default:
@@ -42,16 +42,15 @@
 
               singleForm.push(translatedField);
             }
-            formCollection[dataToParse[i].name] = { fields : singleForm, checked : dataToParse[i].checked};
+            formCollection[dataToParse[i].fieldName] = { fields : singleForm, checked : dataToParse[i].checked};
 
           }
-          console.log(formCollection);
           return formCollection;
         }
       };
   }
   function ImporterSocket(socketFactory){
-    var myIoSocket = io.connect('10.3.83.58:3000/importer');
+    var myIoSocket = io.connect('10.3.83.58:3000/importer'); //jshint ignore:line
     return socketFactory({
       ioSocket : myIoSocket
     });
