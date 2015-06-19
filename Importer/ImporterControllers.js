@@ -30,9 +30,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   //variables
   vm.alerts = {
-    "stepOne":[
-      { type: 'danger', msg: 'Load Item Fails. Please Check Your Internet Connect.' }
-    ],
+    "stepOne":[],
     "stepTwoB" :[
       { type: 'warning', msg: 'Lost Connection (still can manipulate cached data)' }
     ]
@@ -160,6 +158,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   });
 
   ImporterSocket.on("importerListData", function(data){
+    $timeout.cancel(importerListPromise);
     if(data.length !== 0){
       vm.importerList = vm.importerList.concat(data);
       vm.stepOneLoading = false;
@@ -167,6 +166,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       // if(vm.importerList.length < 250){
       //   vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
       // }
+      vm.alerts.stepOne.push({ type: 'success', msg: 'Load Item Success.' });
       console.log(vm.importerList);
     }
 
@@ -220,12 +220,15 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   });
 
-  activate();
+  var importerListPromise = activate();
 
   ///////////////////////////
 
   function activate(){
     ImporterSocket.emit("requestImporterList");
+    return $timeout(function(){
+      vm.alerts.stepOne.push({ type: 'danger', msg: 'Load Item Fails. Please Check Your Internet Connect.' });
+    },10000);
   }
 
   function backToImporterList(){
@@ -245,6 +248,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     vm.stepTwoB = false;
     vm.stepThree = false;
     vm.fileUploadProgress = 0;
+    vm.waitingMessage = 'File Uploading';
   }
 
 
@@ -303,21 +307,25 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     console.log(finalFormToUpload);
 
     ImporterSocket.emit('decideImporterCreation',{location : vm.importerCreationMeta.location,data:finalFormToUpload } );
-    $http.post("/Importer/decideImport", finalFormToUpload).
-    success(function(data, status, headers, config) {
-      // this callback will be called asynchronously
-      // when the response is available
-      vm.stepOne = false;
-      vm.stepTwo = false;
-      vm.stepTwoB = true;
-      vm.stepThree = false;
-      vm.fileUploadProgress = 0;
-    }).
-    error(function(data, status, headers, config) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      alert("Something Wents Wrong");
-    });
+    vm.stepOne = false;
+    vm.stepTwo = true;
+    vm.stepTwoB = false;
+    vm.stepThree = false;
+    // $http.post("/Importer/decideImport", finalFormToUpload).
+    // success(function(data, status, headers, config) {
+    //   // this callback will be called asynchronously
+    //   // when the response is available
+    //   vm.stepOne = false;
+    //   vm.stepTwo = false;
+    //   vm.stepTwoB = true;
+    //   vm.stepThree = false;
+    //   vm.fileUploadProgress = 0;
+    // }).
+    // error(function(data, status, headers, config) {
+    //   // called asynchronously if an error occurs
+    //   // or server returns response with an error status.
+    //   alert("Something Wents Wrong");
+    // });
   }
 
   function requestImporter(importer){
@@ -327,6 +335,10 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   }
 
   function submitFile(){
+    vm.stepOne = false;
+    vm.stepTwo = true;
+    vm.stepTwoB = false;
+    vm.stepThree = false;
     console.log(vm.formModel);
     var uploadfile = vm.formModel["Select A File"][0];
     console.log(uploadfile);
@@ -357,13 +369,13 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
         console.log(progress);
         vm.fileUploadProgress = progress;
         if(progress >= 100){
-
           vm.waitingMessage = 'Waiting response from server';
           console.log(vm.waitingMessage);
         }
       }).success(function(data, status, headers, config) {
         //Upload importerInfo through socket
         ImporterSocket.emit("createNewImporter",importerInfo );
+
         console.log("uploadSuccess");
       }).error(function(err){
         alert(err);
