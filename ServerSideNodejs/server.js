@@ -239,6 +239,9 @@ io.of('/importer').on('connection', function(socket){
     importerInfo.action = 'CREATE_IMPORTER';
     importerInfo.return_topic = '__importer_stepOne_createImporter_out__';
     importerInfo.type = 'csv';
+    importerInfo.files = [{
+      fileName: importerInfo.fileName
+    }];
     kafkaProducer.send([{
       topic:'__importer_stepOne_createImporter_in__',
       messages:[JSON.stringify(importerInfo)]
@@ -259,7 +262,9 @@ io.of('/importer').on('connection', function(socket){
       location : decision.location,
       userName : decision.userName,
       importerName : decision.importerName,
-      list_out : decision.data
+      list_out : decision.data,
+      type:'csv',
+      files: decision.files
     };
     kafkaProducer.send([{
       topic:'__importer_stepTwo_decideCreation_in__',
@@ -313,7 +318,8 @@ kafkaConsumer.on('message',function(message){
         importerName:data5.importerName,
         location:data5.location,
         userName: data5.userName,
-        data: data5.list_out
+        data: data5.list_out,
+        files: data5.files
       });
     }
   } else {

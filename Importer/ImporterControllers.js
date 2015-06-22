@@ -31,9 +31,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   //variables
   vm.alerts = {
     "stepOne":[],
-    "stepTwoB" :[
-      { type: 'warning', msg: 'Lost Connection (still can manipulate cached data)' }
-    ]
+    "stepTwoB" :[]
   };
   vm.availableFields = {};
 
@@ -49,6 +47,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   vm.importerDataItemToDisplay = {};
   vm.importerDataItemData = [];
+  vm.promiseToSolve = null;
+  vm.requestImporterPromiseToSolve = null;
   vm.stepOne = true;
   vm.stepTwo = false;
   vm.stepTwoB = false;
@@ -67,6 +67,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   vm.search = {};
   vm.search2 = '';
 
+  vm.systemStatus = "Normal";
   vm.optionStatus = {
     firstOpen : true,
     secondOpen: false,
@@ -158,81 +159,109 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   });
 
   ImporterSocket.on("importerListData", function(data){
-    $timeout.cancel(importerListPromise);
-    if(data.length !== 0){
-      vm.importerList = vm.importerList.concat(data);
-      vm.stepOneLoading = false;
-    } else {
-      // if(vm.importerList.length < 250){
-      //   vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
-      // }
-      vm.alerts.stepOne.push({ type: 'success', msg: 'Load Item Success.' });
-      console.log(vm.importerList);
+    if(vm.systemStatus === "Normal"){
+      $timeout.cancel(vm.promiseToSolve);
+      if(data.length !== 0){
+        vm.importerList = vm.importerList.concat(data);
+        vm.stepOneLoading = false;
+      } else {
+        // if(vm.importerList.length < 250){
+        //   vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
+        // }
+        console.log(vm.importerList);
+      }
     }
-
   });
 
   ImporterSocket.on("importerData", function(data){
-    if(data.length !== 0){
-      vm.currentDataItem = data[0];
-      vm.stepOne = false;
-      vm.stepTwo = false;
-      vm.stepTwoB = true;
-      vm.stepThree = false;
-      vm.importerToDisplayContent = data;
-    } else if (data.length === 0){
-      vm.importerToDisplayContent.forEach(function(element, index, array){
-        ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
-      });
+    if(vm.systemStatus === "Normal"){
+      $timeout.cancel(vm.requestImporterPromiseToSolve);
+      if(data.length !== 0){
+        vm.currentDataItem = data[0];
+        vm.stepOne = false;
+        vm.stepTwo = false;
+        vm.stepTwoB = true;
+        vm.stepThree = false;
+        vm.importerToDisplayContent = data;
+      } else if (data.length === 0){
+        vm.importerToDisplayContent.forEach(function(element, index, array){
+          ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
+        });
+        if(vm.importerToDisplayContent.length === 0){
+          var alertExsited = false;
+          for(var i = 0; i < vm.alerts.stepOne.length; i ++){
+            if(vm.alerts.stepOne[i].msg === 'Received Empty Importer'){
+              alertExsited = true;
+            }
+          }
+          if(!alertExsited){
+            vm.alerts.stepOne.push({ type: 'warning', msg: 'Received Empty Importer' });
+          }
+        }
+      }
     }
   });
 
   ImporterSocket.on("importerDataItemData", function(dataItem){
-    if(dataItem.data.length !== 0){
-      if(!vm.importerDataItemToDisplay[dataItem.name]){
-        vm.importerDataItemToDisplay[dataItem.name] = [];
+    if(vm.systemStatus === "Normal"){
+      if(dataItem.data.length !== 0){
+        if(!vm.importerDataItemToDisplay[dataItem.name]){
+          vm.importerDataItemToDisplay[dataItem.name] = [];
+        }
+        vm.importerDataItemToDisplay[dataItem.name] = vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
+      } else if (dataItem.data.length === 0){
+        vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
+        console.log(vm.importerDataItemData);
       }
-      vm.importerDataItemToDisplay[dataItem.name] = vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
-    } else if (dataItem.data.length === 0){
-      vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
-      console.log(vm.importerDataItemData);
     }
   });
 
   var temp = []; //temporary var for importerCreationResponse event
   ImporterSocket.on("importerCreationResponse", function(response){
-    if(response.data.length !== 0){
-      temp = temp.concat(response.data);
-    } else {
-      console.log(vm.stepThreeFormCollection);
-      vm.stepThreeFormCollection = FormSettingParseService(temp); //jshint ignore:line
-      vm.importerCreationMeta = {
-        importerName : response.importerName,
-        location : response.location,
-        userName : response.userName
-      };
-      temp = [];
-      vm.stepOne = false;
-      vm.stepTwo = false;
-      vm.stepTwoB = false;
-      vm.stepThree = true;
+    if(vm.systemStatus === "Normal"){
+      if(response.data.length !== 0){
+        temp = temp.concat(response.data);
+      } else {
+        console.log(vm.stepThreeFormCollection);
+        vm.stepThreeFormCollection = FormSettingParseService(temp); //jshint ignore:line
+        vm.importerCreationMeta = {
+          importerName : response.importerName,
+          location : response.location,
+          userName : response.userName,
+          files : response.files
+        };
+        temp = [];
+        vm.stepOne = false;
+        vm.stepTwo = false;
+        vm.stepTwoB = false;
+        vm.stepThree = true;
+      }
     }
-
 
   });
 
-  var importerListPromise = activate();
+  activate();
 
   ///////////////////////////
 
   function activate(){
     ImporterSocket.emit("requestImporterList");
-    angular.element(".importerContainerLeftMenu").toggleClass('fadeInLeft');
-    angular.element(".importerContainerRightPanel").toggleClass('fadeInRight');
+    angular.element(".importerContainerLeftMenu").addClass('fadeInLeft');
+    angular.element(".importerContainerRightPanel").addClass('fadeIn');
 
-    return $timeout(function(){
-      vm.alerts.stepOne.push({ type: 'danger', msg: 'Load Item Fails. Please Check Your Internet Connect.' });
-    },10000);
+    vm.promiseToSolve =  $timeout(function(){
+
+      var alertExsited = false;
+      for(var i = 0; i < vm.alerts.stepOne.length; i ++){
+        if(vm.alerts.stepOne[i].msg === 'Loading Importer List Failed. Please Check Your Internet Connection.'){
+          alertExsited = true;
+        }
+      }
+      if(!alertExsited){
+        vm.alerts.stepOne.push({ type: 'danger', msg: 'Loading Importer List Failed. Please Check Your Internet Connection.' });
+      }
+      vm.systemStatus = "Error";
+    },5000);
   }
 
   function backToImporterList(){
@@ -283,6 +312,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   }
 
   function closeAlert(index, position){
+    angular.element('div.alert.animated#'+position+index).removeClass("fadeInDown");
+    angular.element('div.alert.animated#'+position+index).addClass("fadeOutUp");
     vm.alerts[position].splice(index, 1);
   }
 
@@ -314,6 +345,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       location : vm.importerCreationMeta.location,
       importerName: vm.importerCreationMeta.importerName,
       userName:vm.importerCreationMeta.userName,
+      files:vm.importerCreationMeta.files,
       data:finalFormToUpload }
     );
     vm.stepOne = false;
@@ -341,12 +373,17 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     console.log(importer);
     vm.importerToDisplay = importer;
     ImporterSocket.emit("requestImporter", importer);
+    if((vm.systemStatus === 'Normal') && (vm.requestImporterPromiseToSolve === null)){
+      vm.requestImporterPromiseToSolve = $timeout(function(){
+        if(vm.alerts.stepOne.indexOf({ type: 'danger', msg: 'Timeout' }) === -1){
+          vm.alerts.stepOne.push({ type: 'danger', msg: 'Timeout' });
+        }
+        vm.systemStatus = "Error";
+      }, 1500);
+    }
   }
 
   function submitFile(){
-    angular.element(".importerContainerLeftMenu").toggleClass('fadeInLeft');
-    angular.element(".importerContainerLeftMenu").toggleClass('fadeOutLeft');
-
     vm.stepOne = false;
     vm.stepTwo = true;
     vm.stepTwoB = false;

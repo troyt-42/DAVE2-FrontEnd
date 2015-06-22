@@ -77,45 +77,6 @@ textarea {
   background-color:white;
 }
 
-.importerSystemTitle{
-  text-align:center;
-  background-image:url('../imgs/congruent_pentagon.png');
-  border-bottom-left-radius:50px;
-  border-bottom-right-radius:50px;
-  border:1px solid grey;
-  border-top:0;
-}
-
-.importerSystemTitle2{
-  text-align:center;
-  background-image:url('../imgs/gplaypattern.png');
-  border-top-left-radius:50px;
-  border-top-right-radius:50px;
-  border:1px solid black;
-  border-bottom:0;
-}
-
-
-.importerDataItemTabs{
-  font-size:200%;
-  font-weight:bold;
-  text-align:center;
-  font-size:120%;
-  height:41px;
-  overflow-y:scroll;
-  background-image:url('../imgs/gplaypattern2.png');
-  color:grey;
-  border-top-left-radius:5px;
-  border-top-right-radius:5px;
-  border:1px grey solid;
-  border-bottom:0;
-  line-height:90%;
-  cursor:pointer;
-  width:150px;
-  padding:0 10px 0 10px;
-  display:inline-block;
-  margin-right:5px;
-}
 
 
 .importerDataItemTabs:hover{
