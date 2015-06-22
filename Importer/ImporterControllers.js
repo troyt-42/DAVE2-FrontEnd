@@ -208,7 +208,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       vm.stepThreeFormCollection = FormSettingParseService(temp); //jshint ignore:line
       vm.importerCreationMeta = {
         importerName : response.importerName,
-        location : response.location
+        location : response.location,
+        userName : response.userName
       };
       temp = [];
       vm.stepOne = false;
@@ -226,6 +227,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   function activate(){
     ImporterSocket.emit("requestImporterList");
+    angular.element(".importerContainerLeftMenu").toggleClass('fadeInLeft');
+    angular.element(".importerContainerRightPanel").toggleClass('fadeInRight');
+
     return $timeout(function(){
       vm.alerts.stepOne.push({ type: 'danger', msg: 'Load Item Fails. Please Check Your Internet Connect.' });
     },10000);
@@ -306,7 +310,12 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     }
     console.log(finalFormToUpload);
 
-    ImporterSocket.emit('decideImporterCreation',{location : vm.importerCreationMeta.location,data:finalFormToUpload } );
+    ImporterSocket.emit('decideImporterCreation',{
+      location : vm.importerCreationMeta.location,
+      importerName: vm.importerCreationMeta.importerName,
+      userName:vm.importerCreationMeta.userName,
+      data:finalFormToUpload }
+    );
     vm.stepOne = false;
     vm.stepTwo = true;
     vm.stepTwoB = false;
@@ -335,6 +344,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   }
 
   function submitFile(){
+    angular.element(".importerContainerLeftMenu").toggleClass('fadeInLeft');
+    angular.element(".importerContainerLeftMenu").toggleClass('fadeOutLeft');
+
     vm.stepOne = false;
     vm.stepTwo = true;
     vm.stepTwoB = false;

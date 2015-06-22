@@ -1,1 +1,27 @@
-@import "../bourbon/bourbon"
+@import "bourbon"
+@import "bourbon", "neat"
+$blueColor: #3A8AD3
+
+.importerContainer
+  +outer-container(100%)
+
+.importerContainerLeftMenu
+  +span-columns(3.2)
+  +pad(20px 20px 10px 0)
+  +border-right-radius(20px)
+  +background(url("../imgs/congruent_outline.png") repeat)
+  +omega()
+  max-height: 700px
+  .panel
+    .panel-heading
+      +background(linear-gradient(90deg, $blueColor, darkgray))
+      span
+        cursor: pointer
+    &:last-child
+      color: black
+      .panel-heading
+        +background(linear-gradient(90deg, red, orange))
+
+.importerContainerRightPanel
+  +span-columns(9)
+  +omega()

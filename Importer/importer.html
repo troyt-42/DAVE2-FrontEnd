@@ -1,8 +1,8 @@
 
-<div class="container-fluid">
+<div class="importerContainer">
 
-  <div class="row">
-    <div class="col-md-3 well " id="importerOptions" style="background-image:url('../imgs/congruent_outline.png');background-repeat:repeat;border-left:0 solid white;border-radius:20px;border-top-left-radius:0;border-bottom-left-radius:0;;max-height:700px">
+
+    <div class="importerContainerLeftMenu  animated" id="importerContainerLeftMenu">
 
 
       <accordion close-others="true" >
@@ -51,11 +51,11 @@
 
     </div>
 
-    <div class="col-md-9" >
+    <div class="importerContainerRightPanel animated" >
       <div id="importerPanel">
 
         <div class="col-md-12" ng-show="importerUploadCtrl.stepOne">
-          <alert ng-repeat="alert in importerUploadCtrl.alerts.stepOne" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index, 'stepOne')" style="margin-bottom:0;background-image:url('')">{{alert.msg}}</alert>
+          <alert class="animated fadeInDown" ng-repeat="alert in importerUploadCtrl.alerts.stepOne" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index, 'stepOne')" style="margin-bottom:0;background-image:url('')">{{alert.msg}}</alert>
 
           <div class="well" style="min-height:589px;background-image:url('../imgs/congruent_outline.png');background-repeat:repeat;margin-bottom:0;border:1px lightgrey solid;border-bottom-right-radius:0;position:relative">
             <div class = "col-md-12" style="text-align:center;position:relative;top:225px;" ng-show="importerUploadCtrl.stepOneLoading"><img src="../imgs/477.GIF"/></div>
@@ -82,8 +82,8 @@
               </tbody>
             </table>
           </div>
-          <pagination total-items="importerUploadCtrl.importerList.length" ng-model="importerUploadCtrl.importerListCurrentPage" max-size="10" class="pagination-sm col-md-7" style="margin-top:7px;font-size:150%"boundary-links="true" rotate="false" items-per-page="13"></pagination>
-          <div class="importerSystemTitle col-md-5" ng-show="importerUploadCtrl.stepOne"><span style="font-size:200%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
+          <pagination total-items="importerUploadCtrl.importerList.length" ng-model="importerUploadCtrl.importerListCurrentPage" max-size="10" class="pagination-sm col-md-7 animated rotateInUpLeft" style="margin-top:7px;font-size:150%"boundary-links="true" rotate="false" items-per-page="13"></pagination>
+          <div class="importerSystemTitle col-md-5 animated rotateInUpRight" ng-show="importerUploadCtrl.stepOne"><span style="font-size:200%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
 
 
         </div>
@@ -217,7 +217,4 @@
         </div>
       </div>
     </div>
-
-
-  </div>
 </div>

@@ -2,3 +2,5 @@ bower_components/
 ServerSideNodejs/importerfiles
 ServerSideNodejs/node_modules
 *.DS_Store
+config.codekit
+config.rb

@@ -1,0 +1,48 @@
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+.importerContainer {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+  .importerContainer::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.importerContainerLeftMenu {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 24.9377221615%;
+  padding: 20px 20px 10px 0;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  background: url("../imgs/congruent_outline.png") repeat;
+  background: url("../imgs/congruent_outline.png") repeat;
+  margin-right: 0;
+  max-height: 700px; }
+  .importerContainerLeftMenu:last-child {
+    margin-right: 0; }
+  .importerContainerLeftMenu .panel .panel-heading {
+    background: -webkit-linear-gradient(90deg, #3A8AD3, darkgray);
+    background: linear-gradient(90deg, #3A8AD3, darkgray); }
+    .importerContainerLeftMenu .panel .panel-heading span {
+      cursor: pointer; }
+  .importerContainerLeftMenu .panel:last-child {
+    color: black; }
+    .importerContainerLeftMenu .panel:last-child .panel-heading {
+      background: -webkit-linear-gradient(90deg, red, orange);
+      background: linear-gradient(90deg, red, orange); }
+
+.importerContainerRightPanel {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 74.4105871005%;
+  margin-right: 0; }
+  .importerContainerRightPanel:last-child {
+    margin-right: 0; }

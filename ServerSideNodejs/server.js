@@ -257,6 +257,8 @@ io.of('/importer').on('connection', function(socket){
       return_topic : '__importer_stepTwo_decideCreation_out__',
       action : 'DECIDE_CREATION',
       location : decision.location,
+      userName : decision.userName,
+      importerName : decision.importerName,
       list_out : decision.data
     };
     kafkaProducer.send([{
@@ -310,6 +312,7 @@ kafkaConsumer.on('message',function(message){
       io.of('/importer').to(data5.session_id).emit('importerCreationResponse',{
         importerName:data5.importerName,
         location:data5.location,
+        userName: data5.userName,
         data: data5.list_out
       });
     }

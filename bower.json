@@ -18,6 +18,7 @@
     "angular-formly": "~6.3.4",
     "ng-file-upload": "~4.2.0",
     "particles.js": "~2.0.0",
-    "highcharts-ng": "~0.0.8"
+    "highcharts-ng": "~0.0.8",
+    "animate.css": "~3.3.0"
   }
 }
