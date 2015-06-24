@@ -23,7 +23,20 @@
     $scope.$on("removeDynamicBackground", function(){
       vm.dynamicBackground = false;
     });
+    $(document).ready(function() {
+      var menuToggle = $('#js-mobile-menu').unbind();
+      $('#js-navigation-menu').removeClass("show");
 
+      menuToggle.on('click', function(e) {
+        e.preventDefault();
+        menuToggle.toggleClass('expand');
+        $('#js-navigation-menu').slideToggle(function(){
+          if($('#js-navigation-menu').is(':hidden')) {
+            $('#js-navigation-menu').removeAttr('style');
+          }
+        });
+      });
+    });
     //////////////////////////
     function navClass(page){
       var currentRoute = $location.path();

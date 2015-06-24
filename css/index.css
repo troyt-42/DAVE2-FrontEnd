@@ -1,0 +1,731 @@
+html {
+  box-sizing: border-box; }
+
+*, *::after, *::before {
+  box-sizing: inherit; }
+
+.canvas {
+  display: block;
+  vertical-align: bottom;
+  background-image: url("../imgs/diagonal_striped_brick.png");
+  background-repeat: repeat; }
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%; }
+
+.alert {
+  margin-bottom: 0;
+  background-image: url(""); }
+
+.importerContainer {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+  .importerContainer::after {
+    clear: both;
+    content: "";
+    display: table; }
+
+.importerContainerLeftMenu {
+  float: left;
+  display: block;
+  margin-right: 1.5333130693%;
+  width: 23.8500151981%;
+  padding: 20px 20px 0 0;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  background: url("../imgs/congruent_outline.png") repeat;
+  background: url("../imgs/congruent_outline.png") repeat;
+  max-height: 700px;
+  border: 1px solid silver;
+  border-left: 0; }
+  .importerContainerLeftMenu:last-child {
+    margin-right: 0; }
+  .importerContainerLeftMenu li {
+    padding: 1.5333130693%;
+    border-radius: 2px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom: 2px;
+    background: orange;
+    font-weight: bold; }
+    .importerContainerLeftMenu li i {
+      margin-top: 2px; }
+      .importerContainerLeftMenu li i:hover {
+        color: red;
+        cursor: pointer; }
+  .importerContainerLeftMenu button {
+    float: left;
+    display: block;
+    margin-right: 1.5333130693%;
+    width: 49.2333434654%; }
+    .importerContainerLeftMenu button:last-child {
+      margin-right: 0; }
+  .importerContainerLeftMenu .panel .panel-heading {
+    background: -webkit-linear-gradient(90deg, #3A8AD3, darkgray);
+    background: linear-gradient(90deg, #3A8AD3, darkgray); }
+    .importerContainerLeftMenu .panel .panel-heading span {
+      cursor: pointer; }
+  .importerContainerLeftMenu .panel:last-child {
+    color: black; }
+    .importerContainerLeftMenu .panel:last-child .panel-heading {
+      background: -webkit-linear-gradient(90deg, red, orange);
+      background: linear-gradient(90deg, red, orange); }
+
+.importerContainerRightPanel {
+  float: left;
+  display: block;
+  margin-right: 1.5333130693%;
+  width: 74.6166717327%; }
+  .importerContainerRightPanel:last-child {
+    margin-right: 0; }
+  .importerContainerRightPanel .importerStepOne {
+    float: left;
+    display: block;
+    margin-right: 1.5333130693%;
+    width: 100%; }
+    .importerContainerRightPanel .importerStepOne:last-child {
+      margin-right: 0; }
+    .importerContainerRightPanel .importerStepOne .importerSystemTitle {
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+      text-align: center;
+      background-image: url("../imgs/congruent_pentagon.png");
+      border: 1px solid lightgrey;
+      border-top: 0; }
+    .importerContainerRightPanel .importerStepOne .importerStepOneWell {
+      padding: 20px 20px;
+      background: url("../imgs/congruent_outline.png") repeat;
+      background: url("../imgs/congruent_outline.png") repeat;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+      height: 598px;
+      border: 1px lightgrey solid; }
+      .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 100%;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        box-align: center;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center;
+        -ms-flex-align: center;
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -moz-box-orient: vertical;
+        box-orient: vertical;
+        -webkit-box-direction: normal;
+        -moz-box-direction: normal;
+        box-direction: normal;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        flex-direction: column;
+        -ms-flex-direction: column;
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        box-pack: center;
+        -webkit-justify-content: center;
+        -moz-justify-content: center;
+        -ms-justify-content: center;
+        -o-justify-content: center;
+        justify-content: center;
+        -ms-flex-pack: center;
+        -webkit-box-lines: multiple;
+        -moz-box-lines: multiple;
+        box-lines: multiple;
+        -webkit-flex-wrap: wrap;
+        -moz-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        height: 100%; }
+        .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol:last-child {
+          margin-right: 0; }
+        .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol .alert {
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 49.2333434654%;
+          display: block;
+          margin-top: 5px; }
+          .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol .alert:last-child {
+            margin-right: 0; }
+          .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol .alert::after {
+            clear: both;
+            content: "";
+            display: table; }
+      .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable {
+        width: 100%; }
+        .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th {
+          display: table-cell;
+          width: 33.3333333333%;
+          padding: 10px;
+          border-bottom: 3px solid silver;
+          vertical-align: center;
+          font-size: 120%;
+          border-collapse: collapse; }
+          .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > input {
+            margin-left: 10px;
+            background: linen;
+            border: grey 1px solid;
+            border-radius: 5px; }
+        .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > tbody > tr > td {
+          padding: 10px;
+          border-top: 1px solid silver; }
+        .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > tbody > tr:hover {
+          background: black;
+          color: white;
+          cursor: pointer; }
+  .importerContainerRightPanel .importerStepTwoB {
+    float: left;
+    display: block;
+    margin-right: 1.5333130693%;
+    width: 100%; }
+    .importerContainerRightPanel .importerStepTwoB:last-child {
+      margin-right: 0; }
+    .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader {
+      float: left;
+      display: block;
+      margin-right: 1.5333130693%;
+      width: 100%;
+      display: block;
+      -webkit-box-align: end;
+      -moz-box-align: end;
+      box-align: end;
+      -webkit-align-items: flex-end;
+      -moz-align-items: flex-end;
+      -ms-align-items: flex-end;
+      -o-align-items: flex-end;
+      align-items: flex-end;
+      -ms-flex-align: end;
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader:last-child {
+        margin-right: 0; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader::after {
+        clear: both;
+        content: "";
+        display: table; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader .importerSystemTitle {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 32.3111246205%;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 50px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        background: url("../imgs/gplaypattern.png");
+        background: url("../imgs/gplaypattern.png");
+        text-align: center;
+        border: 1px solid lightgrey;
+        border-bottom: 0; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader .importerSystemTitle:last-child {
+          margin-right: 0; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader .importerDataItemTabs {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding: 5px 1.5333130693% 5px 1.5333130693%;
+        background: orange;
+        background: orange;
+        font-size: 150%;
+        font-weight: bold;
+        text-align: center;
+        color: black;
+        border: 1px lightgrey solid;
+        border-bottom: 0;
+        cursor: pointer;
+        margin-right: 5px; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader .importerDataItemTabs:hover {
+          color: white; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBHeader .importerDataItemTabs.active {
+          color: white; }
+    .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell {
+      float: left;
+      display: block;
+      margin-right: 1.5333130693%;
+      width: 100%;
+      padding: 20px 20px;
+      background: url("../imgs/congruent_outline.png") repeat;
+      background: url("../imgs/congruent_outline.png") repeat;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      border-top-right-radius: 10px;
+      display: block;
+      height: 598px;
+      border: 1px lightgrey solid;
+      text-align: left;
+      box-shadow: 0px 0px 0px #3A8AD3; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell:last-child {
+        margin-right: 0; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell::after {
+        clear: both;
+        content: "";
+        display: table; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 32.3111246205%;
+        height: 100%; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft:last-child {
+          margin-right: 0; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard {
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%;
+          padding: 10px 20px;
+          box-shadow: 0px 2px 4px black inset;
+          border-radius: 5px;
+          background: black;
+          color: skyblue;
+          text-shadow: -1px 0px #0f4d92;
+          margin-bottom: 20px; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard:last-child {
+            margin-right: 0; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard span {
+            font-size: 150%; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard span i {
+              color: orange;
+              font-size: 80%;
+              text-shadow: none; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems {
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%;
+          padding: 10px 20px;
+          height: 77%;
+          border: 2px silver solid;
+          border-radius: 5px;
+          background: black; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems:last-child {
+            margin-right: 0; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .title {
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 100%;
+            color: white;
+            font-size: 200%;
+            font-weight: bold; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .title:last-child {
+              margin-right: 0; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList {
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 100%;
+            margin-top: 10px;
+            height: 80%;
+            overflow-y: auto; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList:last-child {
+              margin-right: 0; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem {
+              float: left;
+              display: block;
+              margin-right: 1.5333130693%;
+              width: 100%;
+              padding: 1.5333130693%;
+              background: -webkit-linear-gradient(135deg, #3A8AD3, black);
+              background: linear-gradient(135deg, #3A8AD3, black);
+              border-radius: 5px;
+              border: 1px solid black;
+              font-weight: bold;
+              font-size: 120%;
+              cursor: pointer;
+              color: white; }
+              .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:last-child {
+                margin-right: 0; }
+              .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:hover {
+                color: orange; }
+              .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem.active {
+                background: -webkit-linear-gradient(135deg, black, black);
+                background: linear-gradient(135deg, black, black);
+                color: orange; }
+      .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 66.1555623102%;
+        background: url("../imgs/classy_fabric.png") repeat;
+        background: url("../imgs/classy_fabric.png") repeat;
+        padding: 1.5333130693%;
+        border-radius: 10px;
+        box-shadow: 0px 2px 4px black inset;
+        height: 100%; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight:last-child {
+          margin-right: 0; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight button {
+          border-radius: 0;
+          font-weight: bold;
+          box-shadow: 1px 0px black;
+          border-bottom-right-radius: 5px;
+          border-top-right-radius: 5px;
+          margin-right: 5px; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title {
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%;
+          display: -webkit-box;
+          display: -moz-box;
+          display: box;
+          display: -webkit-flex;
+          display: -moz-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -moz-box-align: center;
+          box-align: center;
+          -webkit-align-items: center;
+          -moz-align-items: center;
+          -ms-align-items: center;
+          -o-align-items: center;
+          align-items: center;
+          -ms-flex-align: center;
+          color: skyblue;
+          font-size: 150%; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title:last-child {
+            margin-right: 0; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title span {
+            padding: 2px 2px;
+            font-size: 50%;
+            color: #00fd02;
+            border: 1px solid;
+            border-radius: 2px;
+            margin-left: 3px; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData {
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%;
+          border-radius: 5px;
+          background: linen;
+          overflow-y: auto;
+          height: 78%;
+          top: -1px;
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData:last-child {
+            margin-right: 0; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable {
+            width: 100%;
+            text-align: center; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable > thead > tr > th {
+              padding: 10px;
+              border-bottom: 3px solid silver;
+              vertical-align: center;
+              font-size: 120%;
+              border-collapse: collapse;
+              text-align: center; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable > tbody > tr > td {
+              padding: 10px;
+              border-top: 1px solid silver; }
+        .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions {
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions:last-child {
+            margin-right: 0; }
+          .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button {
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 49.2333434654%;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:last-child {
+              margin-right: 0; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:hover {
+              font-weight: bold; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:first-child {
+              background: skyblue;
+              color: black;
+              text-shadow: none;
+              border: 1px skyblue solid;
+              border-top: 0px linen solid; }
+            .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:nth-child(2) {
+              background: red;
+              border: 1px red solid;
+              border-top: 0px linen solid;
+              margin: 0; }
+  .importerContainerRightPanel .importerStepTwo {
+    height: 598px;
+    text-align: center; }
+    .importerContainerRightPanel .importerStepTwo .progressbar-container {
+      float: left;
+      display: block;
+      margin-right: 1.5333130693%;
+      width: 49.2333434654%;
+      margin-left: 25.3833282673%;
+      margin-top: 269.1px; }
+      .importerContainerRightPanel .importerStepTwo .progressbar-container:last-child {
+        margin-right: 0; }
+  .importerContainerRightPanel .importerStepThree .importerStepThreeHeader {
+    float: left;
+    display: block;
+    margin-right: 1.5333130693%;
+    width: 100%;
+    display: block;
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    box-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -ms-flex-align: center;
+    padding-left: 15px;
+    border-radius: 5px;
+    text-align: left;
+    border: 0px solid gray;
+    margin-bottom: 10px;
+    background: url("../imgs/congruent_outline.png");
+    background: url("../imgs/congruent_outline.png");
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0; }
+    .importerContainerRightPanel .importerStepThree .importerStepThreeHeader:last-child {
+      margin-right: 0; }
+    .importerContainerRightPanel .importerStepThree .importerStepThreeHeader::after {
+      clear: both;
+      content: "";
+      display: table; }
+    .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .title {
+      float: left;
+      display: block;
+      margin-right: 1.5333130693%;
+      width: 74.6166717327%;
+      display: inline-block;
+      color: white;
+      font-size: 300%;
+      font-weight: bold; }
+      .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .title:last-child {
+        margin-right: 0; }
+    .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options {
+      float: left;
+      display: block;
+      margin-right: 1.5333130693%;
+      width: 23.8500151981%;
+      height: 100%;
+      display: inline-block; }
+      .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options:last-child {
+        margin-right: 0; }
+      .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options button:first-child {
+        background: orange;
+        color: black;
+        font-size: 150%; }
+      .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options button:nth-child(2) {
+        background: white;
+        color: black;
+        font-size: 150%; }
+  .importerContainerRightPanel .importerStepThree .importerStepThreeWell {
+    float: left;
+    display: block;
+    margin-right: 1.5333130693%;
+    width: 100%;
+    padding: 20px;
+    height: 598px;
+    background: url("../imgs/dark_embroidery.png") repeat;
+    background: url("../imgs/dark_embroidery.png") repeat;
+    border-radius: 5px;
+    text-align: left;
+    box-shadow: 0px 0px 0px #3A8AD3;
+    border: 0px solid gray; }
+    .importerContainerRightPanel .importerStepThree .importerStepThreeWell:last-child {
+      margin-right: 0; }
+    .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField {
+      float: left;
+      display: block;
+      margin-right: 1.5333130693%;
+      width: 32.3111246205%; }
+      .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField:last-child {
+        margin-right: 0; }
+      .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-heading {
+        background: url("../imgs/gplaypattern.png") repeat;
+        background: url("../imgs/gplaypattern.png") repeat;
+        font-size: 125%; }
+      .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-body {
+        height: 200px;
+        overflow-y: auto; }
+
+body {
+  font-family: "Dosis";
+  background: url("../imgs/diagonal_striped_brick.png") repeat;
+  background: url("../imgs/diagonal_striped_brick.png") repeat; }
+
+header.navigation {
+  background: linear-gradient(270deg, #F0F0F0, white);
+  opacity: 1 !important;
+  border-bottom: 1px linen solid;
+  min-height: 70px;
+  width: 100%;
+  z-index: 999;
+  position: relative;
+  margin-bottom: 2em; }
+  @media screen and (max-width: 71.5625em) {
+    header.navigation {
+      background: transparent; } }
+  header.navigation .navigation-wrapper {
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; }
+    header.navigation .navigation-wrapper::after {
+      clear: both;
+      content: "";
+      display: table; }
+    header.navigation .navigation-wrapper::after {
+      clear: both;
+      content: "";
+      display: table; }
+    @media screen and (max-width: 71.5625em) {
+      header.navigation .navigation-wrapper {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto; }
+        header.navigation .navigation-wrapper::after {
+          clear: both;
+          content: "";
+          display: table; } }
+  header.navigation .logo {
+    float: left;
+    max-height: 70px;
+    padding-left: 1em;
+    padding-right: 2em; }
+    header.navigation .logo img {
+      max-height: 70px; }
+  header.navigation .navigation-menu-button {
+    color: white;
+    display: none;
+    float: right;
+    font-weight: 700;
+    line-height: 70px;
+    margin: 0;
+    padding-right: 1em;
+    padding-left: 1em;
+    background: gray;
+    border-radius: 5px; }
+    @media screen and (max-width: 71.5625em) {
+      header.navigation .navigation-menu-button {
+        display: block; } }
+    header.navigation .navigation-menu-button.expand {
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px; }
+    header.navigation .navigation-menu-button:focus, header.navigation .navigation-menu-button:hover {
+      color: white;
+      text-transform: uppercase; }
+  header.navigation nav {
+    float: right;
+    min-height: 70px;
+    z-index: 9999999; }
+    @media screen and (max-width: 71.5625em) {
+      header.navigation nav {
+        float: none; } }
+  header.navigation ul.navigation-menu {
+    -webkit-transform-style: preserve-3d;
+    clear: both;
+    display: inline;
+    margin: 0 auto;
+    overflow: visible;
+    padding-bottom: 0;
+    width: 100%;
+    z-index: 9999; }
+    header.navigation ul.navigation-menu.show {
+      display: block; }
+    @media screen and (max-width: 71.5625em) {
+      header.navigation ul.navigation-menu {
+        display: none;
+        margin: 0;
+        padding: 0; } }
+  header.navigation ul li.nav-link {
+    background: transparent;
+    display: inline;
+    line-height: 70px;
+    overflow: hidden;
+    width: auto;
+    z-index: 9999; }
+    @media screen and (max-width: 71.5625em) {
+      header.navigation ul li.nav-link {
+        background: transparent;
+        display: block;
+        line-height: 20px;
+        text-decoration: none;
+        width: 100%;
+        text-align: right;
+        background: gray;
+        padding: 1.5333130693%;
+        border-bottom: 1px #3A8AD3 solid; }
+        header.navigation ul li.nav-link:first-child {
+          border-top-left-radius: 5px; }
+        header.navigation ul li.nav-link:last-child {
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px; } }
+    header.navigation ul li.nav-link a {
+      color: #3A8AD3;
+      display: inline-block;
+      text-decoration: none;
+      text-align: center;
+      padding-right: 1.1em;
+      padding-left: 1.1em;
+      height: 60px; }
+      header.navigation ul li.nav-link a:hover {
+        color: black; }
+      header.navigation ul li.nav-link a.active {
+        background-color: #add8e6;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+        color: #3A8AD3; }
+        @media screen and (max-width: 71.5625em) {
+          header.navigation ul li.nav-link a.active {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 20px;
+            background-color: transparent;
+            color: white; } }
+      @media screen and (max-width: 71.5625em) {
+        header.navigation ul li.nav-link a {
+          padding: 0;
+          margin: 0;
+          height: 20px;
+          color: white;
+          width: 100%; } }
+  header.navigation li.nav-link.search-bar .navSearch {
+    background: white;
+    border-radius: 20px;
+    border: dark;
+    font-size: 0.9em;
+    margin: 0;
+    width: 12em;
+    display: inline-block; }

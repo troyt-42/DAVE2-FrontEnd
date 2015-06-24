@@ -8,9 +8,8 @@
   <link rel="stylesheet" type= "text/css" href = "http://fonts.googleapis.com/css?family=Dosis:400,600"/>
   <link rel="shortcut icon" href="imgs/favicon.ico" type="image/x-icon">
   <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" type= "text/css" href = "index.css"/>
-  <link rel="stylesheet" type= "text/css" href = "Importer/importer.css"/>
-  <link rel="stylesheet" type= "text/css" href = "css/importer2.css"/>
+  <link rel="stylesheet" type= "text/css" href = "css/index.css"/>
+
 
   <link rel="stylesheet" type= "text/css" href = "Importer/silderBar.css"/>
   <link rel="stylesheet" type= "text/css" href = "DataItemDisplay/DataItemDisplay.css"/>
@@ -20,75 +19,66 @@
 
 <body  ng-controller="Dave2Ctrl as dave2ctrl">
   <div id="particles-js" ng-show="dave2ctrl.isHome()">    </div>
-  <nav class="navbar navbar-customized" role = "navigation">
-
-    <div class="container" >
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar" style="background-color:red"></span>
-          <span class="icon-bar" style="background-color:red"></span>
-          <span class="icon-bar" style="background-color:red"></span>
-        </button>
-        <div  class="navbar-brand" style="padding-top:0px;height:70px"><img src = "imgs/dave_logo2.png" alt="Brand" height="70px"/></div>
-      </div>
-
-      <div class="navbar-collapse collapse navbar-right">
-        <ul class="nav navbar-nav">
-          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Import')"><a href="#/Import">Import</a></li>
-          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/DataItemDisplay')"><a href="#/DataItemDisplay">Display</a></li>
-          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Export')"><a href="#/Export">Export</a></li>
-          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Status')"><a href="#/Status">Status</a></li>
-          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Analysis')"><a href="#/Analysis">Analysis</a></li>
-          <li style="padding-top:10px" ng-class="dave2ctrl.navClass('/Account')"><a href="#/Account">Account</a></li>
-          <li style="padding-top:10px"><a style="color:green;cursor:pointer" ng-click="dave2ctrl.signIn()">Sign In</a></li>
-          <li style="padding-top:18px" >
+  <header class="navigation" role="banner">
+    <div class="navigation-wrapper">
+      <a href="javascript:void(0)" class="logo">
+        <img src="imgs/dave_logo2.png" alt="Logo Image">
+      </a>
+      <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
+      <nav role="navigation">
+        <ul id="js-navigation-menu" class="navigation-menu show">
+          <li class="nav-link"><a href="#/Import"  ng-class="dave2ctrl.navClass('/Import')">Import</a></li>
+          <li class="nav-link"><a href="#/DataItemDisplay" ng-class="dave2ctrl.navClass('/DataItemDisplay')">Display</a></li>
+          <li class="nav-link"><a href="#/Export" ng-class="dave2ctrl.navClass('/Export')">Export</a></li>
+          <li class="nav-link"><a href="#/Status" ng-class="dave2ctrl.navClass('/Status')">Status</a></li>
+          <li class="nav-link"><a href="#/Analysis" ng-class="dave2ctrl.navClass('/Analysis')">Analysis</a></li>
+          <li class="nav-link"><a href="#/Account" ng-class="dave2ctrl.navClass('/Account')">Account</a></li>
+          <li class="nav-link"><a style="color:green;cursor:pointer" ng-click="dave2ctrl.signIn()">Sign In</a></li>
+          <li class="nav-link search-bar" >
             <input type="text" class="form-control navSearch" placeholder="Search">
           </li>
         </ul>
-      </div>
+      </nav>
+    </header>
 
-    </div>
-
-  </nav>
-  <div ng-view></div>
+    <div ng-view></div>
 
 
-  <script src="/bower_components/jquery/dist/jquery.js"  ></script>                                                 <!--jQuery-->
-  <script src="/bower_components/angular/angular.js"  ></script>                                                    <!--Angularjs-->
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"  ></script>                               <!--Bootstrap-->
-  <script src="/bower_components/angular-route/angular-route.js"  ></script>                                        <!--ngRoute-->
-  <script src="/bower_components/angular-animate/angular-animate.js"  ></script>                                    <!--ngAnimate-->
-  <script src="/socket.io/socket.io.js"></script>                                                                   <!--socketio-->
-  <script src="/bower_components/angular-socket-io/socket.js"></script>                                             <!--angularsocketio-->
-  <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>                                       <!--angularUIBootstrap-->
-  <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>                                        <!--ngFileUpload-->
-  <script src="/bower_components/particles.js/particles.js"></script>                                               <!--particlesjs-->
-  <script src="http://code.highcharts.com/stock/highstock.src.js"></script>                                         <!--hightchartsjs-->
-  <script src="http://code.highcharts.com/modules/heatmap.js"></script>                                             <!--(highcharts)heatmap.js-->
-  <script src="http://code.highcharts.com/modules/treemap.js"></script>                                             <!--(highcharts)treemap.js-->
-  <script src="/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>                                     <!--particlesjs-->
+    <script src="/bower_components/jquery/dist/jquery.js"  ></script>                                                 <!--jQuery-->
+    <script src="/bower_components/angular/angular.js"  ></script>                                                    <!--Angularjs-->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"  ></script>                               <!--Bootstrap-->
+    <script src="/bower_components/angular-route/angular-route.js"  ></script>                                        <!--ngRoute-->
+    <script src="/bower_components/angular-animate/angular-animate.js"  ></script>                                    <!--ngAnimate-->
+    <script src="/socket.io/socket.io.js"></script>                                                                   <!--socketio-->
+    <script src="/bower_components/angular-socket-io/socket.js"></script>                                             <!--angularsocketio-->
+    <script src="/bower_components/angular-bootstrap/ui-bootstrap.js"></script>                                       <!--angularUIBootstrap-->
+    <script src="/bower_components/ng-file-upload/ng-file-upload.js"></script>                                        <!--ngFileUpload-->
+    <script src="/bower_components/particles.js/particles.js"></script>                                               <!--particlesjs-->
+    <script src="http://code.highcharts.com/stock/highstock.src.js"></script>                                         <!--hightchartsjs-->
+    <script src="http://code.highcharts.com/modules/heatmap.js"></script>                                             <!--(highcharts)heatmap.js-->
+    <script src="http://code.highcharts.com/modules/treemap.js"></script>                                             <!--(highcharts)treemap.js-->
+    <script src="/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>                                     <!--particlesjs-->
 
 
 
-  <script src="/bower_components/api-check/dist/api-check.js"></script>                                             <!-- must appear before formly.js -->
-  <script src="/bower_components/angular-formly/dist/formly.js"></script>                                           <!--angular formly-->
-  <script src="//rawgit.com/formly-js/angular-formly-templates-bootstrap/master/dist/angular-formly-templates-bootstrap.js"></script>
+    <script src="/bower_components/api-check/dist/api-check.js"></script>                                             <!-- must appear before formly.js -->
+    <script src="/bower_components/angular-formly/dist/formly.js"></script>                                           <!--angular formly-->
+    <script src="//rawgit.com/formly-js/angular-formly-templates-bootstrap/master/dist/angular-formly-templates-bootstrap.js"></script>
 
-  <script src="Dave2.js"></script>                                                                                  <!--Dave2.js-->
-  <script src="Dave2Controllers.js"></script>                                                                       <!--Dave2Controllers.js-->
-  <script src="Dave2Services.js"></script>                                                                          <!--Dave2Controllers.js-->
-  <script src="angularFormlyBasicTemplates/angularFormlyDaveLib.js"></script>                                       <!--angularFormlyDaveLib.js-->
-  <script src="Importer/Importer.js"></script>                                                                      <!--Impoter.js-->
-  <script src="Importer/ImporterControllers.js"></script>                                                           <!--ImporterControllers.js-->
-  <script src="Importer/ImporterDirectives.js"></script>                                                            <!--ImporterDirectives.js-->
-  <script src="Importer/ImporterServices.js"></script>                                                              <!--ImporterServices.js-->
+    <script src="Dave2.js"></script>                                                                                  <!--Dave2.js-->
+    <script src="Dave2Controllers.js"></script>                                                                       <!--Dave2Controllers.js-->
+    <script src="Dave2Services.js"></script>                                                                          <!--Dave2Controllers.js-->
+    <script src="angularFormlyBasicTemplates/angularFormlyDaveLib.js"></script>                                       <!--angularFormlyDaveLib.js-->
+    <script src="Importer/Importer.js"></script>                                                                      <!--Impoter.js-->
+    <script src="Importer/ImporterControllers.js"></script>                                                           <!--ImporterControllers.js-->
+    <script src="Importer/ImporterDirectives.js"></script>                                                            <!--ImporterDirectives.js-->
+    <script src="Importer/ImporterServices.js"></script>                                                              <!--ImporterServices.js-->
 
-  <script src="DataItemDisplay/DataItemDisplay.js"></script>                                                                   <!--DataItemDisplay.js-->
-  <script src="DataItemDisplay/DataItemDisplayControllers.js"></script>                                                        <!--DataItemDisplayControllers.js-->
-  <script src="DataItemDisplay/DataItemDisplayServices.js"></script>                                                           <!--DataItemDisplayServices.js-->
+    <script src="DataItemDisplay/DataItemDisplay.js"></script>                                                                   <!--DataItemDisplay.js-->
+    <script src="DataItemDisplay/DataItemDisplayControllers.js"></script>                                                        <!--DataItemDisplayControllers.js-->
+    <script src="DataItemDisplay/DataItemDisplayServices.js"></script>                                                           <!--DataItemDisplayServices.js-->
 
-  <script src="/highchartsThemes/dark-unica.js"></script>
+    <script src="/highchartsThemes/dark-unica.js"></script>
 
-</body>
-</html>
+  </body>
+  </html>

@@ -19,7 +19,8 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__importer_stepOne_list_out__'},
   { topic: '__importer_stepTwoB_importer_out__'},
   { topic: '__importer_stepTwoB_dataItem_out__'},
-  { topic: '__importer_stepOne_createImporter_out__'}
+  { topic: '__importer_stepOne_createImporter_out__'},
+  { topic: '__importer_stepTwo_decideCreation_out__'}
 ],
 {
   groupId: 'my-group'
@@ -239,9 +240,6 @@ io.of('/importer').on('connection', function(socket){
     importerInfo.action = 'CREATE_IMPORTER';
     importerInfo.return_topic = '__importer_stepOne_createImporter_out__';
     importerInfo.type = 'csv';
-    importerInfo.files = [{
-      fileName: importerInfo.fileName
-    }];
     kafkaProducer.send([{
       topic:'__importer_stepOne_createImporter_in__',
       messages:[JSON.stringify(importerInfo)]
@@ -264,7 +262,8 @@ io.of('/importer').on('connection', function(socket){
       importerName : decision.importerName,
       list_out : decision.data,
       type:'csv',
-      files: decision.files
+      files: decision.files,
+      description: decision.description
     };
     kafkaProducer.send([{
       topic:'__importer_stepTwo_decideCreation_in__',
@@ -309,6 +308,7 @@ kafkaConsumer.on('message',function(message){
   } else if (message.topic === '__importer_stepTwoB_dataItem_out__'){
     var data4 = JSON.parse(message.value);
     if(data4.list_out){
+      console.log('test');
       io.of('/importer').to(data4.session_id).emit('importerDataItemData', {name:data4.payload.name, data: data4.list_out});
     }
   } else if (message.topic === '__importer_stepOne_createImporter_out__'){
@@ -319,8 +319,14 @@ kafkaConsumer.on('message',function(message){
         location:data5.location,
         userName: data5.userName,
         data: data5.list_out,
-        files: data5.files
+        files: data5.files,
+        description: data5.description
       });
+    }
+  } else if (message.topic === '__importer_stepTwo_decideCreation_out__'){
+    var data6 = JSON.parse(message.value);
+    if(data6.list_out){
+      io.of('/importer').to(data6.session_id).emit('importerCreationFinalResponse', data6);
     }
   } else {
     console.log(message);

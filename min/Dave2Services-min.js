@@ -1,0 +1,1 @@
+!function(){"use strict";function t(t){var c=io.connect("10.3.83.58:3000/");return t({ioSocket:c})}function c(t){var c=io.connect("10.3.83.58:3000/user");return t({ioSocket:c})}angular.module("Dave2").factory("generalSocket",t).factory("userSocket",c),t.$inject=["socketFactory"],c.$inject=["socketFactory"]}();

@@ -1,0 +1,332 @@
+$blue-color: #3A8AD3
+$fg-gutter: em(15px)             // Gutter Width
+$importerWellHeight: 598px
+
+.canvas
+  display: block
+  vertical-align: bottom
+  background-image: url("../imgs/diagonal_striped_brick.png")
+  background-repeat: repeat
+
+#particles-js
+  position: absolute
+  width: 100%
+  height: 100%
+
+.alert
+  margin-bottom: 0
+  background-image: url('')
+
+
+.importerContainer
+  +outer-container(100%)
+
+.importerContainerLeftMenu
+  +span-columns(3)
+  +pad(20px 20px 0 0)
+  +border-right-radius(20px)
+  +background(url("../imgs/congruent_outline.png") repeat)
+
+  max-height: 700px
+  border: 1px solid silver
+  border-left: 0
+  li
+    +pad()
+    border-radius: 2px
+    +border-right-radius(5px)
+    margin-bottom: 2px
+    background: orange
+    font-weight: bold
+    i
+      margin-top: 2px
+      &:hover
+        color: red
+        cursor: pointer
+  button
+    +span-columns(6)
+
+  .panel
+    .panel-heading
+      +background(linear-gradient(90deg, $blue-color, darkgray))
+      span
+        cursor: pointer
+    &:last-child
+      color: black
+      .panel-heading
+        +background(linear-gradient(90deg, red, orange))
+
+.importerContainerRightPanel
+  +span-columns(9)
+  .importerStepOne
+    +span-columns(12)
+    .importerSystemTitle
+      +border-bottom-radius(50px)
+      text-align: center
+      background-image: url('../imgs/congruent_pentagon.png')
+      border: 1px solid lightgrey
+      border-top: 0
+
+    .importerStepOneWell
+      +pad(20px 20px)
+      +background(url('../imgs/congruent_outline.png') repeat)
+      +border-top-radius(10px)
+      +border-left-radius(10px)
+      height: $importerWellHeight
+      border: 1px lightgrey solid
+
+      .waitingSymbol
+        +span-columns(12)
+        +align-items(center)
+        +display(flex)
+        +flex-direction(column)
+        +justify-content(center)
+        +flex-wrap(wrap)
+        height: 100%
+
+        .alert
+          +span-columns(6)
+          +row()
+          margin-top: 5px
+      .importerListTable
+        width: 100%
+        & > thead > tr > th
+          +span-columns(4, table)
+          +pad(10px)
+          border-bottom: 3px solid silver
+          vertical-align: center
+          font-size: 120%
+          border-collapse: collapse
+          & > input
+            margin-left: 10px
+            background: linen
+            border: grey 1px solid
+            border-radius: 5px
+        & > tbody > tr > td
+          +pad(10px)
+          border-top: 1px solid silver
+        & > tbody > tr:hover
+          background: black
+          color: white
+          cursor: pointer
+
+  .importerStepTwoB
+    +span-columns(12)
+
+    .importerStepTwoBHeader
+      +span-columns(12)
+      +row()
+      +align-items(flex-end)
+      +display(flex)
+      .importerSystemTitle
+        +span-columns(4)
+        +border-top-radius(50px)
+        +border-bottom-radius(0)
+        +background(url('../imgs/gplaypattern.png'))
+        text-align: center
+        border: 1px solid lightgrey
+        border-bottom: 0
+      .importerDataItemTabs
+        +border-top-radius(5px)
+        +pad(5px default 5px default)
+        +background(orange)
+        font-size: 150%
+        font-weight: bold
+        text-align: center
+        color: black
+        border: 1px lightgrey solid
+        border-bottom: 0
+        cursor: pointer
+        margin-right: 5px
+        &:hover
+          color: white
+
+        &.active
+          color: white
+
+    .importerStepTwoBWell
+      +span-columns(12)
+      +pad(20px 20px)
+      +background(url('../imgs/congruent_outline.png') repeat)
+      +border-bottom-radius(10px)
+      +border-right-radius(10px)
+      +row()
+      height: $importerWellHeight
+      border: 1px lightgrey solid
+      text-align: left
+      box-shadow: 0px 0px 0px #3A8AD3
+
+      .importerStepTwoBWellLeft
+        +span-columns(4)
+        height: 100%
+        .importerNameCard
+          +span-columns(12)
+          +pad(10px 20px)
+          box-shadow: 0px 2px 4px black inset
+          border-radius: 5px
+          background: black
+          color: skyblue
+          text-shadow: -1px 0px #0f4d92
+          margin-bottom: 20px
+          span
+            font-size: 150%
+            i
+              color: orange
+              font-size: 80%
+              text-shadow: none
+
+        .importerStepTwoBDataItems
+          +span-columns(12)
+          +pad(10px 20px)
+          height: 77%
+          border: 2px silver solid
+          border-radius: 5px
+          background: black
+          .title
+            +span-columns(12)
+            color: white
+            font-size: 200%
+            font-weight: bold
+          .importerStepTwoBDataItemsList
+            +span-columns(12)
+            margin-top: 10px
+            height: 80%
+            overflow-y: auto
+            .importerStepTwoBDataItem
+              +span-columns(12)
+              +pad()
+              +background(linear-gradient(135deg, $blue-color, black))
+              border-radius: 5px
+              border: 1px solid black
+              font-weight: bold
+              font-size: 120%
+              cursor: pointer
+              color: white
+              &:hover
+                color: orange
+              &.active
+                +background(linear-gradient(135deg, black, black))
+                color: orange
+
+      .importerStepTwoBWellRight
+        +span-columns(8)
+        +background(url('../imgs/classy_fabric.png') repeat)
+        +pad()
+        border-radius: 10px
+        box-shadow: 0px 2px 4px black inset
+        height: 100%
+        button
+          border-radius: 0
+          font-weight: bold
+          box-shadow: 1px 0px black
+          +border-right-radius(5px)
+          margin-right: 5px
+        .title
+          +span-columns(12)
+          +display(flex)
+          +align-items(center)
+          color: skyblue
+          font-size: 150%
+          span
+            +pad(2px 2px)
+            font-size: 50%
+            color: #00fd02
+            border: 1px solid
+            border-radius: 2px
+            margin-left: 3px
+        .importerStepTwoBDataItemData
+          +span-columns(12)
+          border-radius: 5px
+          background: linen
+          overflow-y: auto
+          height: 78%
+          top: -1px
+          +border-bottom-radius(0px)
+          .importerStepTwoBDataItemTable
+            width: 100%
+            text-align: center
+            & > thead > tr > th
+              +pad(10px)
+              border-bottom: 3px solid silver
+              vertical-align: center
+              font-size: 120%
+              border-collapse: collapse
+              text-align: center
+            & > tbody > tr > td
+              +pad(10px)
+              border-top: 1px solid silver
+        .importerStepTwoBDataItemOptions
+          +span-columns(12)
+          button
+            +span-columns(6)
+            +border-top-radius(0)
+            &:hover
+              font-weight: bold
+            &:first-child
+              background: skyblue
+              color: black
+              text-shadow: none
+              border: 1px skyblue solid
+              border-top: 0px linen solid
+            &:nth-child(2)
+              background: red
+              border: 1px red solid
+              border-top: 0px linen solid
+              margin: 0
+
+  .importerStepTwo
+    height: $importerWellHeight
+    text-align: center
+
+    .progressbar-container
+      +span-columns(6)
+      +shift(3)
+      margin-top: 0.45 * $importerWellHeight
+
+  .importerStepThree
+    .importerStepThreeHeader
+      +span-columns(12)
+      +row()
+      +display(flex)
+      +align-items(center)
+      padding-left: 15px
+      border-radius: 5px
+      text-align: left
+      border: 0px solid gray
+      margin-bottom: 10px
+      +background(url('../imgs/congruent_outline.png'))
+      +border-right-radius(0)
+      .title
+        +span-columns(9)
+        display: inline-block
+        color: white
+        font-size: 300%
+        font-weight: bold
+      .options
+        +span-columns(3)
+        height: 100%
+        display: inline-block
+        button:first-child
+          background: orange
+          color: black
+          font-size: 150%
+        button:nth-child(2)
+          background: white
+          color: black
+          font-size: 150%
+    .importerStepThreeWell
+      +span-columns(12)
+      +pad(20px)
+      height: $importerWellHeight
+      +background(url('../imgs/dark_embroidery.png') repeat)
+      border-radius: 5px
+      text-align: left
+      box-shadow: 0px 0px 0px #3A8AD3
+      border: 0px solid gray
+      .importerStepThreeField
+        +span-columns(4)
+        .panel-heading
+          +background(url('../imgs/gplaypattern.png') repeat)
+          font-size: 125%
+        .panel-body
+          height: 200px
+          overflow-y: auto
