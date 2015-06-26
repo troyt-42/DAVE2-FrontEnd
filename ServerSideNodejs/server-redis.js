@@ -3,12 +3,77 @@ var fs = require('fs');
 var express = require('express');
 var http = require('http');
 var io = require('socket.io')();
+var multiparty= require('multiparty');
 var app = express();
 var server = http.createServer(app);
 var client = redis.createClient({no_ready_check:true});
 io.listen(server);
 
 
+app.post('/Importer/uploadFile', function(req,res){
+  var form = new multiparty.Form();
+  var file;
+  var filename;
+  var count = 0;
+
+  var fileInfo = '';
+  form.on('error', function(err) {
+    console.log('Error parsing form: ' + err.stack);
+  });
+
+  form.on('part', function(part) {
+
+    if (!part.filename) {
+      // filename is not defined when this is a field and not a file
+      console.log('got field named ' + part.name);
+      part.on('data', function(chunk){
+        fileInfo += chunk;
+      });
+
+      part.on('end', function(){
+        console.log(part.name + ' is received: ' + fileInfo);
+      });
+
+      // ignore field's content
+      part.resume();
+    }
+
+    if (part.filename) {
+      filename = part.filename;
+      // filename is defined when this is a file
+      count++;
+      part.on('data', function(chunk){
+        file += chunk;
+      });
+
+
+      part.on('end', function(){
+        console.log('file upload success!');
+      });
+      part.resume();
+    }
+
+    part.on('error', function(err) {
+      // decide what to do
+    });
+  });
+
+  form.on('close', function() {
+    console.log('Upload completed!');
+
+    fs.writeFile(__dirname + '/importerfiles/' + filename,file, function(err){
+      res.end(err);
+    });
+
+    res.end();
+  });
+
+  // form.on('progress', function(bytesReceived, bytesExpected){
+  //   var progress =bytesReceived / bytesExpected * 100;
+  //   console.log('Progress: ' + progress.toFixed(2) + '%');
+  // });
+  form.parse(req);
+});
 app.use(express.static(__dirname + '/../'));
 
 client.on('error', function (err) {

@@ -9,7 +9,7 @@ var kafka = require('kafka-node');
 var app = express();
 var server = http.createServer(app);
 
-var kafkaClient = new kafka.Client('10.3.83.74:2181');
+var kafkaClient = new kafka.Client('10.222.83.158:2181');
 var HighLevelProducer = kafka.HighLevelProducer;
 var HighLevelConsumer = kafka.HighLevelConsumer;
 
@@ -35,7 +35,7 @@ app.use(express.static(__dirname + '/../'));
 app.post('/Importer/uploadFile', function(req,res){
   var form = new multiparty.Form();
   var file;
-  var filename;
+  var filename = [];
   var count = 0;
 
   var fileInfo = '';
@@ -61,7 +61,7 @@ app.post('/Importer/uploadFile', function(req,res){
     }
 
     if (part.filename) {
-      filename = part.filename;
+      filename.push( part.filename);
       // filename is defined when this is a file
       count++;
       part.on('data', function(chunk){
@@ -83,9 +83,12 @@ app.post('/Importer/uploadFile', function(req,res){
   form.on('close', function() {
     console.log('Upload completed!');
 
-    fs.writeFile(__dirname + '/importerfiles/' + filename,file, function(err){
-      res.end(err);
-    });
+    for(var i = 0; i < filename.length; i++){
+      fs.writeFile(__dirname + '/importerfiles/' + filename[i],file, function(err){
+        res.end(err);
+      });
+    }
+    
 
     res.end();
   });

@@ -1,9 +1,7 @@
 
 <div class="importerContainer">
-
-
-  <div class="importerContainerLeftMenu  animated">
-    <accordion close-others="true" >
+  <div class="importerContainerLeftMenu animated">
+    <accordion close-others="true">
       <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black;" >
         <accordion-heading>
           <span style="font-size:150%;font-weight:bold;color:white">Create New Importer</span>
@@ -18,9 +16,7 @@
         </ul>
         <button type="button" ng-disabled = "(!importerUploadCtrl.formModel['Browse'].length) || (!importerUploadCtrl.stepOne)" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
         <button type="button" ng-click = "importerUploadCtrl.cancelFile()" ng-disabled = "!importerUploadCtrl.stepOne" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
-
       </accordion-group>
-
       <accordion-group is-open="importerUploadCtrl.optionStatus.secondOpen" id="importerOptionsSecond" style="border-color:black">
         <accordion-heading>
           <span style="font-size:150%;font-weight:bold;color:white">System Status</span>
