@@ -21,6 +21,11 @@
     });
 
     formlyConfig.setType({
+      name:"input3",
+      templateUrl: "angularFormlyBasicTemplates/input3.html"
+    });
+
+    formlyConfig.setType({
       name:"textarea",
       templateUrl: "angularFormlyBasicTemplates/textarea.html"
     });

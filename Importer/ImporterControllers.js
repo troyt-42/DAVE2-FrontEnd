@@ -18,6 +18,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   var vm = this;
 
   //functions
+  vm.activate = activate;
+  vm.addTableColumn = addTableColumn;
   vm.backToImporterList = backToImporterList;
   vm.cancelFile = cancelFile;
   vm.cancelImport = cancelImport;
@@ -25,17 +27,21 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   vm.chooseDataItem = chooseDataItem;
   vm.closeAlert = closeAlert;
   vm.decideImport = decideImport;
+  vm.decreaseColumnIndex = decreaseColumnIndex;
+  vm.increaseColumnIndex = increaseColumnIndex;
   vm.requestImporter = requestImporter;
   vm.removeFile = removeFile;
+  vm.removeColumn = removeColumn;
   vm.submitFile = submitFile;
+  vm.toggleLayOutMenu = toggleLayOutMenu;
+  vm.toggleLeftMenu = toggleLeftMenu;
 
   //variables
   vm.alerts = {
     "stepOne":[],
     "stepTwoB" :[]
   };
-  vm.availableFields = {};
-
+  vm.avaliableTableColumns =[];
   vm.currentDataItem = "Fermenter Sample HPLC Ethanol";
 
 
@@ -48,6 +54,13 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   vm.importerDataItemToDisplay = {};
   vm.importerDataItemData = [];
+  vm.importerListTableColumns = [
+    "importerName",
+    "location",
+    "ownerName",
+    "type",
+    "description"
+  ];
   vm.promiseToSolve = null;
   vm.requestImporterPromiseToSolve = null;
   vm.stepOne = true;
@@ -90,7 +103,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       key:"Description"
     },
     {
-      type:"input",
+      type:"input3",
       key:"Browse",
       data:{
         inputType:"file"
@@ -129,38 +142,14 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     }
   });
 
-  $scope.$watch(function(){
-    return vm.sampleDataReduction;
-  }, function(newValue){
-    if(newValue <= 10){
-      vm.sampleDataReductionString = "1 Hour";
-    } else if ((newValue > 10) && (newValue <= 20)){
-      vm.sampleDataReductionString = "2 Hour";
-    } else if ((newValue > 20) && (newValue <= 30)){
-      vm.sampleDataReductionString = "3 Hour";
-    } else if ((newValue > 30) && (newValue <= 40)){
-      vm.sampleDataReductionString = "4 Hour";
-    } else if ((newValue > 40) && (newValue <= 50)){
-      vm.sampleDataReductionString = "5 Hour";
-    } else if ((newValue > 50) && (newValue <= 60)){
-      vm.sampleDataReductionString = "6 Hour";
-    } else if ((newValue > 60) && (newValue <= 70)){
-      vm.sampleDataReductionString = "7 Hour";
-    } else if ((newValue > 70) && (newValue <= 80)){
-      vm.sampleDataReductionString = "8 Hour";
-    } else if ((newValue > 80) && (newValue <= 90)){
-      vm.sampleDataReductionString = "9 Hour";
-    } else if ((newValue > 90) && (newValue <= 100)){
-      vm.sampleDataReductionString = "10 Hour";
-    }
-  });
-
   ImporterSocket.on("importerListData", function(data){
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.promiseToSolve);
+          console.log('called');
       if(data.length !== 0){
         vm.importerList = vm.importerList.concat(data);
         vm.stepOneLoading = false;
+        angular.element(".js-layout").addClass("hidden");
       } else {
         // if(vm.importerList.length < 250){
         //   vm.alerts.stepOne = [{ type: 'warning', msg: 'Load Item Incomplete.' }];
@@ -276,15 +265,14 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       }
     }
   });
-  activate();
+  vm.activate();
 
   ///////////////////////////
 
   function activate(){
     ImporterSocket.emit("requestImporterList");
-    angular.element(".importerContainerLeftMenu").addClass('fadeInLeft');
     angular.element(".importerContainerRightPanel").addClass('fadeIn');
-
+    vm.importerList = [];
     vm.promiseToSolve =  $timeout(function(){
 
       var alertExsited = false;
@@ -300,11 +288,21 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     },5000);
   }
 
+  function addTableColumn(){
+    if(vm.avaliableTableColumns.length !== 0){
+      var column = vm.avaliableTableColumns.pop();
+      vm.importerListTableColumns.splice(column.index, 0, column.value);
+    } else {
+
+    }
+  }
   function backToImporterList(){
     vm.stepOne = true;
     vm.stepTwo = false;
     vm.stepTwoB = false;
     vm.stepThree = false;
+    vm.activate();
+
   }
 
   function cancelFile(){
@@ -406,15 +404,39 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     // });
   }
 
+  function decreaseColumnIndex(keyName){
+    var index = vm.importerListTableColumns.indexOf(keyName);
+    if(index > 0){
+
+      var temp = vm.importerListTableColumns[index - 1];
+      vm.importerListTableColumns[index] = temp;
+      vm.importerListTableColumns[index - 1] = keyName;
+    }
+
+  }
+  function increaseColumnIndex(keyName){
+    var index = vm.importerListTableColumns.indexOf(keyName);
+    if(index < vm.importerListTableColumns.length - 1){
+      var newIndex = index + 1;
+      var temp = vm.importerListTableColumns[newIndex];
+      vm.importerListTableColumns[index] = temp;
+      vm.importerListTableColumns[index + 1] = keyName;
+    }
+    console.log(vm.importerListTableColumns);
+  }
+  function removeColumn(key){
+    var index = vm.importerListTableColumns.indexOf(key);
+    vm.importerListTableColumns.splice(index, 1);
+    vm.avaliableTableColumns.push({index: index, value: key});
+    console.log(key);
+    console.log(vm.importerListTableColumns);
+  }
 
   function removeFile(file){
     var index = vm.formModel.Browse.indexOf(file);
     if(index !== -1){
       vm.formModel.Browse.splice(index, 1);
       console.log(vm.formModel);
-    }
-    if(vm.formModel.Browse.length === 0){
-      angular.element("#formly_1_input_Browse_3").val("");
     }
   }
   function requestImporter(importer){
@@ -484,6 +506,23 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     } else {
       alert("Please Browse");
     }
+  }
+
+  function toggleLayOutMenu(){
+    angular.element(".js-layout").toggleClass("hidden");
+  }
+  function toggleLeftMenu(){
+      angular.element(".importerContainerLeftMenu").toggleClass('noExpanded');
+      angular.element(".importerContainerRightPanel").toggleClass('expanded');
+      angular.element("#js-expand-sign").toggleClass('glyphicon-arrow-left  animated flipInY');
+      angular.element("#js-expand-sign").toggleClass('glyphicon-arrow-right  animated flipInY');
+      console.log(angular.element("#js-expand-sign").html());
+      if(angular.element("#js-expand-sign").html() === "Expand"){
+        angular.element("#js-expand-sign").html("Collapse");
+      }
+       else if(angular.element("#js-expand-sign").html() === "Collapse"){
+        angular.element("#js-expand-sign").html("Expand");
+      }
   }
 }
 })();

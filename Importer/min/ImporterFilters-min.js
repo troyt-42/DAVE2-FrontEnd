@@ -1,0 +1,1 @@
+!function(){"use strict";function e(){return function(e){var r={importerName:"Name",location:"Location",ownerName:"Owner",type:"Type",description:"Description"};return r[e]}}angular.module("Dave2.Importer").filter("importerListColumnNamesConversion",e)}();

@@ -88,7 +88,7 @@ app.post('/Importer/uploadFile', function(req,res){
         res.end(err);
       });
     }
-    
+
 
     res.end();
   });
@@ -298,8 +298,8 @@ kafkaConsumer.on('message',function(message){
     }
   } else if (message.topic === '__importer_stepOne_list_out__'){
     var data2 = JSON.parse(message.value);
-
     if(data2.list_out){
+
       io.of('/importer').to(data2.session_id).emit('importerListData', data2.list_out);
     }
   } else if (message.topic === '__importer_stepTwoB_importer_out__'){
@@ -311,7 +311,6 @@ kafkaConsumer.on('message',function(message){
   } else if (message.topic === '__importer_stepTwoB_dataItem_out__'){
     var data4 = JSON.parse(message.value);
     if(data4.list_out){
-      console.log('test');
       io.of('/importer').to(data4.session_id).emit('importerDataItemData', {name:data4.payload.name, data: data4.list_out});
     }
   } else if (message.topic === '__importer_stepOne_createImporter_out__'){

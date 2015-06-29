@@ -1,6 +1,6 @@
 
 <div class="importerContainer">
-  <div class="importerContainerLeftMenu animated">
+  <div class="importerContainerLeftMenu noExpanded">
     <accordion close-others="true">
       <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black;" >
         <accordion-heading>
@@ -8,12 +8,14 @@
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.firstOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.firstOpen}" style="font-size:150%;color:white"></i>
         </accordion-heading>
         <formly-form model="importerUploadCtrl.formModel" fields="importerUploadCtrl.formFields"></formly-form>
-        <ul style="margin-top:5px">
-          <li ng-repeat="file in importerUploadCtrl.formModel.Browse">
-            {{file.name}}
-            <i class="glyphicon glyphicon-remove" style="float:right;padding-right:5px" ng-click="importerUploadCtrl.removeFile(file)"></i>
-          </li>
-        </ul>
+        <div>
+          <ul style="margin-top:5px">
+            <li ng-repeat="file in importerUploadCtrl.formModel.Browse">
+              {{file.name}}
+              <i class="glyphicon glyphicon-remove" style="float:right;padding-right:5px" ng-click="importerUploadCtrl.removeFile(file)"></i>
+            </li>
+          </ul>
+        </div>
         <button type="button" ng-disabled = "(!importerUploadCtrl.formModel['Browse'].length) || (!importerUploadCtrl.stepOne)" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
         <button type="button" ng-click = "importerUploadCtrl.cancelFile()" ng-disabled = "!importerUploadCtrl.stepOne" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
       </accordion-group>
@@ -47,8 +49,11 @@
 
   </div>
 
-  <div class="importerContainerRightPanel animated" >
-
+  <div class="importerContainerRightPanel animated expanded" >
+    <div class="importerSetUpButton" ng-show="importerUploadCtrl.stepOne">
+      <span class=" animated fadeIn" ng-click="importerUploadCtrl.toggleLeftMenu()"><i class="glyphicon glyphicon-arrow-right  animated flipInY" id="js-expand-sign" ></i> Expand</span>
+      <span class=" animated fadeIn" ng-click="importerUploadCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY" id="js-expand-sign" ></i> Lay Out</span>
+    </div>
     <div class="importerStepOne" ng-show="importerUploadCtrl.stepOne">
       <alert ng-hide = "importerUploadCtrl.stepOneLoading" class="animated fadeInDown"  id="stepOne{{$index}}" ng-repeat="alert in importerUploadCtrl.alerts.stepOne" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index, 'stepOne')" >{{alert.msg}}</alert>
       <div class="importerStepOneWell animated fadeIn">
@@ -61,23 +66,26 @@
 
         <table class = "importerListTable" ng-show="!importerUploadCtrl.stepOneLoading">
           <thead>
-            <tr >
-              <th>
-                <label for="Name" style="color:white">Name</label><input type="text" name="Name" ng-model="importerUploadCtrl.search['importerName']"></input>
+            <tr>
+              <th ng-repeat="keyName in importerUploadCtrl.importerListTableColumns">
+                <label for="{{keyName}}" style="color:white">
+                  <i class="js-layout glyphicon glyphicon-chevron-left animated flipInY" ng-click="importerUploadCtrl.decreaseColumnIndex(keyName)"></i>
+                  {{keyName | importerListColumnNamesConversion}}
+                  <i class="js-layout glyphicon glyphicon-chevron-right animated flipInY" ng-click="importerUploadCtrl.increaseColumnIndex(keyName)"></i>
+                  </label>
+                <input type="text" name="{{keyName}}" ng-model="importerUploadCtrl.search[keyName]"></input>
+                <i class="js-layout glyphicon glyphicon-check animated flipInY" ng-click="importerUploadCtrl.removeColumn(keyName)"></i>
               </th>
-              <th>
-                <label for="Location" style="color:white">Location</label><input type="text" name="Location" ng-model="importerUploadCtrl.search['location']"></input>
-              </th>
-              <th>
-                <label for="Owner" style="color:white">Owner</label><input type="text" name="Owner" ng-model="importerUploadCtrl.search['ownerName']"></input>
+              <th ng-click="importerUploadCtrl.addTableColumn()" style="font-size: 90%; font-weight: 300">
+                <i class="js-layout glyphicon glyphicon-plus-sign animated flipInY plus">
+                </i>
+                <span class="js-layout" style="font-size:110%">{{importerUploadCtrl.avaliableTableColumns.length}} Avaliable</span>
               </th>
             </tr>
           </thead>
           <tbody style="color:white">
             <tr ng-repeat = "importer in importerUploadCtrl.importerList | filter:importerUploadCtrl.search" ng-click="importerUploadCtrl.requestImporter(importer)" ng-show="((importerUploadCtrl.importerListCurrentPage * 13 - 13) <= $index) && ($index < (importerUploadCtrl.importerListCurrentPage * 13))">
-              <td>{{importer["importerName"]}}</td>
-              <td>{{importer["location"]}}</td>
-              <td>{{importer["ownerName"]}}</td>
+              <td ng-repeat="keyName in importerUploadCtrl.importerListTableColumns">{{importer[keyName]}}</td>
             </tr>
           </tbody>
         </table>
@@ -106,6 +114,8 @@
             <div><span><i class="glyphicon glyphicon-file"></i> Name: </span><span>{{importerUploadCtrl.importerToDisplay.importerName}}</span></div>
             <div><span><i class="glyphicon glyphicon-globe"></i> Location: </span><span>{{importerUploadCtrl.importerToDisplay.location}}</span></div>
             <div><span><i class="glyphicon glyphicon-user"></i> Owner: </span><span>{{importerUploadCtrl.importerToDisplay.ownerName}}</span></div>
+            <div class="description"><span>Description: </span><span>{{importerUploadCtrl.importerToDisplay.description}}</span></div>
+
           </div>
           <div class="importerStepTwoBDataItems">
 
