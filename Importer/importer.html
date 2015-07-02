@@ -4,8 +4,8 @@
     <accordion close-others="true">
       <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black;" >
         <accordion-heading>
-          <span style="font-size:150%;font-weight:bold;color:white">Create New Importer</span>
-          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.firstOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.firstOpen}" style="font-size:150%;color:white"></i>
+          <span style="font-size:100%;font-weight:bold;color:white">Create New Importer</span>
+          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.firstOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.firstOpen}" style="font-size:100%;color:white"></i>
         </accordion-heading>
         <formly-form model="importerUploadCtrl.formModel" fields="importerUploadCtrl.formFields"></formly-form>
         <div>
@@ -16,21 +16,24 @@
             </li>
           </ul>
         </div>
-        <button type="button" ng-disabled = "(!importerUploadCtrl.formModel['Browse'].length) || (!importerUploadCtrl.stepOne)" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
-        <button type="button" ng-click = "importerUploadCtrl.cancelFile()" ng-disabled = "!importerUploadCtrl.stepOne" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
+        <div>
+          <button type="button" ng-disabled = "(!importerUploadCtrl.formModel['Browse'].length) || (!importerUploadCtrl.stepOne)" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
+          <button type="button" ng-click = "importerUploadCtrl.cancelFile()" ng-disabled = "!importerUploadCtrl.stepOne" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
+        </div>
+        <div class="complicatedUploadMode">Multiple Sources?</div>
       </accordion-group>
       <accordion-group is-open="importerUploadCtrl.optionStatus.secondOpen" id="importerOptionsSecond" style="border-color:black">
         <accordion-heading>
-          <span style="font-size:150%;font-weight:bold;color:white">System Status</span>
-          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.secondOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.secondOpen}" style="font-size:150%;color:white"></i>
+          <span style="font-size:100%;font-weight:bold;color:white">System Status</span>
+          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.secondOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.secondOpen}" style="font-size:100%;color:white"></i>
         </accordion-heading>
         System Status Info
       </accordion-group>
 
       <accordion-group is-open="importerUploadCtrl.optionStatus.thirdOpen" id="importerOptionsThird" style="border-color:black">
         <accordion-heading>
-          <span style="font-size:150%;font-weight:bold;color:white">Default Display Setting</span>
-          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.thirdOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.thirdOpen}" style="font-size:150%;color:white"></i>
+          <span style="font-size:100%;font-weight:bold;color:white">Default Display Setting</span>
+          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.thirdOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.thirdOpen}" style="font-size:100%;color:white"></i>
 
         </accordion-heading>
         Default Setting Info
@@ -38,8 +41,8 @@
 
       <accordion-group is-open="importerUploadCtrl.optionStatus.fourthOpen" id="importerOptionsFourth" style="border-color:black">
         <accordion-heading>
-          <span style="font-size:150%;font-weight:bold;color:white">Help</span>
-          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.fourthOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.fourthOpen}" style="font-size:150%;color:white"></i>
+          <span style="font-size:100%;font-weight:bold;color:white">Help</span>
+          <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.fourthOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.fourthOpen}" style="font-size:100%;color:white"></i>
 
         </accordion-heading>
         Help Info
@@ -51,12 +54,13 @@
 
   <div class="importerContainerRightPanel animated expanded" >
     <div class="importerSetUpButton" ng-show="importerUploadCtrl.stepOne">
-      <span class=" animated fadeIn" ng-click="importerUploadCtrl.toggleLeftMenu()"><i class="glyphicon glyphicon-arrow-right  animated flipInY" id="js-expand-sign" ></i> Expand</span>
-      <span class=" animated fadeIn" ng-click="importerUploadCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY" id="js-expand-sign" ></i> Lay Out</span>
+      <div class=" animated fadeIn" ng-click="importerUploadCtrl.toggleLeftMenu()"><i class="glyphicon glyphicon-arrow-right  animated flipInY" id="js-expand-arrow"></i><span id="js-expand-sign"> Expand</span></div>
+      <div class=" animated fadeIn" ng-click="importerUploadCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY"></i> Lay Out</div>
+      <div class=" animated fadeIn" ng-click="importerUploadCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
     </div>
     <div class="importerStepOne" ng-show="importerUploadCtrl.stepOne">
-      <alert ng-hide = "importerUploadCtrl.stepOneLoading" class="animated fadeInDown"  id="stepOne{{$index}}" ng-repeat="alert in importerUploadCtrl.alerts.stepOne" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index, 'stepOne')" >{{alert.msg}}</alert>
-      <div class="importerStepOneWell animated fadeIn">
+      <div class="importerStepOneWell animated fadeIn" ng-class="{'search-mode' : importerUploadCtrl.stepOneSearchMode}">
+        <alert ng-hide = "importerUploadCtrl.stepOneLoading" class="animated fadeInDown"  id="stepOne{{$index}}" ng-repeat="alert in importerUploadCtrl.alerts.stepOne" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index, 'stepOne')" >{{alert.msg}}</alert>
         <div class = "waitingSymbol" ng-show="importerUploadCtrl.stepOneLoading">
           <alert class="animated fadeInDown" id="stepOne{{$index}}" ng-repeat="alert in importerUploadCtrl.alerts.stepOne" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index, 'stepOne')">
             {{alert.msg}}
@@ -64,7 +68,7 @@
           <img ng-show = "importerUploadCtrl.systemStatus == 'Normal'" src="../imgs/477.GIF"/>
         </div>
 
-        <table class = "importerListTable" ng-show="!importerUploadCtrl.stepOneLoading">
+        <table class = "importerListTable" ng-show="!importerUploadCtrl.stepOneLoading && !importerUploadCtrl.stepOneSearchMode">
           <thead>
             <tr>
               <th ng-repeat="keyName in importerUploadCtrl.importerListTableColumns">
@@ -72,7 +76,7 @@
                   <i class="js-layout glyphicon glyphicon-chevron-left animated flipInY" ng-click="importerUploadCtrl.decreaseColumnIndex(keyName)"></i>
                   {{keyName | importerListColumnNamesConversion}}
                   <i class="js-layout glyphicon glyphicon-chevron-right animated flipInY" ng-click="importerUploadCtrl.increaseColumnIndex(keyName)"></i>
-                  </label>
+                </label>
                 <input type="text" name="{{keyName}}" ng-model="importerUploadCtrl.search[keyName]"></input>
                 <i class="js-layout glyphicon glyphicon-check animated flipInY" ng-click="importerUploadCtrl.removeColumn(keyName)"></i>
               </th>
@@ -84,16 +88,43 @@
             </tr>
           </thead>
           <tbody style="color:white">
-            <tr ng-repeat = "importer in importerUploadCtrl.importerList | filter:importerUploadCtrl.search" ng-click="importerUploadCtrl.requestImporter(importer)" ng-show="((importerUploadCtrl.importerListCurrentPage * 13 - 13) <= $index) && ($index < (importerUploadCtrl.importerListCurrentPage * 13))">
+            <tr ng-repeat = "importer in importerUploadCtrl.importerList | filter:importerUploadCtrl.search" ng-click="importerUploadCtrl.requestImporter(importer)" ng-show="((importerUploadCtrl.importerListCurrentPage * 11 - 11) <= $index) && ($index < (importerUploadCtrl.importerListCurrentPage * 11))">
               <td ng-repeat="keyName in importerUploadCtrl.importerListTableColumns">{{importer[keyName]}}</td>
             </tr>
           </tbody>
         </table>
 
+        <div class="search-mode-brand" ng-show="importerUploadCtrl.stepOneSearchMode">
+          <h1 class=" animated flipInY"><i class="glyphicon glyphicon-eye-open"></i> Search Mode</h1>
+          <button type="button" class="btn btn-info search-btn" >How To Use?</button>
+          <button type="button" class="btn btn-warning search-btn">Search Tool</button>
+        </div>
+        <div class="search-mode-input-group" ng-show="importerUploadCtrl.stepOneSearchMode">
+          <div class="search-mode-input" ng-repeat="keyName in importerUploadCtrl.importerListTableColumns" >
+            <span>
+              {{keyName | importerListColumnNamesConversion}}:
+            </span>
+            <input type="text" class="form-control" ng-model="importerUploadCtrl.stepOneSearchModeInput[keyName]"></input>
+          </div>
+        </div>
+        <div class="search-mode-dashboard" ng-show="importerUploadCtrl.stepOneSearchMode">
+          <div class="search-mode-input-result">
+            <div  ng-repeat="keyName in importerUploadCtrl.importerListTableColumns" >
+              <span>
+                {{keyName | importerListColumnNamesConversion}}:
+              </span>
+              <span>{{importerUploadCtrl.stepOneSearchModeInput[keyName]}}</span>
+            </div>
+          </div>
+          <div class="search-mode-result">
+            <span><i class="glyphicon glyphicon-tasks"></i> Available Results: 0 Items</span>
+            <span><i class="glyphicon glyphicon-dashboard"></i> Estimated Loading Time: 0s</span>
+          </div>
+        </div>
       </div>
-      <pagination total-items="importerUploadCtrl.importerList.length" ng-model="importerUploadCtrl.importerListCurrentPage" max-size="10" class="pagination-sm col-md-7 animated rotateInUpLeft" style="margin-top:7px;font-size:150%"boundary-links="true" rotate="false" items-per-page="13"></pagination>
-      <div class="importerSystemTitle col-md-5 animated rotateInUpRight" ng-show="importerUploadCtrl.stepOne"><span style="font-size:200%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
 
+      <pagination id="js-pagination" ng-show="!importerUploadCtrl.stepOneSearchMode" total-items="importerUploadCtrl.importerList.length" ng-model="importerUploadCtrl.importerListCurrentPage" max-size="10" class="pagination-sm animated rotateInUpLeft" style="margin:0px;font-size:150%;display:inline" boundary-links="true" rotate="false" items-per-page="11"></pagination>
+      <div class="importerSystemTitle animated rotateInUpRight" ng-show="importerUploadCtrl.stepOne"><span style="font-size:200%;color:black;">Importer System</span><span style="font-size:100%;color:orange;font-style:italic"> by Greenfield</span></div>
 
     </div>
 
@@ -171,7 +202,7 @@
 
           <div class="importerStepTwoBDataItemOptions animated fadeInUp">
             <button type="button" class="btn btn-info">View More Data</button>
-            <button type="button" class="btn btn-warning">Delet This Data Item</button>
+            <button type="button" class="btn btn-warning">Update This Data Item</button>
           </div>
 
 

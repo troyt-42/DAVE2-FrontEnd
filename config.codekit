@@ -36681,6 +36681,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": false
 		},
+	"\/sass\/_texture.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/sass\/_texture.scss",
+		"outputAbbreviatedPath": "\/css\/_texture.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": 0
+		},
 	"\/sass\/index.sass": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -37127,7 +37143,7 @@
 "projectAttributes": {
 	"bowerAbbreviatedPath": "",
 	"displayValue": "DAVE2_Spring_Version",
-	"displayValueWasSetByUser": 0,
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "globe_darkGray"
 	},
 "projectSettings": {

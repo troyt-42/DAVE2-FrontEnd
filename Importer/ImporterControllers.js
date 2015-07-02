@@ -35,7 +35,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   vm.submitFile = submitFile;
   vm.toggleLayOutMenu = toggleLayOutMenu;
   vm.toggleLeftMenu = toggleLeftMenu;
-
+  vm.toggleSearchMode = toggleSearchMode;
   //variables
   vm.alerts = {
     "stepOne":[],
@@ -49,6 +49,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   vm.fileUploadProgress = 0;
   vm.importerList = [];
   vm.importerListCurrentPage = 1;
+  vm.stepOneSearchMode = false;
+  vm.stepOneSearchModeInput = {};
   vm.importerToDisplay = {};
   vm.importerToDisplayContent = [];
 
@@ -514,15 +516,21 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   function toggleLeftMenu(){
       angular.element(".importerContainerLeftMenu").toggleClass('noExpanded');
       angular.element(".importerContainerRightPanel").toggleClass('expanded');
-      angular.element("#js-expand-sign").toggleClass('glyphicon-arrow-left  animated flipInY');
-      angular.element("#js-expand-sign").toggleClass('glyphicon-arrow-right  animated flipInY');
-      console.log(angular.element("#js-expand-sign").html());
-      if(angular.element("#js-expand-sign").html() === "Expand"){
-        angular.element("#js-expand-sign").html("Collapse");
+      angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-left  animated flipInY');
+      angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-right  animated flipInY');
+      if(angular.element("#js-expand-sign").html() === " Expand"){
+        angular.element("#js-expand-sign").html(" Collapse");
       }
-       else if(angular.element("#js-expand-sign").html() === "Collapse"){
-        angular.element("#js-expand-sign").html("Expand");
+       else if(angular.element("#js-expand-sign").html() === " Collapse"){
+        angular.element("#js-expand-sign").html(" Expand");
       }
+  }
+
+  function toggleSearchMode(){
+    vm.stepOneSearchMode = vm.stepOneSearchMode ? false : true;
+    angular.element("#js-pagination").toggleClass("rotateInUpLeft");
+    angular.element("#js-pagination").toggleClass("rotateOutDownLeft");
+
   }
 }
 })();

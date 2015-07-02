@@ -1,6 +1,9 @@
+@import "texture"
 $blue-color: #3A8AD3
+$yale-blue: #0F4D92
 $fg-gutter: em(15px)             // Gutter Width
 $importerWellHeight: 598px
+
 
 .canvas
   display: block
@@ -51,7 +54,15 @@ $importerWellHeight: 598px
           cursor: pointer
     button
       +span-columns(6)
-
+    .complicatedUploadMode
+      +span-columns(12)
+      margin-top: 5px
+      text-align: right
+      font-size: 80%
+      color: $blue-color
+      cursor: pointer
+      &:hover
+        text-decoration: underline
     .panel
       .panel-heading
         +background(linear-gradient(90deg, $blue-color, darkgray))
@@ -82,7 +93,8 @@ $importerWellHeight: 598px
       +pad(0 default)
     .importerSetUpButton
       cursor: pointer
-      span
+      div
+        display: inline
         +pad(5px 10px 20px)
         +border-top-radius(10px)
         background: black
@@ -90,14 +102,19 @@ $importerWellHeight: 598px
         &:nth-child(2)
           background: gold
           color: black
+        &:nth-child(3)
+          background: skyblue
+          color: black
     .importerStepOne
       +span-columns(12)
       .importerSystemTitle
         +border-bottom-radius(50px)
+        +span-columns(4)
         text-align: center
         background-image: url('../imgs/congruent_pentagon.png')
         border: 1px solid lightgrey
         border-top: 0
+        float: right
 
       .importerStepOneWell
         +pad(20px 20px)
@@ -106,6 +123,11 @@ $importerWellHeight: 598px
         +border-left-radius(10px)
         height: $importerWellHeight
         border: 1px lightgrey solid
+        &.search-mode
+          +display(flex)
+          +justify-content(center)
+          +align-items(center)
+          +texture(0deg, $yale-blue,  lighten($yale-blue, 10%), 80, 1)
         .waitingSymbol
           +span-columns(12)
           +align-items(center)
@@ -171,6 +193,45 @@ $importerWellHeight: 598px
             color: white
             cursor: pointer
 
+        .search-mode-brand
+          +span-columns(3)
+          +pad()
+          text-align: center
+          h1
+            color: gold
+          button
+            +span-columns(6)
+            background: black
+            &:nth-child(2)
+              color: skyblue
+              outline-color: skyblue
+            &:nth-child(3)
+              color: orange
+              outline-color: orange
+        .search-mode-input-group
+          +span-columns(4)
+          color: white
+          span
+            font-size: 150%
+          input
+            background: black
+            color: white
+        .search-mode-dashboard
+          +span-columns(4)
+          .search-mode-input-result
+            margin-bottom: 5px
+            border: 1px inset white
+            border-radius: 5px
+            +pad()
+            span:nth-child(1)
+              color: linen
+          .search-mode-result
+            span:nth-child(1)
+              display: block
+              color: #8AC007
+            span:nth-child(2)
+              display: block
+              color: skyblue
     .importerStepTwoB
       +span-columns(12)
 
