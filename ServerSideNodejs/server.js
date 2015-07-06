@@ -199,8 +199,7 @@ io.of('/importer').on('connection', function(socket){
       payload:{
         importerName: importer.importerName,
         location: importer.location,
-        list_type: 'importer',
-        userName: 'troy'
+        list_type: 'importer'
       }
     };
     console.log('Requested Importer Info: ' + JSON.stringify(messageToSend));
@@ -220,9 +219,9 @@ io.of('/importer').on('connection', function(socket){
       session_id : socket.id,
       return_topic: '__importer_stepTwoB_dataItem_out__',
       action: 'QUERY_DATAITEM',
-      location:dataItem.location,
       payload:{
         name:dataItem.fieldName,
+        location:dataItem.location,
         list_type:'dataItem'
       }
     };
@@ -298,8 +297,8 @@ kafkaConsumer.on('message',function(message){
     }
   } else if (message.topic === '__importer_stepOne_list_out__'){
     var data2 = JSON.parse(message.value);
+    console.log(data2.list_out);
     if(data2.list_out){
-
       io.of('/importer').to(data2.session_id).emit('importerListData', data2.list_out);
     }
   } else if (message.topic === '__importer_stepTwoB_importer_out__'){
@@ -327,7 +326,7 @@ kafkaConsumer.on('message',function(message){
     }
   } else if (message.topic === '__importer_stepTwo_decideCreation_out__'){
     var data6 = JSON.parse(message.value);
-    if(data6.list_out){
+    if(data6){
       io.of('/importer').to(data6.session_id).emit('importerCreationFinalResponse', data6);
     }
   } else {
