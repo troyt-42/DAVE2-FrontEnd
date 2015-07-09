@@ -1,7 +1,8 @@
 (function(){'use strict';
 angular
 .module("Dave2.Importer")
-.controller("ImporterUploadCtrl" ,ImporterUploadCtrl);
+.controller("ImporterUploadCtrl" ,ImporterUploadCtrl)
+.controller("UpdateImporterModalCtrl", UpdateImporterModalCtrl);
 
 ImporterUploadCtrl.$inject = [
   "$timeout",
@@ -13,6 +14,13 @@ ImporterUploadCtrl.$inject = [
   "ImporterSocket"
 ];
 
+UpdateImporterModalCtrl.$inject = [
+  "$scope",
+  "$modalInstance",
+  "currentImporter",
+  "Upload",
+  "ImporterSocket"
+];
 
 function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingParseService, ImporterSocket){
   var vm = this;
@@ -20,12 +28,14 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   //functions
   vm.activate = activate;
   vm.addTableColumn = addTableColumn;
+  vm.addTableColumnKeyPress = addTableColumnKeyPress;
   vm.backToImporterList = backToImporterList;
   vm.cancelFile = cancelFile;
   vm.cancelImport = cancelImport;
   vm.changeDataItemConfig = changeDataItemConfig;
   vm.chooseDataItem = chooseDataItem;
   vm.closeAlert = closeAlert;
+  vm.dataItemListClass = dataItemListClass;
   vm.decideImport = decideImport;
   vm.decreaseColumnIndex = decreaseColumnIndex;
   vm.increaseColumnIndex = increaseColumnIndex;
@@ -36,6 +46,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   vm.toggleLayOutMenu = toggleLayOutMenu;
   vm.toggleLeftMenu = toggleLeftMenu;
   vm.toggleSearchMode = toggleSearchMode;
+  vm.updateImporter = updateImporter;
   //variables
   vm.alerts = {
     "stepOne":[],
@@ -57,12 +68,13 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   vm.importerDataItemToDisplay = {};
   vm.importerDataItemData = [];
   vm.importerListTableColumns = [
-    "importerName",
-    "location",
-    "ownerName",
-    "type",
-    "description"
+    {name: "importerName", status: true, index: 0},
+    {name:  "location", status: true, index: 1},
+    {name: "ownerName", status: true, index: 2}  ,
+    {name: "type", status: true, index: 3}  ,
+    {name: "description", status:true, index: 4}
   ];
+
   vm.promiseToSolve = null;
   vm.requestImporterPromiseToSolve = null;
   vm.stepOne = true;
@@ -147,7 +159,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   ImporterSocket.on("importerListData", function(data){
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.promiseToSolve);
-          console.log('called');
+      console.log('called');
       if(data.length !== 0){
         vm.importerList = vm.importerList.concat(data);
         vm.stepOneLoading = false;
@@ -211,6 +223,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   var temp = []; //temporary var for importerCreationResponse event
   ImporterSocket.on("importerCreationResponse", function(response){
     if(vm.systemStatus === "Normal"){
+      vm.fileUploadProgress = 0;
       if(response.data.length !== 0){
         temp = temp.concat(response.data);
       } else {
@@ -235,7 +248,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   ImporterSocket.on("importerCreationFinalResponse", function(response){
     if(vm.systemStatus === "Normal"){
+      console.log(response);
       if(response.reply === "SUCCESS"){
+        vm.fileUploadProgress = response.payload.status * 100;
         if(response.list_out !== 0){
           vm.importerToDisplay = {
             importerName: response.importerName,
@@ -265,6 +280,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
           }
         }
       }
+      if(response.reply === "PROGRESSING"){
+        vm.fileUploadProgress = response.payload.status * 100;
+      }
     }
   });
   vm.activate();
@@ -288,14 +306,42 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
       }
       vm.systemStatus = "Error";
     },5000);
+
   }
 
-  function addTableColumn(){
+  function addTableColumn(column, index){
     if(vm.avaliableTableColumns.length !== 0){
-      var column = vm.avaliableTableColumns.pop();
-      vm.importerListTableColumns.splice(column.index, 0, column.value);
+      vm.importerListTableColumns[column.index - 1].status = true;
+      vm.avaliableTableColumns.splice(index, 1);
     } else {
 
+    }
+  }
+
+  function addTableColumnKeyPress(event, column, index){
+    console.log(column);
+    if(event.keyCode === 13){
+      if(column.index === column.newIndex){
+        vm.addTableColumn(column, index);
+      } else {
+        if(column.newIndex > vm.importerListTableColumns.length){
+          column.newIndex = vm.importerListTableColumns.length;
+        }
+        if(column.newIndex < 1){
+          column.newIndex = 1;
+        }
+        vm.importerListTableColumns[column.index - 1].index = column.newIndex - 1;
+        vm.importerListTableColumns[column.newIndex - 1].index = column.index - 1;
+        var temp  = vm.importerListTableColumns[column.index - 1];
+        vm.importerListTableColumns[column.index - 1] = vm.importerListTableColumns[column.newIndex - 1];
+        vm.importerListTableColumns[column.newIndex - 1] = temp;
+        column.index = column.newIndex;
+        console.log(column);
+        console.log(vm.avaliableTableColumns);
+        console.log(vm.importerListTableColumns);
+        vm.addTableColumn(column, index);
+
+      }
     }
   }
   function backToImporterList(){
@@ -303,6 +349,11 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     vm.stepTwo = false;
     vm.stepTwoB = false;
     vm.stepThree = false;
+    vm.currentDataItem = '';
+    vm.importerToDisplay = {};
+    vm.importerToDisplayContent = [];
+    vm.importerDataItemToDisplay = {};
+    vm.importerDataItemData = [];
     vm.activate();
 
   }
@@ -351,6 +402,10 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     angular.element('div.alert.animated#'+position+index).removeClass("fadeInDown");
     angular.element('div.alert.animated#'+position+index).addClass("fadeOutUp");
     vm.alerts[position].splice(index, 1);
+  }
+
+  function dataItemListClass(dataItem){
+    return (dataItem.fieldName === vm.currentDataItem.fieldName) ? 'active': '';
   }
 
   function decideImport(){
@@ -404,34 +459,38 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     //   // or server returns response with an error status.
     //   alert("Something Wents Wrong");
     // });
+    console.log(finalFormToUpload);
   }
 
-  function decreaseColumnIndex(keyName){
-    var index = vm.importerListTableColumns.indexOf(keyName);
-    if(index > 0){
-
-      var temp = vm.importerListTableColumns[index - 1];
-      vm.importerListTableColumns[index] = temp;
-      vm.importerListTableColumns[index - 1] = keyName;
+  function decreaseColumnIndex(index){
+    for(var i = index - 1; i >= 0; i--){
+      if(vm.importerListTableColumns[i].status){
+        var temp = vm.importerListTableColumns[index];
+        temp.index = i;
+        vm.importerListTableColumns[i].index = index;
+        vm.importerListTableColumns[index] = vm.importerListTableColumns[i];
+        vm.importerListTableColumns[i] = temp;
+        break;
+      }
     }
 
   }
-  function increaseColumnIndex(keyName){
-    var index = vm.importerListTableColumns.indexOf(keyName);
-    if(index < vm.importerListTableColumns.length - 1){
-      var newIndex = index + 1;
-      var temp = vm.importerListTableColumns[newIndex];
-      vm.importerListTableColumns[index] = temp;
-      vm.importerListTableColumns[index + 1] = keyName;
+  function increaseColumnIndex(index){
+    for(var i = index + 1; i < vm.importerListTableColumns.length; i++){
+      if(vm.importerListTableColumns[i].status){
+        var temp = vm.importerListTableColumns[index];
+        temp.index = i;
+        vm.importerListTableColumns[i].index = index;
+        vm.importerListTableColumns[index] = vm.importerListTableColumns[i];
+        vm.importerListTableColumns[i] = temp;
+        break;
+      }
     }
-    console.log(vm.importerListTableColumns);
   }
-  function removeColumn(key){
-    var index = vm.importerListTableColumns.indexOf(key);
-    vm.importerListTableColumns.splice(index, 1);
-    vm.avaliableTableColumns.push({index: index, value: key});
-    console.log(key);
-    console.log(vm.importerListTableColumns);
+  function removeColumn(index){
+    vm.importerListTableColumns[index].status = false;
+    vm.avaliableTableColumns.push({index: index + 1, value: vm.importerListTableColumns[index].name, newIndex : index + 1});
+
   }
 
   function removeFile(file){
@@ -484,7 +543,6 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
         fields:{
           'uploadInfo': {
             'name' : vm.formModel.Name,
-            'filename': vm.formModel.Browse[0].name,
             'location': vm.formModel.Location,
             'description': vm.formModel.Description
           }
@@ -514,23 +572,110 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
     angular.element(".js-layout").toggleClass("hidden");
   }
   function toggleLeftMenu(){
-      angular.element(".importerContainerLeftMenu").toggleClass('noExpanded');
-      angular.element(".importerContainerRightPanel").toggleClass('expanded');
-      angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-left  animated flipInY');
-      angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-right  animated flipInY');
-      if(angular.element("#js-expand-sign").html() === " Expand"){
-        angular.element("#js-expand-sign").html(" Collapse");
-      }
-       else if(angular.element("#js-expand-sign").html() === " Collapse"){
-        angular.element("#js-expand-sign").html(" Expand");
-      }
+    angular.element(".importerContainerLeftMenu").toggleClass('noExpanded');
+    angular.element(".importerContainerRightPanel").toggleClass('expanded');
+    angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-left  animated flipInY');
+    angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-right  animated flipInY');
+    if(angular.element("#js-expand-sign").html() === " Expand"){
+      angular.element("#js-expand-sign").html(" Collapse");
+    }
+    else if(angular.element("#js-expand-sign").html() === " Collapse"){
+      angular.element("#js-expand-sign").html(" Expand");
+    }
   }
 
   function toggleSearchMode(){
     vm.stepOneSearchMode = vm.stepOneSearchMode ? false : true;
     angular.element("#js-pagination").toggleClass("rotateInUpLeft");
     angular.element("#js-pagination").toggleClass("rotateOutDownLeft");
+    console.log(angular.element("#js-search-sign").html());
+    if(angular.element("#js-search-sign").html() === " Search Mode"){
+      angular.element("#js-search-sign").html(" Importer List");
+    } else if(angular.element("#js-search-sign").html() === " Importer List"){
+      angular.element("#js-search-sign").html(" Search Mode");
+    }
+  }
 
+  function updateImporter(){
+    var updateImporterInterface = $modal.open({
+      templateUrl:"Importer/ImporterModalViews/updateImporter.html",
+      controller: "UpdateImporterModalCtrl as updateImporterModalCtrl",
+      resolve :{
+        currentImporter : function(){
+          return vm.importerToDisplay;
+        }
+      }
+    });
+
+    updateImporterInterface.result.then(function(data){
+      console.log(data);
+    });
   }
 }
+
+function UpdateImporterModalCtrl($scope, $modalInstance, currentImporter, Upload, ImporterSocket){
+  var vm = this;
+  //functions
+  vm.update = update;
+  vm.cancel = cancel;
+  vm.removeFile = removeFile;
+  //variables
+  vm.currentImporter = currentImporter;
+  vm.files = null;
+  vm.fileUploadProgress = 0;
+  vm.waitingMessage = '';
+  vm.uploading = false;
+  /////////////////////////////
+  function update(){
+      //Start uploading
+      vm.uploading = true;
+      //Upload file through http
+      Upload.upload({
+        url : "/Importer/uploadFile",
+        file: vm.files,
+        fields:{
+          'uploadInfo': {
+            'name' : vm.currentImporter.importerName,
+            'location': vm.currentImporter.location,
+            'description': vm.currentImporter.description
+          }
+        }
+      }).progress(function(evt) {
+        var progress = parseInt(100.0 * evt.loaded / evt.total);
+        vm.fileUploadProgress = progress;
+        if(progress >= 100){
+          vm.waitingMessage = 'Waiting response from server';
+        }
+      }).success(function(data, status, headers, config) {
+        //Upload importerInfo through socket
+        var importerInfo = {
+          'importerName' : vm.currentImporter.importerName,
+          'location': vm.currentImporter.location,
+          'files':[]
+        };
+
+        for(var i = 0; i < vm.files.length; i++){
+          importerInfo.files.push({fileName:vm.files[i].name});
+        }
+        ImporterSocket.emit("updateImporter", importerInfo);
+        console.log("uploadSuccess");
+      }).error(function(err){
+        alert(err);
+      });
+
+
+  }
+
+  function cancel(){
+    $modalInstance.dismiss('cancel');
+  }
+
+  function removeFile(file){
+    var index = vm.files.indexOf(file);
+    if(index !== -1){
+      vm.files.splice(index, 1);
+    }
+  }
+}
+
 })();

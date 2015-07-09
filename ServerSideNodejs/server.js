@@ -20,7 +20,8 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__importer_stepTwoB_importer_out__'},
   { topic: '__importer_stepTwoB_dataItem_out__'},
   { topic: '__importer_stepOne_createImporter_out__'},
-  { topic: '__importer_stepTwo_decideCreation_out__'}
+  { topic: '__importer_stepTwo_decideCreation_out__'},
+  { topic: '__importer_stepTwoB_updateImporter_out__'}
 ],
 {
   groupId: 'my-group'
@@ -169,74 +170,7 @@ io.of('/user').on('connection', function(socket){
 
 io.of('/importer').on('connection', function(socket){
   console.log(socket.handshake.address + ' has connected! id: ' + socket.id + ' Namespace: /importer');
-  socket.on('requestImporterList',function(){
-    kafkaProducer.send([{
-      topic:'__importer_stepOne_list_in__',
-      messages: [
-        JSON.stringify({
-          session_id: socket.id,
-          username: 'troy',
-          password: '1234',
-          return_topic: '__importer_stepOne_list_out__',
-          location:'brampton',
-          action:'GETALL_IMPORTER'
-        })
-      ]
-    }],
-    function(err,data){
-      if(err){
-        console.log(err);
-      } else {
-        console.log('User ' + socket.id + ' has send importer_list request successfully');
-      }
-    });
-  });
-  socket.on('requestImporter', function(importer){
-    var messageToSend = {
-      session_id: socket.id,
-      return_topic: '__importer_stepTwoB_importer_out__',
-      action: 'QUERY_IMPORTER',
-      payload:{
-        importerName: importer.importerName,
-        location: importer.location,
-        list_type: 'importer'
-      }
-    };
-    console.log('Requested Importer Info: ' + JSON.stringify(messageToSend));
-    kafkaProducer.send([{
-      topic:'__importer_stepTwoB_importer_in__',
-      messages:[JSON.stringify(messageToSend)]
-    }],function(err,data){
-      if(err){
-        console.log(err);
-      } else {
-        console.log('User ' + socket.id + ' has sent importer request successfully');
-      }
-    });
-  });
-  socket.on('requestImporterDataItemData', function(dataItem){
-    var messageToSend = {
-      session_id : socket.id,
-      return_topic: '__importer_stepTwoB_dataItem_out__',
-      action: 'QUERY_DATAITEM',
-      payload:{
-        name:dataItem.fieldName,
-        location:dataItem.location,
-        list_type:'dataItem'
-      }
-    };
-    kafkaProducer.send([{
-      topic:'__importer_stepTwoB_dataItem_in__',
-      messages:[JSON.stringify(messageToSend)]
-    }],function(err,data){
-      if(err){
-        console.log(err);
-      } else {
-        console.log('User ' + socket.id + ' has sent dataItem request successfully:' + dataItem.fieldName);
-      }
-    });
 
-  });
   socket.on('createNewImporter',function(importerInfo){
     importerInfo.session_id = socket.id;
     importerInfo.action = 'CREATE_IMPORTER';
@@ -278,6 +212,94 @@ io.of('/importer').on('connection', function(socket){
       }
     });
   });
+
+  socket.on('requestImporter', function(importer){
+    var messageToSend = {
+      session_id: socket.id,
+      return_topic: '__importer_stepTwoB_importer_out__',
+      action: 'QUERY_IMPORTER',
+      payload:{
+        importerName: importer.importerName,
+        location: importer.location,
+        list_type: 'importer'
+      }
+    };
+    console.log('Requested Importer Info: ' + JSON.stringify(messageToSend));
+    kafkaProducer.send([{
+      topic:'__importer_stepTwoB_importer_in__',
+      messages:[JSON.stringify(messageToSend)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent importer request successfully');
+      }
+    });
+  });
+
+  socket.on('requestImporterList',function(){
+    kafkaProducer.send([{
+      topic:'__importer_stepOne_list_in__',
+      messages: [
+        JSON.stringify({
+          session_id: socket.id,
+          username: 'troy',
+          password: '1234',
+          return_topic: '__importer_stepOne_list_out__',
+          location:'brampton',
+          action:'GETALL_IMPORTER'
+        })
+      ]
+    }],
+    function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has send importer_list request successfully');
+      }
+    });
+  });
+
+  socket.on('requestImporterDataItemData', function(dataItem){
+    var messageToSend = {
+      session_id : socket.id,
+      return_topic: '__importer_stepTwoB_dataItem_out__',
+      action: 'QUERY_DATAITEM',
+      payload:{
+        name:dataItem.fieldName,
+        location:dataItem.location,
+        list_type:'dataItem'
+      }
+    };
+    kafkaProducer.send([{
+      topic:'__importer_stepTwoB_dataItem_in__',
+      messages:[JSON.stringify(messageToSend)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent dataItem request successfully:' + dataItem.fieldName);
+      }
+    });
+
+  });
+
+  socket.on('updateImporter', function(targetImporter){
+      targetImporter.session_id = socket.id;
+      targetImporter.action = 'UPDATE_IMPORTER';
+      targetImporter.return_topic = '__importer_stepTwoB_updateImporter_out__';
+      kafkaProducer.send([{
+        topic:'__importer_stepTwoB_updateImporter_in__',
+        messages:[JSON.stringify(targetImporter)]
+      }],function(err,data){
+        if(err){
+          console.log(err);
+        } else {
+          console.log('User ' + socket.id + ' has sent importer update request successfully:' + JSON.stringify(targetImporter));
+        }
+      });
+  });
+
 });
 
 
@@ -297,7 +319,6 @@ kafkaConsumer.on('message',function(message){
     }
   } else if (message.topic === '__importer_stepOne_list_out__'){
     var data2 = JSON.parse(message.value);
-    console.log(data2.list_out);
     if(data2.list_out){
       io.of('/importer').to(data2.session_id).emit('importerListData', data2.list_out);
     }

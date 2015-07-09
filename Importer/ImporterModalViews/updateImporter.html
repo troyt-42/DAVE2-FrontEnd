@@ -1,0 +1,31 @@
+<div class="updateImporterModal">
+  <div class="modal-header">
+    <h3 class="modal-title">Importer To Update</h3>
+  </div>
+
+  <div class="modal-body">
+    <div class="updateImporterNameCard">
+      <div><span><i class="glyphicon glyphicon-file"></i> Name: </span><span>{{updateImporterModalCtrl.currentImporter.importerName}}</span></div>
+      <div><span><i class="glyphicon glyphicon-globe"></i> Location: </span><span>{{updateImporterModalCtrl.currentImporter.location}}</span></div>
+      <div><span><i class="glyphicon glyphicon-user"></i> Owner: </span><span>{{updateImporterModalCtrl.currentImporter.ownerName}}</span></div>
+      <div class="description"><span><i class="glyphicon glyphicon-info-sign"></i> Description: </span><span>{{updateImporterModalCtrl.currentImporter.description}}</span></div>
+    </div>
+    <div class="progressbar-container" ng-show="updateImporterModalCtrl.uploading">
+      <progressbar ng-show="updateImporterModalCtrl.uploading" max = "100" style="height:2em" class="progress-striped active" value="updateImporterModalCtrl.fileUploadProgress" type="warning"><i style="line-height:2.5em"><span style="  font-size: 130%;font-style: normal;color: white;font-weight: bold;">{{updateImporterModalCtrl.waitingMessage}}</span></i></progressbar>
+    </div>
+    <button type="button" class="btn btn-info" accept="updateImporterModalCtrl.currentImporter.type" ngf-select ngf-multiple="true" ng-model="updateImporterModalCtrl.files" ng-show="!updateImporterModalCtrl.uploading">Select</button>
+    <div ng-show="updateImporterModalCtrl.files.length && !updateImporterModalCtrl.uploading">
+      <ul style="margin-top:5px">
+        <li ng-repeat="file in updateImporterModalCtrl.files">
+          {{file.name}}
+          <i class="glyphicon glyphicon-remove" style="float:right;padding-right:5px" ng-click="updateImporterModalCtrl.removeFile(file)"></i>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="modal-foot">
+    <button type="button" class="btn btn-success" ng-click="updateImporterModalCtrl.update()">Update</button>
+    <button type="button" class="btn btn-warning" ng-click="updateImporterModalCtrl.cancel()">Cancel</button>
+  </div>
+</div>

@@ -1,0 +1,100 @@
+requestImporterList:
+  topic: '__importer_stepOne_list_in__'
+  API:
+  {
+    session_id: socket.id /*a number provided by socket.io*/,
+    return_topic: '__importer_stepOne_list_out__' /* return topic for backend */,
+    action:'GETALL_IMPORTER',
+    username: 'troy' /* static value for now but will be user input value in the future */,
+    password: '1234' /* static value for now but will be user input value in the future */,
+    location:'brampton' /* indicate the location of the desired importer (as a pre-filter) and will be customizable by user in the future */
+  }
+
+requestImporter:
+  topic: '__importer_stepTwoB_importer_in__'
+  API:
+  {
+    session_id: socket.id /*a number provided by socket.io*/,
+    return_topic: '__importer_stepTwoB_importer_out__' /* return topic for backend */,
+    action: 'QUERY_IMPORTER',
+    payload:{
+      importerName: "1" /* depends on user's choice */,
+      location: "brampton" /* depends on the importer user selected */,
+      list_type: 'importer' /* other types like 'dataItem' */
+    }
+  }
+
+requestImporterDataItemData:
+  topic: '__importer_stepTwoB_dataItem_in__'
+  API:
+  {
+    session_id: socket.id /*a number provided by socket.io*/,
+    return_topic: '__importer_stepTwoB_dataItem_out__' /* return topic for backend */,
+    action: 'QUERY_DATAITEM',
+    payload:{
+      name: "myFieldName" /* depends on the importer user selected in the previous step */,
+      location: "brampton" /* depends on the dataItem*/,
+      list_type:'dataItem' /* other types like 'importer' */
+    }
+  }
+
+createNewImporter:
+  topic: '__importer_stepOne_createImporter_in__'
+  API:
+  {
+    session_id: socket.id /*a number provided by socket.io*/,
+    return_topic: '__importer_stepOne_createImporter_out__' /* return topic for backend */,
+    action: 'CREATE_IMPORTER',
+    type: 'csv' /* other types like 'dcs' */,
+    importerName: 'new' /* a string defined by the user*/,
+    files: [
+      {
+        fileName:"fermentation.csv"
+      }
+    ] /* a array of info of uploaded files */,
+    location: "brampton" /* a string defined by the user*/,
+    description: "new importer" /* a string defined by the user*/,
+    userName: 'troy' /* static value for now but will be user input value in the future */
+  }
+
+decideImporterCreation
+  topic: '__importer_stepTwo_decideCreation_in__'
+  API:
+  {
+
+    session_id : socket.id /*a number provided by socket.io*/,
+    return_topic : '__importer_stepTwo_decideCreation_out__' /* return topic for backend */,
+    action : 'DECIDE_CREATION',
+    type:'csv',
+    importerName: 'new' /* a string defined by the user*/,
+    files: [
+      {
+        fileName:"fermentation.csv"
+      }
+    ] /* a array of info of uploaded files */,
+    location : "brampton" /* a string defined by the user*/,
+    description: "new importer" /* a string defined by the user*/,
+    userName: 'troy' /* static value for now but will be user input value in the future */
+    list_out : [{
+        fieldName: "Fermenter Sample ID" /* data item name*/
+        checked: true /*boolean value indicates whether user want to import the data item 'Fermenter Sample ID' */
+        availableOptions: { /*available configuration options for the data item 'Fermenter Sample ID' */
+        flexibleFieldName: {
+          name: "flexibleFieldName",
+          value: "Fermenter Sample ID"
+        },
+        note: {
+          name: "note",
+          value: "null"
+        }
+        precision: {
+          name: "precision",
+          value: -1
+        },
+        unit: {
+          name: "unit",
+          value: "null"
+        }
+      }
+    }],
+  }

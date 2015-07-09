@@ -11,8 +11,6 @@
         daveContentChecked:"="
       },
       link:function(scope, element, attrs){
-
-
         scope.$watch(function(){
           return scope.daveSmartDisable;
         }, function(newValue,oldValue){

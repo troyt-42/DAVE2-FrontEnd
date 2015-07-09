@@ -2,8 +2,7 @@
 $blue-color: #3A8AD3
 $yale-blue: #0F4D92
 $fg-gutter: em(15px)             // Gutter Width
-$importerWellHeight: 598px
-
+$importerWellHeight: 650px
 
 .canvas
   display: block
@@ -99,35 +98,49 @@ $importerWellHeight: 598px
         +border-top-radius(10px)
         background: black
         color: white
+        &:hover
+          background: white
+          color: black
         &:nth-child(2)
           background: gold
           color: black
+          &:hover
+            background: black
+            color: gold
         &:nth-child(3)
           background: skyblue
           color: black
+          &:hover
+            background: darken(purple, 10%)
+            color: skyblue
     .importerStepOne
       +span-columns(12)
-      .importerSystemTitle
-        +border-bottom-radius(50px)
-        +span-columns(4)
-        text-align: center
-        background-image: url('../imgs/congruent_pentagon.png')
-        border: 1px solid lightgrey
-        border-top: 0
-        float: right
-
+      // .importerSystemTitle
+      //   // +border-bottom-radius(50px)
+      //   +span-columns(4)
+      //   text-align: center
+      //   +texture(90deg, darken(darkgrey, 20%),  darken(skyblue, 90%) , 9, 1)
+      //   border: 1px solid lightgrey
+      //   border-top: 0
+      //   float: right
+      //   margin-top: -8px
+      //   display: none
+      //   &.search-mode
+      //     display: none
       .importerStepOneWell
+        position: relative
         +pad(20px 20px)
         +background(url('../imgs/congruent_outline.png') repeat)
         +border-top-radius(10px)
-        +border-left-radius(10px)
+        +border-bottom-radius(10px)
         height: $importerWellHeight
         border: 1px lightgrey solid
+        margin-bottom: 7px
         &.search-mode
           +display(flex)
           +justify-content(center)
           +align-items(center)
-          +texture(0deg, $yale-blue,  lighten($yale-blue, 10%), 80, 1)
+          +texture(0deg, $yale-blue,  darken(purple, 10%) , 23, 1)
         .waitingSymbol
           +span-columns(12)
           +align-items(center)
@@ -176,15 +189,51 @@ $importerWellHeight: 598px
               cursor: pointer
               &:hover
                 color: grey
-              &.plus
+
+            &:last-child
+              text-align: center
+              a
+                text-decoration: none
+                color: gold
+                &:hover
+                  text-decoration: none
+
+              i
                 color: gold
                 font-size: 150%
                 display: block
                 &:hover
                   color: LIMEGREEN
-            &:last-child
-              text-align: center
+              ul.dropdown-menu
+                +pad(2px)
+                min-width: 300px
+                color: $yale-blue
+                right: 0
+                left: auto
+                background: silver
+                border-radius: 5px
+                border: 1px solid skyblue
+                li
+                  width: auto
+                  +pad()
+                  color: gold
+                  +texture(180deg, $yale-blue,  $yale-blue , 26, 1)
+                  +display(flex)
+                  +justify-content(space-between)
+                  border-bottom: 1px skyblue solid
+                  font-weight: bold
+                  input.form-control
+                    display: inline
+                    width: 65%
+                    height: 2em
 
+
+                  &:last-child
+                    border-bottom: 0px
+                  &:hover
+                    +texture(180deg, gold,  gold , 26, 0)
+                    color: $yale-blue
+                    cursor: pointer
           & > tbody > tr > td
             +pad(10px)
             border-top: 1px solid silver
@@ -195,32 +244,88 @@ $importerWellHeight: 598px
 
         .search-mode-brand
           +span-columns(3)
-          +pad()
-          text-align: center
           h1
+            +display(flex)
+            +align-items(center)
+            +justify-content(flex-end)
             color: gold
+            font-family: "Slabo 27px"
+            text-shadow: 0px -2px $yale-blue
+            i
+              margin-right: 5px
+              text-shadow: 0px -1px $yale-blue
           button
             +span-columns(6)
-            background: black
+            background: transparent
+            &:nth-child(1)
+              color: #8AC007
+              outline-color: #8AC007
+              border-color: #8AC007
+              text-shadow: 0px -1px darken($yale-blue, 0%)
+              box-shadow: 0px 0px
             &:nth-child(2)
-              color: skyblue
-              outline-color: skyblue
-            &:nth-child(3)
               color: orange
               outline-color: orange
+              box-shadow: 0px 0px
+          .search-mode-result
+            margin-top: 15px
+            +span-columns(12)
+            text-align: left
+            div:nth-child(1)
+              font-weight: bold
+              span:first-child
+                color: lighten(#8AC007, 10%)
+                i
+                  color: lighten(#8AC007, 10%)
+                  float: right
+                  font-size: 120%
+              span:nth-child(2)
+                color: white
+                font-weight: bold
+            div:nth-child(2)
+              font-weight: bold
+              span:first-child
+                color: lighten(skyblue, 10%)
+                i
+                  color: lighten(skyblue, 10%)
+                  float: right
+                  font-size: 120%
+              span:nth-child(2)
+                color: white
+                font-weight: bold
         .search-mode-input-group
           +span-columns(4)
-          color: white
-          span
-            font-size: 150%
-          input
-            background: black
-            color: white
+          color: linen
+          line-height: 3em
+          border-left: 1px solid gold
+
+          +pad()
+          .search-mode-input
+            +display(flex)
+            +justify-content(flex-end)
+            div
+              +row()
+              +span-columns(12)
+              span
+                +span-columns(3)
+                display: inline-block
+                font-size: 130%
+                color: gold
+                text-shadow: 0px -1px black
+              input
+                +pad()
+                +span-columns(9)
+                background: transparent
+                color: linen
+                font-weight: bold
+                display: inline-block
+                box-shadow: 2px 2px darken(purple, 10%) inset
+
         .search-mode-dashboard
           +span-columns(4)
           .search-mode-input-result
             margin-bottom: 5px
-            border: 1px inset white
+            border: 1px inset black
             border-radius: 5px
             +pad()
             span:nth-child(1)
@@ -234,124 +339,167 @@ $importerWellHeight: 598px
               color: skyblue
     .importerStepTwoB
       +span-columns(12)
-
-      .importerStepTwoBHeader
-        +span-columns(12)
-        +row()
-        +align-items(flex-end)
-        +display(flex)
-        .importerSystemTitle
-          +span-columns(4)
-          +border-top-radius(50px)
-          +border-bottom-radius(0)
-          +background(url('../imgs/gplaypattern.png'))
-          text-align: center
-          border: 1px solid lightgrey
-          border-bottom: 0
-        .importerDataItemTabs
-          +border-top-radius(5px)
-          +pad(5px default 5px default)
-          +background(orange)
-          font-size: 150%
-          font-weight: bold
-          text-align: center
-          color: black
-          border: 1px lightgrey solid
-          border-bottom: 0
-          cursor: pointer
-          margin-right: 5px
+      .importerSetUpButton
+        cursor: pointer
+        div
+          display: inline
+          +pad(5px 10px 20px)
+          +border-top-radius(10px)
+          background: black
+          color: white
           &:hover
-            color: white
-
-          &.active
-            color: white
+            background: white
+            color: black
+          &:nth-child(2)
+            background: gold
+            color: black
+            &:hover
+              background: black
+              color: gold
+          &:nth-child(3)
+            background: skyblue
+            color: black
+            &:hover
+              background: darken(purple, 10%)
+              color: skyblue
+      // .importerStepTwoBHeader
+      //   +span-columns(12)
+      //   +row()
+      //   +align-items(flex-end)
+      //   +display(flex)
+      //   .importerSystemTitle
+      //     +span-columns(4)
+      //     +border-top-radius(50px)
+      //     +border-bottom-radius(0)
+      //     +background(url('../imgs/gplaypattern.png'))
+      //     text-align: center
+      //     border: 1px solid lightgrey
+      //     border-bottom: 0
+        // .importerDataItemTabs
+        //   +border-top-radius(5px)
+        //   +pad(5px default 5px default)
+        //   +background(orange)
+        //   font-size: 150%
+        //   font-weight: bold
+        //   text-align: center
+        //   color: black
+        //   border: 1px lightgrey solid
+        //   border-bottom: 0
+        //   cursor: pointer
+        //   margin-right: 5px
+        //   &:hover
+        //     color: white
+        //
+        //   &.active
+        //     color: white
 
       .importerStepTwoBWell
         +span-columns(12)
         +pad(20px 20px)
-        +background(url('../imgs/congruent_outline.png') repeat)
-        +border-bottom-radius(10px)
+        +texture(180deg, $yale-blue,  darken(skyblue, 20%) , 80, 1)
+        +border-left-radius(10px)
         +border-right-radius(10px)
         +row()
-        border: 1px lightgrey solid
+        border: 2px orange solid
         text-align: left
         box-shadow: 0px 0px 0px #3A8AD3
-
+        height: $importerWellHeight
         .importerStepTwoBWellLeft
           +span-columns(4)
           height: 100%
+          border: 2px solid white
+          border-radius: 5px
+
           .importerNameCard
             +span-columns(12)
-            +pad(10px 20px)
-            box-shadow: 0px 2px 4px black inset
-            border-radius: 5px
-            background: black
+            +pad(20px 20px)
+            background: transparent
             color: skyblue
             text-shadow: -1px 0px #0f4d92
-            margin-bottom: 20px
+            margin-bottom: 10px
             height: 10em
-            span
-              font-size: 120%
-              i
-                color: orange
-                font-size: 80%
-                text-shadow: none
+            border-radius: 5px
+            div
+              span:nth-child(1)
+                font-size: 120%
+                font-weight: bold
+                i
+                  color: gold
+                  font-size: 80%
+                  text-shadow: none
+              span:nth-child(2)
+                font-size: 120%
+                font-weight: bold
+                color: white
             .description
-              +pad()
               overflow: auto
-              height: 4em
-              font-size: 90%
-              border-radius: 5px
-              background: white
-              text-shadow: none
-              color: black
+              height: 6em
+              background: transparent
+              color: skyblue
+              font-weight: bold
 
           .importerStepTwoBDataItems
             +span-columns(12)
             +pad(10px 20px)
-            height: 30em
-            border: 2px silver solid
-            border-radius: 5px
-            background: black
+            height: 32em
+            background: transparent
             .title
               +span-columns(12)
-              color: white
+              color: gold
               font-size: 200%
               font-weight: bold
+              text-shadow: 0px -2px darken(purple, 20%)
             .importerStepTwoBDataItemsList
               +span-columns(12)
               margin-top: 10px
               height: 80%
               overflow-y: auto
+              border-radius: 5px
               .importerStepTwoBDataItem
                 +span-columns(12)
                 +pad()
-                +background(linear-gradient(135deg, $blue-color, black))
-                border-radius: 5px
-                border: 1px solid black
+                +texture(90deg, gold,  darken(coral, 10%) , 31, 0)
+                border-radius: 0px
+                border-top: 1px solid white
+                border-right: 1px solid white
+                border-left: 1px solid white
                 font-weight: bold
                 font-size: 120%
                 cursor: pointer
                 color: white
-                &:hover
-                  color: orange
-                &.active
-                  +background(linear-gradient(135deg, black, black))
-                  color: orange
 
+                &:hover
+                  color: $yale-blue
+                &.active
+                  +background(linear-gradient(135deg, $yale-blue, lighten($yale-blue, 30%)))
+                  color: gold
+
+
+                &:first-child
+                  +border-top-radius(5px)
+                &:last-child
+                  +border-bottom-radius(5px)
+                  border-bottom: 1px solid white
         .importerStepTwoBWellRight
           +span-columns(8)
           +background(url('../imgs/classy_fabric.png') repeat)
+          background: transparent
           +pad()
-          border-radius: 10px
-          box-shadow: 0px 2px 4px black inset
+          border-radius: 0px
+          // border-left: 2px orange solid
+          box-shadow: 0px 0px 0px black inset
           height: 100%
-          button
+          .field-button
             border-radius: 0
             font-weight: bold
-            box-shadow: 1px 0px black
             +border-right-radius(5px)
+            +border-left-radius(5px)
+            border-color: orange
+            color: white
             margin-right: 5px
+            background-color: transparent
+            span:first-child
+              color: orange
           .title
             +span-columns(12)
             +display(flex)
@@ -361,52 +509,64 @@ $importerWellHeight: 598px
             span
               +pad(2px 2px)
               font-size: 50%
-              color: #00fd02
+              color: lighten(#8AC007, 10%)
               border: 1px solid
               border-radius: 2px
               margin-left: 3px
           .importerStepTwoBDataItemData
             +span-columns(12)
             border-radius: 5px
-            background: linen
+            background: transparent
             overflow-y: auto
-            height: 30em
+            height: 85%
             top: -1px
             +border-bottom-radius(0px)
+            color: white
             .importerStepTwoBDataItemTable
               width: 100%
               text-align: center
               & > thead > tr > th
                 +pad(10px)
-                border-bottom: 3px solid silver
+                // border-bottom: 3px solid silver
                 vertical-align: center
                 font-size: 120%
                 border-collapse: collapse
                 text-align: center
               & > tbody > tr > td
                 +pad(10px)
-                border-top: 1px solid silver
+                // border-top: 1px solid silver
           .importerStepTwoBDataItemOptions
             +span-columns(12)
+            +display(flex)
+            +justify-content(flex-end)
             button
-              +span-columns(6)
-              +border-top-radius(0)
-              &:hover
-                font-weight: bold
+              +span-columns(3)
+              font-weight: bold
               &:first-child
-                background: skyblue
+                background: transparent
                 color: black
                 text-shadow: none
-                border: 1px skyblue solid
-                border-top: 0px linen solid
-                border-bottom-left-radius: 5px
+                box-shadow: 0px 0px
+                border: 1px solid black
+                &:hover
+                  color: white
+                  background-color: black
+                  border-color: white
+                &:focus
+                  outline-color: black
               &:nth-child(2)
-                background: red
-                border: 1px red solid
-                border-top: 0px linen solid
-                border-bottom-left-radius: 5px
+                background: transparent
+                border: 1px white solid
+                color: white
+                box-shadow: 0 0
+                text-shadow: none
                 margin: 0
-
+                &:hover
+                  color: black
+                  background-color: white
+                  border-color: black
+                &:focus
+                  outline-color: white
     .importerStepTwo
       height: $importerWellHeight
       text-align: center

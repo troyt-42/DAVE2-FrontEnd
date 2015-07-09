@@ -1,0 +1,44 @@
+.updateImporterModal
+  +pad()
+  +texture(270deg, lighten(black,15%), lighten(black,10%) , 73, 1)
+  border-radius: 5px
+  color: white
+  .modal-header
+    padding-bottom: 0
+    border-bottom: 1px solid grey
+    h3
+      font-weight: bold
+  .modal-body
+    font-family: "Slabo 27px"
+    .updateImporterNameCard
+      margin-bottom: 10px
+      span:first-child
+        color: skyblue
+        i
+          color: gold
+      span:nth-child(2)
+        font-weight: bold
+    button
+      +pad(4px 15px 3px 15px)
+      border-radius: 20px
+      font-weight: bold
+      &:focus
+        outline: none
+    div
+      i
+        cursor: pointer
+        &:hover
+          color: red
+  .modal-foot
+    +display(flex)
+    +justify-content(flex-end)
+    border-top: 1px solid grey
+    +pad()
+    button
+      margin-right: 5px
+      &:first-child
+        background: #8AC007
+        outline-color: #8AC007
+      &:nth-child(2)
+        background: orange
+        outline-color: orange
