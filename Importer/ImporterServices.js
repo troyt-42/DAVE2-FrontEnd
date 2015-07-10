@@ -2,10 +2,11 @@
   angular
   .module("Dave2.Importer")
   .factory("FormSettingParseService",FormSettingParseService)
-  .factory("ImporterSocket", ImporterSocket);
+  .factory("ImporterSocket", ImporterSocket)
+  .factory("DirectiveService", DirectiveService);
 
-  FormSettingParseService.$inject = [];
   ImporterSocket.$inject = ["socketFactory"];
+  DirectiveService.$inject = ['$compile'];
   function FormSettingParseService(){
     return function(dataToParse){
         if(dataToParse){
@@ -54,5 +55,19 @@
     return socketFactory({
       ioSocket : myIoSocket
     });
+  }
+  function DirectiveService(){
+    return {
+      DestroyDirectiveService :
+      function(directiveName, scope){
+        angular.element(directiveName).remove();
+        scope.$destroy();
+      },
+      AddDirectiveService :
+      function(targetContainer, directiveName, scope, $compile){
+        var el = $compile(directiveName)(scope);
+        angular.element(targetContainer).append(el);
+      }
+  };
   }
 })();
