@@ -157,38 +157,38 @@ html {
       padding: 0 1.5333130693%; }
       .importerContainer .importerContainerRightPanel.expanded:last-child {
         margin-right: 0; }
-    .importerContainer .importerContainerRightPanel .importerSetUpButton {
+    .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton {
       cursor: pointer; }
-      .importerContainer .importerContainerRightPanel .importerSetUpButton div {
+      .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div {
         display: inline;
         padding: 5px 10px 20px;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         background: black;
         color: white; }
-        .importerContainer .importerContainerRightPanel .importerSetUpButton div:hover {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div:hover {
           background: white;
           color: black; }
-        .importerContainer .importerContainerRightPanel .importerSetUpButton div:nth-child(2) {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div:nth-child(2) {
           background: gold;
           color: black; }
-          .importerContainer .importerContainerRightPanel .importerSetUpButton div:nth-child(2):hover {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div:nth-child(2):hover {
             background: black;
             color: gold; }
-        .importerContainer .importerContainerRightPanel .importerSetUpButton div:nth-child(3) {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div:nth-child(3) {
           background: skyblue;
           color: black; }
-          .importerContainer .importerContainerRightPanel .importerSetUpButton div:nth-child(3):hover {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div:nth-child(3):hover {
             background: #4d004d;
             color: skyblue; }
-    .importerContainer .importerContainerRightPanel .importerStepOne {
+    .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne {
       float: left;
       display: block;
       margin-right: 1.5333130693%;
       width: 100%; }
-      .importerContainer .importerContainerRightPanel .importerStepOne:last-child {
+      .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne:last-child {
         margin-right: 0; }
-      .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell {
+      .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell {
         position: relative;
         padding: 20px 20px;
         background: url("../imgs/congruent_outline.png") repeat;
@@ -200,7 +200,7 @@ html {
         height: 650px;
         border: 1px lightgrey solid;
         margin-bottom: 7px; }
-        .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell.search-mode {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell.search-mode {
           display: -webkit-box;
           display: -moz-box;
           display: box;
@@ -228,7 +228,7 @@ html {
           -ms-flex-align: center;
           background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), -webkit-linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll;
           background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll; }
-        .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .waitingSymbol {
           float: left;
           display: block;
           margin-right: 1.5333130693%;
@@ -276,72 +276,73 @@ html {
           -ms-flex-wrap: wrap;
           flex-wrap: wrap;
           height: 100%; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol:last-child {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .waitingSymbol:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol .alert {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .waitingSymbol .alert {
             float: left;
             display: block;
             margin-right: 1.5333130693%;
             width: 49.2333434654%;
             display: block;
             margin-top: 5px; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol .alert:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .waitingSymbol .alert:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .waitingSymbol .alert::after {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .waitingSymbol .alert::after {
               clear: both;
               content: "";
               display: table; }
-        .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable {
           width: 100%; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th {
             padding: 10px;
             border-bottom: 3px solid silver;
             vertical-align: center;
             font-size: 110%;
             border-collapse: collapse;
             color: white; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label {
               display: block; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i {
                 font-size: 80%;
                 color: skyblue;
                 text-shadow: 1px 1px #0F4D92;
                 cursor: pointer; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i.glyphicon-chevron-left:hover {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i.glyphicon-chevron-left:hover {
                   transform: translateX(-1px);
                   color: gold;
                   text-shadow: 1px 1px coral; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i.glyphicon-chevron-right:hover {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i.glyphicon-chevron-right:hover {
                   transform: translateX(1px);
                   color: gold;
                   text-shadow: 1px 1px coral; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > input {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > input {
               background: linen;
               border: grey 1px solid;
               border-radius: 5px;
-              width: 80%; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > i {
+              width: 80%;
+              color: black; }
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > i {
               -webkit-transition: all 0.25s linear;
               -moz-transition: all 0.25s linear;
               transition: all 0.25s linear;
               color: LIMEGREEN;
               cursor: pointer; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > i:hover {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > i:hover {
                 color: grey; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child {
               text-align: center; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child a {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child a {
                 text-decoration: none;
                 color: gold; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child a:hover {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child a:hover {
                   text-decoration: none; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child i {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child i {
                 color: gold;
                 font-size: 150%;
                 display: block; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child i:hover {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child i:hover {
                   color: LIMEGREEN; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu {
                 padding: 2px;
                 min-width: 300px;
                 color: #0F4D92;
@@ -350,7 +351,7 @@ html {
                 background: silver;
                 border-radius: 5px;
                 border: 1px solid skyblue; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li {
                   width: auto;
                   padding: 1.5333130693%;
                   color: gold;
@@ -374,32 +375,32 @@ html {
                   -ms-flex-pack: justify;
                   border-bottom: 1px skyblue solid;
                   font-weight: bold; }
-                  .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
+                  .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
                     display: inline;
                     width: 65%;
                     height: 2em; }
-                  .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
+                  .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
                     border-bottom: 0px; }
-                  .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
+                  .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
                     background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), -webkit-linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
                     background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
                     color: #0F4D92;
                     cursor: pointer; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > tbody > tr > td {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > tbody > tr > td {
             padding: 10px;
             border-top: 1px solid silver; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .importerListTable > tbody > tr:hover {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > tbody > tr:hover {
             background: black;
             color: white;
             cursor: pointer; }
-        .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand {
           float: left;
           display: block;
           margin-right: 1.5333130693%;
           width: 23.8500151981%; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand:last-child {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand h1 {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand h1 {
             display: -webkit-box;
             display: -moz-box;
             display: box;
@@ -428,59 +429,59 @@ html {
             color: gold;
             font-family: "Slabo 27px";
             text-shadow: 0px -2px #0F4D92; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand h1 i {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand h1 i {
               margin-right: 5px;
               text-shadow: 0px -1px #0F4D92; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand button {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button {
             float: left;
             display: block;
             margin-right: 1.5333130693%;
             width: 49.2333434654%;
             background: transparent; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand button:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand button:nth-child(1) {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button:nth-child(1) {
               color: #8AC007;
               outline-color: #8AC007;
               border-color: #8AC007;
               text-shadow: 0px -1px #0f4d92;
               box-shadow: 0px 0px; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand button:nth-child(2) {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button:nth-child(2) {
               color: orange;
               outline-color: orange;
               box-shadow: 0px 0px; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result {
             margin-top: 15px;
             float: left;
             display: block;
             margin-right: 1.5333130693%;
             width: 100%;
             text-align: left; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) {
               font-weight: bold; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:first-child {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:first-child {
                 color: #adf109; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:first-child i {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:first-child i {
                   color: #adf109;
                   float: right;
                   font-size: 120%; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:nth-child(2) {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:nth-child(2) {
                 color: white;
                 font-weight: bold; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) {
               font-weight: bold; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:first-child {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:first-child {
                 color: #b3e0f2; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:first-child i {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:first-child i {
                   color: #b3e0f2;
                   float: right;
                   font-size: 120%; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:nth-child(2) {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:nth-child(2) {
                 color: white;
                 font-weight: bold; }
-        .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group {
           float: left;
           display: block;
           margin-right: 1.5333130693%;
@@ -489,9 +490,9 @@ html {
           line-height: 3em;
           border-left: 1px solid gold;
           padding: 1.5333130693%; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group:last-child {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input {
             display: -webkit-box;
             display: -moz-box;
             display: box;
@@ -508,19 +509,19 @@ html {
             -o-justify-content: flex-end;
             justify-content: flex-end;
             -ms-flex-pack: end; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div {
               display: block;
               float: left;
               display: block;
               margin-right: 1.5333130693%;
               width: 100%; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div::after {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div::after {
                 clear: both;
                 content: "";
                 display: table; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div:last-child {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div:last-child {
                 margin-right: 0; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div span {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div span {
                 float: left;
                 display: block;
                 margin-right: 1.5333130693%;
@@ -529,9 +530,9 @@ html {
                 font-size: 130%;
                 color: gold;
                 text-shadow: 0px -1px black; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div span:last-child {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div span:last-child {
                   margin-right: 0; }
-              .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div input {
+              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div input {
                 padding: 1.5333130693%;
                 float: left;
                 display: block;
@@ -542,60 +543,60 @@ html {
                 font-weight: bold;
                 display: inline-block;
                 box-shadow: 2px 2px #4d004d inset; }
-                .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div input:last-child {
+                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div input:last-child {
                   margin-right: 0; }
-        .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-dashboard {
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard {
           float: left;
           display: block;
           margin-right: 1.5333130693%;
           width: 32.3111246205%; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-dashboard:last-child {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-input-result {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-input-result {
             margin-bottom: 5px;
             border: 1px inset black;
             border-radius: 5px;
             padding: 1.5333130693%; }
-            .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-input-result span:nth-child(1) {
+            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-input-result span:nth-child(1) {
               color: linen; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-result span:nth-child(1) {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-result span:nth-child(1) {
             display: block;
             color: #8AC007; }
-          .importerContainer .importerContainerRightPanel .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-result span:nth-child(2) {
+          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-result span:nth-child(2) {
             display: block;
             color: skyblue; }
-    .importerContainer .importerContainerRightPanel .importerStepTwoB {
+    .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB {
       float: left;
       display: block;
       margin-right: 1.5333130693%;
       width: 100%; }
-      .importerContainer .importerContainerRightPanel .importerStepTwoB:last-child {
+      .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB:last-child {
         margin-right: 0; }
-      .importerContainer .importerContainerRightPanel .importerStepTwoB .importerSetUpButton {
+      .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerSetUpButton {
         cursor: pointer; }
-        .importerContainer .importerContainerRightPanel .importerStepTwoB .importerSetUpButton div {
+        .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerSetUpButton div {
           display: inline;
           padding: 5px 10px 20px;
           border-top-left-radius: 10px;
           border-top-right-radius: 10px;
           background: black;
           color: white; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerSetUpButton div:hover {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerSetUpButton div:hover {
             background: white;
             color: black; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerSetUpButton div:nth-child(2) {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerSetUpButton div:nth-child(2) {
             background: gold;
             color: black; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerSetUpButton div:nth-child(2):hover {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerSetUpButton div:nth-child(2):hover {
               background: black;
               color: gold; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerSetUpButton div:nth-child(3) {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerSetUpButton div:nth-child(3) {
             background: skyblue;
             color: black; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerSetUpButton div:nth-child(3):hover {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerSetUpButton div:nth-child(3):hover {
               background: #4d004d;
               color: skyblue; }
-      .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell {
+      .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell {
         float: left;
         display: block;
         margin-right: 1.5333130693%;
@@ -612,13 +613,13 @@ html {
         text-align: left;
         box-shadow: 0px 0px 0px #3A8AD3;
         height: 650px; }
-        .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell:last-child {
+        .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell:last-child {
           margin-right: 0; }
-        .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell::after {
+        .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell::after {
           clear: both;
           content: "";
           display: table; }
-        .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft {
+        .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft {
           float: left;
           display: block;
           margin-right: 1.5333130693%;
@@ -626,9 +627,9 @@ html {
           height: 100%;
           border: 2px solid white;
           border-radius: 5px; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft:last-child {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard {
             float: left;
             display: block;
             margin-right: 1.5333130693%;
@@ -640,26 +641,26 @@ html {
             margin-bottom: 10px;
             height: 10em;
             border-radius: 5px; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard div span:nth-child(1) {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard div span:nth-child(1) {
               font-size: 120%;
               font-weight: bold; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard div span:nth-child(1) i {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard div span:nth-child(1) i {
                 color: gold;
                 font-size: 80%;
                 text-shadow: none; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard div span:nth-child(2) {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard div span:nth-child(2) {
               font-size: 120%;
               font-weight: bold;
               color: white; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard .description {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerNameCard .description {
               overflow: auto;
               height: 6em;
               background: transparent;
               color: skyblue;
               font-weight: bold; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems {
             float: left;
             display: block;
             margin-right: 1.5333130693%;
@@ -667,9 +668,9 @@ html {
             padding: 10px 20px;
             height: 32em;
             background: transparent; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .title {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .title {
               float: left;
               display: block;
               margin-right: 1.5333130693%;
@@ -678,9 +679,9 @@ html {
               font-size: 200%;
               font-weight: bold;
               text-shadow: 0px -2px #1a001a; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .title:last-child {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .title:last-child {
                 margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList {
               float: left;
               display: block;
               margin-right: 1.5333130693%;
@@ -689,9 +690,9 @@ html {
               height: 80%;
               overflow-y: auto;
               border-radius: 5px; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList:last-child {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList:last-child {
                 margin-right: 0; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem {
                 float: left;
                 display: block;
                 margin-right: 1.5333130693%;
@@ -707,22 +708,22 @@ html {
                 font-size: 120%;
                 cursor: pointer;
                 color: white; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:last-child {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:last-child {
                   margin-right: 0; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:hover {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:hover {
                   color: #0F4D92; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem.active {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem.active {
                   background: -webkit-linear-gradient(135deg, #0F4D92, #4d99ed);
                   background: linear-gradient(135deg, #0F4D92, #4d99ed);
                   color: gold; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:first-child {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:first-child {
                   border-top-left-radius: 5px;
                   border-top-right-radius: 5px; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:last-child {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellLeft .importerStepTwoBDataItems .importerStepTwoBDataItemsList .importerStepTwoBDataItem:last-child {
                   border-bottom-left-radius: 5px;
                   border-bottom-right-radius: 5px;
                   border-bottom: 1px solid white; }
-        .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight {
+        .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight {
           float: left;
           display: block;
           margin-right: 1.5333130693%;
@@ -734,9 +735,9 @@ html {
           border-radius: 0px;
           box-shadow: 0px 0px 0px black inset;
           height: 100%; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight:last-child {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .field-button {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .field-button {
             border-radius: 0;
             font-weight: bold;
             border-bottom-right-radius: 5px;
@@ -747,9 +748,9 @@ html {
             color: white;
             margin-right: 5px;
             background-color: transparent; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .field-button span:first-child {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .field-button span:first-child {
               color: orange; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title {
             float: left;
             display: block;
             margin-right: 1.5333130693%;
@@ -772,16 +773,16 @@ html {
             -ms-flex-align: center;
             color: skyblue;
             font-size: 150%; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title span {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title span {
               padding: 2px 2px;
               font-size: 50%;
               color: #adf109;
               border: 1px solid;
               border-radius: 2px;
               margin-left: 3px; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData {
             float: left;
             display: block;
             margin-right: 1.5333130693%;
@@ -794,20 +795,20 @@ html {
             border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;
             color: white; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable {
               width: 100%;
               text-align: center; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable > thead > tr > th {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable > thead > tr > th {
                 padding: 10px;
                 vertical-align: center;
                 font-size: 120%;
                 border-collapse: collapse;
                 text-align: center; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable > tbody > tr > td {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .importerStepTwoBDataItemTable > tbody > tr > td {
                 padding: 10px; }
-          .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions {
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions {
             float: left;
             display: block;
             margin-right: 1.5333130693%;
@@ -828,40 +829,40 @@ html {
             -o-justify-content: flex-end;
             justify-content: flex-end;
             -ms-flex-pack: end; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions:last-child {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions:last-child {
               margin-right: 0; }
-            .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button {
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button {
               float: left;
               display: block;
               margin-right: 1.5333130693%;
               width: 23.8500151981%;
               font-weight: bold; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:last-child {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:last-child {
                 margin-right: 0; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:first-child {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:first-child {
                 background: transparent;
                 color: black;
                 text-shadow: none;
                 box-shadow: 0px 0px;
                 border: 1px solid black; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:first-child:hover {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:first-child:hover {
                   color: white;
                   background-color: black;
                   border-color: white; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:first-child:focus {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:first-child:focus {
                   outline-color: black; }
-              .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:nth-child(2) {
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:nth-child(2) {
                 background: transparent;
                 border: 1px white solid;
                 color: white;
                 box-shadow: 0 0;
                 text-shadow: none;
                 margin: 0; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:nth-child(2):hover {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:nth-child(2):hover {
                   color: black;
                   background-color: white;
                   border-color: black; }
-                .importerContainer .importerContainerRightPanel .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:nth-child(2):focus {
+                .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button:nth-child(2):focus {
                   outline-color: white; }
     .importerContainer .importerContainerRightPanel .importerStepTwo {
       height: 650px;

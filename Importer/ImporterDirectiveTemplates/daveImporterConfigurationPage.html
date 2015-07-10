@@ -1,0 +1,25 @@
+<div class="importerStepThree">
+
+  <div class="importerStepThreeHeader animated fadeInRight">
+    <div class="title">
+      Avaliable Fields
+    </div>
+    <div class="options">
+      <button class="btn" ng-click="importerUploadCtrl.decideImport()">Decide</button>
+      <button class="btn" ng-click="importerUploadCtrl.cancelImport()">Cancel</button>
+    </div>
+  </div>
+
+  <div class = "importerStepThreeWell animated fadeInUp">
+    <div class = "importerStepThreeField animated flipInX" ng-repeat="(name, form) in importerUploadCtrl.stepThreeFormCollection" >
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          {{name}}<input type="checkbox" style="float:right" ng-model="form.checked">
+        </div>
+        <div class="panel-body" dave-smart-disable="form.fields" dave-content-checked="form.checked">
+          <formly-form model="form" fields="form.fields"></formly-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

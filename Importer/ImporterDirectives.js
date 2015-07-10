@@ -1,7 +1,9 @@
 (function(){'use strict';
   angular.module("Dave2.Importer")
-  .directive('daveSmartDisable', daveSmartDisableDirective);
-
+  .directive('daveSmartDisable', daveSmartDisableDirective)
+  .directive('daveImporterListPage', daveImporterListPage)
+  .directive('daveImporterPage', daveImporterPage)
+  .directive('daveImporterConfigurationPage', daveImporterConfigurationPage);
 
   function daveSmartDisableDirective(){
     return {
@@ -37,6 +39,48 @@
             });
           }
         });
+      }
+    };
+  }
+
+  function daveImporterListPage(){
+    return {
+      restrict: "EA",
+      templateUrl: "Importer/ImporterDirectiveTemplates/daveImporterListPage.html",
+      controller: 'DaveImporterListPageCtrl',
+      scope: {},
+      controllerAs: "daveImporterListPageCtrl",
+      link: function(scope, element, attrs){
+
+      }
+    };
+  }
+
+  function daveImporterPage(){
+    return {
+      restrict : "EA",
+      templateUrl:'Importer/ImporterDirectiveTemplates/daveImporterPage.html',
+      controller: 'DaveImporterPageCtrl',
+      controllerAs: 'daveImporterPageCtrl',
+      scope:{
+        importerToRequest: "@importerToRequest"
+      },
+      link: function(scope, element, attrs){
+      }
+    };
+  }
+
+  function daveImporterConfigurationPage(){
+    return {
+      restrict : "EA",
+      templateUrl:'Importer/ImporterDirectiveTemplates/daveImporterConfigurationPage.html',
+      controller:'DaveImporterConfigurationPageCtrl',
+      controllerAs:'daveImporterConfigurationPageCtrl',
+      scope:{
+
+      },
+      link: function(scope, element, attrs){
+
       }
     };
   }

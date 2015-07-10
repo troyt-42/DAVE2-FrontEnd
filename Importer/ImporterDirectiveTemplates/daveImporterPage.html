@@ -1,0 +1,79 @@
+<div class="importerStepTwoB" >
+
+  <div class="importerSetUpButton">
+    <div ng-click="daveImporterPageCtrl.backToImporterList()"><i class="glyphicon glyphicon-arrow-left  animated flipInY" id="js-expand-arrow"></i><span id="js-expand-sign"> Importer List</span></div>
+    <div ng-click="daveImporterPageCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY"></i> Lay Out</div>
+    <!-- <div ng-click="daveImporterPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span class="js-search-sign"> Search Mode</span></div> -->
+  </div>
+
+  <div class="importerStepTwoBWell animated fadeIn">
+    <alert class="animated fadeInDown" id="importer{{$index}}" ng-repeat="alert in daveImporterPageCtrl.alerts.stepTwoB" type="{{alert.type}}" close="daveImporterPageCtrl.closeAlert($index, 'stepTwoB')" >{{alert.msg}}</alert>
+
+    <div class="importerStepTwoBWellLeft" >
+      <div class="importerNameCard">
+        <div><span><i class="glyphicon glyphicon-file"></i> Name: </span><span>{{daveImporterPageCtrl.importerToDisplay.importerName}}</span></div>
+        <div><span><i class="glyphicon glyphicon-globe"></i> Location: </span><span>{{daveImporterPageCtrl.importerToDisplay.location}}</span></div>
+        <div><span><i class="glyphicon glyphicon-user"></i> Owner: </span><span>{{daveImporterPageCtrl.importerToDisplay.ownerName}}</span></div>
+        <div class="description"><span><i class="glyphicon glyphicon-info-sign"></i> Description: </span><span>{{daveImporterPageCtrl.importerToDisplay.description}}</span></div>
+      </div>
+      <div class="importerStepTwoBDataItems">
+
+        <div class="title">
+          <span>Avaliable Data Items</span>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1" style="color:#3A8AD3">
+            <i class="glyphicon glyphicon-search"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="Search" ng-model="daveImporterPageCtrl.serach.fieldName">
+        </div>
+
+        <div class="importerStepTwoBDataItemsList">
+
+          <div class="importerStepTwoBDataItem" ng-repeat = "dataItem in daveImporterPageCtrl.importerToDisplayContent | filter: daveImporterPageCtrl.serach" ng-class="{'active' : dataItem.fieldName === daveImporterPageCtrl.currentDataItem.fieldName}" ng-click="daveImporterPageCtrl.chooseDataItem(dataItem)">
+            {{dataItem.fieldName}}
+            <i class="pull-right glyphicon glyphicon-record" style="margin-top:3px"></i>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="importerStepTwoBWellRight">
+      <div class="title">
+        {{daveImporterPageCtrl.currentDataItem.fieldName}}
+        <span>
+          <i class="glyphicon glyphicon-ok"></i>
+          ACTIVE
+        </span>
+      </div>
+
+      <button type="button" class="btn field-button" ng-repeat="(key, config) in daveImporterPageCtrl.currentDataItem.availableOptions"><span>{{key}}:</span><span> {{config.value}}</span></button>
+
+
+      <div class="importerStepTwoBDataItemData animated fadeIn">
+        <table class="importerStepTwoBDataItemTable">
+          <thead>
+            <th>Date</th>
+            <th>{{daveImporterPageCtrl.currentDataItem.fieldName}}</th>
+          </thead>
+          <tbody >
+            <tr ng-repeat = "entry in daveImporterPageCtrl.importerDataItemData track by entry[0]">
+              <td>{{entry[0] | date : 'yyyy/MM/dd HH:mm:ss.sss'}}</td>
+              <td>{{entry[1]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="importerStepTwoBDataItemOptions animated fadeIn">
+        <button type="button" class="btn btn-info">View More Data</button>
+        <button type="button" class="btn btn-warning" ng-click="daveImporterPageCtrl.updateImporter()">Update This Data Item</button>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

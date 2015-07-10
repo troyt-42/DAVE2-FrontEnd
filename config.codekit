@@ -25099,6 +25099,33 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/Importer\/ImporterDirectiveTemplates\/daveImporterConfigurationPage.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/Importer\/ImporterDirectiveTemplates\/daveImporterConfigurationPage.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/Importer\/ImporterDirectiveTemplates\/daveImporterListPage.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/Importer\/ImporterDirectiveTemplates\/daveImporterListPage.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/Importer\/ImporterDirectiveTemplates\/daveImporterPage.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/Importer\/ImporterDirectiveTemplates\/daveImporterPage.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/Importer\/ImporterFilters.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -25141,6 +25168,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/Importer\/min\/ImporterDirectives-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/Importer\/min\/ImporterDirectives-min.js",
+		"outputAbbreviatedPath": "\/Importer\/min\/min\/ImporterDirectives-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/Importer\/min\/ImporterFilters-min.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -25168,6 +25206,15 @@
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/Importer\/silderBar.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/importer_backup.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/importer_backup.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
