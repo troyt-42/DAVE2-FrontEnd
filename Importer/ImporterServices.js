@@ -13,10 +13,11 @@
           var formCollection = {};
           for(var i = 0; i < dataToParse.length; i++){
             var singleForm = [];
+            var topic = '';
             for(var p in dataToParse[i].availableOptions){
               var rawOption = dataToParse[i].availableOptions[p];
               var translatedField = {};
-
+              var useful = true;
               translatedField.key = rawOption.name;
               translatedField.defaultValue = rawOption.value;
               translatedField.expressionProperties = {
@@ -37,13 +38,19 @@
                 case "note":
                 translatedField.type = "textarea2";
                 break;
+                case "topic": // a backend field
+                topic = rawOption.value;
+                useful = false;
+                break;
                 default:
                 break;
               }
+              if(useful){
+                singleForm.push(translatedField);
+              }
 
-              singleForm.push(translatedField);
             }
-            formCollection[dataToParse[i].fieldName] = { fields : singleForm, checked : dataToParse[i].checked};
+            formCollection[dataToParse[i].fieldName] = { fields : singleForm, checked : dataToParse[i].checked, 'topic' : topic};
 
           }
           return formCollection;

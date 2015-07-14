@@ -867,16 +867,28 @@ html {
     .importerContainer .importerContainerRightPanel .importerStepTwo {
       height: 650px;
       text-align: center; }
-      .importerContainer .importerContainerRightPanel .importerStepTwo .progressbar-container {
-        float: left;
-        display: block;
-        margin-right: 1.5333130693%;
-        width: 49.2333434654%;
-        margin-left: 25.3833282673%;
-        margin-top: 292.5px; }
-        .importerContainer .importerContainerRightPanel .importerStepTwo .progressbar-container:last-child {
-          margin-right: 0; }
+    .importerContainer .importerContainerRightPanel .progressbar-container {
+      float: left;
+      display: block;
+      margin-right: 1.5333130693%;
+      width: 49.2333434654%;
+      margin-left: 25.3833282673%;
+      margin-top: 292.5px;
+      color: black; }
+      .importerContainer .importerContainerRightPanel .progressbar-container:last-child {
+        margin-right: 0; }
+      .importerContainer .importerContainerRightPanel .progressbar-container .progressingStat {
+        text-align: right;
+        padding: 1.5333130693%; }
+        .importerContainer .importerContainerRightPanel .progressbar-container .progressingStat span {
+          padding: 5px 1.5333130693%;
+          border-radius: 10px;
+          font-weight: bold;
+          color: white;
+          background: #1465c0; }
     .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader {
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/noisy_grid_simple.png"), -webkit-linear-gradient(90deg, #104b63, #5bbce4), center no-repeat #104b63 scroll;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/noisy_grid_simple.png"), linear-gradient(90deg, #104b63, #5bbce4), center no-repeat #104b63 scroll;
       float: left;
       display: block;
       margin-right: 1.5333130693%;
@@ -903,10 +915,10 @@ html {
       text-align: left;
       border: 0px solid gray;
       margin-bottom: 10px;
-      background: url("../imgs/congruent_outline.png");
-      background: url("../imgs/congruent_outline.png");
       border-bottom-right-radius: 0;
-      border-top-right-radius: 0; }
+      border-top-right-radius: 0;
+      border: 2px silver solid;
+      border-right: 0; }
       .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader:last-child {
         margin-right: 0; }
       .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader::after {
@@ -919,9 +931,8 @@ html {
         margin-right: 1.5333130693%;
         width: 74.6166717327%;
         display: inline-block;
-        color: white;
-        font-size: 300%;
-        font-weight: bold; }
+        color: linen;
+        font-size: 250%; }
         .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .title:last-child {
           margin-right: 0; }
       .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options {
@@ -936,10 +947,14 @@ html {
         .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options button:first-child {
           background: orange;
           color: black;
+          padding: 1px 10px;
+          border: 1px linen solid;
           font-size: 150%; }
         .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options button:nth-child(2) {
-          background: white;
+          background: linen;
           color: black;
+          padding: 1px 10px;
+          border: 1px orange solid;
           font-size: 150%; }
     .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell {
       float: left;
@@ -947,13 +962,15 @@ html {
       margin-right: 1.5333130693%;
       width: 100%;
       padding: 20px;
-      height: 650px;
-      background: url("../imgs/dark_embroidery.png") repeat;
-      background: url("../imgs/dark_embroidery.png") repeat;
-      border-radius: 5px;
+      height: 645px;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/gridme.png"), -webkit-linear-gradient(90deg, #051c36, #104b63), center no-repeat #051c36 scroll;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/gridme.png"), linear-gradient(90deg, #051c36, #104b63), center no-repeat #051c36 scroll;
+      border-radius: 15px;
+      border-bottom-right-radius: 0px;
+      border-top-right-radius: 0px;
       text-align: left;
-      box-shadow: 0px 0px 0px #3A8AD3;
-      border: 0px solid gray; }
+      border: 2px solid silver;
+      border-right: 0; }
       .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell:last-child {
         margin-right: 0; }
       .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField {
@@ -964,12 +981,13 @@ html {
         .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField:last-child {
           margin-right: 0; }
         .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-heading {
-          background: url("../imgs/gplaypattern.png") repeat;
-          background: url("../imgs/gplaypattern.png") repeat;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/pw_maze_white.png"), -webkit-linear-gradient(90deg, skyblue, linen), center no-repeat skyblue scroll;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/pw_maze_white.png"), linear-gradient(90deg, skyblue, linen), center no-repeat skyblue scroll;
           font-size: 125%; }
         .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-body {
           height: 200px;
-          overflow-y: auto; }
+          overflow-y: auto;
+          background: linen; }
 
 .updateImporterModal {
   padding: 1.5333130693%;

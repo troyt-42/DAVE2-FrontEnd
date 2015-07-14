@@ -77,10 +77,12 @@
       controller:'DaveImporterConfigurationPageCtrl',
       controllerAs:'daveImporterConfigurationPageCtrl',
       scope:{
-
+        formCollection: "@formCollection",
+        importerCreationMeta: "@importerCreationMeta",
+        progressing: "=progressing"
       },
       link: function(scope, element, attrs){
-
+        console.log(scope);
       }
     };
   }

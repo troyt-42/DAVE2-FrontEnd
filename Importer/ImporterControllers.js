@@ -12,6 +12,7 @@ ImporterUploadCtrl.$inject = [
   "$http",
   "$scope",
   "$modal",
+  "$compile",
   "Upload",
   "FormSettingParseService",
   "ImporterSocket",
@@ -45,20 +46,20 @@ DaveImporterPageCtrl.$inject = [
   'DirectiveService'
 ];
 
-DaveImporterConfigurationPageCtrl.$index = [
+DaveImporterConfigurationPageCtrl.$inject = [
   '$scope',
+  '$compile',
   'ImporterSocket',
   'DirectiveService'
 ];
 
-function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingParseService, ImporterSocket, DirectiveService){
+function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, FormSettingParseService, ImporterSocket, DirectiveService){
   var vm = this;
   //functions
 
   vm.cancelFile = cancelFile;
-  vm.cancelImport = cancelImport;
   vm.changeDataItemConfig = changeDataItemConfig;
-  vm.decideImport = decideImport;
+
   vm.removeFile = removeFile;
   vm.submitFile = submitFile;
   vm.toggleSearchMode = toggleSearchMode;
@@ -72,7 +73,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   vm.formModel={};
   vm.fileUploadProgress = 0;
-
+  vm.progressing = false;
+  vm.progressingStat = [0, 1];
   vm.stepOneSearchMode = false;
   vm.stepOneSearchModeInput = {};
 
@@ -149,6 +151,12 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   vm.waitingMessage = 'File Uploading';
 
+  $scope.$on('progressing', function(event, progressingStat){
+    vm.progressing = true;
+    vm.progressingStat = progressingStat;
+    console.log('progressing');
+    console.log(progressingStat);
+  });
   $scope.$watch(function(){
     return vm.stepOne;
   }, function(newValue){
@@ -162,10 +170,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   var temp = []; //temporary var for importerCreationResponse event
   ImporterSocket.on("importerCreationResponse", function(response){
     if(vm.systemStatus === "Normal"){
-      vm.fileUploadProgress = 0;
-      if(response.data.length !== 0){
-        temp = temp.concat(response.data);
-      } else {
+      temp = temp.concat(response.data);
+      if(response.completeState === 1.0){
         console.log(vm.stepThreeFormCollection);
         vm.stepThreeFormCollection = FormSettingParseService(temp); //jshint ignore:line
         vm.importerCreationMeta = {
@@ -176,10 +182,15 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
           description: response.description
         };
         temp = [];
-        vm.stepOne = false;
-        vm.stepTwo = false;
-        vm.stepTwoB = false;
-        vm.stepThree = true;
+        vm.progressing = false;
+        console.log(angular.element('dave-importer-configuration-page'));
+        if(!angular.element('dave-importer-configuration-page').length){
+          var bindScope = $scope.$new(true);
+          bindScope.formCollection = vm.stepThreeFormCollection;
+          bindScope.importerCreationMeta = vm.importerCreationMeta;
+          DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-configuration-page  class="angular-directive" form-collection="{{formCollection}}" importer-creation-meta="{{importerCreationMeta}}"></dave-importer-configuration-page>', bindScope, $compile);
+        }
+        vm.fileUploadProgress = 0;
       }
     }
 
@@ -188,39 +199,29 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   ImporterSocket.on("importerCreationFinalResponse", function(response){
     if(vm.systemStatus === "Normal"){
       console.log(response);
-      if(response.reply === "SUCCESS"){
-        vm.fileUploadProgress = response.payload.status * 100;
-        if(response.list_out !== 0){
-          vm.importerToDisplay = {
-            importerName: response.importerName,
-            location: response.location,
-            ownerName: response.ownerName
-          };
-          vm.currentDataItem = response.list_out[0];
-          vm.stepOne = false;
-          vm.stepTwo = false;
-          vm.stepTwoB = true;
-          vm.stepThree = false;
-          vm.importerToDisplayContent = response.list_out;
-          vm.importerToDisplayContent.forEach(function(element, index, array){
-            ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
-          });
-        } else {
-          if(vm.importerToDisplayContent.length === 0){
-            var alertExsited = false;
-            for(var i = 0; i < vm.alerts.stepThree.length; i ++){
-              if(vm.alerts.stepThree[i].msg === 'Created Empty Importer'){
-                alertExsited = true;
-              }
-            }
-            if(!alertExsited){
-              vm.alerts.stepThree.push({ type: 'warning', msg: 'Created Empty Importer' });
-            }
-          }
-        }
+      if(response.reply === "COMPLETE"){
+        vm.importerToRequest = {
+          importerName: response.payload.importerName,
+          location: response.payload.location,
+          ownerName: response.payload.ownerName,
+          description: response.payload.description
+        };
+        var bindScope = $scope.$parent.$new(true);
+        bindScope.importerToRequest = {};
+        angular.copy(vm.importerToRequest, bindScope.importerToRequest);
+        $timeout(function(){
+            DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-page class="angular-directive" importer-to-request="{{importerToRequest}}"></dave-importer-page>', bindScope, $compile);
+            vm.progressing = false;
+        }, 1500);
+
+
       }
       if(response.reply === "PROGRESSING"){
+        vm.progressingStat[1] = response.payload.numFiles;
         vm.fileUploadProgress = response.payload.status * 100;
+        if(response.payload.status === 1.0){
+          vm.progressingStat[0] = response.payload.numFinishProcessedFile;
+        }
       }
     }
   });
@@ -233,15 +234,6 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
 
   function cancelFile(){
     vm.formModel= {};
-  }
-
-  function cancelImport(){
-    vm.stepOne = true;
-    vm.stepTwo = false;
-    vm.stepTwoB = false;
-    vm.stepThree = false;
-    vm.fileUploadProgress = 0;
-    vm.waitingMessage = 'File Uploading';
   }
 
 
@@ -267,59 +259,6 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   }
 
 
-  function decideImport(){
-    var finalFormToUpload = [];
-    console.log(vm.stepThreeFormCollection);
-    for(var key in vm.stepThreeFormCollection){
-      var temp = {
-        availableOptions:{}
-      };
-      for(var key2 in vm.stepThreeFormCollection[key]){
-        switch(key2){
-          case "fields":
-          break;
-          case "checked":
-          temp.checked = vm.stepThreeFormCollection[key][key2];
-          break;
-          default:
-          temp.availableOptions[key2] = { name: key2, value:(vm.stepThreeFormCollection[key][key2])} ;
-          break;
-        }
-      }
-      temp.fieldName = key;
-      finalFormToUpload.push(temp);
-    }
-    console.log(finalFormToUpload);
-
-    ImporterSocket.emit('decideImporterCreation',{
-      location : vm.importerCreationMeta.location,
-      importerName: vm.importerCreationMeta.importerName,
-      userName:vm.importerCreationMeta.userName,
-      files:vm.importerCreationMeta.files,
-      data:finalFormToUpload,
-      description:vm.importerCreationMeta.description }
-    );
-    vm.stepOne = false;
-    vm.stepTwo = true;
-    vm.stepTwoB = false;
-    vm.stepThree = false;
-    // $http.post("/Importer/decideImport", finalFormToUpload).
-    // success(function(data, status, headers, config) {
-    //   // this callback will be called asynchronously
-    //   // when the response is available
-    //   vm.stepOne = false;
-    //   vm.stepTwo = false;
-    //   vm.stepTwoB = true;
-    //   vm.stepThree = false;
-    //   vm.fileUploadProgress = 0;
-    // }).
-    // error(function(data, status, headers, config) {
-    //   // called asynchronously if an error occurs
-    //   // or server returns response with an error status.
-    //   alert("Something Wents Wrong");
-    // });
-    console.log(finalFormToUpload);
-  }
 
   function removeFile(file){
     var index = vm.formModel.Browse.indexOf(file);
@@ -333,7 +272,6 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
   function submitFile(){
     var uploadfile = vm.formModel.Browse;
     console.log(uploadfile);
-
     if(uploadfile !== {}){
 
       var importerInfo = {
@@ -349,6 +287,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
         importerInfo.files.push({fileName:vm.formModel.Browse[i].name});
       }
 
+      DirectiveService.DestroyDirectiveService('.angular-directive', angular.element('.angular-directive').isolateScope());
+      vm.progressing = true;
       //Upload file through http
       Upload.upload({
         url : "/Importer/uploadFile",
@@ -365,7 +305,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal, Upload, FormSettingP
         console.log(progress);
         vm.fileUploadProgress = progress;
         if(progress >= 100){
+          vm.progressingStat[0] = 1;
           vm.waitingMessage = 'Waiting response from server';
+
           console.log(vm.waitingMessage);
         }
       }).success(function(data, status, headers, config) {
@@ -495,11 +437,12 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   ImporterSocket.on("importerListData", function(data){
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.promiseToSolve);
-      if(data.length !== 0){
-        vm.importerList = vm.importerList.concat(data);
-        vm.loading = false;
+      if(data.completeState !== 1.0){
+        vm.importerList = vm.importerList.concat(data.list_out);
         // angular.element(".js-layout").addClass("hidden");
       } else {
+        vm.importerList = vm.importerList.concat(data.list_out);
+        vm.loading = false;
         console.log(vm.importerList);
       }
     }
@@ -605,7 +548,7 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
     angular.copy(vm.importerToRequest, bindScope.importerToRequest);
 
     DirectiveService.DestroyDirectiveService('dave-importer-list-page', $scope);
-    DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-page importer-to-request="{{importerToRequest}}"></dave-importer-page>', bindScope, $compile);
+    DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-page class="angular-directive" importer-to-request="{{importerToRequest}}"></dave-importer-page>', bindScope, $compile);
   }
 
   function toggleLayOutMenu(){
@@ -649,43 +592,47 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   ImporterSocket.on("importerData", function(data){
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.requestImporterPromiseToSolve);
-      if(data.length !== 0){
-        vm.currentDataItem = data[0];
-        console.log(data[0]);
-        vm.importerToDisplayContent = data;
-      } else if (data.length === 0){
+      console.log(data);
+      if(vm.currentDataItem === ''){
+        vm.currentDataItem = data.list_out[0];
+        console.log(vm.currentDataItem);
+      }
+      vm.importerToDisplayContent = vm.importerToDisplayContent.concat(data.list_out);
+
+      if(data.completeState === 1.0){
         console.log(vm.importerToDisplayContent);
         vm.importerToDisplayContent.forEach(function(element, index, array){
           ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
         });
         if(vm.importerToDisplayContent.length === 0){
           var alertExsited = false;
-          for(var i = 0; i < vm.alerts.stepOne.length; i ++){
-            if(vm.alerts.stepOne[i].msg === 'Received Empty Importer'){
+          for(var i = 0; i < vm.alerts.length; i ++){
+            if(vm.alerts[i].msg === 'Received Empty Importer'){
               alertExsited = true;
             }
           }
           if(!alertExsited){
-            vm.alerts.stepOne.push({ type: 'warning', msg: 'Received Empty Importer' });
+            vm.alerts.push({ type: 'warning', msg: 'Received Empty Importer' });
           }
         }
       }
+
     }
   });
 
   ImporterSocket.on("importerDataItemData", function(dataItem){
     if(vm.systemStatus === "Normal"){
-      if(dataItem.data.length !== 0){
-        if(!vm.importerDataItemToDisplay[dataItem.name]){
-          vm.importerDataItemToDisplay[dataItem.name] = [];
-        }
-        vm.importerDataItemToDisplay[dataItem.name] = vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
-      } else if (dataItem.data.length === 0){
-        if((vm.importerDataItemToDisplay[vm.currentDataItem.fieldName].length) && (vm.importerDataItemData.length === 0)){
-          vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
-          console.log(vm.importerDataItemData);
-        }
+      console.log(dataItem);
+      if(!vm.importerDataItemToDisplay[dataItem.name]){
+        vm.importerDataItemToDisplay[dataItem.name] = [];
       }
+      vm.importerDataItemToDisplay[dataItem.name] = vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
+
+      if((dataItem.completeState === 1.0) && (dataItem.name === vm.currentDataItem.fieldName)){
+        vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
+        console.log(vm.importerDataItemData);
+      }
+
     }
   });
 
@@ -707,7 +654,7 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   function backToImporterList(){
     var bindScope = $scope.$parent.$new(true);
     DirectiveService.DestroyDirectiveService('dave-importer-page', $scope);
-    DirectiveService.AddDirectiveService('.importerContainerRightPanel','<dave-importer-list-page></dave-importer-list-page>',bindScope, $compile);
+    DirectiveService.AddDirectiveService('.importerContainerRightPanel','<dave-importer-list-page  class="angular-directive"></dave-importer-list-page>',bindScope, $compile);
   }
   function chooseDataItem(dataItem){
     vm.currentDataItem = dataItem;
@@ -731,7 +678,76 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   }
 }
 
-function DaveImporterConfigurationPageCtrl($scope, ImporterSocket, DirectiveService){
+function DaveImporterConfigurationPageCtrl($scope, $compile, ImporterSocket, DirectiveService){
+  var vm = this;
 
+  //functions
+  vm.cancelImport = cancelImport;
+  vm.decideImport = decideImport;
+  //variables
+  console.log($scope.formCollection);
+  vm.formCollection = JSON.parse($scope.formCollection);
+  vm.importerCreationMeta = JSON.parse($scope.importerCreationMeta);
+
+  ///////////////////////////////
+
+  function cancelImport(){
+    var bindScope = $scope.$parent.$new(true);
+    DirectiveService.DestroyDirectiveService('dave-importer-configuration-page', angular.element('dave-importer-configuration-page').isolateScope());
+    DirectiveService.AddDirectiveService('.importerContainerRightPanel','<dave-importer-list-page  class="angular-directive"></dave-importer-list-page>',bindScope, $compile);
+  }
+
+
+  function decideImport(){
+    var finalFormToUpload = [];
+    for(var key in vm.formCollection){
+      var temp = {
+        availableOptions:{}
+      };
+      for(var key2 in vm.formCollection[key]){
+        switch(key2){
+          case "fields":
+          break;
+          case "checked":
+          temp.checked = vm.formCollection[key][key2];
+          break;
+          default:
+          temp.availableOptions[key2] = { name: key2, value:(vm.formCollection[key][key2])} ;
+          break;
+        }
+      }
+      temp.fieldName = key;
+      finalFormToUpload.push(temp);
+    }
+    console.log(finalFormToUpload);
+    ImporterSocket.emit('decideImporterCreation',{
+      location : vm.importerCreationMeta.location,
+      importerName: vm.importerCreationMeta.importerName,
+      userName:vm.importerCreationMeta.userName,
+      files:vm.importerCreationMeta.files,
+      data:finalFormToUpload,
+      description:vm.importerCreationMeta.description }
+    );
+    var progressingStatTemp =  [0, 1];
+    $scope.$emit('progressing', progressingStatTemp);
+    DirectiveService.DestroyDirectiveService('dave-importer-configuration-page',  angular.element('dave-importer-configuration-page').isolateScope());
+
+    // $http.post("/Importer/decideImport", finalFormToUpload).
+    // success(function(data, status, headers, config) {
+    //   // this callback will be called asynchronously
+    //   // when the response is available
+    //   vm.stepOne = false;
+    //   vm.stepTwo = false;
+    //   vm.stepTwoB = true;
+    //   vm.stepThree = false;
+    //   vm.fileUploadProgress = 0;
+    // }).
+    // error(function(data, status, headers, config) {
+    //   // called asynchronously if an error occurs
+    //   // or server returns response with an error status.
+    //   alert("Something Wents Wrong");
+    // });
+
+  }
 }
 })();

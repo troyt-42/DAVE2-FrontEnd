@@ -53,6 +53,10 @@
   </div>
 
   <div class="importerContainerRightPanel animated fadeIn expanded" >
-    <dave-importer-list-page></dave-importer-list-page>
+    <dave-importer-list-page class="angular-directive"></dave-importer-list-page>
+    <div class="progressbar-container" ng-show="importerUploadCtrl.progressing">
+      <div class="progressingStat"><span>{{importerUploadCtrl.progressingStat[0]}}/{{importerUploadCtrl.progressingStat[1]}}</span></div>
+      <progressbar max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><span style="font-size: 130%;font-style: normal;color: black;font-weight: bold;line-height: 2.6em;display: block">{{importerUploadCtrl.waitingMessage}}</span></progressbar>
+    </div>
   </div>
 </div>

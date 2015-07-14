@@ -543,13 +543,25 @@ $importerWellHeight: 650px
       height: $importerWellHeight
       text-align: center
 
-      .progressbar-container
-        +span-columns(6)
-        +shift(3)
-        margin-top: 0.45 * $importerWellHeight
+    .progressbar-container
+      +span-columns(6)
+      +shift(3)
+      margin-top: 0.45 * $importerWellHeight
+      color: black
+      .progressingStat
+        text-align: right
+        +pad()
+        span
+          +pad(5px default)
+          border-radius: 10px
+          font-weight: bold
+          color: white
+          background: lighten($yale-blue, 10%)
+
 
     .importerStepThree
       .importerStepThreeHeader
+        +texture(90deg, darken(skyblue,50%), darken(skyblue,10%) , 88, 0)
         +span-columns(12)
         +row()
         +display(flex)
@@ -559,14 +571,15 @@ $importerWellHeight: 650px
         text-align: left
         border: 0px solid gray
         margin-bottom: 10px
-        +background(url('../imgs/congruent_outline.png'))
         +border-right-radius(0)
+        border: 2px silver solid
+        border-right: 0
         .title
           +span-columns(9)
           display: inline-block
-          color: white
-          font-size: 300%
-          font-weight: bold
+          color: linen
+          font-size: 250%
+          // font-weight: bold
         .options
           +span-columns(3)
           height: 100%
@@ -574,25 +587,32 @@ $importerWellHeight: 650px
           button:first-child
             background: orange
             color: black
+            +pad(1px 10px)
+            border: 1px linen solid
             font-size: 150%
           button:nth-child(2)
-            background: white
+            background: linen
             color: black
+            +pad(1px 10px)
+            border: 1px orange solid
             font-size: 150%
       .importerStepThreeWell
         +span-columns(12)
         +pad(20px)
-        height: $importerWellHeight
-        +background(url('../imgs/dark_embroidery.png') repeat)
-        border-radius: 5px
+        height: $importerWellHeight - 5px
+        +texture(90deg,  darken($yale-blue, 20%) ,darken(skyblue, 50%), 32, 0)
+        border-radius: 15px
+        +border-right-radius(0px)
         text-align: left
-        box-shadow: 0px 0px 0px #3A8AD3
-        border: 0px solid gray
+        border: 2px solid silver
+        border-right: 0
         .importerStepThreeField
           +span-columns(4)
+
           .panel-heading
-            +background(url('../imgs/gplaypattern.png') repeat)
+            +texture(90deg,  skyblue, linen, 73, 0)
             font-size: 125%
           .panel-body
             height: 200px
             overflow-y: auto
+            background: linen

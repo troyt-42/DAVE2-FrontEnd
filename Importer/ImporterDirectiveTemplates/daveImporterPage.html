@@ -49,7 +49,7 @@
         </span>
       </div>
 
-      <button type="button" class="btn field-button" ng-repeat="(key, config) in daveImporterPageCtrl.currentDataItem.availableOptions"><span>{{key}}:</span><span> {{config.value}}</span></button>
+      <button type="button" class="btn field-button" ng-if="key !== 'topic'" ng-repeat="(key, config) in daveImporterPageCtrl.currentDataItem.availableOptions"><span>{{key}}:</span><span> {{config.value}}</span></button>
 
 
       <div class="importerStepTwoBDataItemData animated fadeIn">

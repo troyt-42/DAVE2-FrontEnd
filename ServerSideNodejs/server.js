@@ -320,18 +320,18 @@ kafkaConsumer.on('message',function(message){
   } else if (message.topic === '__importer_stepOne_list_out__'){
     var data2 = JSON.parse(message.value);
     if(data2.list_out){
-      io.of('/importer').to(data2.session_id).emit('importerListData', data2.list_out);
+      io.of('/importer').to(data2.session_id).emit('importerListData', data2);
     }
   } else if (message.topic === '__importer_stepTwoB_importer_out__'){
 
     var data3 = JSON.parse(message.value);
     if(data3.list_out){
-      io.of('/importer').to(data3.session_id).emit('importerData', data3.list_out);
+      io.of('/importer').to(data3.session_id).emit('importerData', data3);
     }
   } else if (message.topic === '__importer_stepTwoB_dataItem_out__'){
     var data4 = JSON.parse(message.value);
     if(data4.list_out){
-      io.of('/importer').to(data4.session_id).emit('importerDataItemData', {name:data4.payload.name, data: data4.list_out});
+      io.of('/importer').to(data4.session_id).emit('importerDataItemData', {name:data4.payload.name, data: data4.list_out, completeState: data4.completeState});
     }
   } else if (message.topic === '__importer_stepOne_createImporter_out__'){
     var data5 = JSON.parse(message.value);
@@ -342,7 +342,8 @@ kafkaConsumer.on('message',function(message){
         userName: data5.userName,
         data: data5.list_out,
         files: data5.files,
-        description: data5.description
+        description: data5.description,
+        completeState: data5.completeState
       });
     }
   } else if (message.topic === '__importer_stepTwo_decideCreation_out__'){
