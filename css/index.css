@@ -77,19 +77,24 @@ html {
       -ms-transform: translateX(-800px);
       -o-transform: translateX(-800px);
       transform: translateX(-800px); }
-    .importerContainer .importerContainerLeftMenu li {
-      padding: 1.5333130693%;
-      border-radius: 2px;
-      border-bottom-right-radius: 5px;
-      border-top-right-radius: 5px;
-      margin-bottom: 2px;
-      background: orange;
-      font-weight: bold; }
-      .importerContainer .importerContainerLeftMenu li i {
-        margin-top: 2px; }
-        .importerContainer .importerContainerLeftMenu li i:hover {
-          color: red;
-          cursor: pointer; }
+    .importerContainer .importerContainerLeftMenu ul {
+      list-style: disc;
+      color: white; }
+      .importerContainer .importerContainerLeftMenu ul li {
+        padding: 1.5333130693%;
+        border-radius: 2px;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        margin-bottom: 2px;
+        background: orange;
+        font-weight: bold; }
+        .importerContainer .importerContainerLeftMenu ul li span {
+          color: black; }
+          .importerContainer .importerContainerLeftMenu ul li span i {
+            margin-top: 2px; }
+            .importerContainer .importerContainerLeftMenu ul li span i:hover {
+              color: red;
+              cursor: pointer; }
     .importerContainer .importerContainerLeftMenu button {
       float: left;
       display: block;
@@ -105,38 +110,63 @@ html {
       margin-top: 5px;
       text-align: right;
       font-size: 80%;
-      color: #3A8AD3;
+      color: white;
       cursor: pointer; }
       .importerContainer .importerContainerLeftMenu .complicatedUploadMode:last-child {
         margin-right: 0; }
       .importerContainer .importerContainerLeftMenu .complicatedUploadMode:hover {
         text-decoration: underline; }
-    .importerContainer .importerContainerLeftMenu .panel .panel-heading {
-      background: -webkit-linear-gradient(90deg, #3A8AD3, darkgray);
-      background: linear-gradient(90deg, #3A8AD3, darkgray); }
-      .importerContainer .importerContainerLeftMenu .panel .panel-heading span {
-        cursor: pointer; }
-    .importerContainer .importerContainerLeftMenu .panel:last-child {
-      color: black; }
-      .importerContainer .importerContainerLeftMenu .panel:last-child .panel-heading {
-        background: -webkit-linear-gradient(90deg, red, orange);
-        background: linear-gradient(90deg, red, orange); }
-    .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3 {
-      float: left;
-      display: block;
-      margin-right: 1.5333130693%;
-      width: 100%;
-      float: none;
-      margin-top: 10px;
-      display: block; }
-      .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3:last-child {
-        margin-right: 0; }
-      .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3:focus {
-        box-shadow: none;
-        outline-color: white;
-        outline: 0px; }
-      .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3:disabled {
-        cursor: not-allowed; }
+    .importerContainer .importerContainerLeftMenu .panel {
+      border-bottom-right-radius: 6px; }
+      .importerContainer .importerContainerLeftMenu .panel .panel-heading {
+        background: -webkit-linear-gradient(90deg, #3A8AD3, darkgray);
+        background: linear-gradient(90deg, #3A8AD3, darkgray); }
+        .importerContainer .importerContainerLeftMenu .panel .panel-heading span {
+          cursor: pointer; }
+      .importerContainer .importerContainerLeftMenu .panel .panel-body {
+        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/double_lined.png"), -webkit-linear-gradient(270deg, #1465c0, black), center no-repeat #1465c0 scroll;
+        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/double_lined.png"), linear-gradient(270deg, #1465c0, black), center no-repeat #1465c0 scroll;
+        border-bottom-right-radius: 5px;
+        border-top: 0; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body span {
+          border: 2px solid black;
+          border-right: 0;
+          background: gold;
+          font-weight: bold;
+          color: black; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body input {
+          border: 2px solid black;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), -webkit-linear-gradient(270deg, white, linen), center no-repeat white scroll;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), linear-gradient(270deg, white, linen), center no-repeat white scroll;
+          color: black;
+          box-shadow: none; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body textarea {
+          border: 2px solid black;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), -webkit-linear-gradient(270deg, white, linen), center no-repeat white scroll;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), linear-gradient(270deg, white, linen), center no-repeat white scroll;
+          color: black;
+          box-shadow: none; }
+      .importerContainer .importerContainerLeftMenu .panel:last-child {
+        color: black; }
+        .importerContainer .importerContainerLeftMenu .panel:last-child .panel-heading {
+          background: -webkit-linear-gradient(90deg, red, orange);
+          background: linear-gradient(90deg, red, orange); }
+      .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3 {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 100%;
+        float: none;
+        margin-top: 10px;
+        display: block; }
+        .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3:last-child {
+          margin-right: 0; }
+        .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3:focus {
+          box-shadow: none;
+          outline-color: white;
+          outline: 0px; }
+        .importerContainer .importerContainerLeftMenu .panel #formly_1_input3_Browse_3:disabled {
+          cursor: not-allowed; }
   .importerContainer .importerContainerRightPanel {
     float: left;
     display: block;
@@ -158,6 +188,7 @@ html {
       .importerContainer .importerContainerRightPanel.expanded:last-child {
         margin-right: 0; }
     .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton {
+      position: relative;
       cursor: pointer; }
       .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div {
         display: inline;
@@ -181,6 +212,17 @@ html {
           .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div:nth-child(3):hover {
             background: #4d004d;
             color: skyblue; }
+        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerSetUpButton div:last-child {
+          position: absolute;
+          right: 10px;
+          top: -10px;
+          border-radius: 5px;
+          box-shadow: 2px 2px 1px grey;
+          color: linen;
+          text-shadow: 1px 1px black;
+          font-weight: bold;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/skin_side_up.png"), -webkit-linear-gradient(90deg, #1f7ee8, #5bbce4), center no-repeat #1f7ee8 scroll;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/skin_side_up.png"), linear-gradient(90deg, #1f7ee8, #5bbce4), center no-repeat #1f7ee8 scroll; }
     .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne {
       float: left;
       display: block;

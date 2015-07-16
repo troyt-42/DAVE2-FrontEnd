@@ -24,7 +24,7 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__importer_stepTwoB_updateImporter_out__'}
 ],
 {
-  groupId: 'my-group'
+  groupId: 'test'
 });
 
 
@@ -285,21 +285,40 @@ io.of('/importer').on('connection', function(socket){
   });
 
   socket.on('updateImporter', function(targetImporter){
-      targetImporter.session_id = socket.id;
-      targetImporter.action = 'UPDATE_IMPORTER';
-      targetImporter.return_topic = '__importer_stepTwoB_updateImporter_out__';
-      kafkaProducer.send([{
-        topic:'__importer_stepTwoB_updateImporter_in__',
-        messages:[JSON.stringify(targetImporter)]
-      }],function(err,data){
-        if(err){
-          console.log(err);
-        } else {
-          console.log('User ' + socket.id + ' has sent importer update request successfully:' + JSON.stringify(targetImporter));
-        }
-      });
+    targetImporter.session_id = socket.id;
+    targetImporter.action = 'UPDATE_IMPORTER';
+    targetImporter.return_topic = '__importer_stepTwoB_updateImporter_out__';
+    kafkaProducer.send([{
+      topic:'__importer_stepTwoB_updateImporter_in__',
+      messages:[JSON.stringify(targetImporter)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent importer update request successfully:' + JSON.stringify(targetImporter));
+      }
+    });
   });
 
+  socket.on('createRandomImporter', function(configuration){
+    var temp = {
+      payload: configuration,
+      session_id : socket.id,
+      action : 'RANDOM_IMPORTER',
+      return_topic : '__importer_stepOne_randomImporter_out__'
+    };
+
+    kafkaProducer.send([{
+      topic:'__importer_stepOne_randomImporter_in__',
+      messages:[JSON.stringify(temp)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent random importer creation request successfully:' + JSON.stringify(temp));
+      }
+    });
+  });
 });
 
 

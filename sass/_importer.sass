@@ -38,19 +38,24 @@ $importerWellHeight: 650px
       display: inline-block
       +transition(all 0.45s ease-in-out)
       +transform(translateX(-800px))
+    ul
+      list-style: disc
+      color: white
+      li
+        +pad()
+        border-radius: 2px
+        +border-right-radius(5px)
+        margin-bottom: 2px
+        background: orange
+        font-weight: bold
+        span
+          color: black
+          i
+            margin-top: 2px
+            &:hover
+              color: red
+              cursor: pointer
 
-    li
-      +pad()
-      border-radius: 2px
-      +border-right-radius(5px)
-      margin-bottom: 2px
-      background: orange
-      font-weight: bold
-      i
-        margin-top: 2px
-        &:hover
-          color: red
-          cursor: pointer
     button
       +span-columns(6)
     .complicatedUploadMode
@@ -58,15 +63,37 @@ $importerWellHeight: 650px
       margin-top: 5px
       text-align: right
       font-size: 80%
-      color: $blue-color
+      color: white
       cursor: pointer
       &:hover
         text-decoration: underline
     .panel
+      border-bottom-right-radius: 6px
       .panel-heading
         +background(linear-gradient(90deg, $blue-color, darkgray))
         span
           cursor: pointer
+      .panel-body
+        +texture(270deg, lighten($yale-blue, 10%), black , 18, 1)
+        border-bottom-right-radius: 5px
+        border-top: 0
+        span
+          border: 2px solid black
+          border-right: 0
+          background: gold
+          font-weight: bold
+          color: black
+        input
+          border: 2px solid black
+          +texture(270deg, white, linen , 19, 1)
+          color: black
+          box-shadow: none
+        textarea
+          border: 2px solid black
+          +texture(270deg, white, linen , 19, 1)
+          color: black
+          box-shadow: none
+
       &:last-child
         color: black
         .panel-heading
@@ -92,6 +119,7 @@ $importerWellHeight: 650px
       +pad(0 default)
     dave-importer-list-page
       .importerSetUpButton
+        position: relative
         cursor: pointer
         div
           display: inline
@@ -114,6 +142,16 @@ $importerWellHeight: 650px
             &:hover
               background: darken(purple, 10%)
               color: skyblue
+          &:last-child
+            position: absolute
+            right: 10px
+            top: -10px
+            border-radius: 5px
+            box-shadow: 2px 2px 1px grey
+            color: linen
+            text-shadow: 1px 1px black
+            font-weight: bold
+            +texture(90deg, lighten($yale-blue, 20%),  darken(skyblue, 10%) , 9, 1)
       .importerStepOne
         +span-columns(12)
         // .importerSystemTitle

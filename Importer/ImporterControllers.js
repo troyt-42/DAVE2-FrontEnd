@@ -13,6 +13,7 @@ ImporterUploadCtrl.$inject = [
   "$scope",
   "$modal",
   "$compile",
+  "$interval",
   "Upload",
   "FormSettingParseService",
   "ImporterSocket",
@@ -53,11 +54,13 @@ DaveImporterConfigurationPageCtrl.$inject = [
   'DirectiveService'
 ];
 
-function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, FormSettingParseService, ImporterSocket, DirectiveService){
+function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, Upload, FormSettingParseService, ImporterSocket, DirectiveService){
   var vm = this;
   //functions
 
   vm.cancelFile = cancelFile;
+  vm.cancelRandomImporter = cancelRandomImporter;
+  vm.createRandomImporter = createRandomImporter;
   vm.changeDataItemConfig = changeDataItemConfig;
 
   vm.removeFile = removeFile;
@@ -71,15 +74,79 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
   };
 
 
-  vm.formModel={};
+  vm.createNewImporterFormModel = {};
   vm.fileUploadProgress = 0;
+  vm.randomImporterFormFields = [
+    {
+      type:"input",
+      key:"Maximum Value",
+      data:{
+        inputType: "number",
+        placeholder: 0
+      }
+    },
+    {
+      type:"input",
+      key:"Minimum Value",
+      data:{
+        inputType: "number",
+        placeholder: 0
+      }
+    },
+    {
+      type:"input",
+      key:"Maximum Slope",
+      data:{
+        inputType: "number",
+        placeholder: 0
+      }
+    },
+    {
+      type:"input",
+      key:"Minimum Slope",
+      data:{
+        inputType: "number",
+        placeholder: 0
+      }
+    },
+    {
+      type:"input",
+      key:"Reduction (/mm)",
+      data:{
+        inputType: "number",
+        placeholder: 0
+      }
+    },
+    {
+      type:"input",
+      key:"Target Data Item Name",
+      data:{
+        placeholder: "example"
+      }
+    },
+    {
+      type:"input",
+      key:"Location",
+      data:{
+        placeholder: "example"
+      }
+    }
+  ];
+  vm.randomImporterFormModel = {
+    "Maximum Value" : 0,
+    "Minimum Value" : 0,
+    "Maximum Slope" : 0,
+    "Minimum Slope" : 0,
+    "Reduction (/mm)" : 1000,
+    "Target Data Item Name": "test",
+    "Location": "brampton"
+  };
   vm.progressing = false;
   vm.progressingStat = [0, 1];
   vm.stepOneSearchMode = false;
   vm.stepOneSearchModeInput = {};
-
+  vm.importerCreationPromise = '';
   vm.importerToDisplayContent = [];
-
 
 
   vm.promiseToSolve = null;
@@ -102,20 +169,26 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
 
   vm.systemStatus = "Normal";
   vm.optionStatus = {
-    firstOpen : true,
-    secondOpen: false,
+    firstOpen : false,
+    secondOpen: true,
     thirdOpen: false,
     fourthOpen: false
   };
 
-  vm.formFields = [
+  vm.createNewImporterFormFields = [
     {
       type:"input",
-      key:"Name"
+      key:"Name",
+      data:{
+        placeholder: "example"
+      }
     },
     {
       type:"input",
-      key:"Location"
+      key:"Location",
+      data:{
+        placeholder: "example"
+      }
     },
     {
       type:"textarea",
@@ -154,9 +227,13 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
   $scope.$on('progressing', function(event, progressingStat){
     vm.progressing = true;
     vm.progressingStat = progressingStat;
+    vm.importerCreationPromise = $interval(function(){
+      vm.fileUploadProgress += 4;
+    }, 1000, 25);
     console.log('progressing');
     console.log(progressingStat);
   });
+
   $scope.$watch(function(){
     return vm.stepOne;
   }, function(newValue){
@@ -210,8 +287,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
         bindScope.importerToRequest = {};
         angular.copy(vm.importerToRequest, bindScope.importerToRequest);
         $timeout(function(){
-            DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-page class="angular-directive" importer-to-request="{{importerToRequest}}"></dave-importer-page>', bindScope, $compile);
-            vm.progressing = false;
+          DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-page class="angular-directive" importer-to-request="{{importerToRequest}}"></dave-importer-page>', bindScope, $compile);
+          vm.progressing = false;
         }, 1500);
 
 
@@ -221,6 +298,12 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
         vm.fileUploadProgress = response.payload.status * 100;
         if(response.payload.status === 1.0){
           vm.progressingStat[0] = response.payload.numFinishProcessedFile;
+        }
+      }
+      if(response.reply === "submitting"){
+        if(response.completeState === 1){
+          $interval.$cancel(vm.importerCreationPromise);
+          vm.fileUploadProgress = 1;
         }
       }
     }
@@ -235,8 +318,13 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
   function cancelFile(){
     vm.formModel= {};
   }
+  function cancelRandomImporter(){
 
-
+  }
+  function createRandomImporter(){
+    console.log(vm.randomImporterFormModel);
+    ImporterSocket.emit("createRandomImporter", vm.randomImporterFormModel);
+  }
   function changeDataItemConfig(dataItem){
     var loginInterface = $modal.open({
       templateUrl:"Importer/changeDataItemModal.html",
@@ -261,30 +349,30 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
 
 
   function removeFile(file){
-    var index = vm.formModel.Browse.indexOf(file);
+    var index = vm.createNewImporterFormModel.Browse.indexOf(file);
     if(index !== -1){
-      vm.formModel.Browse.splice(index, 1);
+      vm.createNewImporterFormModel.Browse.splice(index, 1);
       console.log(vm.formModel);
     }
   }
 
 
   function submitFile(){
-    var uploadfile = vm.formModel.Browse;
+    var uploadfile = vm.createNewImporterFormModel.Browse;
     console.log(uploadfile);
     if(uploadfile !== {}){
 
       var importerInfo = {
-        'importerName' : vm.formModel.Name,
+        'importerName' : vm.createNewImporterFormModel.Name,
         'files':[],
-        'location': vm.formModel.Location,
-        'description': vm.formModel.Description,
+        'location': vm.createNewImporterFormModel.Location,
+        'description': vm.createNewImporterFormModel.Description,
         'userName': 'troy'
 
       };
 
-      for(var i = 0; i < vm.formModel.Browse.length; i++){
-        importerInfo.files.push({fileName:vm.formModel.Browse[i].name});
+      for(var i = 0; i < vm.createNewImporterFormModel.Browse.length; i++){
+        importerInfo.files.push({fileName:vm.createNewImporterFormModel.Browse[i].name});
       }
 
       DirectiveService.DestroyDirectiveService('.angular-directive', angular.element('.angular-directive').isolateScope());
@@ -295,9 +383,9 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
         file: uploadfile,
         fields:{
           'uploadInfo': {
-            'name' : vm.formModel.Name,
-            'location': vm.formModel.Location,
-            'description': vm.formModel.Description
+            'name' : vm.createNewImporterFormModel.Name,
+            'location': vm.createNewImporterFormModel.Location,
+            'description': vm.createNewImporterFormModel.Description
           }
         }
       }).progress(function(evt) {
@@ -307,7 +395,6 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile, Upload, For
         if(progress >= 100){
           vm.progressingStat[0] = 1;
           vm.waitingMessage = 'Waiting response from server';
-
           console.log(vm.waitingMessage);
         }
       }).success(function(data, status, headers, config) {
@@ -730,6 +817,7 @@ function DaveImporterConfigurationPageCtrl($scope, $compile, ImporterSocket, Dir
     );
     var progressingStatTemp =  [0, 1];
     $scope.$emit('progressing', progressingStatTemp);
+
     DirectiveService.DestroyDirectiveService('dave-importer-configuration-page',  angular.element('dave-importer-configuration-page').isolateScope());
 
     // $http.post("/Importer/decideImport", finalFormToUpload).
