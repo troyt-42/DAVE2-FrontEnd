@@ -435,178 +435,6 @@ html {
             background: black;
             color: white;
             cursor: pointer; }
-        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand {
-          float: left;
-          display: block;
-          margin-right: 1.5333130693%;
-          width: 23.8500151981%; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand:last-child {
-            margin-right: 0; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand h1 {
-            display: -webkit-box;
-            display: -moz-box;
-            display: box;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -moz-box-align: center;
-            box-align: center;
-            -webkit-align-items: center;
-            -moz-align-items: center;
-            -ms-align-items: center;
-            -o-align-items: center;
-            align-items: center;
-            -ms-flex-align: center;
-            -webkit-box-pack: end;
-            -moz-box-pack: end;
-            box-pack: end;
-            -webkit-justify-content: flex-end;
-            -moz-justify-content: flex-end;
-            -ms-justify-content: flex-end;
-            -o-justify-content: flex-end;
-            justify-content: flex-end;
-            -ms-flex-pack: end;
-            color: gold;
-            font-family: "Slabo 27px";
-            text-shadow: 0px -2px #0F4D92; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand h1 i {
-              margin-right: 5px;
-              text-shadow: 0px -1px #0F4D92; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button {
-            float: left;
-            display: block;
-            margin-right: 1.5333130693%;
-            width: 49.2333434654%;
-            background: transparent; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button:last-child {
-              margin-right: 0; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button:nth-child(1) {
-              color: #8AC007;
-              outline-color: #8AC007;
-              border-color: #8AC007;
-              text-shadow: 0px -1px #0f4d92;
-              box-shadow: 0px 0px; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand button:nth-child(2) {
-              color: orange;
-              outline-color: orange;
-              box-shadow: 0px 0px; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result {
-            margin-top: 15px;
-            float: left;
-            display: block;
-            margin-right: 1.5333130693%;
-            width: 100%;
-            text-align: left; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result:last-child {
-              margin-right: 0; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) {
-              font-weight: bold; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:first-child {
-                color: #adf109; }
-                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:first-child i {
-                  color: #adf109;
-                  float: right;
-                  font-size: 120%; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(1) span:nth-child(2) {
-                color: white;
-                font-weight: bold; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) {
-              font-weight: bold; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:first-child {
-                color: #b3e0f2; }
-                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:first-child i {
-                  color: #b3e0f2;
-                  float: right;
-                  font-size: 120%; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-brand .search-mode-result div:nth-child(2) span:nth-child(2) {
-                color: white;
-                font-weight: bold; }
-        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group {
-          float: left;
-          display: block;
-          margin-right: 1.5333130693%;
-          width: 32.3111246205%;
-          color: linen;
-          line-height: 3em;
-          border-left: 1px solid gold;
-          padding: 1.5333130693%; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group:last-child {
-            margin-right: 0; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input {
-            display: -webkit-box;
-            display: -moz-box;
-            display: box;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-pack: end;
-            -moz-box-pack: end;
-            box-pack: end;
-            -webkit-justify-content: flex-end;
-            -moz-justify-content: flex-end;
-            -ms-justify-content: flex-end;
-            -o-justify-content: flex-end;
-            justify-content: flex-end;
-            -ms-flex-pack: end; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div {
-              display: block;
-              float: left;
-              display: block;
-              margin-right: 1.5333130693%;
-              width: 100%; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div::after {
-                clear: both;
-                content: "";
-                display: table; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div:last-child {
-                margin-right: 0; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div span {
-                float: left;
-                display: block;
-                margin-right: 1.5333130693%;
-                width: 23.8500151981%;
-                display: inline-block;
-                font-size: 130%;
-                color: gold;
-                text-shadow: 0px -1px black; }
-                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div span:last-child {
-                  margin-right: 0; }
-              .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div input {
-                padding: 1.5333130693%;
-                float: left;
-                display: block;
-                margin-right: 1.5333130693%;
-                width: 74.6166717327%;
-                background: transparent;
-                color: linen;
-                font-weight: bold;
-                display: inline-block;
-                box-shadow: 2px 2px #4d004d inset; }
-                .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-input-group .search-mode-input div input:last-child {
-                  margin-right: 0; }
-        .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard {
-          float: left;
-          display: block;
-          margin-right: 1.5333130693%;
-          width: 32.3111246205%; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard:last-child {
-            margin-right: 0; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-input-result {
-            margin-bottom: 5px;
-            border: 1px inset black;
-            border-radius: 5px;
-            padding: 1.5333130693%; }
-            .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-input-result span:nth-child(1) {
-              color: linen; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-result span:nth-child(1) {
-            display: block;
-            color: #8AC007; }
-          .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .search-mode-dashboard .search-mode-result span:nth-child(2) {
-            display: block;
-            color: skyblue; }
     .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB {
       float: left;
       display: block;
@@ -928,7 +756,7 @@ html {
           font-weight: bold;
           color: white;
           background: #1465c0; }
-    .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader {
+    .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader {
       background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/noisy_grid_simple.png"), -webkit-linear-gradient(90deg, #104b63, #5bbce4), center no-repeat #104b63 scroll;
       background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/noisy_grid_simple.png"), linear-gradient(90deg, #104b63, #5bbce4), center no-repeat #104b63 scroll;
       float: left;
@@ -961,13 +789,13 @@ html {
       border-top-right-radius: 0;
       border: 2px silver solid;
       border-right: 0; }
-      .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader:last-child {
+      .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader:last-child {
         margin-right: 0; }
-      .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader::after {
+      .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader::after {
         clear: both;
         content: "";
         display: table; }
-      .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .title {
+      .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader .title {
         float: left;
         display: block;
         margin-right: 1.5333130693%;
@@ -975,30 +803,30 @@ html {
         display: inline-block;
         color: linen;
         font-size: 250%; }
-        .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .title:last-child {
+        .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader .title:last-child {
           margin-right: 0; }
-      .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options {
+      .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader .options {
         float: left;
         display: block;
         margin-right: 1.5333130693%;
         width: 23.8500151981%;
         height: 100%;
         display: inline-block; }
-        .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options:last-child {
+        .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader .options:last-child {
           margin-right: 0; }
-        .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options button:first-child {
+        .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader .options button:first-child {
           background: orange;
           color: black;
           padding: 1px 10px;
           border: 1px linen solid;
           font-size: 150%; }
-        .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeHeader .options button:nth-child(2) {
+        .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeHeader .options button:nth-child(2) {
           background: linen;
           color: black;
           padding: 1px 10px;
           border: 1px orange solid;
           font-size: 150%; }
-    .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell {
+    .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeWell {
       float: left;
       display: block;
       margin-right: 1.5333130693%;
@@ -1013,23 +841,259 @@ html {
       text-align: left;
       border: 2px solid silver;
       border-right: 0; }
-      .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell:last-child {
+      .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeWell:last-child {
         margin-right: 0; }
-      .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField {
+      .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeWell .importerStepThreeField {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 32.3111246205%;
+        margin-right: 10px; }
+        .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeWell .importerStepThreeField:last-child {
+          margin-right: 0; }
+        .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-heading {
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/pw_maze_white.png"), -webkit-linear-gradient(90deg, skyblue, linen), center no-repeat skyblue scroll;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/pw_maze_white.png"), linear-gradient(90deg, skyblue, linen), center no-repeat skyblue scroll;
+          font-size: 125%; }
+        .importerContainer .importerContainerRightPanel dave-importer-configuration-page .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-body {
+          height: 200px;
+          overflow-y: auto;
+          background: linen; }
+    .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .importerSetUpButton {
+      cursor: pointer; }
+      .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .importerSetUpButton div {
+        display: inline;
+        padding: 5px 10px 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background: black;
+        color: white; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .importerSetUpButton div:hover {
+          background: white;
+          color: black; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .importerSetUpButton div:nth-child(2) {
+          background: gold;
+          color: black; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .importerSetUpButton div:nth-child(2):hover {
+            background: black;
+            color: gold; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .importerSetUpButton div:nth-child(3) {
+          background: skyblue;
+          color: black; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .importerSetUpButton div:nth-child(3):hover {
+            background: #4d004d;
+            color: skyblue; }
+    .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well {
+      position: relative;
+      padding: 20px 20px;
+      background: url("../imgs/congruent_outline.png") repeat;
+      background: url("../imgs/congruent_outline.png") repeat;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      height: 650px;
+      border: 1px lightgrey solid;
+      margin-bottom: 7px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      box-pack: center;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      -o-justify-content: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      box-align: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      -ms-flex-align: center;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), -webkit-linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll; }
+      .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 23.8500151981%; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand:last-child {
+          margin-right: 0; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand h1 {
+          display: -webkit-box;
+          display: -moz-box;
+          display: box;
+          display: -webkit-flex;
+          display: -moz-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+          -moz-box-align: center;
+          box-align: center;
+          -webkit-align-items: center;
+          -moz-align-items: center;
+          -ms-align-items: center;
+          -o-align-items: center;
+          align-items: center;
+          -ms-flex-align: center;
+          -webkit-box-pack: end;
+          -moz-box-pack: end;
+          box-pack: end;
+          -webkit-justify-content: flex-end;
+          -moz-justify-content: flex-end;
+          -ms-justify-content: flex-end;
+          -o-justify-content: flex-end;
+          justify-content: flex-end;
+          -ms-flex-pack: end;
+          color: gold;
+          font-family: "Slabo 27px";
+          text-shadow: 0px -2px #0F4D92; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand h1 i {
+            margin-right: 5px;
+            text-shadow: 0px -1px #0F4D92; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand button {
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 49.2333434654%;
+          background: transparent; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand button:last-child {
+            margin-right: 0; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand button:nth-child(1) {
+            color: #8AC007;
+            outline-color: #8AC007;
+            border-color: #8AC007;
+            text-shadow: 0px -1px #0f4d92;
+            box-shadow: 0px 0px; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand button:nth-child(2) {
+            color: orange;
+            outline-color: orange;
+            box-shadow: 0px 0px; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result {
+          margin-top: 15px;
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%;
+          text-align: left; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result:last-child {
+            margin-right: 0; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(1) {
+            font-weight: bold; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(1) span:first-child {
+              color: #adf109; }
+              .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(1) span:first-child i {
+                color: #adf109;
+                float: right;
+                font-size: 120%; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(1) span:nth-child(2) {
+              color: white;
+              font-weight: bold; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(2) {
+            font-weight: bold; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(2) span:first-child {
+              color: #b3e0f2; }
+              .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(2) span:first-child i {
+                color: #b3e0f2;
+                float: right;
+                font-size: 120%; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-brand .search-mode-result div:nth-child(2) span:nth-child(2) {
+              color: white;
+              font-weight: bold; }
+      .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group {
+        float: left;
+        display: block;
+        margin-right: 1.5333130693%;
+        width: 32.3111246205%;
+        color: linen;
+        line-height: 3em;
+        border-left: 1px solid gold;
+        padding: 1.5333130693%; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group:last-child {
+          margin-right: 0; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input {
+          display: -webkit-box;
+          display: -moz-box;
+          display: box;
+          display: -webkit-flex;
+          display: -moz-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: end;
+          -moz-box-pack: end;
+          box-pack: end;
+          -webkit-justify-content: flex-end;
+          -moz-justify-content: flex-end;
+          -ms-justify-content: flex-end;
+          -o-justify-content: flex-end;
+          justify-content: flex-end;
+          -ms-flex-pack: end; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input div {
+            display: block;
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 100%; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input div::after {
+              clear: both;
+              content: "";
+              display: table; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input div:last-child {
+              margin-right: 0; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input div span {
+              float: left;
+              display: block;
+              margin-right: 1.5333130693%;
+              width: 23.8500151981%;
+              display: inline-block;
+              font-size: 130%;
+              color: gold;
+              text-shadow: 0px -1px black; }
+              .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input div span:last-child {
+                margin-right: 0; }
+            .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input div input {
+              padding: 1.5333130693%;
+              float: left;
+              display: block;
+              margin-right: 1.5333130693%;
+              width: 74.6166717327%;
+              background: transparent;
+              color: linen;
+              font-weight: bold;
+              display: inline-block;
+              box-shadow: 2px 2px #4d004d inset; }
+              .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-input-group .search-mode-input div input:last-child {
+                margin-right: 0; }
+      .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-dashboard {
         float: left;
         display: block;
         margin-right: 1.5333130693%;
         width: 32.3111246205%; }
-        .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField:last-child {
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-dashboard:last-child {
           margin-right: 0; }
-        .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-heading {
-          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/pw_maze_white.png"), -webkit-linear-gradient(90deg, skyblue, linen), center no-repeat skyblue scroll;
-          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/pw_maze_white.png"), linear-gradient(90deg, skyblue, linen), center no-repeat skyblue scroll;
-          font-size: 125%; }
-        .importerContainer .importerContainerRightPanel .importerStepThree .importerStepThreeWell .importerStepThreeField .panel-body {
-          height: 200px;
-          overflow-y: auto;
-          background: linen; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-dashboard .search-mode-input-result {
+          margin-bottom: 5px;
+          border: 1px inset black;
+          border-radius: 5px;
+          padding: 1.5333130693%; }
+          .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-dashboard .search-mode-input-result span:nth-child(1) {
+            color: linen; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-dashboard .search-mode-result span:nth-child(1) {
+          display: block;
+          color: #8AC007; }
+        .importerContainer .importerContainerRightPanel dave-importer-search-mode-page .search-mode-well .search-mode-dashboard .search-mode-result span:nth-child(2) {
+          display: block;
+          color: skyblue; }
 
 .updateImporterModal {
   padding: 1.5333130693%;

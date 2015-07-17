@@ -69,11 +69,21 @@
       function(directiveName, scope){
         angular.element(directiveName).remove();
         scope.$destroy();
+        
       },
       AddDirectiveService :
       function(targetContainer, directiveName, scope, $compile){
         var el = $compile(directiveName)(scope);
         angular.element(targetContainer).append(el);
+      },
+      CheckDirectiveExpandStatus :
+      function(targetContainer){
+        if(!angular.element('.importerContainerRightPanel').hasClass('expanded')){
+          angular.element("#js-expand-sign").text(' Collapse');
+          angular.element("#js-expand-sign").text(' Collapse');
+          angular.element("#js-expand-arrow").removeClass('glyphicon-arrow-right');
+          angular.element("#js-expand-arrow").addClass('glyphicon-arrow-left');
+        }
       }
   };
   }

@@ -5,7 +5,8 @@ angular
 .controller("UpdateImporterModalCtrl", UpdateImporterModalCtrl)
 .controller("DaveImporterListPageCtrl", DaveImporterListPageCtrl)
 .controller("DaveImporterPageCtrl", DaveImporterPageCtrl)
-.controller("DaveImporterConfigurationPageCtrl", DaveImporterConfigurationPageCtrl);
+.controller("DaveImporterConfigurationPageCtrl", DaveImporterConfigurationPageCtrl)
+.controller("DaveImporterSearchModePageCtrl", DaveImporterSearchModePageCtrl);
 
 ImporterUploadCtrl.$inject = [
   "$timeout",
@@ -54,6 +55,13 @@ DaveImporterConfigurationPageCtrl.$inject = [
   'DirectiveService'
 ];
 
+DaveImporterSearchModePageCtrl.$inject = [
+    '$scope',
+    '$compile',
+    'ImporterSocket',
+    'DirectiveService'
+];
+
 function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, Upload, FormSettingParseService, ImporterSocket, DirectiveService){
   var vm = this;
   //functions
@@ -65,7 +73,6 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
 
   vm.removeFile = removeFile;
   vm.submitFile = submitFile;
-  vm.toggleSearchMode = toggleSearchMode;
 
   //variables
   vm.alerts = {
@@ -75,6 +82,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
 
 
   vm.createNewImporterFormModel = {};
+  vm.leftMenuExpanded = false;
   vm.fileUploadProgress = 0;
   vm.randomImporterFormFields = [
     {
@@ -119,7 +127,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
     },
     {
       type:"input",
-      key:"Target Data Item Name",
+      key:"Target Importer Name",
       data:{
         placeholder: "example"
       }
@@ -234,6 +242,18 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
     console.log(progressingStat);
   });
 
+  $scope.$on('toggleLeftMenu', function(){
+    angular.element(".importerContainerLeftMenu").toggleClass('noExpanded');
+    angular.element(".importerContainerRightPanel").toggleClass('expanded');
+    angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-left  animated flipInY');
+    angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-right  animated flipInY');
+    if(angular.element("#js-expand-sign").html() === " Expand"){
+      angular.element("#js-expand-sign").html(" Collapse");
+    }
+    else if(angular.element("#js-expand-sign").html() === " Collapse"){
+      angular.element("#js-expand-sign").html(" Expand");
+    }
+  });
   $scope.$watch(function(){
     return vm.stepOne;
   }, function(newValue){
@@ -283,7 +303,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
           ownerName: response.payload.ownerName,
           description: response.payload.description
         };
-        var bindScope = $scope.$parent.$new(true);
+        var bindScope = $scope.$new(true);
         bindScope.importerToRequest = {};
         angular.copy(vm.importerToRequest, bindScope.importerToRequest);
         $timeout(function(){
@@ -302,8 +322,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
       }
       if(response.reply === "submitting"){
         if(response.completeState === 1){
-          $interval.$cancel(vm.importerCreationPromise);
-          vm.fileUploadProgress = 1;
+          $interval.cancel(vm.importerCreationPromise);
+          vm.fileUploadProgress = 100;
         }
       }
     }
@@ -411,18 +431,6 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
   }
 
 
-  function toggleSearchMode(){
-    vm.stepOneSearchMode = vm.stepOneSearchMode ? false : true;
-    angular.element("#js-pagination").toggleClass("rotateInUpLeft");
-    angular.element("#js-pagination").toggleClass("rotateOutDownLeft");
-    console.log(angular.element("#js-search-sign").html());
-    if(angular.element("#js-search-sign").html() === " Search Mode"){
-      angular.element("#js-search-sign").html(" Importer List");
-    } else if(angular.element("#js-search-sign").html() === " Importer List"){
-      angular.element("#js-search-sign").html(" Search Mode");
-    }
-  }
-
 }
 
 function UpdateImporterModalCtrl($scope, $modalInstance, currentImporter, Upload, ImporterSocket){
@@ -503,6 +511,7 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   vm.requestImporter = requestImporter;
   vm.toggleLayOutMenu = toggleLayOutMenu;
   vm.toggleLeftMenu = toggleLeftMenu;
+  vm.toggleSearchMode= toggleSearchMode;
   //variables
   vm.alerts = [];
   vm.avaliableTableColumns =[];
@@ -530,15 +539,18 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
       } else {
         vm.importerList = vm.importerList.concat(data.list_out);
         vm.loading = false;
-        console.log(vm.importerList);
       }
     }
   });
 
+  $scope.$on('$destroy', function (event) {
+      ImporterSocket.removeListener('importerListData');
+  });
   vm.activate();
   ///////////////////////////////////
   function activate(){
     ImporterSocket.emit("requestImporterList");
+    DirectiveService.CheckDirectiveExpandStatus('.importerContainerRightPanel');
     vm.promiseToSolve =  $timeout(function(){
 
       var alertExsited = false;
@@ -643,16 +655,14 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   }
 
   function toggleLeftMenu(){
-    angular.element(".importerContainerLeftMenu").toggleClass('noExpanded');
-    angular.element(".importerContainerRightPanel").toggleClass('expanded');
-    angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-left  animated flipInY');
-    angular.element("#js-expand-arrow").toggleClass('glyphicon-arrow-right  animated flipInY');
-    if(angular.element("#js-expand-sign").html() === " Expand"){
-      angular.element("#js-expand-sign").html(" Collapse");
-    }
-    else if(angular.element("#js-expand-sign").html() === " Collapse"){
-      angular.element("#js-expand-sign").html(" Expand");
-    }
+    $scope.$emit("toggleLeftMenu");
+  }
+
+  function toggleSearchMode(){
+    var bindScope = $scope.$parent.$new(true);
+    DirectiveService.DestroyDirectiveService('dave-importer-list-page', $scope);
+    DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-search-mode-page class="angular-directive" ></dave-importer-search-mode-page>', bindScope, $compile);
+
   }
 }
 
@@ -666,6 +676,7 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   //variables
   vm.alerts = [];
   vm.currentDataItem = '';
+  $scope.expanded = false;
   vm.importerDataItemToDisplay = {};
   vm.importerDataItemData = [];
   vm.importerToDisplay = JSON.parse($scope.importerToRequest);
@@ -675,19 +686,16 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
     'fieldName': ""
   };
   vm.systemStatus = 'Normal';
-
+  vm.toggleLeftMenu = toggleLeftMenu;
   ImporterSocket.on("importerData", function(data){
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.requestImporterPromiseToSolve);
-      console.log(data);
       if(vm.currentDataItem === ''){
         vm.currentDataItem = data.list_out[0];
-        console.log(vm.currentDataItem);
       }
       vm.importerToDisplayContent = vm.importerToDisplayContent.concat(data.list_out);
 
       if(data.completeState === 1.0){
-        console.log(vm.importerToDisplayContent);
         vm.importerToDisplayContent.forEach(function(element, index, array){
           ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
         });
@@ -709,7 +717,6 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
 
   ImporterSocket.on("importerDataItemData", function(dataItem){
     if(vm.systemStatus === "Normal"){
-      console.log(dataItem);
       if(!vm.importerDataItemToDisplay[dataItem.name]){
         vm.importerDataItemToDisplay[dataItem.name] = [];
       }
@@ -717,16 +724,20 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
 
       if((dataItem.completeState === 1.0) && (dataItem.name === vm.currentDataItem.fieldName)){
         vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
-        console.log(vm.importerDataItemData);
+
       }
 
     }
   });
-
+  $scope.$on('$destroy', function (event) {
+      ImporterSocket.removeListener('importerData');
+      ImporterSocket.removeListener('importerDataItemData');
+  });
   vm.activate();
   ///////////////////////////////////
   function activate(){
     ImporterSocket.emit("requestImporter", vm.importerToDisplay);
+    DirectiveService.CheckDirectiveExpandStatus('.importerContainerRightPanel');
     if((vm.systemStatus === 'Normal') && (vm.requestImporterPromiseToSolve === null)){
       vm.requestImporterPromiseToSolve = $timeout(function(){
         if(vm.alerts.indexOf({ type: 'danger', msg: 'Timeout' }) === -1){
@@ -748,6 +759,9 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
     vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
   }
 
+  function toggleLeftMenu(){
+    $scope.$emit('toggleLeftMenu');
+  }
   function updateImporter(){
     var updateImporterInterface = $modal.open({
       templateUrl:"Importer/ImporterModalViews/updateImporter.html",
@@ -836,6 +850,26 @@ function DaveImporterConfigurationPageCtrl($scope, $compile, ImporterSocket, Dir
     //   alert("Something Wents Wrong");
     // });
 
+  }
+}
+
+function DaveImporterSearchModePageCtrl($scope, $compile, ImporterSocket, DirectiveService, importerListColumnNamesConversion){
+  var vm = this;
+
+  //functions
+  vm.toggleLeftMenu = toggleLeftMenu;
+  //variables
+  vm.searchableColumns = [
+    {name: "importerName", status: true, index: 0},
+    {name:  "location", status: true, index: 1},
+    {name: "ownerName", status: true, index: 2}  ,
+    {name: "type", status: true, index: 3}  ,
+    {name: "description", status:true, index: 4}
+  ];
+
+  //////////////////////////
+  function toggleLeftMenu(){
+    $scope.$emit('toggleLeftMenu');
   }
 }
 })();

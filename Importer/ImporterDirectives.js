@@ -3,7 +3,8 @@
   .directive('daveSmartDisable', daveSmartDisableDirective)
   .directive('daveImporterListPage', daveImporterListPage)
   .directive('daveImporterPage', daveImporterPage)
-  .directive('daveImporterConfigurationPage', daveImporterConfigurationPage);
+  .directive('daveImporterConfigurationPage', daveImporterConfigurationPage)
+  .directive('daveImporterSearchModePage', daveImporterSearchModePage);
 
   function daveSmartDisableDirective(){
     return {
@@ -51,7 +52,6 @@
       scope: {},
       controllerAs: "daveImporterListPageCtrl",
       link: function(scope, element, attrs){
-
       }
     };
   }
@@ -66,6 +66,7 @@
         importerToRequest: "@importerToRequest"
       },
       link: function(scope, element, attrs){
+
       }
     };
   }
@@ -83,6 +84,21 @@
       },
       link: function(scope, element, attrs){
         console.log(scope);
+      }
+    };
+  }
+
+  function daveImporterSearchModePage(){
+    return {
+      restrict : "EA",
+      templateUrl:'Importer/ImporterDirectiveTemplates/daveImporterSearchModePage.html',
+      controller:'DaveImporterSearchModePageCtrl',
+      controllerAs:'daveImporterSearchModePageCtrl',
+      scope:{
+        searchableColumns:"@searchableColumns",
+        backDirective:"@backDirective"
+      },
+      link: function(scope, element, attrs){
       }
     };
   }

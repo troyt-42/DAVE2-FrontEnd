@@ -281,102 +281,6 @@ $importerWellHeight: 650px
               background: black
               color: white
               cursor: pointer
-
-          .search-mode-brand
-            +span-columns(3)
-            h1
-              +display(flex)
-              +align-items(center)
-              +justify-content(flex-end)
-              color: gold
-              font-family: "Slabo 27px"
-              text-shadow: 0px -2px $yale-blue
-              i
-                margin-right: 5px
-                text-shadow: 0px -1px $yale-blue
-            button
-              +span-columns(6)
-              background: transparent
-              &:nth-child(1)
-                color: #8AC007
-                outline-color: #8AC007
-                border-color: #8AC007
-                text-shadow: 0px -1px darken($yale-blue, 0%)
-                box-shadow: 0px 0px
-              &:nth-child(2)
-                color: orange
-                outline-color: orange
-                box-shadow: 0px 0px
-            .search-mode-result
-              margin-top: 15px
-              +span-columns(12)
-              text-align: left
-              div:nth-child(1)
-                font-weight: bold
-                span:first-child
-                  color: lighten(#8AC007, 10%)
-                  i
-                    color: lighten(#8AC007, 10%)
-                    float: right
-                    font-size: 120%
-                span:nth-child(2)
-                  color: white
-                  font-weight: bold
-              div:nth-child(2)
-                font-weight: bold
-                span:first-child
-                  color: lighten(skyblue, 10%)
-                  i
-                    color: lighten(skyblue, 10%)
-                    float: right
-                    font-size: 120%
-                span:nth-child(2)
-                  color: white
-                  font-weight: bold
-          .search-mode-input-group
-            +span-columns(4)
-            color: linen
-            line-height: 3em
-            border-left: 1px solid gold
-
-            +pad()
-            .search-mode-input
-              +display(flex)
-              +justify-content(flex-end)
-              div
-                +row()
-                +span-columns(12)
-                span
-                  +span-columns(3)
-                  display: inline-block
-                  font-size: 130%
-                  color: gold
-                  text-shadow: 0px -1px black
-                input
-                  +pad()
-                  +span-columns(9)
-                  background: transparent
-                  color: linen
-                  font-weight: bold
-                  display: inline-block
-                  box-shadow: 2px 2px darken(purple, 10%) inset
-
-          .search-mode-dashboard
-            +span-columns(4)
-            .search-mode-input-result
-              margin-bottom: 5px
-              border: 1px inset black
-              border-radius: 5px
-              +pad()
-              span:nth-child(1)
-                color: linen
-            .search-mode-result
-              span:nth-child(1)
-                display: block
-                color: #8AC007
-              span:nth-child(2)
-                display: block
-                color: skyblue
     dave-importer-page
       .importerStepTwoB
         +span-columns(12)
@@ -596,61 +500,193 @@ $importerWellHeight: 650px
           color: white
           background: lighten($yale-blue, 10%)
 
-
-    .importerStepThree
-      .importerStepThreeHeader
-        +texture(90deg, darken(skyblue,50%), darken(skyblue,10%) , 88, 0)
-        +span-columns(12)
-        +row()
+    dave-importer-configuration-page
+      .importerStepThree
+        .importerStepThreeHeader
+          +texture(90deg, darken(skyblue,50%), darken(skyblue,10%) , 88, 0)
+          +span-columns(12)
+          +row()
+          +display(flex)
+          +align-items(center)
+          padding-left: 15px
+          border-radius: 5px
+          text-align: left
+          border: 0px solid gray
+          margin-bottom: 10px
+          +border-right-radius(0)
+          border: 2px silver solid
+          border-right: 0
+          .title
+            +span-columns(9)
+            display: inline-block
+            color: linen
+            font-size: 250%
+            // font-weight: bold
+          .options
+            +span-columns(3)
+            height: 100%
+            display: inline-block
+            button:first-child
+              background: orange
+              color: black
+              +pad(1px 10px)
+              border: 1px linen solid
+              font-size: 150%
+            button:nth-child(2)
+              background: linen
+              color: black
+              +pad(1px 10px)
+              border: 1px orange solid
+              font-size: 150%
+        .importerStepThreeWell
+          +span-columns(12)
+          +pad(20px)
+          height: $importerWellHeight - 5px
+          +texture(90deg,  darken($yale-blue, 20%) ,darken(skyblue, 50%), 32, 0)
+          border-radius: 15px
+          +border-right-radius(0px)
+          text-align: left
+          border: 2px solid silver
+          border-right: 0
+          .importerStepThreeField
+            +span-columns(4)
+            margin-right: 10px
+            .panel-heading
+              +texture(90deg,  skyblue, linen, 73, 0)
+              font-size: 125%
+            .panel-body
+              height: 200px
+              overflow-y: auto
+              background: linen
+    dave-importer-search-mode-page
+      .importerSetUpButton
+        cursor: pointer
+        div
+          display: inline
+          +pad(5px 10px 20px)
+          +border-top-radius(10px)
+          background: black
+          color: white
+          &:hover
+            background: white
+            color: black
+          &:nth-child(2)
+            background: gold
+            color: black
+            &:hover
+              background: black
+              color: gold
+          &:nth-child(3)
+            background: skyblue
+            color: black
+            &:hover
+              background: darken(purple, 10%)
+              color: skyblue
+      .search-mode-well
+        position: relative
+        +pad(20px 20px)
+        +background(url('../imgs/congruent_outline.png') repeat)
+        +border-top-radius(10px)
+        +border-bottom-radius(10px)
+        height: $importerWellHeight
+        border: 1px lightgrey solid
+        margin-bottom: 7px
         +display(flex)
+        +justify-content(center)
         +align-items(center)
-        padding-left: 15px
-        border-radius: 5px
-        text-align: left
-        border: 0px solid gray
-        margin-bottom: 10px
-        +border-right-radius(0)
-        border: 2px silver solid
-        border-right: 0
-        .title
-          +span-columns(9)
-          display: inline-block
-          color: linen
-          font-size: 250%
-          // font-weight: bold
-        .options
+        +texture(0deg, $yale-blue,  darken(purple, 10%) , 23, 1)
+        .search-mode-brand
           +span-columns(3)
-          height: 100%
-          display: inline-block
-          button:first-child
-            background: orange
-            color: black
-            +pad(1px 10px)
-            border: 1px linen solid
-            font-size: 150%
-          button:nth-child(2)
-            background: linen
-            color: black
-            +pad(1px 10px)
-            border: 1px orange solid
-            font-size: 150%
-      .importerStepThreeWell
-        +span-columns(12)
-        +pad(20px)
-        height: $importerWellHeight - 5px
-        +texture(90deg,  darken($yale-blue, 20%) ,darken(skyblue, 50%), 32, 0)
-        border-radius: 15px
-        +border-right-radius(0px)
-        text-align: left
-        border: 2px solid silver
-        border-right: 0
-        .importerStepThreeField
+          h1
+            +display(flex)
+            +align-items(center)
+            +justify-content(flex-end)
+            color: gold
+            font-family: "Slabo 27px"
+            text-shadow: 0px -2px $yale-blue
+            i
+              margin-right: 5px
+              text-shadow: 0px -1px $yale-blue
+          button
+            +span-columns(6)
+            background: transparent
+            &:nth-child(1)
+              color: #8AC007
+              outline-color: #8AC007
+              border-color: #8AC007
+              text-shadow: 0px -1px darken($yale-blue, 0%)
+              box-shadow: 0px 0px
+            &:nth-child(2)
+              color: orange
+              outline-color: orange
+              box-shadow: 0px 0px
+          .search-mode-result
+            margin-top: 15px
+            +span-columns(12)
+            text-align: left
+            div:nth-child(1)
+              font-weight: bold
+              span:first-child
+                color: lighten(#8AC007, 10%)
+                i
+                  color: lighten(#8AC007, 10%)
+                  float: right
+                  font-size: 120%
+              span:nth-child(2)
+                color: white
+                font-weight: bold
+            div:nth-child(2)
+              font-weight: bold
+              span:first-child
+                color: lighten(skyblue, 10%)
+                i
+                  color: lighten(skyblue, 10%)
+                  float: right
+                  font-size: 120%
+              span:nth-child(2)
+                color: white
+                font-weight: bold
+        .search-mode-input-group
           +span-columns(4)
+          color: linen
+          line-height: 3em
+          border-left: 1px solid gold
 
-          .panel-heading
-            +texture(90deg,  skyblue, linen, 73, 0)
-            font-size: 125%
-          .panel-body
-            height: 200px
-            overflow-y: auto
-            background: linen
+          +pad()
+          .search-mode-input
+            +display(flex)
+            +justify-content(flex-end)
+            div
+              +row()
+              +span-columns(12)
+              span
+                +span-columns(3)
+                display: inline-block
+                font-size: 130%
+                color: gold
+                text-shadow: 0px -1px black
+              input
+                +pad()
+                +span-columns(9)
+                background: transparent
+                color: linen
+                font-weight: bold
+                display: inline-block
+                box-shadow: 2px 2px darken(purple, 10%) inset
+
+        .search-mode-dashboard
+          +span-columns(4)
+          .search-mode-input-result
+            margin-bottom: 5px
+            border: 1px inset black
+            border-radius: 5px
+            +pad()
+            span:nth-child(1)
+              color: linen
+          .search-mode-result
+            span:nth-child(1)
+              display: block
+              color: #8AC007
+            span:nth-child(2)
+              display: block
+              color: skyblue

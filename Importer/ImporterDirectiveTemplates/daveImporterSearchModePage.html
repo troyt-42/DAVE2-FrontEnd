@@ -1,0 +1,26 @@
+<div class="importerSetUpButton">
+  <div class=" animated fadeIn" ng-click="daveImporterSearchModePageCtrl.toggleLeftMenu()"><i class="glyphicon glyphicon-arrow-right  animated flipInY" id="js-expand-arrow"></i><span id="js-expand-sign"> Expand</span></div>
+  <div ng-click="daveImporterPageCtrl.backToImporterList()"><span id="js-expand-sign"> Back</span></div>
+  <!-- <div ng-click="daveImporterPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span class="js-search-sign"> Search Mode</span></div> -->
+</div>
+<div class="search-mode-well">
+  <div class="search-mode-brand" >
+    <h1 class=" animated flipInY"><i class="glyphicon glyphicon-eye-open"></i> Search Mode</h1>
+    <div class="animated flipInY">
+      <button type="button" class="btn btn-info search-btn" >How To Use?</button>
+      <button type="button" class="btn btn-warning search-btn">Search Tool</button>
+    </div>
+    <div class="search-mode-result animated flipInY">
+      <div><span><i class="glyphicon glyphicon-tasks"></i> Available Results:</span><span> 0 Items</span></div>
+      <div><span><i class="glyphicon glyphicon-dashboard"></i> Estimated Loading Time:</span><span> 0s</span></div>
+    </div>
+  </div>
+  <div class="search-mode-input-group" >
+    <div class="search-mode-input  animated flipInX" ng-repeat="column in daveImporterSearchModePageCtrl.searchableColumns track by column.name" >
+      <div ng-show="column.status">
+        <span>{{column.name | importerListColumnNamesConversion}}:</span>
+        <input type="text" class="form-control" ng-model="daveImporterSearchModePageCtrl.searchModeInput[column.name]"></input>
+      </div>
+    </div>
+  </div>
+</div>
