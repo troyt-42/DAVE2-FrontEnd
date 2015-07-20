@@ -1754,6 +1754,17 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/bower_components\/angular-animate\/index.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-animate\/index.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-animate\/min\/index-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/bower_components\/angular-animate\/package.json": {
 		"fileType": 524288,
 		"ignore": 1,
@@ -1840,6 +1851,82 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
+		},
+	"\/bower_components\/angular-cookies\/angular-cookies.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-cookies\/angular-cookies.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-cookies\/min\/angular-cookies-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/bower_components\/angular-cookies\/angular-cookies.min.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-cookies\/angular-cookies.min.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-cookies\/min\/angular-cookies.min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/bower_components\/angular-cookies\/bower.json": {
+		"fileType": 524288,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-cookies\/bower.json",
+		"orderOutput": 0,
+		"outputAbbreviatedPath": "\/bower_components\/angular-cookies\/bower-min.json",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/bower_components\/angular-cookies\/index.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-cookies\/index.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-cookies\/min\/index-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/bower_components\/angular-cookies\/package.json": {
+		"fileType": 524288,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-cookies\/package.json",
+		"orderOutput": 0,
+		"outputAbbreviatedPath": "\/bower_components\/angular-cookies\/package-min.json",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/bower_components\/angular-cookies\/README.md": {
+		"criticStyle": 0,
+		"enableFootnotes": 1,
+		"enableLabels": 1,
+		"enableSmartQuotes": 1,
+		"escapeLineBreaks": 0,
+		"fileType": 4096,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-cookies\/README.md",
+		"maskEmailAddresses": 1,
+		"outputAbbreviatedPath": "\/bower_components\/angular-cookies\/README.html",
+		"outputFormat": 0,
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"parseMetadata": 1,
+		"processHTML": 0,
+		"randomFootnoteNumbers": 0,
+		"useCompatibilityMode": 0
 		},
 	"\/bower_components\/angular-formly\/bower.json": {
 		"fileType": 524288,
@@ -2014,6 +2101,39 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/bower_components\/angular-mocks\/ngAnimateMock.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-mocks\/ngAnimateMock.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-mocks\/min\/ngAnimateMock-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/bower_components\/angular-mocks\/ngMock.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-mocks\/ngMock.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-mocks\/min\/ngMock-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/bower_components\/angular-mocks\/ngMockE2E.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-mocks\/ngMockE2E.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-mocks\/min\/ngMockE2E-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/bower_components\/angular-mocks\/package.json": {
 		"fileType": 524288,
 		"ignore": 1,
@@ -2078,6 +2198,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/bower_components\/angular-route\/index.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular-route\/index.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular-route\/min\/index-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
 		},
 	"\/bower_components\/angular-route\/package.json": {
 		"fileType": 524288,
@@ -2261,6 +2392,17 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/bower_components\/angular\/index.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/angular\/index.js",
+		"outputAbbreviatedPath": "\/bower_components\/angular\/min\/index-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
 		},
 	"\/bower_components\/angular\/package.json": {
 		"fileType": 524288,
@@ -13290,6 +13432,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
+		},
+	"\/bower_components\/ng-file-upload\/index.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/bower_components\/ng-file-upload\/index.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/bower_components\/ng-file-upload\/ng-file-upload-all.js": {
 		"fileType": 64,
@@ -24621,6 +24772,26 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/DataItemDisplay\/DataItemDisplayDirectives.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/DataItemDisplay\/DataItemDisplayDirectives.js",
+		"outputAbbreviatedPath": "\/DataItemDisplay\/min\/DataItemDisplayDirectives-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/DataItemDisplay\/DataItemDisplayDirectiveTemplates\/daveDataItemDisplayListPage.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/DataItemDisplay\/DataItemDisplayDirectiveTemplates\/daveDataItemDisplayListPage.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/DataItemDisplay\/DataItemDisplayServices.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -24632,12 +24803,45 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/DataItemDisplay\/min\/DataItemDisplay-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/DataItemDisplay\/min\/DataItemDisplay-min.js",
+		"outputAbbreviatedPath": "\/DataItemDisplay\/min\/min\/DataItemDisplay-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/DataItemDisplay\/min\/DataItemDisplayControllers-min.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/DataItemDisplay\/min\/DataItemDisplayControllers-min.js",
 		"outputAbbreviatedPath": "\/DataItemDisplay\/min\/min\/DataItemDisplayControllers-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/DataItemDisplay\/min\/DataItemDisplayDirectives-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/DataItemDisplay\/min\/DataItemDisplayDirectives-min.js",
+		"outputAbbreviatedPath": "\/DataItemDisplay\/min\/min\/DataItemDisplayDirectives-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/DataItemDisplay\/min\/DataItemDisplayServices-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/DataItemDisplay\/min\/DataItemDisplayServices-min.js",
+		"outputAbbreviatedPath": "\/DataItemDisplay\/min\/min\/DataItemDisplayServices-min-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -25161,6 +25365,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/Importer\/ImporterServices.js",
 		"outputAbbreviatedPath": "\/Importer\/min\/ImporterServices-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/Importer\/min\/Importer-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/Importer\/min\/Importer-min.js",
+		"outputAbbreviatedPath": "\/Importer\/min\/min\/Importer-min-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -36729,6 +36944,22 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
+		},
+	"\/sass\/_dataItemDisplay.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/sass\/_dataItemDisplay.sass",
+		"outputAbbreviatedPath": "\/css\/_dataItemDisplay.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
 		},
 	"\/sass\/_importer.modal.sass": {
 		"createSourceMap": 0,

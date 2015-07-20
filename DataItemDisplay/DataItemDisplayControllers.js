@@ -1,9 +1,11 @@
 (function(){'use strict';
 
 angular.module("Dave2.DataItemDisplay")
-.controller("DataItemDisplayCtrl", DataItemDisplayCtrl);
+.controller("DataItemDisplayCtrl", DataItemDisplayCtrl)
+.controller("DaveDataItemDisplayListPageCtrl", DaveDataItemDisplayListPageCtrl);
 
 DataItemDisplayCtrl.$inject=['$scope','$timeout','dataItemDisplaySocket'];
+DaveDataItemDisplayListPageCtrl.$inject=['$scope','$timeout','dataItemDisplaySocket'];
 
 function DataItemDisplayCtrl($scope,$timeout,dataItemDisplaySocket){
   var vm = this;
@@ -287,5 +289,20 @@ function DataItemDisplayCtrl($scope,$timeout,dataItemDisplaySocket){
   });
 
 
+}
+
+function DaveDataItemDisplayListPageCtrl($scope, $timeout, dataItemDisplaySocket){
+  var vm = this;
+
+  //functions
+  vm.activate = activate;
+  //variables
+
+  vm.activate();
+  /////////////////
+
+  function activate(){
+    dataItemDisplaySocket.emit('requestDataItemList');
+  }
 }
 }());

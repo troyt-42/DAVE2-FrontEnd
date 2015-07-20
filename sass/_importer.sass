@@ -26,7 +26,7 @@ $importerWellHeight: 650px
     +span-columns(3)
     +pad(20px 20px 0 0)
     +border-right-radius(20px)
-    +background(url("../imgs/congruent_outline.png") repeat)
+    background: black
 
     max-height: 700px
     border: 1px solid silver
@@ -58,6 +58,17 @@ $importerWellHeight: 650px
 
     button
       +span-columns(6)
+    #submitBtn
+      +span-columns(12)
+      float: none
+      margin-top: 10px
+      display: block
+      &:focus
+        box-shadow: none
+        outline-color: white
+        outline: 0px
+      &:disabled
+        cursor: not-allowed
     .complicatedUploadMode
       +span-columns(12)
       margin-top: 5px
@@ -73,8 +84,11 @@ $importerWellHeight: 650px
         +background(linear-gradient(90deg, $blue-color, darkgray))
         span
           cursor: pointer
+          font-size: 100%
+          font-weight: bold
+          color: white
       .panel-body
-        +texture(270deg, lighten($yale-blue, 10%), black , 18, 1)
+        +texture(270deg, lighten($yale-blue, 10%), black , 26, 1)
         border-bottom-right-radius: 5px
         border-top: 0
         span
@@ -98,17 +112,6 @@ $importerWellHeight: 650px
         color: black
         .panel-heading
           +background(linear-gradient(90deg, red, orange))
-      #formly_1_input3_Browse_3
-        +span-columns(12)
-        float: none
-        margin-top: 10px
-        display: block
-        &:focus
-          box-shadow: none
-          outline-color: white
-          outline: 0px
-        &:disabled
-          cursor: not-allowed
   .importerContainerRightPanel
     +span-columns(9)
     +transition(all 0.5s ease-in-out)
@@ -152,6 +155,8 @@ $importerWellHeight: 650px
             text-shadow: 1px 1px black
             font-weight: bold
             +texture(90deg, lighten($yale-blue, 20%),  darken(skyblue, 10%) , 9, 1)
+            i
+              text-shadow: none
       .importerStepOne
         +span-columns(12)
         // .importerSystemTitle
@@ -169,7 +174,7 @@ $importerWellHeight: 650px
         .importerStepOneWell
           position: relative
           +pad(20px 20px)
-          +background(url('../imgs/congruent_outline.png') repeat)
+          +texture(270deg, black, black , 18, 1)
           +border-top-radius(10px)
           +border-bottom-radius(10px)
           height: $importerWellHeight

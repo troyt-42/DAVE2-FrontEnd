@@ -2,15 +2,16 @@
 <div class="importerContainer">
   <div class="importerContainerLeftMenu noExpanded">
     <accordion close-others="true">
-      <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst" style="border-color:black;" >
+      <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst"  >
         <accordion-heading>
-          <span style="font-size:100%;font-weight:bold;color:white">Create New Importer</span>
+          <span >Create New Importer</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.firstOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.firstOpen}" style="font-size:100%;color:white"></i>
         </accordion-heading>
         <formly-form model="importerUploadCtrl.createNewImporterFormModel" fields="importerUploadCtrl.createNewImporterFormFields"></formly-form>
+        <button type="button" class="btn btn-info" id="submitBtn" ngf-select ngf-multiple="true" ng-model="importerUploadCtrl.fileToUpload" accept = "csv" ng-disabled = "!(importerUploadCtrl.createNewImporterFormModel.Location && importerUploadCtrl.createNewImporterFormModel.Name)" >Browse</button>
         <div>
           <ul style="margin-top:5px">
-            <li ng-repeat="file in importerUploadCtrl.createNewImporterFormModel.Browse track by file.name">
+            <li ng-repeat="file in importerUploadCtrl.fileToUpload track by file.name">
               <span style="border: 0;box-shadow: 0;background: inherit">{{file.name}}
               <i class="glyphicon glyphicon-remove" style="float:right;padding-right:5px" ng-click="importerUploadCtrl.removeFile(file)"></i>
             </span>
@@ -18,14 +19,14 @@
           </ul>
         </div>
         <div>
-          <button type="button" ng-disabled = "(!importerUploadCtrl.createNewImporterFormModel['Browse'].length) || (!importerUploadCtrl.stepOne)" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
+          <button type="button" ng-disabled = "(!importerUploadCtrl.fileToUpload.length) || (!importerUploadCtrl.stepOne)" ng-click = "importerUploadCtrl.submitFile()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Submit</button>
           <button type="button" ng-click = "importerUploadCtrl.cancelFile()" ng-disabled = "!importerUploadCtrl.stepOne" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
         </div>
         <div class="complicatedUploadMode">Multiple Sources?</div>
       </accordion-group>
-      <accordion-group is-open="importerUploadCtrl.optionStatus.secondOpen" id="importerOptionsSecond" style="border-color:black">
+      <accordion-group is-open="importerUploadCtrl.optionStatus.secondOpen" id="importerOptionsSecond" >
         <accordion-heading>
-          <span style="font-size:100%;font-weight:bold;color:white">Random Importer</span>
+          <span >Random Data Generator Config</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.secondOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.secondOpen}" style="font-size:100%;color:white"></i>
         </accordion-heading>
         <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields"></formly-form>
@@ -35,18 +36,18 @@
         </div>
       </accordion-group>
 
-      <accordion-group is-open="importerUploadCtrl.optionStatus.thirdOpen" id="importerOptionsThird" style="border-color:black">
+      <accordion-group is-open="importerUploadCtrl.optionStatus.thirdOpen" id="importerOptionsThird" >
         <accordion-heading>
-          <span style="font-size:100%;font-weight:bold;color:white">Default Display Setting</span>
+          <span >Default Display Setting</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.thirdOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.thirdOpen}" style="font-size:100%;color:white"></i>
 
         </accordion-heading>
         Default Setting Info
       </accordion-group>
 
-      <accordion-group is-open="importerUploadCtrl.optionStatus.fourthOpen" id="importerOptionsFourth" style="border-color:black">
+      <accordion-group is-open="importerUploadCtrl.optionStatus.fourthOpen" id="importerOptionsFourth" >
         <accordion-heading>
-          <span style="font-size:100%;font-weight:bold;color:white">Help</span>
+          <span >Help</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.fourthOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.fourthOpen}" style="font-size:100%;color:white"></i>
 
         </accordion-heading>

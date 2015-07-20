@@ -4,7 +4,7 @@
     "formly",
     "ui.bootstrap",
     "ngFileUpload",
-    "ngAnimate",
+    "ngCookies",
     "angularFormlyDaveLib",
     "highcharts-ng",
     "btford.socket-io"

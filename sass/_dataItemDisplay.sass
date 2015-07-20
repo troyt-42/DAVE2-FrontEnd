@@ -1,0 +1,154 @@
+@import "bourbon"
+@import "bourbon", "neat"
+
+.dataItemDisplayContainer
+  +span-columns(12)
+  +pad(0 default)
+  dave-data-item-display-list-page
+    .importerSetUpButton
+      position: relative
+      cursor: pointer
+      div
+        display: inline
+        +pad(5px 10px 20px)
+        +border-top-radius(10px)
+        background: black
+        color: white
+        &:hover
+          background: white
+          color: black
+        &:nth-child(2)
+          background: skyblue
+          color: black
+          &:hover
+            background: darken(purple, 10%)
+            color: skyblue
+        &:last-child
+          position: absolute
+          right: 10px
+          top: -10px
+          border-radius: 5px
+          box-shadow: 2px 2px 1px grey
+          color: linen
+          text-shadow: 1px 1px black
+          font-weight: bold
+          +texture(90deg, lighten(green, 10%) ,lighten(#8AC007, 5%), 9, 1)
+          i
+            text-shadow: none
+    .importerStepOne
+      +span-columns(12)
+      .importerStepOneWell
+        position: relative
+        +pad(20px 20px)
+        +texture(270deg, black, black , 18, 1)
+        +border-top-radius(10px)
+        +border-bottom-radius(10px)
+        height: $importerWellHeight
+        border: 1px lightgrey solid
+        margin-bottom: 7px
+        &.search-mode
+          +display(flex)
+          +justify-content(center)
+          +align-items(center)
+          +texture(0deg, $yale-blue,  darken(purple, 10%) , 23, 1)
+        .waitingSymbol
+          +span-columns(12)
+          +align-items(center)
+          +display(flex)
+          +flex-direction(column)
+          +justify-content(center)
+          +flex-wrap(wrap)
+          height: 100%
+
+          .alert
+            +span-columns(6)
+            +row()
+            margin-top: 5px
+        .importerListTable
+          width: 100%
+          & > thead > tr > th
+            +pad(10px)
+            border-bottom: 3px solid silver
+            vertical-align: center
+            font-size: 110%
+            border-collapse: collapse
+            color: white
+            & > label
+              display: block
+              i
+                font-size: 80%
+                color: skyblue
+                text-shadow: 1px 1px #0F4D92
+                cursor: pointer
+                &.glyphicon-chevron-left:hover
+                  transform: translateX(-1px)
+                  color: gold
+                  text-shadow: 1px 1px coral
+                &.glyphicon-chevron-right:hover
+                  transform: translateX(1px)
+                  color: gold
+                  text-shadow: 1px 1px coral
+            & > input
+              background: linen
+              border: grey 1px solid
+              border-radius: 5px
+              width: 80%
+              color: black
+            & > i
+              +transition(all 0.25s linear)
+              color: LIMEGREEN
+              cursor: pointer
+              &:hover
+                color: grey
+
+            &:last-child
+              text-align: center
+              a
+                text-decoration: none
+                color: gold
+                &:hover
+                  text-decoration: none
+
+              i
+                color: gold
+                font-size: 150%
+                display: block
+                &:hover
+                  color: LIMEGREEN
+              ul.dropdown-menu
+                +pad(2px)
+                min-width: 300px
+                color: $yale-blue
+                right: 0
+                left: auto
+                background: silver
+                border-radius: 5px
+                border: 1px solid skyblue
+                li
+                  width: auto
+                  +pad()
+                  color: gold
+                  +texture(180deg, $yale-blue,  $yale-blue , 26, 1)
+                  +display(flex)
+                  +justify-content(space-between)
+                  border-bottom: 1px skyblue solid
+                  font-weight: bold
+                  input.form-control
+                    display: inline
+                    width: 65%
+                    height: 2em
+
+
+                  &:last-child
+                    border-bottom: 0px
+                  &:hover
+                    +texture(180deg, gold,  gold , 26, 0)
+                    color: $yale-blue
+                    cursor: pointer
+          & > tbody > tr > td
+            +pad(10px)
+            border-top: 1px solid silver
+          & > tbody > tr:hover
+            background: black
+            color: white
+            cursor: pointer

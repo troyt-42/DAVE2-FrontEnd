@@ -15,6 +15,7 @@ ImporterUploadCtrl.$inject = [
   "$modal",
   "$compile",
   "$interval",
+  "$cookies",
   "Upload",
   "FormSettingParseService",
   "ImporterSocket",
@@ -36,6 +37,7 @@ DaveImporterListPageCtrl.$inject = [
   '$timeout',
   '$compile',
   '$rootScope',
+  "$cookies",
   'DirectiveService'
 ];
 
@@ -58,11 +60,12 @@ DaveImporterConfigurationPageCtrl.$inject = [
 DaveImporterSearchModePageCtrl.$inject = [
     '$scope',
     '$compile',
+    '$cookies',
     'ImporterSocket',
     'DirectiveService'
 ];
 
-function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, Upload, FormSettingParseService, ImporterSocket, DirectiveService){
+function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, $cookies, Upload, FormSettingParseService, ImporterSocket, DirectiveService){
   var vm = this;
   //functions
 
@@ -83,6 +86,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
 
   vm.createNewImporterFormModel = {};
   vm.leftMenuExpanded = false;
+  vm.fileToUpload = [];
   vm.fileUploadProgress = 0;
   vm.randomImporterFormFields = [
     {
@@ -202,32 +206,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
       type:"textarea",
       key:"Description"
     },
-    {
-      type:"input3",
-      key:"Browse",
-      data:{
-        inputType:"file"
-      },
-      ngModelAttrs:{
-        fileAccept:{
-          attribute:"accept"
-        },
-        fileUploaderMarkup:{
-          attribute:"ngf-select"
-        },
-        fileUploaderMultipleMarkup:{
-          attribute:"ngf-multiple"
-        }
-      },
-      templateOptions:{
-        fileAccept:".csv",
-        fileUploaderMarkup: "",
-        fileUploaderMultipleMarkup: true
-      },
-      expressionProperties:{
-        "templateOptions.disabled":"!(model.Name || model.Location || model.Description)"
-      }
-    }
+
   ];
 
   vm.waitingMessage = 'File Uploading';
@@ -369,16 +348,16 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
 
 
   function removeFile(file){
-    var index = vm.createNewImporterFormModel.Browse.indexOf(file);
+    var index = vm.fileToUpload.indexOf(file);
     if(index !== -1){
-      vm.createNewImporterFormModel.Browse.splice(index, 1);
+      vm.fileToUpload.splice(index, 1);
       console.log(vm.formModel);
     }
   }
 
 
   function submitFile(){
-    var uploadfile = vm.createNewImporterFormModel.Browse;
+    var uploadfile = vm.fileToUpload;
     console.log(uploadfile);
     if(uploadfile !== {}){
 
@@ -391,8 +370,8 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
 
       };
 
-      for(var i = 0; i < vm.createNewImporterFormModel.Browse.length; i++){
-        importerInfo.files.push({fileName:vm.createNewImporterFormModel.Browse[i].name});
+      for(var i = 0; i < vm.fileToUpload.length; i++){
+        importerInfo.files.push({fileName:vm.fileToUpload[i].name});
       }
 
       DirectiveService.DestroyDirectiveService('.angular-directive', angular.element('.angular-directive').isolateScope());
@@ -426,7 +405,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, U
         alert(err);
       });
     } else {
-      alert("Please Browse");
+      alert("Please Select a File");
     }
   }
 
@@ -498,7 +477,7 @@ function UpdateImporterModalCtrl($scope, $modalInstance, currentImporter, Upload
   }
 }
 
-function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scope, $timeout, $compile, $rootScope, DirectiveService){
+function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scope, $timeout, $compile, $rootScope, $cookies, DirectiveService){
   var vm = this; //jshint ignore: line
   //functions
   vm.activate = activate;
@@ -542,7 +521,11 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
       }
     }
   });
-
+  $scope.$watch(function(){
+    return vm.search;
+  }, function(){
+    console.log(vm.search);
+  }, true);
   $scope.$on('$destroy', function (event) {
       ImporterSocket.removeListener('importerListData');
   });
@@ -600,6 +583,7 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
 
       }
     }
+
   }
 
   function closeAlert(index){
@@ -637,6 +621,7 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   function removeColumn(index){
     vm.importerListTableColumns[index].status = false;
     vm.avaliableTableColumns.push({index: index + 1, value: vm.importerListTableColumns[index].name, newIndex : index + 1});
+
   }
 
   function requestImporter(importer){
@@ -661,7 +646,7 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   function toggleSearchMode(){
     var bindScope = $scope.$parent.$new(true);
     DirectiveService.DestroyDirectiveService('dave-importer-list-page', $scope);
-    DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-search-mode-page class="angular-directive" ></dave-importer-search-mode-page>', bindScope, $compile);
+    DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-search-mode-page class="angular-directive" back-directive="<dave-importer-list-page></dave-importer-list-page>"></dave-importer-search-mode-page>', bindScope, $compile);
 
   }
 }
@@ -853,21 +838,28 @@ function DaveImporterConfigurationPageCtrl($scope, $compile, ImporterSocket, Dir
   }
 }
 
-function DaveImporterSearchModePageCtrl($scope, $compile, ImporterSocket, DirectiveService, importerListColumnNamesConversion){
+function DaveImporterSearchModePageCtrl($scope, $compile,$cookies, ImporterSocket, DirectiveService, importerListColumnNamesConversion){
   var vm = this;
 
   //functions
+  vm.activate = activate;
+  vm.back = back;
   vm.toggleLeftMenu = toggleLeftMenu;
   //variables
-  vm.searchableColumns = [
-    {name: "importerName", status: true, index: 0},
-    {name:  "location", status: true, index: 1},
-    {name: "ownerName", status: true, index: 2}  ,
-    {name: "type", status: true, index: 3}  ,
-    {name: "description", status:true, index: 4}
-  ];
+  vm.backDirective = $scope.backDirective;
 
+  vm.activate();
   //////////////////////////
+  function activate(){
+    DirectiveService.CheckDirectiveExpandStatus('.importerContainerRightPanel');
+  }
+
+  function back(){
+    var bindScope = $scope.$parent.$new(true);
+    DirectiveService.DestroyDirectiveService('dave-importer-search-mode-page', $scope);
+    DirectiveService.AddDirectiveService('.importerContainerRightPanel', vm.backDirective, bindScope, $compile);
+  }
+
   function toggleLeftMenu(){
     $scope.$emit('toggleLeftMenu');
   }

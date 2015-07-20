@@ -1,0 +1,1 @@
+!function(){"use strict";function t(){return{restrict:"EA",templateUrl:"DataItemDisplay/DataItemDisplayDirectiveTemplates/daveDataItemDisplayListPage.html",controller:"DaveDataItemDisplayListPageCtrl",scope:{},controllerAs:"daveDataItemDisplayListPageCtrl",link:function(t,a,e){}}}angular.module("Dave2.DataItemDisplay").directive("daveDataItemDisplayListPage",t)}();

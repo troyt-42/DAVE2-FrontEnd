@@ -1,8 +1,7 @@
 <div class="importerSetUpButton">
-  <div class=" animated fadeIn" ng-click="daveImporterListPageCtrl.toggleLeftMenu()"><i class="glyphicon glyphicon-arrow-right  animated flipInY" id="js-expand-arrow"></i><span id="js-expand-sign"> Expand</span></div>
   <div class=" animated fadeIn" ng-click="daveImporterListPageCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY"></i> Lay Out</div>
   <div class=" animated fadeIn" ng-click="daveImporterListPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
-  <div class=" animated fadeIn"><i class="glyphicon glyphicon-wrench animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Importer System</span></div>
+  <div class=" animated fadeIn"><i class="glyphicon glyphicon-signal animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Display System</span></div>
 </div>
 
 <div class="importerStepOne">
@@ -44,7 +43,7 @@
         </tr>
       </thead>
       <tbody style="color:white">
-        <tr ng-repeat = "importer in daveImporterListPageCtrl.importerList | filter:daveImporterListPageCtrl.search" ng-click="daveImporterListPageCtrl.requestImporter(importer)" ng-show="((daveImporterListPageCtrl.importerListCurrentPage * 11 - 11) <= $index) && ($index < (daveImporterListPageCtrl.importerListCurrentPage * 11))">
+        <tr ng-repeat = "importer in daveImporterListPageCtrl.importerList track by importer['importerName'] | filter: daveImporterListPageCtrl.search" ng-click="daveImporterListPageCtrl.requestImporter(importer)" ng-show="((daveImporterListPageCtrl.importerListCurrentPage * 11 - 11) <= $index) && ($index < (daveImporterListPageCtrl.importerListCurrentPage * 11))">
           <td ng-repeat="column in daveImporterListPageCtrl.importerListTableColumns track by column.name"  ng-show="column.status">{{importer[column.name]}}</td>
         </tr>
       </tbody>

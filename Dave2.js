@@ -5,7 +5,6 @@ angular
   "ngRoute",
   "Dave2.Importer",
   "Dave2.DataItemDisplay",
-  "ngAnimate",
   "ui.bootstrap",
   "btford.socket-io"
 ])
@@ -23,7 +22,7 @@ function routeConfig($routeProvider){
   $routeProvider.when('/DataItemDisplay',{
     templateUrl : "DataItemDisplay/DataItemDisplay.html",
     controller: "DataItemDisplayCtrl",
-    controllerAs: "DataItemDisplayCtrl"
+    controllerAs: "dataItemDisplayCtrl"
   });
 }
 

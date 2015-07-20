@@ -321,7 +321,32 @@ io.of('/importer').on('connection', function(socket){
   });
 });
 
+io.of('/dataItemDisplay').on('connection', function(socket){
+  console.log(socket.handshake.address + ' has connected! id: ' + socket.id + ' Namespace: /dataItemDisplay');
 
+  socket.on('requestDataItemList', function(){
+    kafkaProducer.send([{
+      topic:'__ip_dataItem_list_in__',
+      messages: [
+        JSON.stringify({
+          session_id: socket.id,
+          username: 'troy',
+          password: '1234',
+          return_topic: '__ip_dataItem_list_in__',
+          location:'brampton',
+          action:'GETALL_DATAITEM'
+        })
+      ]
+    }],
+    function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has send dataItem_list request successfully');
+      }
+    });
+  });
+});
 
 kafkaConsumer.on('message',function(message){
   if(message.value === "hi"){

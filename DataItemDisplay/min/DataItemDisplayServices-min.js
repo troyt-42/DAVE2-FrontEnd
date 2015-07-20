@@ -1,0 +1,1 @@
+!function(){"use strict";function t(t){var a=io.connect("10.3.83.58:3000/dataItemDisplay");return t({ioSocket:a})}angular.module("Dave2.DataItemDisplay").factory("dataItemDisplaySocket",t),t.$inject=["socketFactory"]}();
