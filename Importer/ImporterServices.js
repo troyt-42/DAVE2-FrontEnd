@@ -64,27 +64,38 @@
     });
   }
   function DirectiveService(){
-    return {
-      DestroyDirectiveService :
-      function(directiveName, scope){
-        angular.element(directiveName).remove();
-        scope.$destroy();
-        
-      },
-      AddDirectiveService :
-      function(targetContainer, directiveName, scope, $compile){
-        var el = $compile(directiveName)(scope);
-        angular.element(targetContainer).append(el);
-      },
-      CheckDirectiveExpandStatus :
-      function(targetContainer){
-        if(!angular.element('.importerContainerRightPanel').hasClass('expanded')){
-          angular.element("#js-expand-sign").text(' Collapse');
-          angular.element("#js-expand-sign").text(' Collapse');
-          angular.element("#js-expand-arrow").removeClass('glyphicon-arrow-right');
-          angular.element("#js-expand-arrow").addClass('glyphicon-arrow-left');
-        }
+    var DirectiveServiceObj = {
+      'DestroyDirectiveService' : DestroyDirectiveService,
+      'AddDirectiveService' : AddDirectiveService,
+      'CheckDirectiveExpandStatus' : CheckDirectiveExpandStatus,
+      'EnterSearchMode' : EnterSearchMode
+    };
+    return DirectiveServiceObj;
+    ///////////////
+
+    function DestroyDirectiveService(directiveName, scope){
+      angular.element(directiveName).remove();
+      scope.$destroy();
+    }
+
+    function AddDirectiveService(targetContainer, directiveName, scope, $compile){
+      var el = $compile(directiveName)(scope);
+      angular.element(targetContainer).append(el);
+    }
+
+    function CheckDirectiveExpandStatus(targetContainer){
+      if(!angular.element('.importerContainerRightPanel').hasClass('expanded')){
+        angular.element("#js-expand-sign").text(' Collapse');
+        angular.element("#js-expand-sign").text(' Collapse');
+        angular.element("#js-expand-arrow").removeClass('glyphicon-arrow-right');
+        angular.element("#js-expand-arrow").addClass('glyphicon-arrow-left');
       }
-  };
+    }
+
+    function EnterSearchMode(backDirective,backDirectiveHtml, targetContainer, scope, $compile){
+      var bindScope = scope.$parent.$new(true);
+      DirectiveServiceObj.DestroyDirectiveService(backDirective, scope);
+      DirectiveServiceObj.AddDirectiveService(targetContainer, '<dave-importer-search-mode-page class="angular-directive" back-directive="' + backDirectiveHtml + '"></dave-importer-search-mode-page>', bindScope, $compile);
+    }
   }
 })();

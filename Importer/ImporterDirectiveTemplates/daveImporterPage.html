@@ -2,7 +2,9 @@
 
   <div class="importerSetUpButton">
     <div class=" animated fadeIn" ng-click="daveImporterPageCtrl.toggleLeftMenu()"><i class="glyphicon glyphicon-arrow-right  animated flipInY" id="js-expand-arrow"></i><span id="js-expand-sign"> Expand</span></div>
-    <div ng-click="daveImporterPageCtrl.backToImporterList()"><span id="js-expand-sign"> Importer List</span></div>
+    <div ng-click="daveImporterPageCtrl.backToImporterList()"><span id="js-expand-sign"> Back</span></div>
+    <div class=" animated fadeIn" ng-click="daveImporterPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
+
     <!-- <div ng-click="daveImporterPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span class="js-search-sign"> Search Mode</span></div> -->
   </div>
 
@@ -54,10 +56,10 @@
 
       <div class="importerStepTwoBDataItemData animated fadeIn">
         <div class = "waitingSymbol" ng-show="daveImporterPageCtrl.loading">
-          <alert class="animated fadeInDown" id="importerPage{{$index}}" ng-repeat="alert in daveImporterPageCtrl.alerts" type="{{alert.type}}" close="daveImporterPageCtrl.closeAlert($index)">
+          <alert class="animated fadeInDown" id="importer{{$index}}" ng-repeat="alert in daveImporterPageCtrl.alerts" type="{{alert.type}}" close="daveImporterPageCtrl.closeAlert($index)">
             {{alert.msg}}
           </alert>
-          <img ng-show = "daveImporterPageCtrl.systemStatus == 'Normal'" src="../imgs/477.GIF"/>
+          <img ng-show = "daveImporterPageCtrl.systemStatus == 'Normal'" src="../imgs/477_black.GIF"/>
         </div>
         <table class="importerStepTwoBDataItemTable" ng-show="!daveImporterPageCtrl.loading">
           <thead>
@@ -74,7 +76,7 @@
       </div>
 
       <div class="importerStepTwoBDataItemOptions animated fadeIn">
-        <button type="button" class="btn btn-info">View More Data</button>
+        <button type="button" class="btn btn-info" ng-click="daveImporterPageCtrl.viewMoreData()">View More Data</button>
         <button type="button" class="btn btn-warning" ng-click="daveImporterPageCtrl.updateImporter()">Update This Data Item</button>
       </div>
 

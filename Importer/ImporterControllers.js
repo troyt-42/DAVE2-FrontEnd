@@ -47,6 +47,8 @@ DaveImporterPageCtrl.$inject = [
   '$timeout',
   '$compile',
   '$modal',
+  '$location',
+  '$cookies',
   'DirectiveService'
 ];
 
@@ -654,27 +656,25 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   }
 
   function toggleSearchMode(){
-    var bindScope = $scope.$parent.$new(true);
-    DirectiveService.DestroyDirectiveService('dave-importer-list-page', $scope);
-    DirectiveService.AddDirectiveService('.importerContainerRightPanel', '<dave-importer-search-mode-page class="angular-directive" back-directive="<dave-importer-list-page></dave-importer-list-page>"></dave-importer-search-mode-page>', bindScope, $compile);
-
+    DirectiveService.EnterSearchMode('dave-importer-list-page', '<dave-importer-list-page></dave-importer-list-page>', '.importerContainerRightPanel', $scope, $compile);
   }
 }
 
-function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal, DirectiveService){
+function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal, $location, $cookies, DirectiveService){
   var vm = this;
   //functions
   vm.activate = activate;
   vm.backToImporterList = backToImporterList;
   vm.chooseDataItem = chooseDataItem;
   vm.updateImporter = updateImporter;
+  vm.viewMoreData = viewMoreData;
   //variables
   vm.alerts = [];
   vm.currentDataItem = '';
   $scope.expanded = false;
   vm.importerDataItemToDisplay = {};
   vm.importerDataItemData = [];
-  vm.importerToDisplay = JSON.parse($scope.importerToRequest);
+  vm.importerToDisplay = $scope.importerToRequest ? JSON.parse($scope.importerToRequest) : {};
   vm.importerToDisplayContent = [];
   vm.loading = false;
   vm.requestDataItemPromiseToSolve = null;
@@ -683,6 +683,8 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   };
   vm.systemStatus = 'Normal';
   vm.toggleLeftMenu = toggleLeftMenu;
+  vm.toggleSearchMode= toggleSearchMode;
+
   ImporterSocket.on("importerData", function(data){
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.requestImporterPromiseToSolve);
@@ -723,6 +725,7 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   ImporterSocket.on("importerDataItemData", function(dataItem){
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.requestDataItemPromiseToSolve);
+      vm.loading = false;
       if(!vm.importerDataItemToDisplay[dataItem.name]){
         vm.importerDataItemToDisplay[dataItem.name] = [];
       }
@@ -730,7 +733,6 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
 
       if((dataItem.completeState === 1.0) && (dataItem.name === vm.currentDataItem.fieldName)){
         vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
-
       }
 
     }
@@ -742,8 +744,16 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   vm.activate();
   ///////////////////////////////////
   function activate(){
+    console.log($cookies.getObject('requestedImporter'));
+    if($cookies.getObject('requestedImporter') === undefined){
+      $cookies.putObject('requestedImporter', vm.importerToDisplay);
+      console.log(vm.importerToDisplay);
+    }
+    vm.importerToDisplay = $cookies.getObject('requestedImporter');
+    $cookies.remove('requestedImporter');
     ImporterSocket.emit("requestImporter", vm.importerToDisplay);
     DirectiveService.CheckDirectiveExpandStatus('.importerContainerRightPanel');
+    vm.loading = true;
   }
 
 
@@ -774,6 +784,17 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
     updateImporterInterface.result.then(function(data){
       console.log(data);
     });
+  }
+
+  function viewMoreData(){
+    console.log($location.url());
+    $location.url('/DataItemDisplay');
+    DirectiveService.DestroyDirectiveService('dave-importer-page', $scope);
+  }
+
+  function toggleSearchMode(){
+    $cookies.putObject('requestedImporter', vm.importerToDisplay);
+    DirectiveService.EnterSearchMode('dave-importer-page', '<dave-importer-page></dave-importer-page>', '.importerContainerRightPanel', $scope, $compile);
   }
 }
 
@@ -877,5 +898,7 @@ function DaveImporterSearchModePageCtrl($scope, $compile,$cookies, ImporterSocke
   function toggleLeftMenu(){
     $scope.$emit('toggleLeftMenu');
   }
+
+
 }
 })();
