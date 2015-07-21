@@ -666,6 +666,7 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   vm.activate = activate;
   vm.backToImporterList = backToImporterList;
   vm.chooseDataItem = chooseDataItem;
+  vm.closeAlert = closeAlert;
   vm.updateImporter = updateImporter;
   vm.viewMoreData = viewMoreData;
   //variables
@@ -687,7 +688,6 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
 
   ImporterSocket.on("importerData", function(data){
     if(vm.systemStatus === "Normal"){
-      $timeout.cancel(vm.requestImporterPromiseToSolve);
       if(vm.currentDataItem === ''){
         vm.currentDataItem = data.list_out[0];
       }
@@ -701,7 +701,7 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
         if(vm.requestDataItemPromiseToSolve === null){
           vm.requestDataItemPromiseToSolve = $timeout(function(){
             if(vm.alerts.indexOf({ type: 'danger', msg: 'Data Item Timeout' }) === -1){
-              vm.alerts.push({ type: 'danger', msg: 'Timeout' });
+              vm.alerts.push({ type: 'danger', msg: 'Data Item Timeout' });
             }
             vm.systemStatus = "Error";
           }, 3000);
@@ -732,7 +732,19 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
       vm.importerDataItemToDisplay[dataItem.name] = vm.importerDataItemToDisplay[dataItem.name].concat(dataItem.data);
 
       if((dataItem.completeState === 1.0) && (dataItem.name === vm.currentDataItem.fieldName)){
-        vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
+        console.log(vm.importerDataItemToDisplay[vm.currentDataItem.fieldName].length);
+        if(vm.importerDataItemToDisplay[vm.currentDataItem.fieldName].length === 0){
+          vm.loading = true;
+          if(vm.alerts.indexOf({ type: 'warning', msg: 'Received Empty Data Item' }) === -1){
+            console.log("called");
+            vm.alerts.push({ type: 'warning', msg: 'Received Empty Data Item' });
+          }
+          vm.systemStatus = "Error";
+        } else {
+          vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
+        }
+
+
       }
 
     }
@@ -766,7 +778,11 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
     vm.currentDataItem = dataItem;
     vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
   }
-
+  function closeAlert(index){
+    angular.element('div.alert.animated#importer'+index).removeClass("fadeInDown");
+    angular.element('div.alert.animated#importer'+index).addClass("fadeOutUp");
+    vm.alerts.splice(index, 1);
+  }
   function toggleLeftMenu(){
     $scope.$emit('toggleLeftMenu');
   }

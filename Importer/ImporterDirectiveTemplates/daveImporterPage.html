@@ -9,7 +9,6 @@
   </div>
 
   <div class="importerStepTwoBWell animated fadeIn">
-    <alert class="animated fadeInDown" id="importer{{$index}}" ng-repeat="alert in daveImporterPageCtrl.alerts.stepTwoB" type="{{alert.type}}" close="daveImporterPageCtrl.closeAlert($index, 'stepTwoB')" >{{alert.msg}}</alert>
 
     <div class="importerStepTwoBWellLeft" >
       <div class="importerNameCard">
@@ -43,9 +42,9 @@
     </div>
 
     <div class="importerStepTwoBWellRight">
-      <div class="title">
+      <div class="title" >
         {{daveImporterPageCtrl.currentDataItem.fieldName}}
-        <span>
+        <span ng-show="!daveImporterPageCtrl.loading">
           <i class="glyphicon glyphicon-ok"></i>
           ACTIVE
         </span>
@@ -55,11 +54,15 @@
 
 
       <div class="importerStepTwoBDataItemData animated fadeIn">
+
         <div class = "waitingSymbol" ng-show="daveImporterPageCtrl.loading">
           <alert class="animated fadeInDown" id="importer{{$index}}" ng-repeat="alert in daveImporterPageCtrl.alerts" type="{{alert.type}}" close="daveImporterPageCtrl.closeAlert($index)">
             {{alert.msg}}
           </alert>
           <img ng-show = "daveImporterPageCtrl.systemStatus == 'Normal'" src="../imgs/477_black.GIF"/>
+          <!-- <div id="loader-wrapper">
+            <div id="loader"></div>
+          </div> -->
         </div>
         <table class="importerStepTwoBDataItemTable" ng-show="!daveImporterPageCtrl.loading">
           <thead>
