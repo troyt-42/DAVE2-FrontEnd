@@ -35,7 +35,7 @@
                 <span class="js-layout hidden" style="font-size:110%">{{daveImporterListPageCtrl.avaliableTableColumns.length}} Avaliable</span>
               </a>
               <ul class="dropdown-menu" >
-                <li ng-repeat="column in daveImporterListPageCtrl.avaliableTableColumns track by column.name" ng-click="daveImporterListPageCtrl.addTableColumn(column, $index)" >
+                <li ng-repeat="column in daveImporterListPageCtrl.avaliableTableColumns track by column.value" ng-click="daveImporterListPageCtrl.addTableColumn(column, $index)" >
                   <span>Index: <input type="text" class="form-control column-index-input" ng-model="daveImporterListPageCtrl.avaliableTableColumns[$index].newIndex" ng-click="$event.stopPropagation()" ng-keypress="daveImporterListPageCtrl.addTableColumnKeyPress($event, column, $index)"></input></span><span>{{column.value | importerListColumnNamesConversion}}</span>
                 </li>
               </ul>

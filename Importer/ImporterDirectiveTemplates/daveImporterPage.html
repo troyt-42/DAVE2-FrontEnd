@@ -53,7 +53,13 @@
 
 
       <div class="importerStepTwoBDataItemData animated fadeIn">
-        <table class="importerStepTwoBDataItemTable">
+        <div class = "waitingSymbol" ng-show="daveImporterPageCtrl.loading">
+          <alert class="animated fadeInDown" id="importerPage{{$index}}" ng-repeat="alert in daveImporterPageCtrl.alerts" type="{{alert.type}}" close="daveImporterPageCtrl.closeAlert($index)">
+            {{alert.msg}}
+          </alert>
+          <img ng-show = "daveImporterPageCtrl.systemStatus == 'Normal'" src="../imgs/477.GIF"/>
+        </div>
+        <table class="importerStepTwoBDataItemTable" ng-show="!daveImporterPageCtrl.loading">
           <thead>
             <th>Date</th>
             <th>{{daveImporterPageCtrl.currentDataItem.fieldName}}</th>

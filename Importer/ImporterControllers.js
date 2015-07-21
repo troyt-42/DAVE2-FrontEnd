@@ -532,6 +532,11 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   vm.activate();
   ///////////////////////////////////
   function activate(){
+    if($cookies.getObject('importerListTableColumns') === undefined){
+      $cookies.putObject('importerListTableColumns', vm.importerListTableColumns);
+    }
+    vm.importerListTableColumns = $cookies.getObject('importerListTableColumns');
+    vm.avaliableTableColumns = $cookies.getObject('avaliableTableColumns') || [];
     ImporterSocket.emit("requestImporterList");
     DirectiveService.CheckDirectiveExpandStatus('.importerContainerRightPanel');
     vm.promiseToSolve =  $timeout(function(){
@@ -553,6 +558,8 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
     if(vm.avaliableTableColumns.length !== 0){
       vm.importerListTableColumns[column.index - 1].status = true;
       vm.avaliableTableColumns.splice(index, 1);
+      $cookies.putObject('importerListTableColumns', vm.importerListTableColumns);
+      $cookies.putObject('avaliableTableColumns', vm.avaliableTableColumns);
     } else {
 
     }
@@ -583,7 +590,8 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
 
       }
     }
-
+    $cookies.putObject('importerListTableColumns', vm.importerListTableColumns);
+    $cookies.putObject('avaliableTableColumns', vm.avaliableTableColumns);
   }
 
   function closeAlert(index){
@@ -621,7 +629,9 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   function removeColumn(index){
     vm.importerListTableColumns[index].status = false;
     vm.avaliableTableColumns.push({index: index + 1, value: vm.importerListTableColumns[index].name, newIndex : index + 1});
-
+    console.log(vm.avaliableTableColumns);
+    $cookies.putObject('importerListTableColumns', vm.importerListTableColumns);
+    $cookies.putObject('avaliableTableColumns', vm.avaliableTableColumns);
   }
 
   function requestImporter(importer){
@@ -666,7 +676,8 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   vm.importerDataItemData = [];
   vm.importerToDisplay = JSON.parse($scope.importerToRequest);
   vm.importerToDisplayContent = [];
-  vm.requestImporterPromiseToSolve = null;
+  vm.loading = false;
+  vm.requestDataItemPromiseToSolve = null;
   vm.search = {
     'fieldName': ""
   };
@@ -681,9 +692,18 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
       vm.importerToDisplayContent = vm.importerToDisplayContent.concat(data.list_out);
 
       if(data.completeState === 1.0){
+        vm.loading = true;
         vm.importerToDisplayContent.forEach(function(element, index, array){
           ImporterSocket.emit("requestImporterDataItemData", {fieldName : element.fieldName, location: vm.importerToDisplay.location});
         });
+        if(vm.requestDataItemPromiseToSolve === null){
+          vm.requestDataItemPromiseToSolve = $timeout(function(){
+            if(vm.alerts.indexOf({ type: 'danger', msg: 'Data Item Timeout' }) === -1){
+              vm.alerts.push({ type: 'danger', msg: 'Timeout' });
+            }
+            vm.systemStatus = "Error";
+          }, 3000);
+        }
         if(vm.importerToDisplayContent.length === 0){
           var alertExsited = false;
           for(var i = 0; i < vm.alerts.length; i ++){
@@ -702,6 +722,7 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
 
   ImporterSocket.on("importerDataItemData", function(dataItem){
     if(vm.systemStatus === "Normal"){
+      $timeout.cancel(vm.requestDataItemPromiseToSolve);
       if(!vm.importerDataItemToDisplay[dataItem.name]){
         vm.importerDataItemToDisplay[dataItem.name] = [];
       }
@@ -723,14 +744,6 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   function activate(){
     ImporterSocket.emit("requestImporter", vm.importerToDisplay);
     DirectiveService.CheckDirectiveExpandStatus('.importerContainerRightPanel');
-    if((vm.systemStatus === 'Normal') && (vm.requestImporterPromiseToSolve === null)){
-      vm.requestImporterPromiseToSolve = $timeout(function(){
-        if(vm.alerts.indexOf({ type: 'danger', msg: 'Timeout' }) === -1){
-          vm.alerts.push({ type: 'danger', msg: 'Timeout' });
-        }
-        vm.systemStatus = "Error";
-      }, 1500);
-    }
   }
 
 
@@ -852,6 +865,7 @@ function DaveImporterSearchModePageCtrl($scope, $compile,$cookies, ImporterSocke
   //////////////////////////
   function activate(){
     DirectiveService.CheckDirectiveExpandStatus('.importerContainerRightPanel');
+    vm.searchableColumns = $cookies.getObject('importerListTableColumns');
   }
 
   function back(){
