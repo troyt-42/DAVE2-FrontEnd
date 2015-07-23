@@ -1,7 +1,7 @@
 var express = require('express');
 var http = require('http');
 var fs = require('fs');
-var io = require('socket.io')();
+var io = require('socket.io')(); //jshint ignore: line
 var bodyparser = require('body-parser');
 var multiparty= require('multiparty');
 var kafka = require('kafka-node');
@@ -21,7 +21,8 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__importer_stepTwoB_dataItem_out__'},
   { topic: '__importer_stepOne_createImporter_out__'},
   { topic: '__importer_stepTwo_decideCreation_out__'},
-  { topic: '__importer_stepTwoB_updateImporter_out__'}
+  { topic: '__importer_stepTwoB_updateImporter_out__'},
+  { topic: '__ip_dataItem_list_out__'}
 ],
 {
   groupId: 'test'
@@ -332,7 +333,7 @@ io.of('/dataItemDisplay').on('connection', function(socket){
           session_id: socket.id,
           username: 'troy',
           password: '1234',
-          return_topic: '__ip_dataItem_list_in__',
+          return_topic: '__ip_dataItem_list_out__',
           location:'brampton',
           action:'GETALL_DATAITEM'
         })
@@ -394,6 +395,11 @@ kafkaConsumer.on('message',function(message){
     var data6 = JSON.parse(message.value);
     if(data6){
       io.of('/importer').to(data6.session_id).emit('importerCreationFinalResponse', data6);
+    }
+  } else if (message.topic === '__ip_dataItem_list_out__'){
+    var data7 = JSON.parse(message.value);
+    if(data7){
+      io.of('/dataItemDisplay').to(data7.session_id).emit('ipDataItemListResponse', data7);
     }
   } else {
     console.log(message);

@@ -1,14 +1,15 @@
 (function(){'use strict';
   angular.module("Dave2.DataItemDisplay")
-  .factory("dataItemDisplaySocket", dataItemDisplaySocket);
+  .factory("DataItemDisplaySocket", DataItemDisplaySocket);
 
-  dataItemDisplaySocket.$inject=["socketFactory"];
+  DataItemDisplaySocket.$inject=["socketFactory"];
 
-  function dataItemDisplaySocket(socketFactory){
+  function DataItemDisplaySocket(socketFactory){
     var myIoSocket = io.connect('10.3.83.58:3000/dataItemDisplay');
-
-    return socketFactory({
+    var dataItemDisplaySocket = socketFactory({
       ioSocket: myIoSocket
     });
+    dataItemDisplaySocket.forward('ipDataItemListResponse');
+    return dataItemDisplaySocket;
   }
 }());

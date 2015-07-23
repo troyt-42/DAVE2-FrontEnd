@@ -125,7 +125,7 @@ function ImporterUploadCtrl($timeout, $http, $scope,$modal,$compile,$interval, $
     },
     {
       type:"input",
-      key:"Reduction (/mm)",
+      key:"Reduction (/ms)",
       data:{
         inputType: "number",
         placeholder: 0
@@ -511,7 +511,8 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   vm.search = {};
   vm.systemStatus = 'Normal';
 
-  ImporterSocket.on("importerListData", function(data){
+  $scope.$on("socket:importerListData", function(event, data){
+    console.log(event.name);
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.promiseToSolve);
       if(data.completeState !== 1.0){
@@ -528,9 +529,7 @@ function DaveImporterListPageCtrl(FormSettingParseService, ImporterSocket, $scop
   }, function(){
     console.log(vm.search);
   }, true);
-  $scope.$on('$destroy', function (event) {
-      ImporterSocket.removeListener('importerListData');
-  });
+
   vm.activate();
   ///////////////////////////////////
   function activate(){
@@ -686,7 +685,8 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
   vm.toggleLeftMenu = toggleLeftMenu;
   vm.toggleSearchMode= toggleSearchMode;
 
-  ImporterSocket.on("importerData", function(data){
+  $scope.$on("socket:importerData", function(event, data){
+      console.log(event.name);
     if(vm.systemStatus === "Normal"){
       if(vm.currentDataItem === ''){
         vm.currentDataItem = data.list_out[0];
@@ -722,7 +722,8 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
     }
   });
 
-  ImporterSocket.on("importerDataItemData", function(dataItem){
+  $scope.$on("socket:importerDataItemData", function(event, dataItem){
+    console.log(event.name);
     if(vm.systemStatus === "Normal"){
       $timeout.cancel(vm.requestDataItemPromiseToSolve);
       vm.loading = false;
@@ -749,10 +750,7 @@ function DaveImporterPageCtrl(ImporterSocket, $scope, $timeout, $compile, $modal
 
     }
   });
-  $scope.$on('$destroy', function (event) {
-      ImporterSocket.removeListener('importerData');
-      ImporterSocket.removeListener('importerDataItemData');
-  });
+
   vm.activate();
   ///////////////////////////////////
   function activate(){

@@ -4,20 +4,20 @@ angular.module("Dave2.DataItemDisplay")
 .controller("DataItemDisplayCtrl", DataItemDisplayCtrl)
 .controller("DaveDataItemDisplayListPageCtrl", DaveDataItemDisplayListPageCtrl);
 
-DataItemDisplayCtrl.$inject=['$scope','$timeout','dataItemDisplaySocket'];
-DaveDataItemDisplayListPageCtrl.$inject=['$scope','$timeout','dataItemDisplaySocket'];
+DataItemDisplayCtrl.$inject=['$scope','$timeout','DataItemDisplaySocket'];
+DaveDataItemDisplayListPageCtrl.$inject=['$scope','$timeout','DataItemDisplaySocket'];
 
-function DataItemDisplayCtrl($scope,$timeout,dataItemDisplaySocket){
+function DataItemDisplayCtrl($scope,$timeout,DataItemDisplaySocket){
   var vm = this;
   var highchartsContainer = angular.element("#container");
 
   vm.loading = true;
 
-  dataItemDisplaySocket.on('importersInfo', function(data){
+  DataItemDisplaySocket.on('importersInfo', function(data){
     console.log(data);
   });
 
-  dataItemDisplaySocket.on('importersData', function(data){
+  DataItemDisplaySocket.on('importersData', function(data){
 
     highchartsContainer.highcharts('StockChart',{
       chart:{
@@ -66,7 +66,7 @@ function DataItemDisplayCtrl($scope,$timeout,dataItemDisplaySocket){
         events:{
           afterSetExtremes: function(){
             highchartsContainer.highcharts().showLoading('Loading data from server...');
-            dataItemDisplaySocket.emit("displayRquest", {min: this.min, max: this.max});
+            DataItemDisplaySocket.emit("displayRquest", {min: this.min, max: this.max});
           }
         },
         minRange: 3600 * 1000 * 24 * 7
@@ -276,7 +276,7 @@ function DataItemDisplayCtrl($scope,$timeout,dataItemDisplaySocket){
 
   });
 
-  dataItemDisplaySocket.on('displayResponse', function(data){
+  DataItemDisplaySocket.on('displayResponse', function(data){
     console.log(data);
     highchartsContainer.highcharts().series[0].setData(data);
     highchartsContainer.highcharts().hideLoading();
@@ -291,18 +291,58 @@ function DataItemDisplayCtrl($scope,$timeout,dataItemDisplaySocket){
 
 }
 
-function DaveDataItemDisplayListPageCtrl($scope, $timeout, dataItemDisplaySocket){
+function DaveDataItemDisplayListPageCtrl($scope, $timeout, DataItemDisplaySocket){
   var vm = this;
 
   //functions
   vm.activate = activate;
-  //variables
 
+  //variables
+  vm.alerts = [];
+
+  vm.dataItemList = [];
+  vm.dataItemListCurrentPage = 1;
+  vm.dataItemListTableColumns = [
+    {name: "name", status: true, index: 0},
+    {name:  "note", status: true, index: 1},
+    {name: "precision", status: true, index: 2},
+    {name: "unit", status: true, index: 3}
+  ];
+  vm.promiseToSolve = '';
+  vm.search = {};
+  vm.systemStatus = 'Normal';
+  vm.loading = true;
+  $scope.$on('socket:ipDataItemListResponse', function(event, data){
+    console.log(event.name);
+    if(vm.systemStatus === "Normal"){
+      $timeout.cancel(vm.promiseToSolve);
+      if(data.completeState !== 1.0){
+        vm.dataItemList = vm.dataItemList.concat(data.list_out);
+        // angular.element(".js-layout").addClass("hidden");
+      } else {
+        vm.dataItemList = vm.dataItemList.concat(data.list_out);
+        vm.loading = false;
+      }
+    }
+  });
   vm.activate();
   /////////////////
 
   function activate(){
-    dataItemDisplaySocket.emit('requestDataItemList');
+    DataItemDisplaySocket.emit('requestDataItemList');
+    vm.promiseToSolve =  $timeout(function(){
+
+      var alertExsited = false;
+      for(var i = 0; i < vm.alerts.length; i ++){
+        if(vm.alerts[i].msg === 'Loading Importer List Failed. Please Check Your Internet Connection.'){
+          alertExsited = true;
+        }
+      }
+      if(!alertExsited){
+        vm.alerts.push({ type: 'danger', msg: 'Loading Importer List Failed. Please Check Your Internet Connection.' });
+      }
+      vm.systemStatus = "Error";
+    },5000);
   }
 }
 }());

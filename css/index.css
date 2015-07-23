@@ -1380,58 +1380,58 @@ html {
             clear: both;
             content: "";
             display: table; }
-      .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable {
+      .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable {
         width: 100%; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th {
+        .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th {
           padding: 10px;
           border-bottom: 3px solid silver;
           vertical-align: center;
           font-size: 110%;
           border-collapse: collapse;
           color: white; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label {
+          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th > label {
             display: block; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i {
+            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th > label i {
               font-size: 80%;
               color: skyblue;
               text-shadow: 1px 1px #0F4D92;
               cursor: pointer; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i.glyphicon-chevron-left:hover {
+              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th > label i.glyphicon-chevron-left:hover {
                 transform: translateX(-1px);
                 color: gold;
                 text-shadow: 1px 1px coral; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > label i.glyphicon-chevron-right:hover {
+              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th > label i.glyphicon-chevron-right:hover {
                 transform: translateX(1px);
                 color: gold;
                 text-shadow: 1px 1px coral; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > input {
+          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th > input {
             background: linen;
             border: grey 1px solid;
             border-radius: 5px;
             width: 80%;
             color: black; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > i {
+          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th > i {
             -webkit-transition: all 0.25s linear;
             -moz-transition: all 0.25s linear;
             transition: all 0.25s linear;
             color: LIMEGREEN;
             cursor: pointer; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th > i:hover {
+            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th > i:hover {
               color: grey; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child {
+          .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child {
             text-align: center; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child a {
+            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child a {
               text-decoration: none;
               color: gold; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child a:hover {
+              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child a:hover {
                 text-decoration: none; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child i {
+            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child i {
               color: gold;
               font-size: 150%;
               display: block; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child i:hover {
+              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child i:hover {
                 color: LIMEGREEN; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu {
+            .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu {
               padding: 2px;
               min-width: 300px;
               color: #0F4D92;
@@ -1440,7 +1440,7 @@ html {
               background: silver;
               border-radius: 5px;
               border: 1px solid skyblue; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li {
+              .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li {
                 width: auto;
                 padding: 2.3576515979%;
                 color: gold;
@@ -1464,21 +1464,21 @@ html {
                 -ms-flex-pack: justify;
                 border-bottom: 1px skyblue solid;
                 font-weight: bold; }
-                .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
+                .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
                   display: inline;
                   width: 65%;
                   height: 2em; }
-                .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
+                .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
                   border-bottom: 0px; }
-                .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
+                .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
                   background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), -webkit-linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
                   background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
                   color: #0F4D92;
                   cursor: pointer; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > tbody > tr > td {
+        .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > tbody > tr > td {
           padding: 10px;
           border-top: 1px solid silver; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .importerListTable > tbody > tr:hover {
+        .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > tbody > tr:hover {
           background: black;
           color: white;
           cursor: pointer; }
@@ -1562,8 +1562,8 @@ html {
     width: 100px;
     height: 100px;
     z-index: 1500;
-    border: 5px solid transparent;
-    border-top-color: black;
+    border: 3px solid transparent;
+    border-top-color: #8ac007;
     border-radius: 50%;
     -webkit-animation: spin 2s linear infinite;
     -moz-animation: spin 2s linear infinite;
@@ -1576,7 +1576,7 @@ html {
     left: 10px;
     right: 10px;
     bottom: 10px;
-    border: 5px solid transparent;
+    border: 3px solid transparent;
     border-top-color: red;
     border-radius: 50%;
     -webkit-animation: spin 3s linear infinite;
@@ -1589,7 +1589,7 @@ html {
     left: 25px;
     right: 25px;
     bottom: 25px;
-    border: 5px solid transparent;
+    border: 3px solid transparent;
     border-top-color: orange;
     border-radius: 50%;
     -webkit-animation: spin 1.5s linear infinite;

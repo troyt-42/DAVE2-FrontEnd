@@ -59,9 +59,13 @@
   }
   function ImporterSocket(socketFactory){
     var myIoSocket = io.connect('10.3.83.58:3000/importer'); //jshint ignore:line
-    return socketFactory({
+    var importerSocket = socketFactory({
       ioSocket : myIoSocket
     });
+    importerSocket.forward('importerListData');
+    importerSocket.forward('importerData');
+    importerSocket.forward('importerDataItemData');
+    return importerSocket;
   }
   function DirectiveService(){
     var DirectiveServiceObj = {

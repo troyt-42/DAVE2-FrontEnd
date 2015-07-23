@@ -1,41 +1,41 @@
 <div class="importerSetUpButton">
-  <div class=" animated fadeIn" ng-click="daveImporterListPageCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY"></i> Lay Out</div>
-  <div class=" animated fadeIn" ng-click="daveImporterListPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
+  <div class=" animated fadeIn" ng-click="daveDataItemDisplayListPageCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY"></i> Lay Out</div>
+  <div class=" animated fadeIn" ng-click="daveDataItemDisplayListPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
   <div class=" animated fadeIn"><i class="glyphicon glyphicon-signal animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Display System</span></div>
 </div>
 
 <div class="importerStepOne">
   <div class="importerStepOneWell animated fadeIn">
-    <alert ng-hide = "daveImporterListPageCtrl.loading" class="animated fadeInDown"  id="importerList{{$index}}" ng-repeat="alert in daveImporterListPageCtrl.alerts" type="{{alert.type}}" close="daveImporterListPageCtrl.closeAlert($index)" >{{alert.msg}}</alert>
+    <alert ng-hide = "daveDataItemDisplayListPageCtrl.loading" class="animated fadeInDown"  id="dataItemList{{$index}}" ng-repeat="alert in daveDataItemDisplayListPageCtrl.alerts" type="{{alert.type}}" close="daveDataItemDisplayListPageCtrl.closeAlert($index)" >{{alert.msg}}</alert>
 
-    <div class = "waitingSymbol" ng-show="daveImporterListPageCtrl.loading">
-      <alert class="animated fadeInDown" id="importerList{{$index}}" ng-repeat="alert in daveImporterListPageCtrl.alerts" type="{{alert.type}}" close="daveImporterListPageCtrl.closeAlert($index)">
+    <div class = "waitingSymbol" ng-show="daveDataItemDisplayListPageCtrl.loading">
+      <alert class="animated fadeInDown" id="dataItemList{{$index}}" ng-repeat="alert in daveDataItemDisplayListPageCtrl.alerts" type="{{alert.type}}" close="daveDataItemDisplayListPageCtrl.closeAlert($index)">
         {{alert.msg}}
       </alert>
-      <img ng-show = "daveImporterListPageCtrl.systemStatus == 'Normal'" src="../imgs/477.GIF"/>
+      <img ng-show = "daveDataItemDisplayListPageCtrl.systemStatus == 'Normal'" src="../imgs/477.GIF"/>
     </div>
 
-    <table class = "importerListTable" ng-show="!daveImporterListPageCtrl.loading" >
+    <table class = "dataItemListTable" ng-show="!daveDataItemDisplayListPageCtrl.loading" >
       <thead>
         <tr>
-          <th ng-repeat="column in daveImporterListPageCtrl.importerListTableColumns track by column.name" ng-show="column.status">
+          <th ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name" ng-show="column.status">
             <label for="{{column.name}}" style="color:white">
-              <i class="js-layout hidden glyphicon glyphicon-chevron-left animated flipInY" ng-click="daveImporterListPageCtrl.decreaseColumnIndex(column.index)"></i>
-              {{column.name | importerListColumnNamesConversion}}
-              <i class="js-layout hidden glyphicon glyphicon-chevron-right animated flipInY" ng-click="daveImporterListPageCtrl.increaseColumnIndex(column.index)"></i>
+              <i class="js-layout hidden glyphicon glyphicon-chevron-left animated flipInY" ng-click="daveDataItemDisplayListPageCtrl.decreaseColumnIndex(column.index)"></i>
+              {{column.name}}
+              <i class="js-layout hidden glyphicon glyphicon-chevron-right animated flipInY" ng-click="daveDataItemDisplayListPageCtrl.increaseColumnIndex(column.index)"></i>
             </label>
-            <input type="text" name="{{column.name}}" ng-model="daveImporterListPageCtrl.search[column.name]"></input>
-            <i class="js-layout  hidden glyphicon glyphicon-check animated flipInY" ng-click="daveImporterListPageCtrl.removeColumn(column.index)"></i>
+            <input type="text" name="{{column.name}}" ng-model="daveDataItemDisplayListPageCtrl.search[column.name]"></input>
+            <i class="js-layout  hidden glyphicon glyphicon-check animated flipInY" ng-click="daveDataItemDisplayListPageCtrl.removeColumn(column.index)"></i>
           </th>
           <th style="font-size: 90%; font-weight: 300">
             <span class="dropdown" dropdown on-toggle="toggled(open)">
               <a href class="dropdown-toggle" dropdown-toggle>
                 <i class="js-layout hidden glyphicon glyphicon-plus-sign animated flipInY plus"></i>
-                <span class="js-layout hidden" style="font-size:110%">{{daveImporterListPageCtrl.avaliableTableColumns.length}} Avaliable</span>
+                <span class="js-layout hidden" style="font-size:110%">{{daveDataItemDisplayListPageCtrl.avaliableTableColumns.length}} Avaliable</span>
               </a>
               <ul class="dropdown-menu" >
-                <li ng-repeat="column in daveImporterListPageCtrl.avaliableTableColumns track by column.name" ng-click="daveImporterListPageCtrl.addTableColumn(column, $index)" >
-                  <span>Index: <input type="text" class="form-control column-index-input" ng-model="daveImporterListPageCtrl.avaliableTableColumns[$index].newIndex" ng-click="$event.stopPropagation()" ng-keypress="daveImporterListPageCtrl.addTableColumnKeyPress($event, column, $index)"></input></span><span>{{column.value | importerListColumnNamesConversion}}</span>
+                <li ng-repeat="column in daveDataItemDisplayListPageCtrl.avaliableTableColumns track by column.name" ng-click="daveDataItemDisplayListPageCtrl.addTableColumn(column, $index)" >
+                  <span>Index: <input type="text" class="form-control column-index-input" ng-model="daveDataItemDisplayListPageCtrl.avaliableTableColumns[$index].newIndex" ng-click="$event.stopPropagation()" ng-keypress="daveDataItemDisplayListPageCtrl.addTableColumnKeyPress($event, column, $index)"></input></span><span>{{column.value}}</span>
                 </li>
               </ul>
             </span>
@@ -43,13 +43,13 @@
         </tr>
       </thead>
       <tbody style="color:white">
-        <tr ng-repeat = "importer in daveImporterListPageCtrl.importerList track by importer['importerName'] | filter: daveImporterListPageCtrl.search" ng-click="daveImporterListPageCtrl.requestImporter(importer)" ng-show="((daveImporterListPageCtrl.importerListCurrentPage * 11 - 11) <= $index) && ($index < (daveImporterListPageCtrl.importerListCurrentPage * 11))">
-          <td ng-repeat="column in daveImporterListPageCtrl.importerListTableColumns track by column.name"  ng-show="column.status">{{importer[column.name]}}</td>
+        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search" ng-click="daveDataItemDisplayListPageCtrl.requestImporter(importer)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))">
+          <td ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name"  ng-show="column.status">{{dataItem[column.name]}}</td>
         </tr>
       </tbody>
     </table>
-    <div ng-show="!daveImporterListPageCtrl.loading">
-      <pagination id="js-pagination" total-items="daveImporterListPageCtrl.importerList.length" ng-model="daveImporterListPageCtrl.importerListCurrentPage" max-size="10" class="pagination-sm animated rotateInUpLeft" style="margin:0px;font-size:150%;display:inline;position:absolute;bottom: 10px;left: 10px" boundary-links="true" rotate="false" items-per-page="11"></pagination>
+    <div ng-show="!daveDataItemDisplayListPageCtrl.loading">
+      <pagination id="js-pagination" total-items="daveDataItemDisplayListPageCtrl.dataItemList.length" ng-model="daveDataItemDisplayListPageCtrl.dataItemListCurrentPage" max-size="10" class="pagination-sm animated rotateInUpLeft" style="margin:0px;font-size:150%;display:inline;position:absolute;bottom: 10px;left: 10px" boundary-links="true" rotate="false" items-per-page="11"></pagination>
     </div>
   </div>
 </div>
