@@ -11,18 +11,27 @@
       restrict:'A',
       scope:{
         daveSmartDisable:"=",
-        daveContentChecked:"="
+        daveContentChecked:"=",
+        displayMessage:"="
       },
       link:function(scope, element, attrs){
+        scope.originHtml = '';
         scope.$watch(function(){
           return scope.daveSmartDisable;
         }, function(newValue,oldValue){
+          console.log(newValue);
           if(newValue !== undefined){
             if(newValue.length === 0){
-              element.text("No Configurations Avaliable");
+              scope.originHtml = element.html();
+              element.find('span').text(scope.displayMessage);
+              element.css('text-align', 'center');
+              element.css('background', 'black');
+              element.css('color', 'white');
+            } else {
+              element.find('span').text('');
             }
           }
-        });
+        }, true);
 
         scope.$watch(function(){
           return scope.daveContentChecked;
@@ -96,6 +105,7 @@
       controllerAs:'daveImporterSearchModePageCtrl',
       scope:{
         searchableColumns:"@searchableColumns",
+        targetContainer: "@targetContainer",
         backDirective:"@backDirective"
       },
       link: function(scope, element, attrs){

@@ -33,7 +33,8 @@
                 <i class="js-layout hidden glyphicon glyphicon-plus-sign animated flipInY plus"></i>
                 <span class="js-layout hidden" style="font-size:110%">{{daveDataItemDisplayListPageCtrl.avaliableTableColumns.length}} Avaliable</span>
               </a>
-              <ul class="dropdown-menu" >
+              <ul class="dropdown-menu" ng-class="{'noAvaliableHeaders' : !daveDataItemDisplayListPageCtrl.avaliableTableColumns.length}">
+                <span ng-show="!daveDataItemDisplayListPageCtrl.avaliableTableColumns.length">No Avaliable Headers</span>
                 <li ng-repeat="column in daveDataItemDisplayListPageCtrl.avaliableTableColumns track by column.name" ng-click="daveDataItemDisplayListPageCtrl.addTableColumn(column, $index)" >
                   <span>Index: <input type="text" class="form-control column-index-input" ng-model="daveDataItemDisplayListPageCtrl.avaliableTableColumns[$index].newIndex" ng-click="$event.stopPropagation()" ng-keypress="daveDataItemDisplayListPageCtrl.addTableColumnKeyPress($event, column, $index)"></input></span><span>{{column.value}}</span>
                 </li>

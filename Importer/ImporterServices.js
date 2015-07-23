@@ -78,11 +78,13 @@
     ///////////////
 
     function DestroyDirectiveService(directiveName, scope){
+      console.log('Destroy ' + directiveName);
       angular.element(directiveName).remove();
       scope.$destroy();
     }
 
     function AddDirectiveService(targetContainer, directiveName, scope, $compile){
+      console.log('Add ' + directiveName + " in " + targetContainer);
       var el = $compile(directiveName)(scope);
       angular.element(targetContainer).append(el);
     }
@@ -97,9 +99,10 @@
     }
 
     function EnterSearchMode(backDirective,backDirectiveHtml, targetContainer, scope, $compile){
+
       var bindScope = scope.$parent.$new(true);
       DirectiveServiceObj.DestroyDirectiveService(backDirective, scope);
-      DirectiveServiceObj.AddDirectiveService(targetContainer, '<dave-importer-search-mode-page class="angular-directive" back-directive="' + backDirectiveHtml + '"></dave-importer-search-mode-page>', bindScope, $compile);
+      DirectiveServiceObj.AddDirectiveService(targetContainer, '<dave-importer-search-mode-page class="angular-directive" back-directive="' + backDirectiveHtml + '" target-container="'+ targetContainer+'"></dave-importer-search-mode-page>', bindScope, $compile);
     }
   }
 })();

@@ -248,6 +248,11 @@ $importerWellHeight: 650px
                   background: silver
                   border-radius: 5px
                   border: 1px solid skyblue
+                  &.noAvaliableHeaders
+                    background: black
+                    color: white
+                    text-align: center
+
                   li
                     width: auto
                     +pad()
@@ -255,6 +260,7 @@ $importerWellHeight: 650px
                     +texture(180deg, $yale-blue,  $yale-blue , 26, 1)
                     +display(flex)
                     +justify-content(space-between)
+                    +align-items(center)
                     border-bottom: 1px skyblue solid
                     font-weight: bold
                     input.form-control
@@ -567,135 +573,135 @@ $importerWellHeight: 650px
               height: 200px
               overflow-y: auto
               background: linen
-    dave-importer-search-mode-page
-      .importerSetUpButton
-        cursor: pointer
-        div
-          display: inline
-          +pad(5px 10px 20px)
-          +border-top-radius(10px)
+dave-importer-search-mode-page
+  .importerSetUpButton
+    cursor: pointer
+    div
+      display: inline
+      +pad(5px 10px 20px)
+      +border-top-radius(10px)
+      background: black
+      color: white
+      &:hover
+        background: white
+        color: black
+      &:nth-child(2)
+        background: gold
+        color: black
+        &:hover
           background: black
-          color: white
-          &:hover
-            background: white
-            color: black
-          &:nth-child(2)
-            background: gold
-            color: black
-            &:hover
-              background: black
-              color: gold
-          &:nth-child(3)
-            background: skyblue
-            color: black
-            &:hover
-              background: darken(purple, 10%)
-              color: skyblue
-      .search-mode-well
-        position: relative
-        +pad(20px 20px)
-        +background(url('../imgs/congruent_outline.png') repeat)
-        +border-top-radius(10px)
-        +border-bottom-radius(10px)
-        height: $importerWellHeight
-        border: 1px lightgrey solid
-        margin-bottom: 7px
+          color: gold
+      &:nth-child(3)
+        background: skyblue
+        color: black
+        &:hover
+          background: darken(purple, 10%)
+          color: skyblue
+  .search-mode-well
+    position: relative
+    +pad(20px 20px)
+    +background(url('../imgs/congruent_outline.png') repeat)
+    +border-top-radius(10px)
+    +border-bottom-radius(10px)
+    height: $importerWellHeight
+    border: 1px lightgrey solid
+    margin-bottom: 7px
+    +display(flex)
+    +justify-content(center)
+    +align-items(center)
+    +texture(0deg, $yale-blue,  darken(purple, 10%) , 23, 1)
+    .search-mode-brand
+      +span-columns(3)
+      h1
         +display(flex)
-        +justify-content(center)
         +align-items(center)
-        +texture(0deg, $yale-blue,  darken(purple, 10%) , 23, 1)
-        .search-mode-brand
-          +span-columns(3)
-          h1
-            +display(flex)
-            +align-items(center)
-            +justify-content(flex-end)
-            color: gold
-            font-family: "Slabo 27px"
-            text-shadow: 0px -2px $yale-blue
+        +justify-content(flex-end)
+        color: gold
+        font-family: "Slabo 27px"
+        text-shadow: 0px -2px $yale-blue
+        i
+          margin-right: 5px
+          text-shadow: 0px -1px $yale-blue
+      button
+        +span-columns(6)
+        background: transparent
+        &:nth-child(1)
+          color: #8AC007
+          outline-color: #8AC007
+          border-color: #8AC007
+          text-shadow: 0px -1px darken($yale-blue, 0%)
+          box-shadow: 0px 0px
+        &:nth-child(2)
+          color: orange
+          outline-color: orange
+          box-shadow: 0px 0px
+      .search-mode-result
+        margin-top: 15px
+        +span-columns(12)
+        text-align: left
+        div:nth-child(1)
+          font-weight: bold
+          span:first-child
+            color: lighten(#8AC007, 10%)
             i
-              margin-right: 5px
-              text-shadow: 0px -1px $yale-blue
-          button
-            +span-columns(6)
-            background: transparent
-            &:nth-child(1)
-              color: #8AC007
-              outline-color: #8AC007
-              border-color: #8AC007
-              text-shadow: 0px -1px darken($yale-blue, 0%)
-              box-shadow: 0px 0px
-            &:nth-child(2)
-              color: orange
-              outline-color: orange
-              box-shadow: 0px 0px
-          .search-mode-result
-            margin-top: 15px
-            +span-columns(12)
-            text-align: left
-            div:nth-child(1)
-              font-weight: bold
-              span:first-child
-                color: lighten(#8AC007, 10%)
-                i
-                  color: lighten(#8AC007, 10%)
-                  float: right
-                  font-size: 120%
-              span:nth-child(2)
-                color: white
-                font-weight: bold
-            div:nth-child(2)
-              font-weight: bold
-              span:first-child
-                color: lighten(skyblue, 10%)
-                i
-                  color: lighten(skyblue, 10%)
-                  float: right
-                  font-size: 120%
-              span:nth-child(2)
-                color: white
-                font-weight: bold
-        .search-mode-input-group
-          +span-columns(4)
-          color: linen
-          line-height: 3em
-          border-left: 1px solid gold
+              color: lighten(#8AC007, 10%)
+              float: right
+              font-size: 120%
+          span:nth-child(2)
+            color: white
+            font-weight: bold
+        div:nth-child(2)
+          font-weight: bold
+          span:first-child
+            color: lighten(skyblue, 10%)
+            i
+              color: lighten(skyblue, 10%)
+              float: right
+              font-size: 120%
+          span:nth-child(2)
+            color: white
+            font-weight: bold
+    .search-mode-input-group
+      +span-columns(4)
+      color: linen
+      line-height: 3em
+      border-left: 1px solid gold
 
-          +pad()
-          .search-mode-input
-            +display(flex)
-            +justify-content(flex-end)
-            div
-              +row()
-              +span-columns(12)
-              span
-                +span-columns(3)
-                display: inline-block
-                font-size: 130%
-                color: gold
-                text-shadow: 0px -1px black
-              input
-                +pad()
-                +span-columns(9)
-                background: transparent
-                color: linen
-                font-weight: bold
-                display: inline-block
-                box-shadow: 2px 2px darken(purple, 10%) inset
-
-        .search-mode-dashboard
-          +span-columns(4)
-          .search-mode-input-result
-            margin-bottom: 5px
-            border: 1px inset black
-            border-radius: 5px
+      +pad()
+      .search-mode-input
+        +display(flex)
+        +justify-content(flex-end)
+        div
+          +row()
+          +span-columns(12)
+          span
+            +span-columns(3)
+            display: inline-block
+            font-size: 130%
+            color: gold
+            text-shadow: 0px -1px black
+          input
             +pad()
-            span:nth-child(1)
-              color: linen
-          .search-mode-result
-            span:nth-child(1)
-              display: block
-              color: #8AC007
-            span:nth-child(2)
-              display: block
-              color: skyblue
+            +span-columns(9)
+            background: transparent
+            color: linen
+            font-weight: bold
+            display: inline-block
+            box-shadow: 2px 2px darken(purple, 10%) inset
+
+    .search-mode-dashboard
+      +span-columns(4)
+      .search-mode-input-result
+        margin-bottom: 5px
+        border: 1px inset black
+        border-radius: 5px
+        +pad()
+        span:nth-child(1)
+          color: linen
+      .search-mode-result
+        span:nth-child(1)
+          display: block
+          color: #8AC007
+        span:nth-child(2)
+          display: block
+          color: skyblue

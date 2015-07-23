@@ -895,7 +895,9 @@ function DaveImporterSearchModePageCtrl($scope, $compile,$cookies, ImporterSocke
   vm.toggleLeftMenu = toggleLeftMenu;
   //variables
   vm.backDirective = $scope.backDirective;
-
+  vm.targetContainer = $scope.targetContainer;
+    console.log($scope.targetContainer);
+  console.log(vm.targetContainer);
   vm.activate();
   //////////////////////////
   function activate(){
@@ -906,7 +908,7 @@ function DaveImporterSearchModePageCtrl($scope, $compile,$cookies, ImporterSocke
   function back(){
     var bindScope = $scope.$parent.$new(true);
     DirectiveService.DestroyDirectiveService('dave-importer-search-mode-page', $scope);
-    DirectiveService.AddDirectiveService('.importerContainerRightPanel', vm.backDirective, bindScope, $compile);
+    DirectiveService.AddDirectiveService(vm.targetContainer, vm.backDirective, bindScope, $compile);
   }
 
   function toggleLeftMenu(){

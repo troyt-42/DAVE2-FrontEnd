@@ -12,10 +12,10 @@
         display: inline
         +pad(5px 10px 20px)
         +border-top-radius(10px)
-        background: black
-        color: white
+        background: gold
+        color: black
         &:hover
-          background: white
+          background: gold
           color: black
         &:nth-child(2)
           background: skyblue
@@ -124,6 +124,10 @@
                 background: silver
                 border-radius: 5px
                 border: 1px solid skyblue
+                &.noAvaliableHeaders
+                  background: black
+                  color: white
+                  text-align: center
                 li
                   width: auto
                   +pad()
