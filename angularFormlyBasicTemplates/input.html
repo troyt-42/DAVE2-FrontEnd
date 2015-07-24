@@ -1,8 +1,18 @@
-<div class="input-group" style="margin-top:10px">
+<div class="input-group" style="margin-top:10px" ng-class="{'has-error' : options.validation.errorExistsAndShouldBeVisible}">
   <span class="input-group-addon" id="basic-addon1">{{options.key}}</span>
   <input type="{{options.data.inputType}}" class="form-control" placeholder="{{options.data.placeholder}}" ng-model="model[options.key]">
 </div>
 
+<div class="validation"
+ng-if="options.validation.errorExistsAndShouldBeVisible"
+ng-messages="options.formControl.$error">
+<div style="color: crimson;text-align: center" ng-message="halfOfInterval">Should less than 0.5 * Interval</div>
+
+<!-- <div ng-messages-include="../angularFormlyBasicTemplates/validation.html"></div>
+<div ng-message="{{::name}}" ng-repeat="(name, message) in ::options.validation.messages">
+  {{message(options.formControl.$viewValue, options.formControl.$modelValue, this)}}
+</div> -->
+</div>
 <!--<div>
 <pre ng-repeat="(key, val) in this" ng-if="key !== 'uploader'">$scope.{{key}} = {{val | json}}</pre>
 </div>-->

@@ -78,6 +78,24 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/angularFormlyBasicTemplates\/validation.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/angularFormlyBasicTemplates\/validation.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/angularFormlyBasicTemplates\/wrappers\/has-error.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/angularFormlyBasicTemplates\/wrappers\/has-error.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/bourbon\/_bourbon-deprecated-upcoming.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,

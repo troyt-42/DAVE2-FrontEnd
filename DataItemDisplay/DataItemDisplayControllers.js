@@ -5,7 +5,7 @@ angular.module("Dave2.DataItemDisplay")
 .controller("DaveDataItemDisplayListPageCtrl", DaveDataItemDisplayListPageCtrl);
 
 DataItemDisplayCtrl.$inject=['$scope','$timeout','DataItemDisplaySocket'];
-DaveDataItemDisplayListPageCtrl.$inject=['$scope','$timeout','$compile', "$cookies", 'DataItemDisplaySocket','DirectiveService'];
+DaveDataItemDisplayListPageCtrl.$inject=['$scope','$timeout','$compile', "$cookies", 'DataItemDisplaySocket','DirectiveService','generalStateWRS'];
 
 function DataItemDisplayCtrl($scope,$timeout,DataItemDisplaySocket){
   var vm = this;
@@ -291,7 +291,7 @@ function DataItemDisplayCtrl($scope,$timeout,DataItemDisplaySocket){
 
 }
 
-function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, DataItemDisplaySocket, DirectiveService){
+function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, DataItemDisplaySocket, DirectiveService,generalStateWRS){
   var vm = this;
 
   //functions
@@ -301,18 +301,21 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   vm.decreaseColumnIndex = decreaseColumnIndex;
   vm.increaseColumnIndex = increaseColumnIndex;
   vm.removeColumn = removeColumn;
+  vm.requestDataItem = requestDataItem;
   vm.toggleLayOutMenu = toggleLayOutMenu;
   vm.toggleSearchMode = toggleSearchMode;
   //variables
   vm.alerts = [];
-  vm.avaliableTableColumns = [];
+  vm.avaliableDataItemTableColumns = [];
+  vm.dataItemData = [];
   vm.dataItemList = [];
   vm.dataItemListCurrentPage = 1;
   vm.dataItemListTableColumns = [
     {name: "name", status: true, index: 0},
-    {name:  "note", status: true, index: 1},
-    {name: "precision", status: true, index: 2},
-    {name: "unit", status: true, index: 3}
+    {name:  "location", status: true, index: 1},
+    {name:  "note", status: true, index: 2},
+    {name: "precision", status: true, index: 3},
+    {name: "unit", status: true, index: 4}
   ];
   vm.promiseToSolve = '';
   vm.search = {};
@@ -332,15 +335,24 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
     }
   });
 
+  $scope.$on('socket:ipDataItemResponse', function(event,data){
+    console.log(event.name);
+    if(data.completeState !== 1){
+      vm.dataItemData = vm.dataItemData.concat(data.list_out);
+    } else {
+      console.log(vm.dataItemData.length);
+    }
+  });
   vm.activate();
   /////////////////
 
   function activate(){
+    $cookies.remove('dataItemListTableColumns');
     if($cookies.getObject('dataItemListTableColumns') === undefined){
       $cookies.putObject('dataItemListTableColumns', vm.dataItemListTableColumns);
     }
     vm.dataItemListTableColumns = $cookies.getObject('dataItemListTableColumns');
-    vm.avaliableTableColumns = $cookies.getObject('avaliableTableColumns') || [];
+    vm.avaliableDataItemTableColumns = $cookies.getObject('avaliableDataItemTableColumns') || [];
 
     DataItemDisplaySocket.emit('requestDataItemList');
     vm.promiseToSolve =  $timeout(function(){
@@ -356,14 +368,16 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
       }
       vm.systemStatus = "Error";
     },5000);
+
+    generalStateWRS.writeState('hasMenu', false);
   }
 
   function addTableColumn(column, index){
-    if(vm.avaliableTableColumns.length !== 0){
+    if(vm.avaliableDataItemTableColumns.length !== 0){
       vm.dataItemListTableColumns[column.index - 1].status = true;
-      vm.avaliableTableColumns.splice(index, 1);
+      vm.avaliableDataItemTableColumns.splice(index, 1);
       $cookies.putObject('dataItemListTableColumns', vm.dataItemListTableColumns);
-      $cookies.putObject('avaliableTableColumns', vm.avaliableTableColumns);
+      $cookies.putObject('avaliableDataItemTableColumns', vm.avaliableDataItemTableColumns);
     } else {
 
     }
@@ -388,16 +402,15 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
         vm.dataItemListTableColumns[column.newIndex - 1] = temp;
         column.index = column.newIndex;
         console.log(column);
-        console.log(vm.avaliableTableColumns);
+        console.log(vm.avaliableDataItemTableColumns);
         console.log(vm.dataItemListTableColumns);
         vm.addTableColumn(column, index);
 
       }
     }
     $cookies.putObject('dataItemListTableColumns', vm.dataItemListTableColumns);
-    $cookies.putObject('avaliableTableColumns', vm.avaliableTableColumns);
+    $cookies.putObject('avaliableDataItemTableColumns', vm.avaliableDataItemTableColumns);
   }
-
 
   function decreaseColumnIndex(index){
     for(var i = index - 1; i >= 0; i--){
@@ -428,17 +441,21 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
 
   function removeColumn(index){
     vm.dataItemListTableColumns[index].status = false;
-    vm.avaliableTableColumns.push({index: index + 1, value: vm.dataItemListTableColumns[index].name, newIndex : index + 1});
-    console.log(vm.avaliableTableColumns);
+    vm.avaliableDataItemTableColumns.push({index: index + 1, value: vm.dataItemListTableColumns[index].name, newIndex : index + 1});
+    console.log(vm.avaliableDataItemTableColumns);
     $cookies.putObject('dataItemListTableColumns', vm.dataItemListTableColumns);
-    $cookies.putObject('avaliableTableColumns', vm.avaliableTableColumns);
+    $cookies.putObject('avaliableDataItemTableColumns', vm.avaliableDataItemTableColumns);
   }
 
+  function requestDataItem(dataItem){
+    console.log(dataItem);
+    DataItemDisplaySocket.emit('requestDataItem', dataItem);
+  }
   function toggleLayOutMenu(){
     angular.element('.js-layout').toggleClass('hidden');
   }
   function toggleSearchMode(){
-    DirectiveService.EnterSearchMode('dave-data-item-display-list-page', '<dave-data-item-display-list-page></dave-data-item-display-list-page>', '.dataItemDisplayContainer', $scope, $compile);
+    DirectiveService.EnterSearchMode('dave-data-item-display-list-page', '<dave-data-item-display-list-page></dave-data-item-display-list-page>', '.dataItemDisplayContainer',$scope, $compile);
   }
 }
 }());

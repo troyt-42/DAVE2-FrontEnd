@@ -90,22 +90,40 @@ $importerWellHeight: 650px
         +texture(270deg, lighten($yale-blue, 10%), black , 26, 1)
         border-bottom-right-radius: 5px
         border-top: 0
-        span
-          border: 2px solid black
-          border-right: 0
-          background: gold
-          font-weight: bold
-          color: black
-        input
-          border: 2px solid black
-          +texture(270deg, white, linen , 19, 1)
-          color: black
-          box-shadow: none
-        textarea
-          border: 2px solid black
-          +texture(270deg, white, linen , 19, 1)
-          color: black
-          box-shadow: none
+        div.input-group
+
+          span
+            +transition(all 0.2s linear)
+            border: 2px solid black
+            border-right: 0
+            background: gold
+            font-weight: bold
+            color: black
+          input
+            +transition(all 0.2s linear)
+            border: 2px solid black
+            +texture(270deg, white, linen , 19, 1)
+            color: black
+            box-shadow: none
+            +pad(0 10px)
+          textarea
+            +transition(all 0.2s linear)
+            border: 2px solid black
+            +texture(270deg, white, linen , 19, 1)
+            color: black
+            box-shadow: none
+          &.has-error
+            span
+              border-right: none
+              color: white
+              background: crimson
+            input
+              background: crimson
+              color: white
+            textarea
+              background: crimson
+              color: white
+
 
       &:last-child
         color: black
@@ -266,7 +284,7 @@ $importerWellHeight: 650px
                     input.form-control
                       display: inline
                       width: 65%
-                      height: 2em
+                      height: 1.5em
 
 
                     &:last-child

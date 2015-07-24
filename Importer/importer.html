@@ -1,6 +1,6 @@
 
 <div class="importerContainer">
-  <div class="importerContainerLeftMenu noExpanded">
+  <div class="importerContainerLeftMenu expanded">
     <accordion close-others="true">
       <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst"  >
         <accordion-heading>
@@ -29,9 +29,9 @@
           <span >Random Data Generator Config</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.secondOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.secondOpen}" style="font-size:100%;color:white"></i>
         </accordion-heading>
-        <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields"></formly-form>
+        <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
         <div>
-          <button type="button" ng-click = "importerUploadCtrl.createRandomImporter()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007">Send</button>
+          <button type="button" ng-click = "importerUploadCtrl.createRandomImporter()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007" ng-disabled="vm.randomImporterForm.$invalid">Send</button>
           <button type="button" ng-click = "importerUploadCtrl.cancelRandomImporter()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
         </div>
       </accordion-group>
@@ -58,11 +58,13 @@
 
   </div>
 
-  <div class="importerContainerRightPanel animated fadeIn expanded" >
-    <dave-importer-list-page class="angular-directive"></dave-importer-list-page>
+  <div class="importerContainerRightPanel animated fadeIn noExpanded" >
+
+    <pre>{{importerUploadCtrl.randomImporterForm | json: spacing}}</pre>
+    <!-- <dave-importer-list-page class="angular-directive"></dave-importer-list-page>
     <div class="progressbar-container" ng-show="importerUploadCtrl.progressing">
       <div class="progressingStat"><span>{{importerUploadCtrl.progressingStat[0]}}/{{importerUploadCtrl.progressingStat[1]}}</span></div>
       <progressbar max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><span style="font-size: 130%;font-style: normal;color: black;font-weight: bold;line-height: 2.6em;display: block">{{importerUploadCtrl.waitingMessage}}</span></progressbar>
-    </div>
+    </div> -->
   </div>
 </div>

@@ -146,24 +146,44 @@ html {
         background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/ps_neutral.png"), linear-gradient(270deg, #1465c0, black), center no-repeat #1465c0 scroll;
         border-bottom-right-radius: 5px;
         border-top: 0; }
-        .importerContainer .importerContainerLeftMenu .panel .panel-body span {
+        .importerContainer .importerContainerLeftMenu .panel .panel-body div.input-group span {
+          -webkit-transition: all 0.2s linear;
+          -moz-transition: all 0.2s linear;
+          transition: all 0.2s linear;
           border: 2px solid black;
           border-right: 0;
           background: gold;
           font-weight: bold;
           color: black; }
-        .importerContainer .importerContainerLeftMenu .panel .panel-body input {
+        .importerContainer .importerContainerLeftMenu .panel .panel-body div.input-group input {
+          -webkit-transition: all 0.2s linear;
+          -moz-transition: all 0.2s linear;
+          transition: all 0.2s linear;
+          border: 2px solid black;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), -webkit-linear-gradient(270deg, white, linen), center no-repeat white scroll;
+          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), linear-gradient(270deg, white, linen), center no-repeat white scroll;
+          color: black;
+          box-shadow: none;
+          padding: 0 10px; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body div.input-group textarea {
+          -webkit-transition: all 0.2s linear;
+          -moz-transition: all 0.2s linear;
+          transition: all 0.2s linear;
           border: 2px solid black;
           background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), -webkit-linear-gradient(270deg, white, linen), center no-repeat white scroll;
           background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), linear-gradient(270deg, white, linen), center no-repeat white scroll;
           color: black;
           box-shadow: none; }
-        .importerContainer .importerContainerLeftMenu .panel .panel-body textarea {
-          border: 2px solid black;
-          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), -webkit-linear-gradient(270deg, white, linen), center no-repeat white scroll;
-          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/grid.png"), linear-gradient(270deg, white, linen), center no-repeat white scroll;
-          color: black;
-          box-shadow: none; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body div.input-group.has-error span {
+          border-right: none;
+          color: white;
+          background: crimson; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body div.input-group.has-error input {
+          background: crimson;
+          color: white; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body div.input-group.has-error textarea {
+          background: crimson;
+          color: white; }
       .importerContainer .importerContainerLeftMenu .panel:last-child {
         color: black; }
         .importerContainer .importerContainerLeftMenu .panel:last-child .panel-heading {
@@ -440,7 +460,7 @@ html {
                   .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
                     display: inline;
                     width: 65%;
-                    height: 2em; }
+                    height: 1.5em; }
                   .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
                     border-bottom: 0px; }
                   .importerContainer .importerContainerRightPanel dave-importer-list-page .importerStepOne .importerStepOneWell .importerListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
@@ -1480,12 +1500,21 @@ html {
                 -o-justify-content: space-between;
                 justify-content: space-between;
                 -ms-flex-pack: justify;
+                -webkit-box-align: center;
+                -moz-box-align: center;
+                box-align: center;
+                -webkit-align-items: center;
+                -moz-align-items: center;
+                -ms-align-items: center;
+                -o-align-items: center;
+                align-items: center;
+                -ms-flex-align: center;
                 border-bottom: 1px skyblue solid;
                 font-weight: bold; }
                 .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
                   display: inline;
                   width: 65%;
-                  height: 2em; }
+                  height: 1.5em; }
                 .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
                   border-bottom: 0px; }
                 .dataItemDisplayContainer dave-data-item-display-list-page .importerStepOne .importerStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
@@ -1618,7 +1647,7 @@ body {
   font-family: "Dosis";
   background: url("../imgs/diagonal_striped_brick.png") repeat;
   background: url("../imgs/diagonal_striped_brick.png") repeat;
-  overflow: hidden; }
+  overflow: scroll; }
 
 header.navigation {
   background: linear-gradient(270deg, #F0F0F0, white);

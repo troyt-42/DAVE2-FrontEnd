@@ -2,7 +2,8 @@
   angular
   .module("Dave2")
   .factory("generalSocket", generalSocket)
-  .factory("userSocket", userSocket);
+  .factory("userSocket", userSocket)
+  .factory("generalStateWRS", generalStateWRS);
   generalSocket.$inject = ["socketFactory"];
   userSocket.$inject = ["socketFactory"];
 
@@ -20,5 +21,17 @@
     return socketFactory({
       ioSocket: myIoSocket
     });
+  }
+
+  function generalStateWRS(){
+    var states = {};
+    return {
+      writeState : function(name, value){
+        states[ name] = value;
+      },
+      readState : function(name){
+        return states[ name];
+      }
+    };
   }
 })();

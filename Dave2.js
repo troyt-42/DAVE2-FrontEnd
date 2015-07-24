@@ -6,12 +6,12 @@ angular
   "Dave2.Importer",
   "Dave2.DataItemDisplay",
   "ui.bootstrap",
-  "btford.socket-io"
+  "btford.socket-io",
+  "formly"
 ])
 .config(routeConfig);
 
 routeConfig.$inject = ["$routeProvider"];
-
 function routeConfig($routeProvider){
   $routeProvider.when('/Import',{
     templateUrl : "Importer/importer.html",
@@ -25,8 +25,6 @@ function routeConfig($routeProvider){
     controllerAs: "dataItemDisplayCtrl"
   });
 }
-
-
 
 
 //Particles.js config loading function

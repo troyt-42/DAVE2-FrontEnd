@@ -22,7 +22,9 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__importer_stepOne_createImporter_out__'},
   { topic: '__importer_stepTwo_decideCreation_out__'},
   { topic: '__importer_stepTwoB_updateImporter_out__'},
-  { topic: '__ip_dataItem_list_out__'}
+  { topic: '__ip_dataItem_list_out__'},
+    { topic: '__ip_dataItem_out__'}
+
 ],
 {
   groupId: 'test'
@@ -347,6 +349,30 @@ io.of('/dataItemDisplay').on('connection', function(socket){
       }
     });
   });
+
+    socket.on('requestDataItem', function(dataItem){
+      kafkaProducer.send([{
+        topic:'__ip_dataItem_in__',
+        messages: [
+          JSON.stringify({
+            session_id: socket.id,
+            action:'QUERY_DATAITEM',
+            return_topic: '__ip_dataItem_out__',
+            payload:{
+              location: dataItem.location,
+              name: dataItem.name
+            }
+          })
+        ]
+      }],
+      function(err,data){
+        if(err){
+          console.log(err);
+        } else {
+          console.log('User ' + socket.id + ' has send dataItem request successfully');
+        }
+      });
+    });
 });
 
 kafkaConsumer.on('message',function(message){
@@ -400,6 +426,11 @@ kafkaConsumer.on('message',function(message){
     var data7 = JSON.parse(message.value);
     if(data7){
       io.of('/dataItemDisplay').to(data7.session_id).emit('ipDataItemListResponse', data7);
+    }
+  }  else if (message.topic === '__ip_dataItem_out__'){
+    var data8 = JSON.parse(message.value);
+    if(data8){
+      io.of('/dataItemDisplay').to(data8.session_id).emit('ipDataItemResponse', data8);
     }
   } else {
     console.log(message);

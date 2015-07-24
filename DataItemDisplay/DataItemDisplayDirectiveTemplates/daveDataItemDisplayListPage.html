@@ -31,12 +31,12 @@
             <span class="dropdown" dropdown on-toggle="toggled(open)">
               <a href class="dropdown-toggle" dropdown-toggle>
                 <i class="js-layout hidden glyphicon glyphicon-plus-sign animated flipInY plus"></i>
-                <span class="js-layout hidden" style="font-size:110%">{{daveDataItemDisplayListPageCtrl.avaliableTableColumns.length}} Avaliable</span>
+                <span class="js-layout hidden" style="font-size:110%">{{daveDataItemDisplayListPageCtrl.avaliableDataItemTableColumns.length}} Avaliable</span>
               </a>
-              <ul class="dropdown-menu" ng-class="{'noAvaliableHeaders' : !daveDataItemDisplayListPageCtrl.avaliableTableColumns.length}">
-                <span ng-show="!daveDataItemDisplayListPageCtrl.avaliableTableColumns.length">No Avaliable Headers</span>
-                <li ng-repeat="column in daveDataItemDisplayListPageCtrl.avaliableTableColumns track by column.name" ng-click="daveDataItemDisplayListPageCtrl.addTableColumn(column, $index)" >
-                  <span>Index: <input type="text" class="form-control column-index-input" ng-model="daveDataItemDisplayListPageCtrl.avaliableTableColumns[$index].newIndex" ng-click="$event.stopPropagation()" ng-keypress="daveDataItemDisplayListPageCtrl.addTableColumnKeyPress($event, column, $index)"></input></span><span>{{column.value}}</span>
+              <ul class="dropdown-menu" ng-class="{'noAvaliableHeaders' : !daveDataItemDisplayListPageCtrl.avaliableDataItemTableColumns.length}">
+                <span ng-show="!daveDataItemDisplayListPageCtrl.avaliableDataItemTableColumns.length">No Avaliable Headers</span>
+                <li ng-repeat="column in daveDataItemDisplayListPageCtrl.avaliableDataItemTableColumns" ng-click="daveDataItemDisplayListPageCtrl.addTableColumn(column, $index)" >
+                  <span>Index: <input type="text" class="form-control column-index-input" ng-model="daveDataItemDisplayListPageCtrl.avaliableDataItemTableColumns[$index].newIndex" ng-click="$event.stopPropagation()" ng-keypress="daveDataItemDisplayListPageCtrl.addTableColumnKeyPress($event, column, $index)"></input></span><span>{{column.value}}</span>
                 </li>
               </ul>
             </span>
@@ -44,7 +44,7 @@
         </tr>
       </thead>
       <tbody style="color:white">
-        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search" ng-click="daveDataItemDisplayListPageCtrl.requestImporter(importer)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))">
+        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search" ng-click="daveDataItemDisplayListPageCtrl.requestDataItem(dataItem)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))">
           <td ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name"  ng-show="column.status">{{dataItem[column.name]}}</td>
         </tr>
       </tbody>
