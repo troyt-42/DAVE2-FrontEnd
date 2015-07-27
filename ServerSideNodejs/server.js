@@ -351,6 +351,7 @@ io.of('/dataItemDisplay').on('connection', function(socket){
   });
 
     socket.on('requestDataItem', function(dataItem){
+      console.log("called");
       kafkaProducer.send([{
         topic:'__ip_dataItem_in__',
         messages: [
