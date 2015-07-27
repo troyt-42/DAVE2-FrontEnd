@@ -5,10 +5,10 @@ var io = require('socket.io')(); //jshint ignore: line
 var bodyparser = require('body-parser');
 var multiparty= require('multiparty');
 var kafka = require('kafka-node');
-
+var redis = require("redis");
 var app = express();
 var server = http.createServer(app);
-
+var redisClient = redis.createClient({no_ready_check:true});
 var kafkaClient = new kafka.Client('10.222.83.158:2181');
 var HighLevelProducer = kafka.HighLevelProducer;
 var HighLevelConsumer = kafka.HighLevelConsumer;
@@ -23,7 +23,7 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__importer_stepTwo_decideCreation_out__'},
   { topic: '__importer_stepTwoB_updateImporter_out__'},
   { topic: '__ip_dataItem_list_out__'},
-    { topic: '__ip_dataItem_out__'}
+  { topic: '__ip_dataItem_out__'}
 
 ],
 {
@@ -324,6 +324,8 @@ io.of('/importer').on('connection', function(socket){
   });
 });
 
+
+
 io.of('/dataItemDisplay').on('connection', function(socket){
   console.log(socket.handshake.address + ' has connected! id: ' + socket.id + ' Namespace: /dataItemDisplay');
 
@@ -350,31 +352,45 @@ io.of('/dataItemDisplay').on('connection', function(socket){
     });
   });
 
-    socket.on('requestDataItem', function(dataItem){
-      console.log("called");
-      kafkaProducer.send([{
-        topic:'__ip_dataItem_in__',
-        messages: [
-          JSON.stringify({
-            session_id: socket.id,
-            action:'QUERY_DATAITEM',
-            return_topic: '__ip_dataItem_out__',
-            payload:{
-              location: dataItem.location,
-              name: dataItem.name
-            }
-          })
-        ]
-      }],
-      function(err,data){
-        if(err){
-          console.log(err);
-        } else {
-          console.log('User ' + socket.id + ' has send dataItem request successfully');
-        }
-      });
+  socket.on('requestDataItem', function(dataItem){
+    kafkaProducer.send([{
+      topic:'__ip_dataItem_in__',
+      messages: [
+        JSON.stringify({
+          session_id: socket.id,
+          action:'QUERY_DATAITEM',
+          return_topic: '__ip_dataItem_out__',
+          payload:{
+            location: dataItem.location,
+            name: dataItem.name
+          }
+        })
+      ]
+    }],
+    function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has send dataItem request successfully');
+      }
     });
+  });
+
+  socket.on('ipAsychLoadingDataRequest', function(info){
+    redisClient.zrangebyscore(info.name+":"+info.location+":date", info.min, info.max, function(err, data){
+      if(err) {throw err;}
+      var dataToSend = [];
+      for(var i = 0; i < data.length; i ++){
+        var obj =JSON.parse(data[i]);
+        var temp = [obj.DATE, obj.VALUE];
+        dataToSend[i] = temp;
+      }
+      socket.emit("ipAsychLoadingDataResponse", dataToSend);
+    });
+  });
 });
+
+var redisClient = redis.createClient({no_ready_check:true});
 
 kafkaConsumer.on('message',function(message){
   if(message.value === "hi"){
@@ -431,6 +447,11 @@ kafkaConsumer.on('message',function(message){
   }  else if (message.topic === '__ip_dataItem_out__'){
     var data8 = JSON.parse(message.value);
     if(data8){
+      for(var i = 0; i < data8.list_out.length; i ++){
+        data8.list_out[i][0] = Number(data8.list_out[i][0]);
+        data8.list_out[i][1] = Number(data8.list_out[i][1]);
+        redisClient.zadd(data8.payload.name + ":" + data8.payload.location + ":date", data8.list_out[i][0], "{ \"DATE\":" + data8.list_out[i][0] + ", \"VALUE\":" + data8.list_out[i][1] + "}");
+      }
       io.of('/dataItemDisplay').to(data8.session_id).emit('ipDataItemResponse', data8);
     }
   } else {
