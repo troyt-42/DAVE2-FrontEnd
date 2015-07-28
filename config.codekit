@@ -60,6 +60,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/angularFormlyBasicTemplates\/select2.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/angularFormlyBasicTemplates\/select2.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/angularFormlyBasicTemplates\/textarea.html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -24810,6 +24819,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/DataItemDisplay\/DataItemDisplayDirectiveTemplates\/daveDataItemDisplayPage.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/DataItemDisplay\/DataItemDisplayDirectiveTemplates\/daveDataItemDisplayPage.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/DataItemDisplay\/DataItemDisplayServices.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -24959,6 +24977,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/highchartsThemes\/grid.js",
 		"outputAbbreviatedPath": "\/highchartsThemes\/min\/grid-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/highchartsThemes\/min\/dark-unica-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/highchartsThemes\/min\/dark-unica-min.js",
+		"outputAbbreviatedPath": "\/highchartsThemes\/min\/min\/dark-unica-min-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -37020,6 +37049,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/sass\/_preloader.sass",
 		"outputAbbreviatedPath": "\/css\/_preloader.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
+		},
+	"\/sass\/_preloader2.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/sass\/_preloader2.sass",
+		"outputAbbreviatedPath": "\/css\/_preloader2.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 0,

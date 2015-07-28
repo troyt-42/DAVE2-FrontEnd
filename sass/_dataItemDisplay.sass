@@ -2,10 +2,10 @@
 @import "bourbon", "neat"
 
 .dataItemDisplayContainer
-  +span-columns(12)
+  +outer-container(100%)
   +pad(0 default)
   dave-data-item-display-list-page
-    .importerSetUpButton
+    .dataItemSetUpButton
       position: relative
       cursor: pointer
       div
@@ -35,9 +35,9 @@
           +texture(90deg, lighten(green, 10%) ,lighten(#8AC007, 5%), 9, 1)
           i
             text-shadow: none
-    .importerStepOne
+    .dataItemStepOne
       +span-columns(12)
-      .importerStepOneWell
+      .dataItemStepOneWell
         position: relative
         +pad(20px 20px)
         +texture(270deg, black, black , 18, 1)
@@ -157,3 +157,193 @@
             background: black
             color: white
             cursor: pointer
+  dave-data-item-display-page
+    .dataItemStepTwoB
+      +span-columns(12)
+      .dataItemSetUpButton
+        cursor: pointer
+        div
+          display: inline
+          +pad(5px 10px 20px)
+          +border-top-radius(10px)
+          background: black
+          color: white
+          &:hover
+            background: white
+            color: black
+          &:nth-child(2)
+            background: gold
+            color: black
+            &:hover
+              background: black
+              color: gold
+          &:nth-child(3)
+            background: skyblue
+            color: black
+            &:hover
+              background: darken(purple, 10%)
+              color: skyblue
+      .dataItemStepTwoBWell
+        +span-columns(12)
+        +pad(20px 20px)
+        +texture(180deg, $yale-blue,  darken(skyblue, 20%) , 80, 1)
+        +border-left-radius(10px)
+        +border-right-radius(10px)
+        +row()
+        border: 2px orange solid
+        text-align: left
+        box-shadow: 0px 0px 0px #3A8AD3
+        height: $importerWellHeight
+
+        .dataItemStepTwoBWellLeft
+          +span-columns(4)
+          height: 100%
+          border: 1px solid white
+          border-radius: 5px
+
+          .dataItemStepTwoBWellLeftHeader
+            +pad()
+            +span-columns(12)
+            color: white
+            +border-top-radius(5px)
+            height: auto
+            border: 0
+            border-bottom: 1px solid white
+            +texture(90deg, darken(deepskyblue, 10%), tint(darkorange, 10%), 33, 1)
+            +display(flex)
+            +align-items(center)
+
+            div:first-child
+              +span-columns(10)
+              font-size: 130%
+            div:last-child
+              +span-columns(2)
+              font-size: 80%
+              +display(flex)
+              +align-items(center)
+              color: black
+              &:hover
+                color: linen
+              span
+                margin-right: 5px
+                cursor: pointer
+                text-decoration: underline
+
+              i
+
+                font-size: 144%
+                cursor: pointer
+          .dataItemNameCard
+            +span-columns(12)
+            +pad(5px 20px)
+            background: transparent
+            color: skyblue
+            text-shadow: -1px 0px #0f4d92
+            margin-bottom: 10px
+            border-bottom: 1px solid white
+            +display(flex)
+            +align-items(center)
+            +justify-content(space-between)
+            background: black
+            // +texture(90deg, contrast(gold),  contrast(darken(coral, 10%)) , 31, 0)
+            div.info
+              +span-columns(8)
+              border-right: 1px solid greenyellow
+
+              div
+                &:first-child
+                  border-bottom: 1px solid greenyellow
+                span:nth-child(1)
+                  font-size: 100%
+                  i
+                    color: gold
+                    font-size: 80%
+                    text-shadow: none
+                span:nth-child(2)
+                  font-size: 120%
+                  font-weight: bold
+                  color: white
+            div.status
+              +span-columns(4)
+              margin-left: 10px
+              color: greenyellow
+              +display(flex)
+              +align-items(center)
+              +justify-content(space-between)
+              i
+                color: white
+                font-size: 130%
+                text-shadow: none
+          .dataItemStepTwoBDataItems
+            +span-columns(12)
+            +pad(10px 20px)
+            height: 32em
+            background: transparent
+            .title
+              +span-columns(12)
+              color: gold
+              font-size: 200%
+              font-weight: bold
+              text-shadow: 0px -2px darken(purple, 20%)
+            .dataItemStepTwoBDataItemsList
+              +span-columns(12)
+              margin-top: 10px
+              height: 80%
+              overflow-y: auto
+              border-radius: 5px
+              .dataItemStepTwoBDataItem
+                +span-columns(12)
+                +pad()
+                +texture(90deg, gold,  darken(coral, 10%) , 31, 0)
+                border-radius: 0px
+                border-top: 1px solid white
+                border-right: 1px solid white
+                border-left: 1px solid white
+                font-weight: bold
+                font-size: 120%
+                cursor: pointer
+                color: white
+
+                &:hover
+                  color: $yale-blue
+                &.active
+                  +background(linear-gradient(135deg, $yale-blue, lighten($yale-blue, 30%)))
+                  color: gold
+
+
+                &:first-child
+                  +border-top-radius(5px)
+                &:last-child
+                  +border-bottom-radius(5px)
+                  border-bottom: 1px solid white
+        .dataItemStepTwoBWellRight
+          +span-columns(8)
+          +background(url('../imgs/classy_fabric.png') repeat)
+          background: transparent
+          border-radius: 0px
+          // border-left: 2px orange solid
+          box-shadow: 0px 0px 0px black inset
+          height: 100%
+
+          .dave-data-item-graph
+            +span-columns(12)
+            background: transparent
+            border-radius: 10px
+            height: 100%
+            +pad()
+            border: 1px solid black
+            .waitingSymbol
+              +span-columns(12)
+              +align-items(center)
+              +display(flex)
+              +flex-direction(column)
+              +justify-content(center)
+              +flex-wrap(wrap)
+              height: 100%
+
+              .alert
+                +span-columns(6)
+                +row()
+                margin-top: 5px
+            #container
+              height: 100%

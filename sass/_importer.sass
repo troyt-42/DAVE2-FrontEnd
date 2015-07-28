@@ -90,28 +90,108 @@ $importerWellHeight: 650px
         +texture(270deg, lighten($yale-blue, 10%), black , 26, 1)
         border-bottom-right-radius: 5px
         border-top: 0
-        div.input-group
+        .queryJobs
+          +display(flex)
+          +align-items(center)
+          +justify-content(center)
+          button
+            background: greenyellow
+            color: black
+            text-shadow: none
+            font-weight: bold
+            &:focus
+              outline-color: shade(greenyellow, 10%)
+              background: shade(greenyellow, 10%)
+        .jobList
+          +span-columns(12)
+          background: transparent
+          div:first-child
+            +span-columns(12)
+            font-size: 130%
+            color: linen
+            border-bottom: 1px solid white
+            text-align: center
+          ul
+            min-height: 100px
+          div:nth-child(3)
+            color: linen
+          div:last-child
+            border-top: 1px solid white
+            text-align: center
+            i
+              margin-top: 10px
+              font-size: 120%
+              color: white
+              cursor: pointer
+              &:hover
+                color: skyblue
+        .createJobMode
+          div.action
+            +span-columns(12)
+            text-align: center
+            font-size: 120%
+            color: white
+            margin-top: 10px
+            i:first-child
+              margin-right: 40px
+              color: greenyellow
+              cursor: pointer
+            i:last-child
+              color: red
+              cursor: pointer
+        .waitingSymbol
+          +span-columns(12)
+          +align-items(center)
+          +display(flex)
+          +flex-direction(column)
+          +justify-content(center)
+          +flex-wrap(wrap)
+          height: 100%
+          +pad()
+          min-height: 50px
+          .alert
+            +span-columns(6)
+            +row()
+            margin-top: 5px
 
+        div.input-group
           span
             +transition(all 0.2s linear)
-            border: 2px solid black
-            border-right: 0
-            background: gold
+            border: 0
+            border-radius: 0
+            border-bottom: 1px solid gold
+            border-right: 1px solid gold
+            background: transparent
+
             font-weight: bold
-            color: black
+            color: white
+            &.selectSpan
+              border-right: 0
           input
             +transition(all 0.2s linear)
-            border: 2px solid black
-            +texture(270deg, white, linen , 19, 1)
+            border: 0
+            border-bottom: 1px solid gold
+            border-radius: 0
             color: black
             box-shadow: none
+            background: transparent
             +pad(0 10px)
+            color: white
           textarea
             +transition(all 0.2s linear)
-            border: 2px solid black
-            +texture(270deg, white, linen , 19, 1)
+            border: 0
+            border-bottom: 1px solid gold
+            border-radius: 0
+            color: black
+            background: transparent
+            box-shadow: none
+          select
+            +transition(all 0.2s linear)
             color: black
             box-shadow: none
+            background: transparent
+            +pad(0 10px)
+            color: white
           &.has-error
             span
               border-right: none
@@ -514,6 +594,7 @@ $importerWellHeight: 650px
                     border-color: black
                   &:focus
                     outline-color: white
+
     .importerStepTwo
       height: $importerWellHeight
       text-align: center

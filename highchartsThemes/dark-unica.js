@@ -16,10 +16,10 @@ Highcharts.createElement('link', {
 // 	}
 // })
 Highcharts.theme = {
-	colors: ["#3A8AD3", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+	colors: ["GREENYELLOW", "#905d2b", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
 		"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
 	chart: {
-		backgroundColor: "#3e3e40",
+		backgroundColor: "transparent",
 		style: {
 			fontFamily: "Dosis"
 		},
@@ -28,13 +28,13 @@ Highcharts.theme = {
 	title: {
 		style: {
 			color: 'white',
-			textTransform: 'uppercase',
+			// textTransform: 'uppercase',
 			fontSize: '20px'
 		}
 	},
 	subtitle: {
 		style: {
-			color: 'white',
+			color: 'black',
 			textTransform: 'uppercase'
 		}
 	},
@@ -50,13 +50,13 @@ Highcharts.theme = {
 		tickColor: '#707073',
 		title: {
 			style: {
-				color: 'white'
+				color: 'black'
 
 			}
 		}
 	},
 	yAxis: {
-		gridLineColor: '#707073',
+		gridLineColor: 'black',
 		labels: {
 			style: {
 				color: 'white'
@@ -140,10 +140,10 @@ Highcharts.theme = {
 	// scroll charts
 	rangeSelector: {
 		buttonTheme: {
-			fill: '#505053',
-			stroke: '#000000',
+			fill: 'darkorange',
+			stroke: '#fff',
 			style: {
-				color: '#CCC'
+				color: 'black'
 			},
 			states: {
 				hover: {
@@ -162,10 +162,10 @@ Highcharts.theme = {
 				}
 			}
 		},
-		inputBoxBorderColor: '#505053',
+		inputBoxBorderColor: 'linen',
 		inputStyle: {
 			backgroundColor: '#333',
-			color: 'silver'
+			color: 'linen'
 		},
 		labelStyle: {
 			color: 'silver'
@@ -189,12 +189,12 @@ Highcharts.theme = {
 	},
 
 	scrollbar: {
-		barBackgroundColor: '#808083',
+		barBackgroundColor: 'linen',
 		barBorderColor: '#808083',
 		buttonArrowColor: '#CCC',
 		buttonBackgroundColor: '#606063',
 		buttonBorderColor: '#606063',
-		rifleColor: '#FFF',
+		rifleColor: '#000',
 		trackBackgroundColor: '#404043',
 		trackBorderColor: '#404043'
 	},

@@ -1,6 +1,6 @@
 
 <div class="importerContainer">
-  <div class="importerContainerLeftMenu expanded">
+  <div class="importerContainerLeftMenu noExpanded">
     <accordion close-others="true">
       <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst"  >
         <accordion-heading>
@@ -13,8 +13,8 @@
           <ul style="margin-top:5px">
             <li ng-repeat="file in importerUploadCtrl.fileToUpload track by file.name">
               <span style="border: 0;box-shadow: 0;background: inherit">{{file.name}}
-              <i class="glyphicon glyphicon-remove" style="float:right;padding-right:5px" ng-click="importerUploadCtrl.removeFile(file)"></i>
-            </span>
+                <i class="glyphicon glyphicon-remove" style="float:right;padding-right:5px" ng-click="importerUploadCtrl.removeFile(file)"></i>
+              </span>
             </li>
           </ul>
         </div>
@@ -29,10 +29,47 @@
           <span >Random Data Generator Config</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.secondOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.secondOpen}" style="font-size:100%;color:white"></i>
         </accordion-heading>
-        <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
+        <!-- <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
         <div>
-          <button type="button" ng-click = "importerUploadCtrl.createRandomImporter()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007" ng-disabled="vm.randomImporterForm.$invalid">Send</button>
-          <button type="button" ng-click = "importerUploadCtrl.cancelRandomImporter()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
+        <button type="button" ng-click = "importerUploadCtrl.createRandomImporter()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007" ng-disabled="vm.randomImporterForm.$invalid">Send</button>
+        <button type="button" ng-click = "importerUploadCtrl.cancelRandomImporter()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
+        </div> -->
+        <div class="queryJobs" ng-show="!importerUploadCtrl.loadingJobs && !importerUploadCtrl.jobsLoaded">
+          <button type="button" ng-click = "importerUploadCtrl.requestJobs()" class="btn btn-success col-md-11" ng-disabled="vm.randomImporterForm.$invalid">Query</button>
+        </div>
+        <div class = "waitingSymbol" ng-show="importerUploadCtrl.loadingJobs || importerUploadCtrl.waitingJobCreation">
+          <alert class="animated fadeInDown" id="jobs{{$index}}" ng-repeat="alert in importerUploadCtrl.alerts" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index)">
+            {{alert.msg}}
+          </alert>
+          <div id="preloader_2">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="jobList animated fadeIn" ng-show="importerUploadCtrl.jobsLoaded && !importerUploadCtrl.waitingJobCreation">
+          <div><span>Job List<span>
+          </div>
+          <ul ng-show="importerUploadCtrl.jobs.length">
+            <li ng-repeat="job in importerUploadCtrl.jobs"></li>
+          </ul>
+          <div ng-show="importerUploadCtrl.jobs.length === 0">No Jobs Currently</div>
+          <div>
+            <i class = "glyphicon glyphicon-plus" ng-click="importerUploadCtrl.createNewJob()"></i>
+          </div>
+        </div>
+        <div class="createJobMode animated fadeIn" ng-show="importerUploadCtrl.createJobMode && !importerUploadCtrl.waitingJobCreation">
+          <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
+          <div class="input-group animated fadeIn" style="margin-top:10px" ng-show="importerUploadCtrl.randomImporterFormModel['Type'] === 'Static/Fast Generation'">
+            <span class="input-group-addon" id="basic-addon1">Range (/h)</span>
+            <input type="number" class="form-control" ng-model="importerUploadCtrl.randomImporterFormModel['Range (/h)']">
+          </div>
+          <div class="action">
+            <i ng-click = "importerUploadCtrl.submitJob()" class="glyphicon glyphicon-ok"></i>
+            <i ng-click = "importerUploadCtrl.cancelJobCreation()" class="glyphicon glyphicon-remove"></i>
+          </div>
         </div>
       </accordion-group>
 
@@ -58,13 +95,13 @@
 
   </div>
 
-  <div class="importerContainerRightPanel animated fadeIn noExpanded" >
+  <div class="importerContainerRightPanel animated fadeIn expanded" >
 
-    <pre>{{importerUploadCtrl.randomImporterForm | json: spacing}}</pre>
-    <!-- <dave-importer-list-page class="angular-directive"></dave-importer-list-page>
+    <!-- <pre>{{importerUploadCtrl.randomImporterForm | json: spacing}}</pre> -->
+    <dave-importer-list-page class="angular-directive"></dave-importer-list-page>
     <div class="progressbar-container" ng-show="importerUploadCtrl.progressing">
       <div class="progressingStat"><span>{{importerUploadCtrl.progressingStat[0]}}/{{importerUploadCtrl.progressingStat[1]}}</span></div>
       <progressbar max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><span style="font-size: 130%;font-style: normal;color: black;font-weight: bold;line-height: 2.6em;display: block">{{importerUploadCtrl.waitingMessage}}</span></progressbar>
-    </div> -->
+    </div>
   </div>
 </div>

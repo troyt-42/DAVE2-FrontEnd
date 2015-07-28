@@ -1,0 +1,6 @@
+<div class="input-group" style="margin-top:10px" >
+  <span class="input-group-addon selectSpan" id="basic-addon1">{{options.key}}:</span>
+  <select class="form-control" ng-model="model[options.key]">
+    <option ng-repeat="option in options.data.options">{{option}}</option>
+  </select>
+</div>

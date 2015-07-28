@@ -1,11 +1,11 @@
-<div class="importerSetUpButton">
+<div class="dataItemSetUpButton">
   <div class=" animated fadeIn" ng-click="daveDataItemDisplayListPageCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY"></i> Lay Out</div>
   <div class=" animated fadeIn" ng-click="daveDataItemDisplayListPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
   <div class=" animated fadeIn"><i class="glyphicon glyphicon-signal animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Display System</span></div>
 </div>
 
-<div class="importerStepOne">
-  <div class="importerStepOneWell animated fadeIn">
+<div class="dataItemStepOne">
+  <div class="dataItemStepOneWell animated fadeIn">
     <alert ng-hide = "daveDataItemDisplayListPageCtrl.loading" class="animated fadeInDown"  id="dataItemList{{$index}}" ng-repeat="alert in daveDataItemDisplayListPageCtrl.alerts" type="{{alert.type}}" close="daveDataItemDisplayListPageCtrl.closeAlert($index)" >{{alert.msg}}</alert>
 
     <div class = "waitingSymbol" ng-show="daveDataItemDisplayListPageCtrl.loading">

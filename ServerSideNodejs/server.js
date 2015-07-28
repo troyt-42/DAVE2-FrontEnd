@@ -17,11 +17,13 @@ var kafkaProducer = new HighLevelProducer(kafkaClient);
 var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__main_out__' },
   { topic: '__importer_stepOne_list_out__'},
-  { topic: '__importer_stepTwoB_importer_out__'},
-  { topic: '__importer_stepTwoB_dataItem_out__'},
+  { topic: '__importer_stepOne_jobs_out__'},
   { topic: '__importer_stepOne_createImporter_out__'},
   { topic: '__importer_stepTwo_decideCreation_out__'},
+  { topic: '__importer_stepTwoB_importer_out__'},
+  { topic: '__importer_stepTwoB_dataItem_out__'},
   { topic: '__importer_stepTwoB_updateImporter_out__'},
+
   { topic: '__ip_dataItem_list_out__'},
   { topic: '__ip_dataItem_out__'}
 
@@ -287,6 +289,26 @@ io.of('/importer').on('connection', function(socket){
 
   });
 
+  socket.on("requestJobs", function(){
+    kafkaProducer.send([{
+      topic:'__importer_stepOne_jobs_in__',
+      messages:[
+        JSON.stringify({
+          session_id: socket.id,
+          return_topic: '__importer_stepOne_jobs_out__',
+          location:'brampton',
+          action:'GETALL_JOBS'
+        })
+      ]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent request for current jobs successfully');
+      }
+    });
+  });
+
   socket.on('updateImporter', function(targetImporter){
     targetImporter.session_id = socket.id;
     targetImporter.action = 'UPDATE_IMPORTER';
@@ -303,22 +325,22 @@ io.of('/importer').on('connection', function(socket){
     });
   });
 
-  socket.on('createRandomImporter', function(configuration){
+  socket.on('createJob', function(configuration){
     var temp = {
       payload: configuration,
       session_id : socket.id,
-      action : 'RANDOM_IMPORTER',
-      return_topic : '__importer_stepOne_randomImporter_out__'
+      action : 'CREATE_JOB',
+      return_topic : '__importer_stepOne_new_job_out__'
     };
 
     kafkaProducer.send([{
-      topic:'__importer_stepOne_randomImporter_in__',
+      topic:'__importer_stepOne_new_job_in__',
       messages:[JSON.stringify(temp)]
     }],function(err,data){
       if(err){
         console.log(err);
       } else {
-        console.log('User ' + socket.id + ' has sent random importer creation request successfully:' + JSON.stringify(temp));
+        console.log('User ' + socket.id + ' has sent job creation request successfully:' + JSON.stringify(temp));
       }
     });
   });
@@ -447,12 +469,23 @@ kafkaConsumer.on('message',function(message){
   }  else if (message.topic === '__ip_dataItem_out__'){
     var data8 = JSON.parse(message.value);
     if(data8){
-      for(var i = 0; i < data8.list_out.length; i ++){
-        data8.list_out[i][0] = Number(data8.list_out[i][0]);
-        data8.list_out[i][1] = Number(data8.list_out[i][1]);
-        redisClient.zadd(data8.payload.name + ":" + data8.payload.location + ":date", data8.list_out[i][0], "{ \"DATE\":" + data8.list_out[i][0] + ", \"VALUE\":" + data8.list_out[i][1] + "}");
+      if(data8.reply === "ERROR"){
+        io.of('/dataItemDisplay').to(data8.session_id).emit('ipDataItemResponse', data8);
+      } else {
+        for(var i = 0; i < data8.list_out.length; i ++){
+          data8.list_out[i][0] = Number(data8.list_out[i][0]);
+          data8.list_out[i][1] = Number(data8.list_out[i][1]);
+          redisClient.zadd(data8.payload.name + ":" + data8.payload.location + ":date", data8.list_out[i][0], "{ \"DATE\":" + data8.list_out[i][0] + ", \"VALUE\":" + data8.list_out[i][1] + "}");
+        }
+        io.of('/dataItemDisplay').to(data8.session_id).emit('ipDataItemResponse', data8);
       }
-      io.of('/dataItemDisplay').to(data8.session_id).emit('ipDataItemResponse', data8);
+
+    }
+  } else if (message.topic === '__importer_stepOne_jobs_out__'){
+    var data9 = JSON.parse(message.value);
+
+    if(data9.list_out){
+      io.of('/importer').to(data9.session_id).emit('jobsData', data9);
     }
   } else {
     console.log(message);

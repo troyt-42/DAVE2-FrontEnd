@@ -10,8 +10,8 @@
       ioSocket: myIoSocket
     });
     dataItemDisplaySocket.forward('ipDataItemListResponse');
-        dataItemDisplaySocket.forward('ipDataItemResponse');
-
+    dataItemDisplaySocket.forward('ipDataItemResponse');
+    dataItemDisplaySocket.forward('ipAsychLoadingDataResponse');
     return dataItemDisplaySocket;
   }
 }());

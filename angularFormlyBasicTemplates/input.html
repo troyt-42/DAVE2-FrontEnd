@@ -6,7 +6,7 @@
 <div class="validation"
 ng-if="options.validation.errorExistsAndShouldBeVisible"
 ng-messages="options.formControl.$error">
-<div style="color: crimson;text-align: center" ng-message="halfOfInterval">Should less than 0.5 * Interval</div>
+<div class="animated fadeIn" style="color: white;text-align: center" ng-message="halfOfInterval">Should be less than 0.5 * Interval</div>
 
 <!-- <div ng-messages-include="../angularFormlyBasicTemplates/validation.html"></div>
 <div ng-message="{{::name}}" ng-repeat="(name, message) in ::options.validation.messages">

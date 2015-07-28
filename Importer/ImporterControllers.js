@@ -75,22 +75,21 @@
     //functions
     vm.activate = activate;
     vm.cancelFile = cancelFile;
-    vm.cancelRandomImporter = cancelRandomImporter;
-    vm.createRandomImporter = createRandomImporter;
+    vm.cancelJobCreation = cancelJobCreation;
     vm.changeDataItemConfig = changeDataItemConfig;
-
+    vm.createNewJob = createNewJob;
     vm.removeFile = removeFile;
+    vm.requestJobs = requestJobs;
     vm.submitFile = submitFile;
-
+    vm.submitJob = submitJob;
     //variables
     vm.alerts = {
-      "stepOne":[],
-      "stepTwoB" :[]
     };
-
-
+    vm.availableDataItems = [];
+    vm.createJobMode = false;
     vm.createNewImporterFormModel = {};
     vm.leftMenuExpanded = false;
+    vm.loadingJobs = false;
     vm.fileToUpload = [];
     vm.fileUploadProgress = 0;
     vm.randomImporterFormFields = [
@@ -145,10 +144,10 @@
         }
       },
       {
-        type:"input",
-        key:"Target Importer Name",
+        type:"select2",
+        key:"Target Data Item",
         data:{
-          placeholder: "example"
+          options: []
         }
       },
       {
@@ -157,16 +156,24 @@
         data:{
           placeholder: "example"
         }
+      },
+      {
+        type:"select2",
+        key:"Type",
+        data:{
+          options : ['Live/Slow Generation', 'Static/Fast Generation']
+        }
       }
     ];
     vm.randomImporterFormModel = {
-      "Maximum Value" : 0,
+      "Maximum Value" : 100,
       "Minimum Value" : 0,
-      "Maximum Slope" : 0,
+      "Maximum Slope" : 2,
       "Interval (/ms)" : 1000,
       "Time Float (/ms)": 0,
-      "Target Data Item Name": "test",
-      "Location": "brampton"
+      "Target Data Item": "",
+      "Location": "brampton",
+      "Type": "Live/Slow Generation"
     };
     vm.progressing = false;
     vm.progressingStat = [0, 1];
@@ -175,7 +182,8 @@
     vm.importerCreationPromise = '';
     vm.importerToDisplayContent = [];
 
-
+    vm.jobs = [];
+    vm.jobsLoaded = false;
     vm.promiseToSolve = null;
     vm.requestImporterPromiseToSolve = null;
     vm.stepOne = true;
@@ -225,7 +233,7 @@
     ];
 
     vm.waitingMessage = 'File Uploading';
-
+    vm.waitingJobCreation = false;
     $scope.$on('progressing', function(event, progressingStat){
       vm.progressing = true;
       vm.progressingStat = progressingStat;
@@ -323,6 +331,23 @@
       }
     });
 
+    $scope.$on("socket:jobsData", function(event, data){
+      console.log(event.name);
+      console.log(data);
+      if(vm.systemStatus === "Normal"){
+        if(data.completeState !== 1.0){
+          vm.jobs = vm.jobs.concat(data.list_out);
+          vm.avaliableDataItem = vm.avaliableDataItem.concat(data.avaiableDataItem);
+        } else {
+          vm.jobs = vm.jobs.concat(data.list_out);
+          vm.avaliableDataItem = vm.avaliableDataItem.concat(data.avaiableDataItem);
+          vm.randomImporterFormFields[5].data.options = vm.avaliableDataItem;
+          vm.randomImporterFormModel['Target Data Item'] = vm.avaliableDataItem[0];
+          vm.loadingJobs = false;
+          vm.jobsLoaded = true;
+        }
+      }
+    });
     vm.activate();
     ///////////////////////////
     function activate(){
@@ -334,13 +359,11 @@
     function cancelFile(){
       vm.formModel= {};
     }
-    function cancelRandomImporter(){
 
+    function cancelJobCreation(){
+      vm.createJobMode = false;
     }
-    function createRandomImporter(){
-      console.log(vm.randomImporterFormModel);
-      ImporterSocket.emit("createRandomImporter", vm.randomImporterFormModel);
-    }
+
     function changeDataItemConfig(dataItem){
       var loginInterface = $modal.open({
         templateUrl:"Importer/changeDataItemModal.html",
@@ -363,6 +386,9 @@
     }
 
 
+    function createNewJob(){
+      vm.createJobMode = true;
+    }
 
     function removeFile(file){
       var index = vm.fileToUpload.indexOf(file);
@@ -372,6 +398,13 @@
       }
     }
 
+    function requestJobs(){
+      vm.loadingJobs = true;
+      vm.jobs = [];
+      vm.avaliableDataItem = [];
+      ImporterSocket.emit('requestJobs');
+
+    }
 
     function submitFile(){
       var uploadfile = vm.fileToUpload;
@@ -426,7 +459,21 @@
       }
     }
 
+    function submitJob(){
+      vm.waitingJobCreation = true;
+      ImporterSocket.emit('createJob', {
+        "maximum" : vm.randomImporterFormModel['Maximum Value'],
+        "minimum" : vm.randomImporterFormModel['Minimum Value'],
+        "maximumSlope" : vm.randomImporterFormModel['Maximum Slope'],
+        "interval" : vm.randomImporterFormModel['Interval (/ms)'],
+        "timeFloat" : vm.randomImporterFormModel['Time Float (/ms)'],
+        "targetDataItem" : vm.randomImporterFormModel["Target Data Item"],
+        "location" : vm.randomImporterFormModel["Location"], //jshint ignore: line
+        "type" : vm.randomImporterFormModel["Type"],  //jshint ignore: line
+        "range" : vm.randomImporterFormModel['Range (/h)'] //jshint ignore: line
+      });
 
+    }
   }
 
   function UpdateImporterModalCtrl($scope, $modalInstance, currentImporter, Upload, ImporterSocket){

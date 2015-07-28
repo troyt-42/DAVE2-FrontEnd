@@ -2,23 +2,26 @@
 
 angular.module("Dave2.DataItemDisplay")
 .controller("DataItemDisplayCtrl", DataItemDisplayCtrl)
-.controller("DaveDataItemDisplayListPageCtrl", DaveDataItemDisplayListPageCtrl);
+.controller("DaveDataItemDisplayListPageCtrl", DaveDataItemDisplayListPageCtrl)
+.controller("DaveDataItemDisplayPageCtrl", DaveDataItemDisplayPageCtrl);
 
 DataItemDisplayCtrl.$inject=['$scope','$timeout','DataItemDisplaySocket'];
+
 DaveDataItemDisplayListPageCtrl.$inject=['$scope','$timeout','$compile', "$cookies", 'DataItemDisplaySocket','DirectiveService','generalStateWRS'];
+
+DaveDataItemDisplayPageCtrl.$inject = ['$scope','$timeout','$compile', "$cookies", 'DataItemDisplaySocket','DirectiveService','generalStateWRS'];
 
 function DataItemDisplayCtrl($scope,$timeout,DataItemDisplaySocket){
   var vm = this;
-  var highchartsContainer = angular.element("#container");
 
   vm.loading = true;
+  var highchartsContainer = angular.element("#container");
 
   DataItemDisplaySocket.on('importersInfo', function(data){
     console.log(data);
   });
 
   DataItemDisplaySocket.on('importersData', function(data){
-
     highchartsContainer.highcharts('StockChart',{
       chart:{
         zoomType:'x',
@@ -117,6 +120,7 @@ function DataItemDisplayCtrl($scope,$timeout,DataItemDisplaySocket){
         data:data
       }]
     });
+
     var points = [];
     var points2 = [];
     console.log(data.slice(0,100));
@@ -298,6 +302,7 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   vm.activate = activate;
   vm.addTableColumn = addTableColumn;
   vm.addTableColumnKeyPress = addTableColumnKeyPress;
+  vm.closeAlert = closeAlert;
   vm.decreaseColumnIndex = decreaseColumnIndex;
   vm.increaseColumnIndex = increaseColumnIndex;
   vm.removeColumn = removeColumn;
@@ -307,7 +312,6 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   //variables
   vm.alerts = [];
   vm.avaliableDataItemTableColumns = [];
-  vm.dataItemData = [];
   vm.dataItemList = [];
   vm.dataItemListCurrentPage = 1;
   vm.dataItemListTableColumns = [
@@ -321,6 +325,7 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   vm.search = {};
   vm.systemStatus = 'Normal';
   vm.loading = true;
+
   $scope.$on('socket:ipDataItemListResponse', function(event, data){
     console.log(event.name);
     if(vm.systemStatus === "Normal"){
@@ -335,14 +340,6 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
     }
   });
 
-  $scope.$on('socket:ipDataItemResponse', function(event,data){
-    console.log(event.name);
-    if(data.completeState !== 1){
-      vm.dataItemData = vm.dataItemData.concat(data.list_out);
-    } else {
-      console.log(vm.dataItemData.length);
-    }
-  });
   vm.activate();
   /////////////////
 
@@ -412,6 +409,11 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
     $cookies.putObject('avaliableDataItemTableColumns', vm.avaliableDataItemTableColumns);
   }
 
+  function closeAlert(index){
+    angular.element('div.alert.animated#dataItemList'+index).removeClass("fadeInDown");
+    angular.element('div.alert.animated#dataItemList'+index).addClass("fadeOutUp");
+    vm.alerts.splice(index, 1);
+  }
   function decreaseColumnIndex(index){
     for(var i = index - 1; i >= 0; i--){
       if(vm.dataItemListTableColumns[i].status){
@@ -448,14 +450,214 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   }
 
   function requestDataItem(dataItem){
-    console.log(dataItem);
-    DataItemDisplaySocket.emit('requestDataItem', dataItem);
+
+    var bindScope = $scope.$parent.$new(true);
+    bindScope.dataItemToRequest = dataItem;
+    DirectiveService.DestroyDirectiveService('dave-data-item-display-list-page', $scope);
+
+    DirectiveService.AddDirectiveService('.dataItemDisplayContainer', '<dave-data-item-display-page class="angular-directive" dave-data-item="{{dataItemToRequest}}"></dave-data-item-display-page>', bindScope, $compile);
   }
   function toggleLayOutMenu(){
     angular.element('.js-layout').toggleClass('hidden');
   }
   function toggleSearchMode(){
     DirectiveService.EnterSearchMode('dave-data-item-display-list-page', '<dave-data-item-display-list-page></dave-data-item-display-list-page>', '.dataItemDisplayContainer',$scope, $compile);
+  }
+}
+
+function DaveDataItemDisplayPageCtrl($scope, $timeout,$compile,$cookies, DataItemDisplaySocket, DirectiveService,generalStateWRS){
+  var vm = this;
+
+  //functions
+  vm.activate = activate;
+  vm.backToDataItemList = backToDataItemList;
+  vm.closeAlert = closeAlert;
+  //variables
+  vm.alerts = [];
+  vm.dataItemData = [];
+  vm.dataItemToRequest = $scope.dataItemToRequest ? JSON.parse($scope.dataItemToRequest) : {};
+  vm.loading = true;
+  vm.systemStatus = "Normal";
+  vm.toggleSearchMode = toggleSearchMode;
+
+  var highchartsContainer = angular.element("#container");
+
+  $scope.$on('socket:ipDataItemResponse', function(event,data){
+    if(data.reply === "ERROR"){
+      vm.loading = false;
+      var alertExsited = false;
+      for(var i = 0; i < vm.alerts.length; i ++){
+        if(vm.alerts[i].msg === 'Loading Data Item Failed. Please Check Your Internet Connection.'){
+          alertExsited = true;
+        }
+      }
+      if(!alertExsited){
+        vm.alerts.push({ type: 'danger', msg: 'Loading Data Item Failed. Please Check Your Internet Connection.' });
+      }
+      vm.systemStatus = "Error";
+    } else {
+
+
+      if(data.completeState !== 1){
+        vm.dataItemData = vm.dataItemData.concat(data.list_out);
+      } else {
+        vm.dataItemData = vm.dataItemData.concat(data.list_out);
+        console.log(vm.dataItemData.length);
+        vm.loading = false;
+        highchartsContainer.highcharts('StockChart',{
+          chart:{
+            zoomType:'x',
+            type:"spline"
+          },
+          title: {
+            text: vm.dataItemToRequest.name
+          },
+          tooltip:{
+            pointFormat: ' | <span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
+            positioner:function(){
+              return { x: 0, y: 0 };
+            },
+            crosshairs: {
+              // dashStyle: 'dash',
+              color:'black'
+            }
+          },
+          plotOptions: {
+            series: {
+              tooltip:{
+                dateTimeLabelFormats:{
+                  millisecond:"%A, %b %e, %H:%M:%S.%L"
+                }
+              },
+              marker:{
+                states:{
+                  hover:{
+                    // fillColor:'greenyellow'
+                  }
+                }
+              },
+              animation:true,
+              states:{
+                hover:false
+              },
+              lineWidth: 1
+            }
+
+          },
+          xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+              day: '%e  %b %Y',
+              month: '%b'
+            },
+            events:{
+              afterSetExtremes: function(){
+                highchartsContainer.highcharts().showLoading('Loading data from server...');
+                DataItemDisplaySocket.emit("ipAsychLoadingDataRequest", {min: this.min, max: this.max, name: vm.dataItemToRequest.name, location: vm.dataItemToRequest.location});
+              }
+            },
+            minRange: 10000
+          },
+          navigator : {
+            adaptToUpdatedData: false,
+            series : {
+              data : vm.dataItemData
+            }
+          },
+          scrollbar: {
+            liveRedraw: false
+          },
+
+          rangeSelector: {
+            enabled:true,
+            buttonTheme: { // styles for the buttons
+              fill: 'orange',
+              stroke: 'none',
+              'stroke-width': 0,
+              r: 8,
+              style: {
+                color: '#000',
+                fontWeight: 'bold'
+              },
+              states: {
+                hover: {
+                },
+                select: {
+                  fill: 'black',
+                  style: {
+                    color: 'white'
+                  }
+                }
+              }
+            },
+            buttons: [{
+              type: 'second',
+              count: 30,
+              text: '30s'
+            }, {
+              type: 'minute',
+              count: 1,
+              text: '1m'
+            }, {
+              type: 'minute',
+              count: 30,
+              text: '30m'
+            }, {
+              type: 'hour',
+              count: 1,
+              text: '1h'
+            }, {
+              type: 'hour',
+              count: 3,
+              text: '3h'
+            }, {
+              type: 'all',
+              text: 'All'
+            }],
+            selected: 2
+          },
+
+
+          series: [{
+            name:"Data Point",
+            data:vm.dataItemData
+          }]
+        });
+      }
+    }
+  });
+
+  $scope.$on('socket:ipAsychLoadingDataResponse', function(event, data){
+    console.log(event.name);
+    highchartsContainer.highcharts().series[0].setData(data);
+    highchartsContainer.highcharts().hideLoading();
+  });
+  vm.activate();
+  //////////////////////////
+
+  function activate(){
+    if($cookies.getObject('requestedDataItem') === undefined){
+      $cookies.putObject('requestedDataItem', vm.dataItemToRequest);
+    }
+    vm.dataItemToRequest = $cookies.getObject('requestedDataItem');
+    $cookies.remove('requestedDataItem');
+    DataItemDisplaySocket.emit('requestDataItem', vm.dataItemToRequest);
+  }
+
+  function backToDataItemList(){
+    var bindScope = $scope.$parent.$new(true);
+    DirectiveService.DestroyDirectiveService('dave-data-item-display-page', $scope);
+    DirectiveService.AddDirectiveService('.dataItemDisplayContainer','<dave-data-item-display-list-page  class="angular-directive"></dave-data-item-display-list-page>',bindScope, $compile);
+  }
+
+  function closeAlert(index){
+    angular.element('div.alert.animated#dataItem'+index).removeClass("fadeInDown");
+    angular.element('div.alert.animated#dataItem'+index).addClass("fadeOutUp");
+    vm.alerts.splice(index, 1);
+  }
+  function toggleSearchMode(){
+    $cookies.putObject('requestedDataItem', vm.dataItemToRequest);
+    DirectiveService.EnterSearchMode('dave-data-item-display-page', '<dave-data-item-display-page></dave-data-item-display-page>', '.dataItemDisplayContainer',$scope, $compile);
   }
 }
 }());

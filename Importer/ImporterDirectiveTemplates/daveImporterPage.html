@@ -78,7 +78,7 @@
         </table>
       </div>
 
-      <div class="importerStepTwoBDataItemOptions animated fadeIn">
+      <div class="importerStepTwoBDataItemOptions animated fadeIn" ng-show="!daveImporterPageCtrl.loading">
         <button type="button" class="btn btn-info" ng-click="daveImporterPageCtrl.viewMoreData()">View More Data</button>
         <button type="button" class="btn btn-warning" ng-click="daveImporterPageCtrl.updateImporter()">Update This Data Item</button>
       </div>

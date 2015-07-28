@@ -1,0 +1,111 @@
+<!--
+<div class ="dave-data-item-status" ng-hide="daveDataItemDisplayPageCtrl.loading">
+
+<div class="well col-md-12" style="height:640px;overflow:scroll;background:#3A8AD3;color:white">
+<table class="table table-hover">
+<thead style="">
+<th class="col-md-6" style="color:black">Date</th>
+<th class="col-md-6"  style="color:black">58-B9-E1-F1-87-89</th>
+</thead>
+<tbody>
+<tr ng-repeat = "entry in dataItemDisplayCtrl.tableData" style="">
+<td>{{entry[0]}}</td>
+<td>{{entry[1]}}</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div> -->
+
+
+<div class="dataItemStepTwoB" >
+
+  <div class="dataItemSetUpButton">
+    <div class=" animated fadeIn" ng-click="daveDataItemDisplayPageCtrl.toggleLeftMenu()"><i class="glyphicon glyphicon-arrow-right  animated flipInY" id="js-expand-arrow"></i><span id="js-expand-sign"> Expand</span></div>
+    <div ng-click="daveDataItemDisplayPageCtrl.backToDataItemList()"><span id="js-expand-sign"> Back</span></div>
+    <div class=" animated fadeIn" ng-click="daveDataItemDisplayPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
+
+    <!-- <div ng-click="daveDataItemDisplayPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span class="js-search-sign"> Search Mode</span></div> -->
+  </div>
+
+  <div class="dataItemStepTwoBWell animated fadeIn">
+
+    <div class="dataItemStepTwoBWellLeft" >
+      <div class="dataItemStepTwoBWellLeftHeader">
+        <div>Graph Control</div>
+        <div><span>Add</span>  <i class="glyphicon glyphicon-plus"></i></div>
+      </div>
+      <div class="dataItemNameCard">
+        <div class="info">
+          <div><span><i class="glyphicon glyphicon-file"></i> Name: </span><span>{{daveDataItemDisplayPageCtrl.dataItemToRequest.name}}</span></div>
+          <div><span><i class="glyphicon glyphicon-globe"></i> Location: </span><span>{{daveDataItemDisplayPageCtrl.dataItemToRequest.location}}</span></div>
+        </div>
+
+        <div class="status">
+          <i class="glyphicon glyphicon-ok"></i>
+          <i class="glyphicon glyphicon-cog"></i>
+          <i class="glyphicon glyphicon-list-alt"></i>
+          <i class="glyphicon glyphicon-lock"></i>
+        </div>
+
+        <!-- <div><span><i class="glyphicon glyphicon-user"></i> Owner: </span><span>{{daveDataItemDisplayPageCtrl.dataItemToDisplay.ownerName}}</span></div>
+        <div class="description"><span><i class="glyphicon glyphicon-info-sign"></i> Description: </span><span>{{daveDataItemDisplayPageCtrl.dataItemToDisplay.description}}</span></div> -->
+      </div>
+      <!-- <div class="dataItemStepTwoBDataItems">
+
+      <div class="title">
+      <span>Avaliable Data Items</span>
+      </div>
+
+      <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1" style="color:#3A8AD3">
+      <i class="glyphicon glyphicon-search"></i>
+      </span>
+      <input type="text" class="form-control" placeholder="Search" ng-model="daveDataItemDisplayPageCtrl.serach.fieldName">
+      </div>
+
+      <div class="dataItemStepTwoBDataItemsList">
+
+      <div class="dataItemStepTwoBDataItem" ng-repeat = "dataItem in daveDataItemDisplayPageCtrl.dataItemToDisplayContent | filter: daveDataItemDisplayPageCtrl.serach" ng-class="{'active' : dataItem.fieldName === daveDataItemDisplayPageCtrl.currentDataItem.fieldName}" ng-click="daveDataItemDisplayPageCtrl.chooseDataItem(dataItem)">
+      {{dataItem.fieldName}}
+      <i class="pull-right glyphicon glyphicon-record" style="margin-top:3px"></i>
+      </div>
+
+      </div>
+      </div> -->
+    </div>
+
+    <div class="dataItemStepTwoBWellRight">
+      <!-- <div class="title" >
+      {{daveDataItemDisplayPageCtrl.currentDataItem.fieldName}}
+      <span ng-show="!daveDataItemDisplayPageCtrl.loading">
+      <i class="glyphicon glyphicon-ok"></i>
+      ACTIVE
+      </span>
+      </div> -->
+
+      <!-- <button type="button" class="btn field-button" ng-if="key !== 'topic'" ng-repeat="(key, config) in daveDataItemDisplayPageCtrl.currentDataItem.availableOptions"><span>{{key}}:</span><span> {{config.value}}</span></button>
+      -->
+
+      <div class = "dave-data-item-graph">
+        <div class = "waitingSymbol" ng-show="daveDataItemDisplayPageCtrl.loading">
+          <alert class="animated fadeInDown" id="dataItem{{$index}}" ng-repeat="alert in daveDataItemDisplayPageCtrl.alerts" type="{{alert.type}}" close="daveDataItemDisplayPageCtrl.closeAlert($index)">
+            {{alert.msg}}
+          </alert>
+          <img ng-show = "daveDataItemDisplayPageCtrl.systemStatus == 'Normal'" src="../imgs/477_black.GIF"/>
+        </div>
+        <div id="container"></div>
+        <div id="container2"></div>
+      </div>
+
+      <!-- <div class="dataItemStepTwoBDataItemOptions animated fadeIn" ng-show="!daveDataItemDisplayPageCtrl.loading">
+      <button type="button" class="btn btn-info" ng-click="daveDataItemDisplayPageCtrl.viewMoreData()">View More Data</button>
+      <button type="button" class="btn btn-warning" ng-click="daveDataItemDisplayPageCtrl.updatedataItem()">Update This Data Item</button>
+      </div> -->
+
+
+
+    </div>
+  </div>
+</div>
