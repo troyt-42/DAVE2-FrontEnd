@@ -52,7 +52,6 @@ html {
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
     background: black;
-    max-height: 700px;
     border: 1px solid silver;
     border-left: 0;
     -webkit-transition: all 0.5s ease-in-out;
@@ -195,16 +194,55 @@ html {
             width: 100%;
             font-size: 130%;
             color: linen;
-            border-bottom: 1px solid white;
+            float: none;
+            border-bottom: 1px solid linen;
             text-align: center; }
             .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:first-child:last-child {
               margin-right: 0; }
           .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul {
-            min-height: 100px; }
+            min-height: 100px;
+            list-style-type: none;
+            padding: 1.5333130693%; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li {
+              background: transparent;
+              border-bottom: 1px solid grey;
+              border-radius: 0;
+              display: -webkit-box;
+              display: -moz-box;
+              display: box;
+              display: -webkit-flex;
+              display: -moz-flex;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-align: center;
+              -moz-box-align: center;
+              box-align: center;
+              -webkit-align-items: center;
+              -moz-align-items: center;
+              -ms-align-items: center;
+              -o-align-items: center;
+              align-items: center;
+              -ms-flex-align: center;
+              -webkit-box-pack: justify;
+              -moz-box-pack: justify;
+              box-pack: justify;
+              -webkit-justify-content: space-between;
+              -moz-justify-content: space-between;
+              -ms-justify-content: space-between;
+              -o-justify-content: space-between;
+              justify-content: space-between;
+              -ms-flex-pack: justify; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li span {
+                color: white; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li div.type {
+                border-top: 0;
+                color: gold; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li:hover {
+                cursor: pointer; }
           .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:nth-child(3) {
             color: linen; }
           .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:last-child {
-            border-top: 1px solid white;
+            border-top: 1px solid linen;
             text-align: center; }
             .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:last-child i {
               margin-top: 10px;
@@ -213,6 +251,36 @@ html {
               cursor: pointer; }
               .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:last-child i:hover {
                 color: skyblue; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo {
+          color: white;
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%;
+          border: 1px solid white;
+          border-radius: 5px;
+          padding: 1.5333130693%;
+          position: relative; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo:last-child {
+            margin-right: 0; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo span {
+            color: gold;
+            width: auto;
+            font-weight: bold; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo button {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 20%;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+            background: crimson;
+            border-left: 1px solid white; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo button:hover {
+              background: #c61236; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo button:focus {
+              outline-color: crimson; }
         .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action {
           float: left;
           display: block;
@@ -224,13 +292,17 @@ html {
           margin-top: 10px; }
           .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action:last-child {
             margin-right: 0; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action div {
+            display: inline;
+            color: gold; }
           .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action i:first-child {
-            margin-right: 40px;
+            margin-right: 20px;
             color: greenyellow;
             cursor: pointer; }
           .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action i:last-child {
             color: red;
-            cursor: pointer; }
+            cursor: pointer;
+            margin-left: 20px; }
         .importerContainer .importerContainerLeftMenu .panel .panel-body .waitingSymbol {
           float: left;
           display: block;
@@ -688,7 +760,7 @@ html {
         border: 2px orange solid;
         text-align: left;
         box-shadow: 0px 0px 0px #3A8AD3;
-        height: 650px; }
+        height: 680px; }
         .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell:last-child {
           margin-right: 0; }
         .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell::after {
@@ -810,22 +882,31 @@ html {
           padding: 1.5333130693%;
           border-radius: 0px;
           box-shadow: 0px 0px 0px black inset;
-          height: 100%; }
+          height: 100%;
+          white-space: nowrap; }
           .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .field-button {
-            border-radius: 0;
-            font-weight: bold;
-            border-bottom-right-radius: 5px;
-            border-top-right-radius: 5px;
-            border-bottom-left-radius: 5px;
-            border-top-left-radius: 5px;
-            border-color: orange;
-            color: white;
-            margin-right: 5px;
-            background-color: transparent; }
-            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .field-button span:first-child {
-              color: orange; }
+          .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .dataItemStatus {
+            overflow-y: scroll;
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 100%; }
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .dataItemStatus:last-child {
+              margin-right: 0; }
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .dataItemStatus .field-button {
+              border-radius: 0;
+              font-weight: bold;
+              border-bottom-right-radius: 5px;
+              border-top-right-radius: 5px;
+              border-bottom-left-radius: 5px;
+              border-top-left-radius: 5px;
+              border-color: orange;
+              color: white;
+              margin-right: 5px;
+              background-color: transparent; }
+              .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .dataItemStatus .field-button span:first-child {
+                color: orange; }
           .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .title {
             float: left;
             display: block;
@@ -873,6 +954,32 @@ html {
             color: white; }
             .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData:last-child {
               margin-right: 0; }
+            .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData.emptySign {
+              display: -webkit-box;
+              display: -moz-box;
+              display: box;
+              display: -webkit-flex;
+              display: -moz-flex;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-align: center;
+              -moz-box-align: center;
+              box-align: center;
+              -webkit-align-items: center;
+              -moz-align-items: center;
+              -ms-align-items: center;
+              -o-align-items: center;
+              align-items: center;
+              -ms-flex-align: center;
+              -webkit-box-pack: center;
+              -moz-box-pack: center;
+              box-pack: center;
+              -webkit-justify-content: center;
+              -moz-justify-content: center;
+              -ms-justify-content: center;
+              -o-justify-content: center;
+              justify-content: center;
+              -ms-flex-pack: center; }
             .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemData .waitingSymbol {
               float: left;
               display: block;
@@ -967,7 +1074,8 @@ html {
             -ms-justify-content: flex-end;
             -o-justify-content: flex-end;
             justify-content: flex-end;
-            -ms-flex-pack: end; }
+            -ms-flex-pack: end;
+            margin-top: 10px; }
             .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions:last-child {
               margin-right: 0; }
             .importerContainer .importerContainerRightPanel dave-importer-page .importerStepTwoB .importerStepTwoBWell .importerStepTwoBWellRight .importerStepTwoBDataItemOptions button {
@@ -1839,7 +1947,7 @@ html {
           display: block;
           margin-right: 2.3576515979%;
           width: 100%;
-          padding: 5px 20px;
+          padding: 5px 0px 5px 20px;
           background: transparent;
           color: skyblue;
           text-shadow: -1px 0px #0f4d92;
@@ -1877,27 +1985,30 @@ html {
             float: left;
             display: block;
             margin-right: 2.3576515979%;
-            width: 65.8807828007%;
-            border-right: 1px solid greenyellow; }
+            width: 57.3509785009%;
+            border-right: 1px solid greenyellow;
+            margin-right: 0; }
             .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info:last-child {
               margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div:first-child {
-              border-bottom: 1px solid greenyellow; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) {
-              font-size: 100%; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) i {
-                color: gold;
-                font-size: 80%;
-                text-shadow: none; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(2) {
-              font-size: 120%;
-              font-weight: bold;
-              color: white; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.status {
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div {
+              padding: 0px 10px; }
+              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div:first-child {
+                border-bottom: 1px solid greenyellow; }
+              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) {
+                font-size: 100%; }
+                .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) i {
+                  color: gold;
+                  font-size: 80%;
+                  text-shadow: none; }
+              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(2) {
+                font-size: 120%;
+                font-weight: bold;
+                color: white; }
+          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.action {
             float: left;
             display: block;
             margin-right: 2.3576515979%;
-            width: 31.7615656014%;
+            width: 23.2317613015%;
             margin-left: 10px;
             color: greenyellow;
             display: -webkit-box;
@@ -1924,12 +2035,73 @@ html {
             -ms-justify-content: space-between;
             -o-justify-content: space-between;
             justify-content: space-between;
-            -ms-flex-pack: justify; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.status:last-child {
+            -ms-flex-pack: justify;
+            border: 1px solid white;
+            border-radius: 5px;
+            background: grey;
+            padding: 2.3576515979%; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.action:last-child {
               margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.status i {
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.action i {
               color: white;
               font-size: 130%;
+              text-shadow: none; }
+          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status {
+            float: left;
+            display: block;
+            margin-right: 2.3576515979%;
+            width: 6.1721527019%;
+            border: 1px solid white;
+            border-right: 0;
+            padding: 10px 15px;
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -o-align-items: center;
+            align-items: center;
+            -ms-flex-align: center;
+            -webkit-box-pack: center;
+            -moz-box-pack: center;
+            box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-justify-content: center;
+            -o-justify-content: center;
+            justify-content: center;
+            -ms-flex-pack: center;
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            box-orient: vertical;
+            -webkit-box-direction: normal;
+            -moz-box-direction: normal;
+            box-direction: normal;
+            -webkit-flex-direction: column;
+            -moz-flex-direction: column;
+            flex-direction: column;
+            -ms-flex-direction: column;
+            border-radius: 5px;
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            background: crimson; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status:last-child {
+              margin-right: 0; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status:hover {
+              background: #c61236; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status:focus {
+              outline: none; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status i {
+              font-size: 120%;
+              color: white;
               text-shadow: none; }
         .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems {
           float: left;
@@ -2082,6 +2254,16 @@ html {
                 clear: both;
                 content: "";
                 display: table; }
+          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container {
+            float: left;
+            display: block;
+            margin-right: 2.3576515979%;
+            width: 48.821174201%;
+            background: transparent; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container:last-child {
+              margin-right: 0; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container .progressingStat {
+              color: white; }
           .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph #container {
             height: 100%; }
 

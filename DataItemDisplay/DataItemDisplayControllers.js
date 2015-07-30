@@ -474,11 +474,13 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout,$compile,$cookies, DataIte
   vm.closeAlert = closeAlert;
   //variables
   vm.alerts = [];
+  vm.completeState = 0;
   vm.dataItemData = [];
   vm.dataItemToRequest = $scope.dataItemToRequest ? JSON.parse($scope.dataItemToRequest) : {};
   vm.loading = true;
   vm.systemStatus = "Normal";
   vm.toggleSearchMode = toggleSearchMode;
+  vm.waitingMessage = "Loading Data From Server";
 
   var highchartsContainer = angular.element("#container");
 
@@ -497,13 +499,21 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout,$compile,$cookies, DataIte
       vm.systemStatus = "Error";
     } else {
 
-
+      console.log(data.payload.name);
       if(data.completeState !== 1){
+        if((data.completeState * 100 - vm.completeState) > 5 ){
+          vm.completeState = data.completeState * 100;
+        }
         vm.dataItemData = vm.dataItemData.concat(data.list_out);
       } else {
+
+        vm.completeState = data.completeState * 100;
         vm.dataItemData = vm.dataItemData.concat(data.list_out);
         console.log(vm.dataItemData.length);
+        console.log("First Value: " + vm.dataItemData[0]);
+        console.log("Last Value: " + vm.dataItemData[vm.dataItemData.length - 1]);
         vm.loading = false;
+
         highchartsContainer.highcharts('StockChart',{
           chart:{
             zoomType:'x',
@@ -552,8 +562,8 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout,$compile,$cookies, DataIte
             },
             events:{
               afterSetExtremes: function(){
-                highchartsContainer.highcharts().showLoading('Loading data from server...');
-                DataItemDisplaySocket.emit("ipAsychLoadingDataRequest", {min: this.min, max: this.max, name: vm.dataItemToRequest.name, location: vm.dataItemToRequest.location});
+                // highchartsContainer.highcharts().showLoading('Loading data from server...');
+                // DataItemDisplaySocket.emit("ipAsychLoadingDataRequest", {min: this.min, max: this.max, name: vm.dataItemToRequest.name, location: vm.dataItemToRequest.location});
               }
             },
             minRange: 10000
@@ -619,7 +629,7 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout,$compile,$cookies, DataIte
 
 
           series: [{
-            name:"Data Point",
+            name: vm.dataItemToRequest.name,
             data:vm.dataItemData
           }]
         });

@@ -62,9 +62,11 @@
     var importerSocket = socketFactory({
       ioSocket : myIoSocket
     });
-    importerSocket.forward('importerListData');
+    importerSocket.forward('importerCreationResponse');
+    importerSocket.forward('importerCreationFinalResponse');
     importerSocket.forward('importerData');
     importerSocket.forward('importerDataItemData');
+    importerSocket.forward('importerListData');
     importerSocket.forward('jobsData');
     return importerSocket;
   }

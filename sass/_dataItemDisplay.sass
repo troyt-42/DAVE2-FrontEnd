@@ -235,7 +235,7 @@
                 cursor: pointer
           .dataItemNameCard
             +span-columns(12)
-            +pad(5px 20px)
+            +pad(5px 0px 5px 20px)
             background: transparent
             color: skyblue
             text-shadow: -1px 0px #0f4d92
@@ -247,10 +247,11 @@
             background: black
             // +texture(90deg, contrast(gold),  contrast(darken(coral, 10%)) , 31, 0)
             div.info
-              +span-columns(8)
+              +span-columns(7)
               border-right: 1px solid greenyellow
-
+              margin-right: 0
               div
+                +pad(0px 10px)
                 &:first-child
                   border-bottom: 1px solid greenyellow
                 span:nth-child(1)
@@ -263,16 +264,40 @@
                   font-size: 120%
                   font-weight: bold
                   color: white
-            div.status
-              +span-columns(4)
+            div.action
+              +span-columns(3)
               margin-left: 10px
               color: greenyellow
               +display(flex)
               +align-items(center)
               +justify-content(space-between)
+              border: 1px solid white
+              border-radius: 5px
+              background: grey
+              +pad()
               i
                 color: white
                 font-size: 130%
+                text-shadow: none
+            button.status
+              +span-columns(1)
+              border: 1px solid white
+              border-right: 0
+              +pad(10px 15px)
+              +display(flex)
+              +align-items(center)
+              +justify-content(center)
+              +flex-direction(column)
+              border-radius: 5px
+              +border-right-radius(0px)
+              background: crimson
+              &:hover
+                background: shade(crimson, 10%)
+              &:focus
+                outline: none
+              i
+                font-size: 120%
+                color: white
                 text-shadow: none
           .dataItemStepTwoBDataItems
             +span-columns(12)
@@ -345,5 +370,10 @@
                 +span-columns(6)
                 +row()
                 margin-top: 5px
+            .progressbar-container
+              +span-columns(6)
+              background: transparent
+              .progressingStat
+                color: white
             #container
               height: 100%

@@ -27,7 +27,7 @@ $importerWellHeight: 650px
     +border-right-radius(20px)
     background: black
 
-    max-height: 700px
+    // max-height: 700px
     border: 1px solid silver
     border-left: 0
     +transition(all 0.5s ease-in-out)
@@ -103,20 +103,39 @@ $importerWellHeight: 650px
               outline-color: shade(greenyellow, 10%)
               background: shade(greenyellow, 10%)
         .jobList
+
           +span-columns(12)
           background: transparent
           div:first-child
             +span-columns(12)
             font-size: 130%
             color: linen
-            border-bottom: 1px solid white
+            float: none
+            border-bottom: 1px solid linen
             text-align: center
           ul
             min-height: 100px
+            list-style-type: none
+            +pad()
+
+            li
+              background: transparent
+              border-bottom: 1px solid grey
+              border-radius: 0
+              +display(flex)
+              +align-items(center)
+              +justify-content(space-between)
+              span
+                color: white
+              div.type
+                border-top: 0
+                color: gold
+              &:hover
+                cursor: pointer
           div:nth-child(3)
             color: linen
           div:last-child
-            border-top: 1px solid white
+            border-top: 1px solid linen
             text-align: center
             i
               margin-top: 10px
@@ -126,19 +145,48 @@ $importerWellHeight: 650px
               &:hover
                 color: skyblue
         .createJobMode
+          div.jobInfo
+            color: white
+            +span-columns(12)
+            border: 1px solid white
+            border-radius: 5px
+            +pad()
+            position: relative
+            span
+              color: gold
+              width: auto
+              font-weight: bold
+            button
+              position: absolute
+              right: 0
+              bottom: 0
+              height: 100%
+              width: 20%
+              +border-left-radius(0)
+              background: crimson
+              border-left: 1px solid white
+              &:hover
+                background: shade(crimson, 10%)
+              &:focus
+                outline-color: crimson
+
           div.action
             +span-columns(12)
             text-align: center
             font-size: 120%
             color: white
             margin-top: 10px
+            div
+              display: inline
+              color: gold
             i:first-child
-              margin-right: 40px
+              margin-right: 20px
               color: greenyellow
               cursor: pointer
             i:last-child
               color: red
               cursor: pointer
+              margin-left: 20px
         .waitingSymbol
           +span-columns(12)
           +align-items(center)
@@ -416,7 +464,7 @@ $importerWellHeight: 650px
           border: 2px orange solid
           text-align: left
           box-shadow: 0px 0px 0px #3A8AD3
-          height: $importerWellHeight
+          height: $importerWellHeight + 30px
 
           .importerStepTwoBWellLeft
             +span-columns(4)
@@ -503,17 +551,21 @@ $importerWellHeight: 650px
             // border-left: 2px orange solid
             box-shadow: 0px 0px 0px black inset
             height: 100%
-            .field-button
-              border-radius: 0
-              font-weight: bold
-              +border-right-radius(5px)
-              +border-left-radius(5px)
-              border-color: orange
-              color: white
-              margin-right: 5px
-              background-color: transparent
-              span:first-child
-                color: orange
+            white-space: nowrap
+            .dataItemStatus
+              overflow-y: scroll
+              +span-columns(12)
+              .field-button
+                border-radius: 0
+                font-weight: bold
+                +border-right-radius(5px)
+                +border-left-radius(5px)
+                border-color: orange
+                color: white
+                margin-right: 5px
+                background-color: transparent
+                span:first-child
+                  color: orange
             .title
               +span-columns(12)
               +display(flex)
@@ -535,6 +587,10 @@ $importerWellHeight: 650px
               height: 85%
               top: -1px
               +border-bottom-radius(0px)
+              &.emptySign
+                +display(flex)
+                +align-items(center)
+                +justify-content(center)
               color: white
               .waitingSymbol
                 +span-columns(12)
@@ -566,6 +622,7 @@ $importerWellHeight: 650px
               +span-columns(12)
               +display(flex)
               +justify-content(flex-end)
+              margin-top: 10px
               button
                 +span-columns(3)
                 font-weight: bold

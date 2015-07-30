@@ -37104,116 +37104,6 @@
 		"shouldRunBless": 0,
 		"useLibsass": false
 		},
-	"\/ServerSideNodejs\/58-B9-E1-F1-87-89.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/58-B9-E1-F1-87-89.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/58-B9-E1-F1-87-89-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/5F-4A-72-94-6F-32.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/5F-4A-72-94-6F-32.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/5F-4A-72-94-6F-32-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/B4-A8-0E-EB-9D-65.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/B4-A8-0E-EB-9D-65.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/B4-A8-0E-EB-9D-65-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/DA-60-CF-2A-24-CF-12H.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-12H.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-12H-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/DA-60-CF-2A-24-CF-1H.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-1H.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-1H-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/DA-60-CF-2A-24-CF-24H.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-24H.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-24H-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/DA-60-CF-2A-24-CF-2D.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-2D.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-2D-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/DA-60-CF-2A-24-CF-3H.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-3H.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-3H-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/DA-60-CF-2A-24-CF-4D.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-4D.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-4D-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/ServerSideNodejs\/DA-60-CF-2A-24-CF-6H.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-6H.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/DA-60-CF-2A-24-CF-6H-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
 	"\/ServerSideNodejs\/min\/server-min.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -37257,17 +37147,6 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
-		},
-	"\/ServerSideNodejs\/table.json": {
-		"fileType": 524288,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/ServerSideNodejs\/table.json",
-		"orderOutput": 0,
-		"outputAbbreviatedPath": "\/ServerSideNodejs\/table-min.json",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
 		},
 	"\/ServerSideNodejs\/testServer.js": {
 		"fileType": 64,

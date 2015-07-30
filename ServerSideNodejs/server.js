@@ -18,6 +18,7 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   { topic: '__main_out__' },
   { topic: '__importer_stepOne_list_out__'},
   { topic: '__importer_stepOne_jobs_out__'},
+  { topic: '__importer_stepOne_new_job_out__'},
   { topic: '__importer_stepOne_createImporter_out__'},
   { topic: '__importer_stepTwo_decideCreation_out__'},
   { topic: '__importer_stepTwoB_importer_out__'},
@@ -32,7 +33,9 @@ var kafkaConsumer = new HighLevelConsumer(kafkaClient,[
   groupId: 'test'
 });
 
-
+redisClient.on('error', function (err) {
+  console.log('Error ' + err);
+});
 io.listen(server);
 
 app.use(express.static(__dirname + '/../'));
@@ -176,6 +179,25 @@ io.of('/user').on('connection', function(socket){
 io.of('/importer').on('connection', function(socket){
   console.log(socket.handshake.address + ' has connected! id: ' + socket.id + ' Namespace: /importer');
 
+  socket.on('createJob', function(configuration){
+    var temp = {
+      payload: configuration,
+      session_id : socket.id,
+      action : 'CREATE_JOB',
+      return_topic : '__importer_stepOne_new_job_out__'
+    };
+
+    kafkaProducer.send([{
+      topic:'__importer_stepOne_new_job_in__',
+      messages:[JSON.stringify(temp)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent job creation request successfully:' + JSON.stringify(temp));
+      }
+    });
+  });
   socket.on('createNewImporter',function(importerInfo){
     importerInfo.session_id = socket.id;
     importerInfo.action = 'CREATE_IMPORTER';
@@ -217,7 +239,26 @@ io.of('/importer').on('connection', function(socket){
       }
     });
   });
-
+  socket.on('deleteJob', function(info){
+    var temp = {
+      session_id : socket.session_id,
+      return_topic : "__importer_stepOne_delete_job_out__",
+      action: "DELETE_JOB",
+      payload: {
+        jobID: info.jobID
+      }
+    };
+    kafkaProducer.send([{
+      topic:'__importer_stepOne_delete_job_in__',
+      messages:[JSON.stringify(temp)]
+    }],function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent job delete request successfully:' + JSON.stringify(temp));
+      }
+    });
+  });
   socket.on('requestImporter', function(importer){
     var messageToSend = {
       session_id: socket.id,
@@ -325,25 +366,7 @@ io.of('/importer').on('connection', function(socket){
     });
   });
 
-  socket.on('createJob', function(configuration){
-    var temp = {
-      payload: configuration,
-      session_id : socket.id,
-      action : 'CREATE_JOB',
-      return_topic : '__importer_stepOne_new_job_out__'
-    };
 
-    kafkaProducer.send([{
-      topic:'__importer_stepOne_new_job_in__',
-      messages:[JSON.stringify(temp)]
-    }],function(err,data){
-      if(err){
-        console.log(err);
-      } else {
-        console.log('User ' + socket.id + ' has sent job creation request successfully:' + JSON.stringify(temp));
-      }
-    });
-  });
 });
 
 
@@ -399,10 +422,14 @@ io.of('/dataItemDisplay').on('connection', function(socket){
   });
 
   socket.on('ipAsychLoadingDataRequest', function(info){
+    console.log(info);
     redisClient.zrangebyscore(info.name+":"+info.location+":date", info.min, info.max, function(err, data){
+      console.log("back");
       if(err) {throw err;}
       var dataToSend = [];
+      console.log("back");
       for(var i = 0; i < data.length; i ++){
+
         var obj =JSON.parse(data[i]);
         var temp = [obj.DATE, obj.VALUE];
         dataToSend[i] = temp;

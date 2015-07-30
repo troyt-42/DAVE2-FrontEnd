@@ -49,27 +49,36 @@
             <span></span>
           </div>
         </div>
-        <div class="jobList animated fadeIn" ng-show="importerUploadCtrl.jobsLoaded && !importerUploadCtrl.waitingJobCreation">
-          <div><span>Job List<span>
+        <div class="jobList animated fadeIn" ng-show="importerUploadCtrl.jobsLoaded && !importerUploadCtrl.waitingJobCreation && !importerUploadCtrl.createJobMode && !importerUploadCtrl.modifyJobMode">
+          <div>
+            <span>Job List<span>
           </div>
           <ul ng-show="importerUploadCtrl.jobs.length">
-            <li ng-repeat="job in importerUploadCtrl.jobs"></li>
+            <li ng-repeat="job in importerUploadCtrl.jobs" ng-click = "importerUploadCtrl.modifyJob($index)"><span>ID: {{job.jobID}}</span> <span>To {{job.targetDataItem}}</span>
+              <div class="type" ng-show="job.type === 'Static/Fast Generation'">FAST</div>
+              <div class="type" ng-show="job.type === 'Live/Slow Generation'">SLOW</div>
+            </li>
           </ul>
           <div ng-show="importerUploadCtrl.jobs.length === 0">No Jobs Currently</div>
           <div>
             <i class = "glyphicon glyphicon-plus" ng-click="importerUploadCtrl.createNewJob()"></i>
           </div>
         </div>
-        <div class="createJobMode animated fadeIn" ng-show="importerUploadCtrl.createJobMode && !importerUploadCtrl.waitingJobCreation">
-          <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
-          <div class="input-group animated fadeIn" style="margin-top:10px" ng-show="importerUploadCtrl.randomImporterFormModel['Type'] === 'Static/Fast Generation'">
-            <span class="input-group-addon" id="basic-addon1">Range (/h)</span>
-            <input type="number" class="form-control" ng-model="importerUploadCtrl.randomImporterFormModel['Range (/h)']">
+        <div class="createJobMode animated fadeIn" ng-show="(importerUploadCtrl.createJobMode || importerUploadCtrl.modifyJobMode)  && !importerUploadCtrl.waitingJobCreation">
+          <div class="jobInfo" ng-show="importerUploadCtrl.modifyJobMode">
+            <div><span>ID: </span> {{importerUploadCtrl.currentJob.jobID}}</div>
+            <div><span>Target Data Item: </span> {{importerUploadCtrl.currentJob.targetDataItem}}</div>
+            <div><span>Data Amount: </span> {{6 * 3600 * (1000 / importerUploadCtrl.randomImporterFormModel['Interval (/ms)']) | number: 0}}</div>
+            <button type="button" class="btn btn-danger" ng-click="importerUploadCtrl.deleteJob()">Delete</button>
           </div>
+          <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
           <div class="action">
             <i ng-click = "importerUploadCtrl.submitJob()" class="glyphicon glyphicon-ok"></i>
+            <div ng-show="importerUploadCtrl.createJobMode"><span>CREATE</span></div>
+            <div ng-show="importerUploadCtrl.modifyJobMode"><span>UPDATE</span></div>
             <i ng-click = "importerUploadCtrl.cancelJobCreation()" class="glyphicon glyphicon-remove"></i>
           </div>
+
         </div>
       </accordion-group>
 
@@ -101,7 +110,7 @@
     <dave-importer-list-page class="angular-directive"></dave-importer-list-page>
     <div class="progressbar-container" ng-show="importerUploadCtrl.progressing">
       <div class="progressingStat"><span>{{importerUploadCtrl.progressingStat[0]}}/{{importerUploadCtrl.progressingStat[1]}}</span></div>
-      <progressbar max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><span style="font-size: 130%;font-style: normal;color: black;font-weight: bold;line-height: 2.6em;display: block">{{importerUploadCtrl.waitingMessage}}</span></progressbar>
+      <progressbar max = "100" style="height:3em" class="progress-striped active" value="importerUploadCtrl.fileUploadProgress" type="warning"><span style="font-size: 130%;font-style: normal;color: black;font-weight: bold;line-height: 2.6em;display: block;">{{importerUploadCtrl.waitingMessage}}</span></progressbar>
     </div>
   </div>
 </div>

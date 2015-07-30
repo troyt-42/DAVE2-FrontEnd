@@ -78,6 +78,8 @@
     vm.cancelJobCreation = cancelJobCreation;
     vm.changeDataItemConfig = changeDataItemConfig;
     vm.createNewJob = createNewJob;
+    vm.deleteJob = deleteJob;
+    vm.modifyJob = modifyJob;
     vm.removeFile = removeFile;
     vm.requestJobs = requestJobs;
     vm.submitFile = submitFile;
@@ -87,6 +89,7 @@
     };
     vm.availableDataItems = [];
     vm.createJobMode = false;
+    vm.currentJob = '';
     vm.createNewImporterFormModel = {};
     vm.leftMenuExpanded = false;
     vm.loadingJobs = false;
@@ -184,6 +187,7 @@
 
     vm.jobs = [];
     vm.jobsLoaded = false;
+    vm.modifyJobMode = false;
     vm.promiseToSolve = null;
     vm.requestImporterPromiseToSolve = null;
     vm.stepOne = true;
@@ -267,7 +271,8 @@
     });
 
     var temp = []; //temporary var for importerCreationResponse event
-    ImporterSocket.on("importerCreationResponse", function(response){
+    $scope.$on("socket:importerCreationResponse", function(event, response){
+      console.log(event.name);
       if(vm.systemStatus === "Normal"){
         temp = temp.concat(response.data);
         if(response.completeState === 1.0){
@@ -295,7 +300,8 @@
 
     });
 
-    ImporterSocket.on("importerCreationFinalResponse", function(response){
+    $scope.$on("socket:importerCreationFinalResponse", function(event, response){
+      console.log(event.name);
       if(vm.systemStatus === "Normal"){
         console.log(response);
         if(response.reply === "COMPLETE"){
@@ -362,6 +368,7 @@
 
     function cancelJobCreation(){
       vm.createJobMode = false;
+      vm.modifyJobMode =false;
     }
 
     function changeDataItemConfig(dataItem){
@@ -390,6 +397,25 @@
       vm.createJobMode = true;
     }
 
+    function deleteJob(){
+      console.log(vm.currentJob);
+      ImporterSocket.emit("deleteJob", vm.currentJob);
+    }
+    function modifyJob(index){
+      console.log(vm.jobs[index]);
+      vm.modifyJobMode = true;
+      vm.currentJob = vm.jobs[index];
+      vm.randomImporterFormModel ={
+        "Maximum Value" : vm.jobs[index].maximum,
+        "Minimum Value" : vm.jobs[index].minimum,
+        "Maximum Slope" : vm.jobs[index].maximumSlope,
+        "Interval (/ms)" : vm.jobs[index].interval,
+        "Time Float (/ms)": vm.jobs[index].timeFloat,
+        "Target Data Item": vm.jobs[index].targetDataItem,
+        "Location": vm.jobs[index].location,
+        "Type": vm.jobs[index].type
+      };
+    }
     function removeFile(file){
       var index = vm.fileToUpload.indexOf(file);
       if(index !== -1){
@@ -408,6 +434,7 @@
 
     function submitFile(){
       var uploadfile = vm.fileToUpload;
+
       console.log(uploadfile);
       if(uploadfile !== {}){
 
@@ -461,6 +488,8 @@
 
     function submitJob(){
       vm.waitingJobCreation = true;
+      vm.modifyJobMode = false;
+      vm.createJobMode = false;
       ImporterSocket.emit('createJob', {
         "maximum" : vm.randomImporterFormModel['Maximum Value'],
         "minimum" : vm.randomImporterFormModel['Minimum Value'],
@@ -796,18 +825,7 @@
 
         if((dataItem.completeState === 1.0) && (dataItem.name === vm.currentDataItem.fieldName)){
           console.log(vm.importerDataItemToDisplay[vm.currentDataItem.fieldName].length);
-          if(vm.importerDataItemToDisplay[vm.currentDataItem.fieldName].length === 0){
-            vm.loading = true;
-            if(vm.alerts.indexOf({ type: 'warning', msg: 'Received Empty Data Item' }) === -1){
-              console.log("called");
-              vm.alerts.push({ type: 'warning', msg: 'Received Empty Data Item' });
-            }
-            vm.systemStatus = "Error";
-          } else {
-            vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
-          }
-
-
+          vm.importerDataItemData = vm.importerDataItemToDisplay[vm.currentDataItem.fieldName];
         }
 
       }

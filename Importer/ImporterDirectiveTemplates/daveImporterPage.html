@@ -49,11 +49,11 @@
           ACTIVE
         </span>
       </div>
+      <div class="dataItemStatus">
+        <button type="button" class="btn field-button" ng-if="key !== 'topic'" ng-repeat="(key, config) in daveImporterPageCtrl.currentDataItem.availableOptions"><span>{{key}}:</span><span> {{config.value}}</span></button>
+      </div>
 
-      <button type="button" class="btn field-button" ng-if="key !== 'topic'" ng-repeat="(key, config) in daveImporterPageCtrl.currentDataItem.availableOptions"><span>{{key}}:</span><span> {{config.value}}</span></button>
-
-
-      <div class="importerStepTwoBDataItemData animated fadeIn">
+        <div class="importerStepTwoBDataItemData animated fadeIn" ng-class="{'emptySign' : daveImporterPageCtrl.importerDataItemData.length === 0}">
 
         <div class = "waitingSymbol" ng-show="daveImporterPageCtrl.loading">
           <alert class="animated fadeInDown" id="importer{{$index}}" ng-repeat="alert in daveImporterPageCtrl.alerts" type="{{alert.type}}" close="daveImporterPageCtrl.closeAlert($index)">
@@ -61,15 +61,18 @@
           </alert>
           <img ng-show = "daveImporterPageCtrl.systemStatus == 'Normal'" src="../imgs/477_black.GIF"/>
           <!-- <div id="loader-wrapper">
-            <div id="loader"></div>
+          <div id="loader"></div>
           </div> -->
         </div>
-        <table class="importerStepTwoBDataItemTable" ng-show="!daveImporterPageCtrl.loading">
+        <div class="emptySign animated fadeInDown" ng-show="(!daveImporterPageCtrl.loading)&&(daveImporterPageCtrl.importerDataItemData.length === 0)">Empty Data Item</div>
+        <table class="importerStepTwoBDataItemTable" ng-show="!daveImporterPageCtrl.loading && !(daveImporterPageCtrl.importerDataItemData.length === 0)">
           <thead>
             <th>Date</th>
             <th>{{daveImporterPageCtrl.currentDataItem.fieldName}}</th>
           </thead>
+
           <tbody >
+
             <tr ng-repeat = "entry in daveImporterPageCtrl.importerDataItemData track by entry[0]">
               <td>{{entry[0] | date : 'yyyy/MM/dd HH:mm:ss.sss'}}</td>
               <td>{{entry[1]}}</td>
