@@ -4,8 +4,10 @@
     <accordion close-others="true">
       <accordion-group is-open="importerUploadCtrl.optionStatus.firstOpen" id="importerOptionsFirst"  >
         <accordion-heading>
-          <span >Create New Importer</span>
+          <paper-ripple></paper-ripple>
+          <span >Create New Importer </span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.firstOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.firstOpen}" style="font-size:100%;color:white"></i>
+
         </accordion-heading>
         <formly-form model="importerUploadCtrl.createNewImporterFormModel" fields="importerUploadCtrl.createNewImporterFormFields"></formly-form>
         <button type="button" class="btn btn-info" id="submitBtn" ngf-select ngf-multiple="true" ng-model="importerUploadCtrl.fileToUpload" accept = "csv" ng-disabled = "!(importerUploadCtrl.createNewImporterFormModel.Location && importerUploadCtrl.createNewImporterFormModel.Name)" >Browse</button>
@@ -26,32 +28,35 @@
       </accordion-group>
       <accordion-group is-open="importerUploadCtrl.optionStatus.secondOpen" id="importerOptionsSecond" >
         <accordion-heading>
-          <span >Random Data Generator Config</span>
+          <paper-ripple></paper-ripple>
+          <span >Random Data Generator Config </span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.secondOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.secondOpen}" style="font-size:100%;color:white"></i>
+
         </accordion-heading>
         <!-- <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
         <div>
         <button type="button" ng-click = "importerUploadCtrl.createRandomImporter()" class="btn btn-success col-md-11" style="margin-top:15px;background:#8AC007" ng-disabled="vm.randomImporterForm.$invalid">Send</button>
         <button type="button" ng-click = "importerUploadCtrl.cancelRandomImporter()" class="btn btn-danger col-md-11" style="margin-top:15px;background:#FF4500">Cancel</button>
-        </div> -->
-        <div class="queryJobs" ng-show="!importerUploadCtrl.loadingJobs && !importerUploadCtrl.jobsLoaded">
-          <button type="button" ng-click = "importerUploadCtrl.requestJobs()" class="btn btn-success col-md-11" ng-disabled="vm.randomImporterForm.$invalid">Query</button>
+      </div> -->
+      <div class="queryJobs" ng-show="!importerUploadCtrl.loadingJobs && !importerUploadCtrl.jobsLoaded">
+        <button type="button" ng-click = "importerUploadCtrl.requestJobs()" class="btn btn-success" ng-disabled="vm.randomImporterForm.$invalid">Query<paper-ripple></paper-ripple>
+        </button>
+      </div>
+      <div class = "waitingSymbol" ng-show="importerUploadCtrl.loadingJobs || importerUploadCtrl.waitingJobCreation">
+        <alert class="animated fadeInDown" id="jobs{{$index}}" ng-repeat="alert in importerUploadCtrl.alerts" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index)">
+          {{alert.msg}}
+        </alert>
+        <div id="preloader_2">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <div class = "waitingSymbol" ng-show="importerUploadCtrl.loadingJobs || importerUploadCtrl.waitingJobCreation">
-          <alert class="animated fadeInDown" id="jobs{{$index}}" ng-repeat="alert in importerUploadCtrl.alerts" type="{{alert.type}}" close="importerUploadCtrl.closeAlert($index)">
-            {{alert.msg}}
-          </alert>
-          <div id="preloader_2">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-        <div class="jobList animated fadeIn" ng-show="importerUploadCtrl.jobsLoaded && !importerUploadCtrl.waitingJobCreation && !importerUploadCtrl.createJobMode && !importerUploadCtrl.modifyJobMode">
-          <div>
-            <span>Job List<span>
+      </div>
+      <div class="jobList animated fadeIn" ng-show="importerUploadCtrl.jobsLoaded && !importerUploadCtrl.waitingJobCreation && !importerUploadCtrl.createJobMode && !importerUploadCtrl.modifyJobMode">
+        <div>
+          <span>Job List<span>
           </div>
           <ul ng-show="importerUploadCtrl.jobs.length">
             <li ng-repeat="job in importerUploadCtrl.jobs" ng-click = "importerUploadCtrl.modifyJob($index)"><span>ID: {{job.jobID}}</span> <span>To {{job.targetDataItem}}</span>
@@ -60,8 +65,15 @@
             </li>
           </ul>
           <div ng-show="importerUploadCtrl.jobs.length === 0">No Jobs Currently</div>
-          <div>
-            <i class = "glyphicon glyphicon-plus" ng-click="importerUploadCtrl.createNewJob()"></i>
+          <div class="job-list-actions">
+            <div class="add" ng-click="importerUploadCtrl.createNewJob()">
+              <i class = "glyphicon glyphicon-plus"></i>
+              <paper-ripple></paper-ripple>
+            </div>
+            <div class="refresh" ng-click = "importerUploadCtrl.requestJobs()">
+              <i class = "glyphicon glyphicon-refresh"></i>
+              <paper-ripple></paper-ripple>
+            </div>
           </div>
         </div>
         <div class="createJobMode animated fadeIn" ng-show="(importerUploadCtrl.createJobMode || importerUploadCtrl.modifyJobMode)  && !importerUploadCtrl.waitingJobCreation">
@@ -75,7 +87,7 @@
           <div class="action">
             <i ng-click = "importerUploadCtrl.submitJob()" class="glyphicon glyphicon-ok"></i>
             <div ng-show="importerUploadCtrl.createJobMode"><span>CREATE</span></div>
-            <div ng-show="importerUploadCtrl.modifyJobMode"><span>UPDATE</span></div>
+            <div ng-show="importerUploadCtrl.modifyJobMode"><span>RESUBMIT</span></div>
             <i ng-click = "importerUploadCtrl.cancelJobCreation()" class="glyphicon glyphicon-remove"></i>
           </div>
 
@@ -84,6 +96,7 @@
 
       <accordion-group is-open="importerUploadCtrl.optionStatus.thirdOpen" id="importerOptionsThird" >
         <accordion-heading>
+          <paper-ripple></paper-ripple>
           <span >Default Display Setting</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.thirdOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.thirdOpen}" style="font-size:100%;color:white"></i>
 
@@ -93,6 +106,7 @@
 
       <accordion-group is-open="importerUploadCtrl.optionStatus.fourthOpen" id="importerOptionsFourth" >
         <accordion-heading>
+          <paper-ripple></paper-ripple>
           <span >Help</span>
           <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': importerUploadCtrl.optionStatus.fourthOpen, 'glyphicon-chevron-right': !importerUploadCtrl.optionStatus.fourthOpen}" style="font-size:100%;color:white"></i>
 

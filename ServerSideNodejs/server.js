@@ -228,6 +228,7 @@ io.of('/importer').on('connection', function(socket){
       files: decision.files,
       description: decision.description
     };
+    console.log(temp);
     kafkaProducer.send([{
       topic:'__importer_stepTwo_decideCreation_in__',
       messages:[JSON.stringify(temp)]
@@ -241,11 +242,12 @@ io.of('/importer').on('connection', function(socket){
   });
   socket.on('deleteJob', function(info){
     var temp = {
-      session_id : socket.session_id,
+      session_id : socket.id,
       return_topic : "__importer_stepOne_delete_job_out__",
       action: "DELETE_JOB",
       payload: {
-        jobID: info.jobID
+        jobID: info.jobID,
+        location: info.location
       }
     };
     kafkaProducer.send([{
@@ -437,6 +439,26 @@ io.of('/dataItemDisplay').on('connection', function(socket){
       socket.emit("ipAsychLoadingDataResponse", dataToSend);
     });
   });
+
+  socket.on('stopDataItemConnection', function(){
+    kafkaProducer.send([{
+      topic:'__ip_dataItem_in__',
+      messages: [
+        JSON.stringify({
+          session_id: socket.id,
+          action:'STOP_CONNECTION',
+          return_topic: '__ip_dataItem_out__'
+        })
+      ]
+    }],
+    function(err,data){
+      if(err){
+        console.log(err);
+      } else {
+        console.log('User ' + socket.id + ' has sent stop dataItem connection request successfully');
+      }
+    });
+  });
 });
 
 var redisClient = redis.createClient({no_ready_check:true});
@@ -495,10 +517,11 @@ kafkaConsumer.on('message',function(message){
     }
   }  else if (message.topic === '__ip_dataItem_out__'){
     var data8 = JSON.parse(message.value);
+
     if(data8){
       if(data8.reply === "ERROR"){
         io.of('/dataItemDisplay').to(data8.session_id).emit('ipDataItemResponse', data8);
-      } else {
+      } else if(data8.list_out){
         for(var i = 0; i < data8.list_out.length; i ++){
           data8.list_out[i][0] = Number(data8.list_out[i][0]);
           data8.list_out[i][1] = Number(data8.list_out[i][1]);
@@ -514,6 +537,9 @@ kafkaConsumer.on('message',function(message){
     if(data9.list_out){
       io.of('/importer').to(data9.session_id).emit('jobsData', data9);
     }
+  } else if (message.topic === '__importer_stepOne_new_job_out__'){
+    var data10 = JSON.parse(message.value);
+    io.of('/importer').to(data10.session_id).emit('createJobResponse', data10);
   } else {
     console.log(message);
   }

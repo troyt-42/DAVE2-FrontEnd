@@ -68,6 +68,8 @@
     importerSocket.forward('importerDataItemData');
     importerSocket.forward('importerListData');
     importerSocket.forward('jobsData');
+    importerSocket.forward('createJobResponse');
+
     return importerSocket;
   }
   function DirectiveService(){

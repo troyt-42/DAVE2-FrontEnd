@@ -134,7 +134,10 @@ html {
       border-bottom-right-radius: 6px; }
       .importerContainer .importerContainerLeftMenu .panel .panel-heading {
         background: -webkit-linear-gradient(90deg, #3A8AD3, darkgray);
-        background: linear-gradient(90deg, #3A8AD3, darkgray); }
+        background: linear-gradient(90deg, #3A8AD3, darkgray);
+        position: relative; }
+        .importerContainer .importerContainerLeftMenu .panel .panel-heading paper-ripple {
+          color: black; }
         .importerContainer .importerContainerLeftMenu .panel .panel-heading span {
           cursor: pointer;
           font-size: 100%;
@@ -175,7 +178,9 @@ html {
             background: greenyellow;
             color: black;
             text-shadow: none;
-            font-weight: bold; }
+            font-weight: bold;
+            position: relative;
+            outline: none; }
             .importerContainer .importerContainerLeftMenu .panel .panel-body .queryJobs button:focus {
               outline-color: #9be52a;
               background: #9be52a; }
@@ -202,8 +207,18 @@ html {
           .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul {
             min-height: 100px;
             list-style-type: none;
-            padding: 1.5333130693%; }
+            padding: 1.5333130693%;
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 100%; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul:last-child {
+              margin-right: 0; }
             .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li {
+              float: left;
+              display: block;
+              margin-right: 1.5333130693%;
+              width: 100%;
               background: transparent;
               border-bottom: 1px solid grey;
               border-radius: 0;
@@ -232,25 +247,81 @@ html {
               -o-justify-content: space-between;
               justify-content: space-between;
               -ms-flex-pack: justify; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li:last-child {
+                margin-right: 0; }
               .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li span {
                 color: white; }
               .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li div.type {
                 border-top: 0;
-                color: gold; }
+                color: gold;
+                width: auto; }
               .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList ul li:hover {
                 cursor: pointer; }
           .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:nth-child(3) {
             color: linen; }
-          .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:last-child {
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions {
             border-top: 1px solid linen;
-            text-align: center; }
-            .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:last-child i {
-              margin-top: 10px;
+            text-align: center;
+            display: inline-block;
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 100%;
+            display: -webkit-box;
+            display: -moz-box;
+            display: box;
+            display: -webkit-flex;
+            display: -moz-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -moz-box-align: center;
+            box-align: center;
+            -webkit-align-items: center;
+            -moz-align-items: center;
+            -ms-align-items: center;
+            -o-align-items: center;
+            align-items: center;
+            -ms-flex-align: center;
+            -webkit-box-pack: center;
+            -moz-box-pack: center;
+            box-pack: center;
+            -webkit-justify-content: center;
+            -moz-justify-content: center;
+            -ms-justify-content: center;
+            -o-justify-content: center;
+            justify-content: center;
+            -ms-flex-pack: center;
+            padding: 1.5333130693%; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions:last-child {
+              margin-right: 0; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions .add {
               font-size: 120%;
-              color: white;
-              cursor: pointer; }
-              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div:last-child i:hover {
-                color: skyblue; }
+              border: none;
+              position: relative;
+              display: inline-block;
+              float: left;
+              display: block;
+              margin-right: 1.5333130693%;
+              width: 23.8500151981%; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions .add:last-child {
+                margin-right: 0; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions .add #waves {
+                border: none; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions .refresh {
+              font-size: 120%;
+              border: none;
+              position: relative;
+              display: inline-block;
+              float: left;
+              display: block;
+              margin-right: 1.5333130693%;
+              width: 23.8500151981%;
+              color: gold; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions .refresh:last-child {
+                margin-right: 0; }
+              .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList div.job-list-actions .refresh #waves {
+                border-top: 0; }
         .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo {
           color: white;
           float: left;
@@ -400,7 +471,7 @@ html {
           border: 0;
           border-bottom: 1px solid gold;
           border-radius: 0;
-          color: black;
+          color: white;
           background: transparent;
           box-shadow: none; }
         .importerContainer .importerContainerLeftMenu .panel .panel-body div.input-group select {
@@ -1538,6 +1609,9 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
+paper-ripple {
+  cursor: pointer; }
+
 .dataItemDisplayContainer {
   max-width: 100%;
   margin-left: auto;
@@ -1947,11 +2021,9 @@ html {
           display: block;
           margin-right: 2.3576515979%;
           width: 100%;
-          padding: 5px 0px 5px 20px;
-          background: transparent;
+          padding: 0px 0px 0px 20px;
           color: skyblue;
           text-shadow: -1px 0px #0f4d92;
-          margin-bottom: 10px;
           border-bottom: 1px solid white;
           display: -webkit-box;
           display: -moz-box;
@@ -1985,8 +2057,9 @@ html {
             float: left;
             display: block;
             margin-right: 2.3576515979%;
-            width: 57.3509785009%;
+            width: 70.1456849506%;
             border-right: 1px solid greenyellow;
+            border-left: 1px solid greenyellow;
             margin-right: 0; }
             .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info:last-child {
               margin-right: 0; }
@@ -2004,105 +2077,45 @@ html {
                 font-size: 120%;
                 font-weight: bold;
                 color: white; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.action {
+          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button {
             float: left;
             display: block;
             margin-right: 2.3576515979%;
-            width: 23.2317613015%;
-            margin-left: 10px;
-            color: greenyellow;
-            display: -webkit-box;
-            display: -moz-box;
-            display: box;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -moz-box-align: center;
-            box-align: center;
-            -webkit-align-items: center;
-            -moz-align-items: center;
-            -ms-align-items: center;
-            -o-align-items: center;
-            align-items: center;
-            -ms-flex-align: center;
-            -webkit-box-pack: justify;
-            -moz-box-pack: justify;
-            box-pack: justify;
-            -webkit-justify-content: space-between;
-            -moz-justify-content: space-between;
-            -ms-justify-content: space-between;
-            -o-justify-content: space-between;
-            justify-content: space-between;
-            -ms-flex-pack: justify;
-            border: 1px solid white;
-            border-radius: 5px;
-            background: grey;
-            padding: 2.3576515979%; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.action:last-child {
+            width: 14.7019570017%;
+            color: gold;
+            margin: 0;
+            text-shadow: 1px 1px black; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button:last-child {
               margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.action i {
-              color: white;
-              font-size: 130%;
-              text-shadow: none; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status {
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button > paper-material {
+              padding: 0; }
+          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container {
+            padding: 10px 0px 10px 0px;
             float: left;
             display: block;
             margin-right: 2.3576515979%;
-            width: 6.1721527019%;
-            border: 1px solid white;
-            border-right: 0;
-            padding: 10px 15px;
-            display: -webkit-box;
-            display: -moz-box;
-            display: box;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -moz-box-align: center;
-            box-align: center;
-            -webkit-align-items: center;
-            -moz-align-items: center;
-            -ms-align-items: center;
-            -o-align-items: center;
-            align-items: center;
-            -ms-flex-align: center;
-            -webkit-box-pack: center;
-            -moz-box-pack: center;
-            box-pack: center;
-            -webkit-justify-content: center;
-            -moz-justify-content: center;
-            -ms-justify-content: center;
-            -o-justify-content: center;
-            justify-content: center;
-            -ms-flex-pack: center;
-            -webkit-box-orient: vertical;
-            -moz-box-orient: vertical;
-            box-orient: vertical;
-            -webkit-box-direction: normal;
-            -moz-box-direction: normal;
-            box-direction: normal;
-            -webkit-flex-direction: column;
-            -moz-flex-direction: column;
-            flex-direction: column;
-            -ms-flex-direction: column;
-            border-radius: 5px;
-            border-bottom-right-radius: 0px;
-            border-top-right-radius: 0px;
-            background: crimson; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status:last-child {
+            width: 10.4370548518%; }
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container:last-child {
               margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status:hover {
-              background: #c61236; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status:focus {
-              outline: none; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard button.status i {
-              font-size: 120%;
+            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button {
+              float: left;
+              display: block;
+              margin-right: 2.3576515979%;
+              width: 100%;
               color: white;
-              text-shadow: none; }
+              margin: 0;
+              border: 1px solid white;
+              border-right: 0;
+              min-width: 0;
+              border-radius: 5px;
+              background: crimson;
+              border-bottom-right-radius: 0px;
+              border-top-right-radius: 0px;
+              float: right; }
+              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button:last-child {
+                margin-right: 0; }
+              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button > paper-material {
+                padding: 0; }
         .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems {
           float: left;
           display: block;

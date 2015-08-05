@@ -285,6 +285,7 @@
             files : response.files,
             description: response.description
           };
+          console.log(vm.importerCreationMeta);
           temp = [];
           vm.progressing = false;
           console.log(angular.element('dave-importer-configuration-page'));
@@ -352,6 +353,15 @@
           vm.loadingJobs = false;
           vm.jobsLoaded = true;
         }
+      }
+    });
+
+    $scope.$on("socket:createJobResponse", function(event, data){
+      console.log(event.name);
+      console.log(data);
+      if(data.reply === 'SUCCESS'){
+        vm.waitingJobCreation = false;
+        vm.requestJobs();
       }
     });
     vm.activate();
@@ -426,6 +436,7 @@
 
     function requestJobs(){
       vm.loadingJobs = true;
+      vm.jobsLoaded = false;
       vm.jobs = [];
       vm.avaliableDataItem = [];
       ImporterSocket.emit('requestJobs');

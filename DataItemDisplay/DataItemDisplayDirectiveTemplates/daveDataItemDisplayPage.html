@@ -34,27 +34,30 @@
     <div class="dataItemStepTwoBWellLeft" >
       <div class="dataItemStepTwoBWellLeftHeader">
         <div>Graph Control</div>
-        <div><span>Add</span>  <i class="glyphicon glyphicon-plus"></i></div>
+        <div ng-click="daveDataItemDisplayPageCtrl.addDataItem()">
+          <span>Add</span>  <i class="glyphicon glyphicon-plus"></i>
+
+        </div>
       </div>
-      <div class="dataItemNameCard animated fadeIn">
+      <div class="dataItemNameCard animated fadeIn" ng-repeat = "dataItem in daveDataItemDisplayPageCtrl.dataItemsToRequest">
         <div class="info">
           <div>
-            <span><i class="glyphicon glyphicon-file"></i> Name: </span>
-            <span>{{daveDataItemDisplayPageCtrl.dataItemToRequest.name}}</span>
+            <span>Name: </span>
+            <span>{{dataItem.name}}</span>
           </div>
-          <div><span><i class="glyphicon glyphicon-globe"></i> Location: </span><span>{{daveDataItemDisplayPageCtrl.dataItemToRequest.location}}</span></div>
+          <div><span>Location: </span><span>{{dataItem.location}}</span></div>
         </div>
 
-        <div class="action">
+        <!-- <div class="action">
 
           <i class="glyphicon glyphicon-cog"></i>
-          <i class="glyphicon glyphicon-list-alt"></i>
-          <i class="glyphicon glyphicon-lock"></i>
-        </div>
+        </div> -->
 
-        <button type="button" class="btn btn-danger status">
+        <paper-button id="data-item-setting-paper-button" ng-click="daveDataItemDisplayPageCtrl.openSettingModal($index)"><iron-icon icon="settings"></iron-icon>Setting</paper-button>
+        <div class="paper-button-container"><paper-button id="data-item-cancel-paper-button"><iron-icon icon="cancel"></iron-icon></paper-button></div>
+        <!-- <button type="button" class="btn btn-danger status" ng-click="daveDataItemDisplayPageCtrl.removeData()">
           <i class="glyphicon glyphicon-remove"></i>
-        </button>
+        </button> -->
         <!-- <div><span><i class="glyphicon glyphicon-user"></i> Owner: </span><span>{{daveDataItemDisplayPageCtrl.dataItemToDisplay.ownerName}}</span></div>
         <div class="description"><span><i class="glyphicon glyphicon-info-sign"></i> Description: </span><span>{{daveDataItemDisplayPageCtrl.dataItemToDisplay.description}}</span></div> -->
       </div>

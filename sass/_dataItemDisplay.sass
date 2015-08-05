@@ -1,6 +1,7 @@
 @import "bourbon"
 @import "bourbon", "neat"
-
+paper-ripple
+  cursor: pointer
 .dataItemDisplayContainer
   +outer-container(100%)
   +pad(0 default)
@@ -235,11 +236,10 @@
                 cursor: pointer
           .dataItemNameCard
             +span-columns(12)
-            +pad(5px 0px 5px 20px)
-            background: transparent
+            +pad(0px 0px 0px 20px)
+
             color: skyblue
             text-shadow: -1px 0px #0f4d92
-            margin-bottom: 10px
             border-bottom: 1px solid white
             +display(flex)
             +align-items(center)
@@ -247,8 +247,9 @@
             background: black
             // +texture(90deg, contrast(gold),  contrast(darken(coral, 10%)) , 31, 0)
             div.info
-              +span-columns(7)
+              +span-columns(8.5)
               border-right: 1px solid greenyellow
+              border-left: 1px solid greenyellow
               margin-right: 0
               div
                 +pad(0px 10px)
@@ -264,41 +265,59 @@
                   font-size: 120%
                   font-weight: bold
                   color: white
-            div.action
-              +span-columns(3)
-              margin-left: 10px
-              color: greenyellow
-              +display(flex)
-              +align-items(center)
-              +justify-content(space-between)
-              border: 1px solid white
-              border-radius: 5px
-              background: grey
-              +pad()
-              i
+            // div.action
+            //   +span-columns(1)
+            //   color: greenyellow
+            //   +display(flex)
+            //   +align-items(center)
+            //   +justify-content(center)
+            //   i
+            //     color: greenyellow
+            //     font-size: 130%
+            //     text-shadow: none
+            #data-item-setting-paper-button
+              +span-columns(2)
+              color: gold
+              margin: 0
+              text-shadow: 1px 1px black
+              & > paper-material
+                padding: 0
+            .paper-button-container
+              +pad(10px 0px 10px 0px)
+              +span-columns(1.5)
+              #data-item-cancel-paper-button
+                +span-columns(12)
                 color: white
-                font-size: 130%
-                text-shadow: none
-            button.status
-              +span-columns(1)
-              border: 1px solid white
-              border-right: 0
-              +pad(10px 15px)
-              +display(flex)
-              +align-items(center)
-              +justify-content(center)
-              +flex-direction(column)
-              border-radius: 5px
-              +border-right-radius(0px)
-              background: crimson
-              &:hover
-                background: shade(crimson, 10%)
-              &:focus
-                outline: none
-              i
-                font-size: 120%
-                color: white
-                text-shadow: none
+                margin: 0
+                border: 1px solid white
+                border-right: 0
+                min-width: 0
+                border-radius: 5px
+                background: crimson
+                +border-right-radius(0px)
+                float: right
+                & > paper-material
+                  padding: 0
+            // button.status
+            //   +span-columns(1)
+            //   border: 1px solid white
+            //   border-right: 0
+            //   +pad(10px 15px)
+            //   +display(flex)
+            //   +align-items(center)
+            //   +justify-content(center)
+            //   +flex-direction(column)
+            //   border-radius: 5px
+            //   +border-right-radius(0px)
+            //   background: crimson
+            //   &:hover
+            //     background: shade(crimson, 10%)
+            //   &:focus
+            //     outline: none
+            //   i
+            //     font-size: 120%
+            //     color: white
+            //     text-shadow: none
           .dataItemStepTwoBDataItems
             +span-columns(12)
             +pad(10px 20px)
