@@ -1,15 +1,13 @@
-<div class="modal-header">
-  <h3 class="modal-title">Add Data Item</h3>
-</div>
-<div class="modal-body">
-  <ul>
-    <li ng-repeat="item in items">
-      <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-    </li>
-  </ul>
-  Selected: <b>{{ selected.item }}</b>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-primary" ng-click="ok()">OK</button>
-  <button class="btn btn-warning" ng-click="addDataItemModalCtrl.cancel()">Cancel</button>
+<div class="add-data-item-modal">
+  <div class="modal-header">
+    <h3 class="modal-title">Add Data Item</h3>
+    <paper-ripple></paper-ripple>
+  </div>
+  <div class="modal-body">
+    <dave-data-item-display-list-page options='{ "disableSetUpButton" : true}'></dave-data-item-display-list-page>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="addDataItemModalCtrl.cancel()">Cancel</button>
+  </div>
 </div>

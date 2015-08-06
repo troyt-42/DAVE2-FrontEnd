@@ -84,12 +84,25 @@
             <button type="button" class="btn btn-danger" ng-click="importerUploadCtrl.deleteJob()">Delete</button>
           </div>
           <formly-form model="importerUploadCtrl.randomImporterFormModel" fields="importerUploadCtrl.randomImporterFormFields" form="importerUploadCtrl.randomImporterForm"></formly-form>
-          <div class="action">
-            <i ng-click = "importerUploadCtrl.submitJob()" class="glyphicon glyphicon-ok"></i>
+
+          <div class="job-actions">
+            <div class="ok" ng-click="importerUploadCtrl.submitJob()">
+              <i class = "glyphicon glyphicon-ok"></i>
+              <paper-ripple></paper-ripple>
+            </div>
             <div ng-show="importerUploadCtrl.createJobMode"><span>CREATE</span></div>
             <div ng-show="importerUploadCtrl.modifyJobMode"><span>RESUBMIT</span></div>
-            <i ng-click = "importerUploadCtrl.cancelJobCreation()" class="glyphicon glyphicon-remove"></i>
+            <div class="remove" ng-click = "importerUploadCtrl.cancelJobCreation()">
+              <i class = "glyphicon glyphicon-remove"></i>
+              <paper-ripple></paper-ripple>
+            </div>
           </div>
+
+          <!-- <div class="action">
+            <i ng-click = "importerUploadCtrl.submitJob()" class="glyphicon glyphicon-ok"></i>
+
+            <i ng-click = "importerUploadCtrl.cancelJobCreation()" class="glyphicon glyphicon-remove"></i>
+          </div> -->
 
         </div>
       </accordion-group>

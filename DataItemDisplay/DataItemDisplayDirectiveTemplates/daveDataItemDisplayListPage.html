@@ -1,4 +1,4 @@
-<div class="dataItemSetUpButton">
+<div class="dataItemSetUpButton" ng-hide="daveDataItemDisplayListPageCtrl.disableSetUpButton">
   <div class=" animated fadeIn" ng-click="daveDataItemDisplayListPageCtrl.toggleLayOutMenu()"><i class="glyphicon glyphicon-list-alt  animated flipInY"></i> Lay Out</div>
   <div class=" animated fadeIn" ng-click="daveDataItemDisplayListPageCtrl.toggleSearchMode()"><i class="glyphicon glyphicon-eye-open animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Search Mode</span></div>
   <div class=" animated fadeIn"><i class="glyphicon glyphicon-signal animated flipInY" id="js-expand-search"></i><span id="js-search-sign"> Display System</span></div>
@@ -44,7 +44,7 @@
         </tr>
       </thead>
       <tbody style="color:white">
-        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search" ng-click="daveDataItemDisplayListPageCtrl.requestDataItem(dataItem)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))">
+        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search track by dataItem.name" ng-click="daveDataItemDisplayListPageCtrl.requestDataItem(dataItem)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))">
           <td ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name"  ng-show="column.status">{{dataItem[column.name]}}</td>
         </tr>
       </tbody>

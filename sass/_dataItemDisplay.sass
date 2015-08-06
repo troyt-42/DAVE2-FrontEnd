@@ -5,394 +5,396 @@ paper-ripple
 .dataItemDisplayContainer
   +outer-container(100%)
   +pad(0 default)
-  dave-data-item-display-list-page
-    .dataItemSetUpButton
+dave-data-item-display-list-page
+  .dataItemSetUpButton
+    position: relative
+    cursor: pointer
+    div
+      display: inline
+      +pad(5px 10px 20px)
+      +border-top-radius(10px)
+      background: gold
+      color: black
+      &:hover
+        background: gold
+        color: black
+      &:nth-child(2)
+        background: skyblue
+        color: black
+        &:hover
+          background: darken(purple, 10%)
+          color: skyblue
+      &:last-child
+        position: absolute
+        right: 10px
+        top: -10px
+        border-radius: 5px
+        box-shadow: 2px 2px 1px grey
+        color: linen
+        text-shadow: 1px 1px black
+        font-weight: bold
+        +texture(90deg, lighten(green, 10%) ,lighten(#8AC007, 5%), 9, 1)
+        i
+          text-shadow: none
+  .dataItemStepOne
+    +span-columns(12)
+    float: none
+    .dataItemStepOneWell
       position: relative
+      +pad(20px 20px)
+      +texture(270deg, black, black , 18, 1)
+      +border-top-radius(10px)
+      +border-bottom-radius(10px)
+      height: $importerWellHeight
+      border: 1px lightgrey solid
+      margin-bottom: 7px
+      &.search-mode
+        +display(flex)
+        +justify-content(center)
+        +align-items(center)
+        +texture(0deg, $yale-blue,  darken(purple, 10%) , 23, 1)
+      .waitingSymbol
+        +span-columns(12)
+        +align-items(center)
+        +display(flex)
+        +flex-direction(column)
+        +justify-content(center)
+        +flex-wrap(wrap)
+        height: 100%
+
+        .alert
+          +span-columns(6)
+          +row()
+          margin-top: 5px
+      .dataItemListTable
+        width: 100%
+        & > thead > tr > th
+          +pad(10px)
+          border-bottom: 3px solid silver
+          vertical-align: center
+          font-size: 110%
+          border-collapse: collapse
+          color: white
+          & > label
+            display: block
+            i
+              font-size: 80%
+              color: skyblue
+              text-shadow: 1px 1px #0F4D92
+              cursor: pointer
+              &.glyphicon-chevron-left:hover
+                transform: translateX(-1px)
+                color: gold
+                text-shadow: 1px 1px coral
+              &.glyphicon-chevron-right:hover
+                transform: translateX(1px)
+                color: gold
+                text-shadow: 1px 1px coral
+          & > input
+            background: linen
+            border: grey 1px solid
+            border-radius: 5px
+            width: 80%
+            color: black
+          & > i
+            +transition(all 0.25s linear)
+            color: LIMEGREEN
+            cursor: pointer
+            &:hover
+              color: grey
+
+          &:last-child
+            text-align: center
+            a
+              text-decoration: none
+              color: gold
+              &:hover
+                text-decoration: none
+
+            i
+              color: gold
+              font-size: 150%
+              display: block
+              &:hover
+                color: LIMEGREEN
+            ul.dropdown-menu
+              +pad(2px)
+              min-width: 300px
+              color: $yale-blue
+              right: 0
+              left: auto
+              background: silver
+              border-radius: 5px
+              border: 1px solid skyblue
+              &.noAvaliableHeaders
+                background: black
+                color: white
+                text-align: center
+              li
+                width: auto
+                +pad()
+                color: gold
+                +texture(180deg, $yale-blue,  $yale-blue , 26, 1)
+                +display(flex)
+                +justify-content(space-between)
+                +align-items(center)
+                border-bottom: 1px skyblue solid
+                font-weight: bold
+                input.form-control
+                  display: inline
+                  width: 65%
+                  height: 1.5em
+
+
+                &:last-child
+                  border-bottom: 0px
+                &:hover
+                  +texture(180deg, gold,  gold , 26, 0)
+                  color: $yale-blue
+                  cursor: pointer
+        & > tbody > tr > td
+          +pad(10px)
+          border-top: 1px solid silver
+        & > tbody > tr:hover
+          background: black
+          color: white
+          cursor: pointer
+
+dave-data-item-display-page
+  .dataItemStepTwoB
+    +span-columns(12)
+    .dataItemSetUpButton
       cursor: pointer
       div
         display: inline
         +pad(5px 10px 20px)
         +border-top-radius(10px)
-        background: gold
-        color: black
+        background: black
+        color: white
         &:hover
-          background: gold
+          background: white
           color: black
         &:nth-child(2)
+          background: gold
+          color: black
+          &:hover
+            background: black
+            color: gold
+        &:nth-child(3)
           background: skyblue
           color: black
           &:hover
             background: darken(purple, 10%)
             color: skyblue
-        &:last-child
-          position: absolute
-          right: 10px
-          top: -10px
-          border-radius: 5px
-          box-shadow: 2px 2px 1px grey
-          color: linen
-          text-shadow: 1px 1px black
-          font-weight: bold
-          +texture(90deg, lighten(green, 10%) ,lighten(#8AC007, 5%), 9, 1)
-          i
-            text-shadow: none
-    .dataItemStepOne
+    .dataItemStepTwoBWell
       +span-columns(12)
-      .dataItemStepOneWell
-        position: relative
-        +pad(20px 20px)
-        +texture(270deg, black, black , 18, 1)
-        +border-top-radius(10px)
-        +border-bottom-radius(10px)
-        height: $importerWellHeight
-        border: 1px lightgrey solid
-        margin-bottom: 7px
-        &.search-mode
-          +display(flex)
-          +justify-content(center)
-          +align-items(center)
-          +texture(0deg, $yale-blue,  darken(purple, 10%) , 23, 1)
-        .waitingSymbol
+      +pad(20px 20px)
+      +texture(180deg, $yale-blue,  darken(skyblue, 20%) , 80, 1)
+      +border-left-radius(10px)
+      +border-right-radius(10px)
+      +row()
+      border: 2px orange solid
+      text-align: left
+      box-shadow: 0px 0px 0px #3A8AD3
+      height: $importerWellHeight
+
+      .dataItemStepTwoBWellLeft
+        +span-columns(4)
+        height: 100%
+        border: 1px solid white
+        border-radius: 5px
+
+        .dataItemStepTwoBWellLeftHeader
+          +pad()
           +span-columns(12)
-          +align-items(center)
-          +display(flex)
-          +flex-direction(column)
-          +justify-content(center)
-          +flex-wrap(wrap)
-          height: 100%
-
-          .alert
-            +span-columns(6)
-            +row()
-            margin-top: 5px
-        .dataItemListTable
-          width: 100%
-          & > thead > tr > th
-            +pad(10px)
-            border-bottom: 3px solid silver
-            vertical-align: center
-            font-size: 110%
-            border-collapse: collapse
-            color: white
-            & > label
-              display: block
-              i
-                font-size: 80%
-                color: skyblue
-                text-shadow: 1px 1px #0F4D92
-                cursor: pointer
-                &.glyphicon-chevron-left:hover
-                  transform: translateX(-1px)
-                  color: gold
-                  text-shadow: 1px 1px coral
-                &.glyphicon-chevron-right:hover
-                  transform: translateX(1px)
-                  color: gold
-                  text-shadow: 1px 1px coral
-            & > input
-              background: linen
-              border: grey 1px solid
-              border-radius: 5px
-              width: 80%
-              color: black
-            & > i
-              +transition(all 0.25s linear)
-              color: LIMEGREEN
-              cursor: pointer
-              &:hover
-                color: grey
-
-            &:last-child
-              text-align: center
-              a
-                text-decoration: none
-                color: gold
-                &:hover
-                  text-decoration: none
-
-              i
-                color: gold
-                font-size: 150%
-                display: block
-                &:hover
-                  color: LIMEGREEN
-              ul.dropdown-menu
-                +pad(2px)
-                min-width: 300px
-                color: $yale-blue
-                right: 0
-                left: auto
-                background: silver
-                border-radius: 5px
-                border: 1px solid skyblue
-                &.noAvaliableHeaders
-                  background: black
-                  color: white
-                  text-align: center
-                li
-                  width: auto
-                  +pad()
-                  color: gold
-                  +texture(180deg, $yale-blue,  $yale-blue , 26, 1)
-                  +display(flex)
-                  +justify-content(space-between)
-                  +align-items(center)
-                  border-bottom: 1px skyblue solid
-                  font-weight: bold
-                  input.form-control
-                    display: inline
-                    width: 65%
-                    height: 1.5em
-
-
-                  &:last-child
-                    border-bottom: 0px
-                  &:hover
-                    +texture(180deg, gold,  gold , 26, 0)
-                    color: $yale-blue
-                    cursor: pointer
-          & > tbody > tr > td
-            +pad(10px)
-            border-top: 1px solid silver
-          & > tbody > tr:hover
-            background: black
-            color: white
-            cursor: pointer
-  dave-data-item-display-page
-    .dataItemStepTwoB
-      +span-columns(12)
-      .dataItemSetUpButton
-        cursor: pointer
-        div
-          display: inline
-          +pad(5px 10px 20px)
-          +border-top-radius(10px)
-          background: black
           color: white
-          &:hover
-            background: white
-            color: black
-          &:nth-child(2)
-            background: gold
-            color: black
-            &:hover
-              background: black
-              color: gold
-          &:nth-child(3)
-            background: skyblue
-            color: black
-            &:hover
-              background: darken(purple, 10%)
-              color: skyblue
-      .dataItemStepTwoBWell
-        +span-columns(12)
-        +pad(20px 20px)
-        +texture(180deg, $yale-blue,  darken(skyblue, 20%) , 80, 1)
-        +border-left-radius(10px)
-        +border-right-radius(10px)
-        +row()
-        border: 2px orange solid
-        text-align: left
-        box-shadow: 0px 0px 0px #3A8AD3
-        height: $importerWellHeight
+          +border-top-radius(5px)
+          height: auto
+          border: 0
+          border-bottom: 1px solid white
+          +texture(90deg, darken(deepskyblue, 10%), tint(darkorange, 10%), 33, 1)
+          +display(flex)
+          +align-items(center)
 
-        .dataItemStepTwoBWellLeft
-          +span-columns(4)
-          height: 100%
-          border: 1px solid white
-          border-radius: 5px
-
-          .dataItemStepTwoBWellLeftHeader
-            +pad()
-            +span-columns(12)
-            color: white
-            +border-top-radius(5px)
-            height: auto
-            border: 0
-            border-bottom: 1px solid white
-            +texture(90deg, darken(deepskyblue, 10%), tint(darkorange, 10%), 33, 1)
+          div:first-child
+            +span-columns(10)
+            font-size: 130%
+          div:last-child
+            +span-columns(2)
+            font-size: 80%
             +display(flex)
             +align-items(center)
+            color: black
+            &:hover
+              color: linen
+            span
+              margin-right: 5px
+              cursor: pointer
+              text-decoration: underline
 
-            div:first-child
-              +span-columns(10)
-              font-size: 130%
-            div:last-child
-              +span-columns(2)
-              font-size: 80%
-              +display(flex)
-              +align-items(center)
-              color: black
-              &:hover
-                color: linen
-              span
-                margin-right: 5px
-                cursor: pointer
-                text-decoration: underline
+            i
 
-              i
+              font-size: 144%
+              cursor: pointer
+        .dataItemNameCard
+          +span-columns(12)
+          +pad(0px 0px 0px 20px)
 
-                font-size: 144%
-                cursor: pointer
-          .dataItemNameCard
-            +span-columns(12)
-            +pad(0px 0px 0px 20px)
-
-            color: skyblue
-            text-shadow: -1px 0px #0f4d92
-            border-bottom: 1px solid white
-            +display(flex)
-            +align-items(center)
-            +justify-content(space-between)
-            background: black
-            // +texture(90deg, contrast(gold),  contrast(darken(coral, 10%)) , 31, 0)
-            div.info
-              +span-columns(8.5)
-              border-right: 1px solid greenyellow
-              border-left: 1px solid greenyellow
-              margin-right: 0
-              div
-                +pad(0px 10px)
-                &:first-child
-                  border-bottom: 1px solid greenyellow
-                span:nth-child(1)
-                  font-size: 100%
-                  i
-                    color: gold
-                    font-size: 80%
-                    text-shadow: none
-                span:nth-child(2)
-                  font-size: 120%
-                  font-weight: bold
-                  color: white
-            // div.action
-            //   +span-columns(1)
-            //   color: greenyellow
-            //   +display(flex)
-            //   +align-items(center)
-            //   +justify-content(center)
-            //   i
-            //     color: greenyellow
-            //     font-size: 130%
-            //     text-shadow: none
-            #data-item-setting-paper-button
-              +span-columns(2)
-              color: gold
+          color: skyblue
+          text-shadow: -1px 0px #0f4d92
+          border-bottom: 1px solid white
+          +display(flex)
+          +align-items(center)
+          +justify-content(space-between)
+          background: black
+          // +texture(90deg, contrast(gold),  contrast(darken(coral, 10%)) , 31, 0)
+          div.info
+            +span-columns(8.5)
+            border-right: 1px solid greenyellow
+            border-left: 1px solid greenyellow
+            margin-right: 0
+            div
+              +pad(0px 10px)
+              &:first-child
+                border-bottom: 1px solid greenyellow
+              span:nth-child(1)
+                font-size: 100%
+                i
+                  color: gold
+                  font-size: 80%
+                  text-shadow: none
+              span:nth-child(2)
+                font-size: 120%
+                font-weight: bold
+                color: white
+          // div.action
+          //   +span-columns(1)
+          //   color: greenyellow
+          //   +display(flex)
+          //   +align-items(center)
+          //   +justify-content(center)
+          //   i
+          //     color: greenyellow
+          //     font-size: 130%
+          //     text-shadow: none
+          #data-item-setting-paper-button
+            +span-columns(2)
+            color: gold
+            margin: 0
+            text-shadow: 1px 1px black
+            & > paper-material
+              padding: 0
+          .paper-button-container
+            +pad(10px 0px 10px 0px)
+            +span-columns(1.5)
+            #data-item-cancel-paper-button
+              +span-columns(12)
+              color: white
               margin: 0
-              text-shadow: 1px 1px black
+              border: 1px solid white
+              border-right: 0
+              min-width: 0
+              border-radius: 5px
+              background: crimson
+              +border-right-radius(0px)
+              float: right
               & > paper-material
                 padding: 0
-            .paper-button-container
-              +pad(10px 0px 10px 0px)
-              +span-columns(1.5)
-              #data-item-cancel-paper-button
-                +span-columns(12)
-                color: white
-                margin: 0
-                border: 1px solid white
-                border-right: 0
-                min-width: 0
-                border-radius: 5px
-                background: crimson
-                +border-right-radius(0px)
-                float: right
-                & > paper-material
-                  padding: 0
-            // button.status
-            //   +span-columns(1)
-            //   border: 1px solid white
-            //   border-right: 0
-            //   +pad(10px 15px)
-            //   +display(flex)
-            //   +align-items(center)
-            //   +justify-content(center)
-            //   +flex-direction(column)
-            //   border-radius: 5px
-            //   +border-right-radius(0px)
-            //   background: crimson
-            //   &:hover
-            //     background: shade(crimson, 10%)
-            //   &:focus
-            //     outline: none
-            //   i
-            //     font-size: 120%
-            //     color: white
-            //     text-shadow: none
-          .dataItemStepTwoBDataItems
-            +span-columns(12)
-            +pad(10px 20px)
-            height: 32em
-            background: transparent
-            .title
-              +span-columns(12)
-              color: gold
-              font-size: 200%
-              font-weight: bold
-              text-shadow: 0px -2px darken(purple, 20%)
-            .dataItemStepTwoBDataItemsList
-              +span-columns(12)
-              margin-top: 10px
-              height: 80%
-              overflow-y: auto
-              border-radius: 5px
-              .dataItemStepTwoBDataItem
-                +span-columns(12)
-                +pad()
-                +texture(90deg, gold,  darken(coral, 10%) , 31, 0)
-                border-radius: 0px
-                border-top: 1px solid white
-                border-right: 1px solid white
-                border-left: 1px solid white
-                font-weight: bold
-                font-size: 120%
-                cursor: pointer
-                color: white
-
-                &:hover
-                  color: $yale-blue
-                &.active
-                  +background(linear-gradient(135deg, $yale-blue, lighten($yale-blue, 30%)))
-                  color: gold
-
-
-                &:first-child
-                  +border-top-radius(5px)
-                &:last-child
-                  +border-bottom-radius(5px)
-                  border-bottom: 1px solid white
-        .dataItemStepTwoBWellRight
-          +span-columns(8)
-          +background(url('../imgs/classy_fabric.png') repeat)
+          // button.status
+          //   +span-columns(1)
+          //   border: 1px solid white
+          //   border-right: 0
+          //   +pad(10px 15px)
+          //   +display(flex)
+          //   +align-items(center)
+          //   +justify-content(center)
+          //   +flex-direction(column)
+          //   border-radius: 5px
+          //   +border-right-radius(0px)
+          //   background: crimson
+          //   &:hover
+          //     background: shade(crimson, 10%)
+          //   &:focus
+          //     outline: none
+          //   i
+          //     font-size: 120%
+          //     color: white
+          //     text-shadow: none
+        .dataItemStepTwoBDataItems
+          +span-columns(12)
+          +pad(10px 20px)
+          height: 32em
           background: transparent
-          border-radius: 0px
-          // border-left: 2px orange solid
-          box-shadow: 0px 0px 0px black inset
-          height: 100%
-
-          .dave-data-item-graph
+          .title
             +span-columns(12)
-            background: transparent
-            border-radius: 10px
-            height: 100%
-            +pad()
-            border: 1px solid black
-            .waitingSymbol
+            color: gold
+            font-size: 200%
+            font-weight: bold
+            text-shadow: 0px -2px darken(purple, 20%)
+          .dataItemStepTwoBDataItemsList
+            +span-columns(12)
+            margin-top: 10px
+            height: 80%
+            overflow-y: auto
+            border-radius: 5px
+            .dataItemStepTwoBDataItem
               +span-columns(12)
-              +align-items(center)
-              +display(flex)
-              +flex-direction(column)
-              +justify-content(center)
-              +flex-wrap(wrap)
-              height: 100%
+              +pad()
+              +texture(90deg, gold,  darken(coral, 10%) , 31, 0)
+              border-radius: 0px
+              border-top: 1px solid white
+              border-right: 1px solid white
+              border-left: 1px solid white
+              font-weight: bold
+              font-size: 120%
+              cursor: pointer
+              color: white
 
-              .alert
-                +span-columns(6)
-                +row()
-                margin-top: 5px
-            .progressbar-container
+              &:hover
+                color: $yale-blue
+              &.active
+                +background(linear-gradient(135deg, $yale-blue, lighten($yale-blue, 30%)))
+                color: gold
+
+
+              &:first-child
+                +border-top-radius(5px)
+              &:last-child
+                +border-bottom-radius(5px)
+                border-bottom: 1px solid white
+      .dataItemStepTwoBWellRight
+        +span-columns(8)
+        +background(url('../imgs/classy_fabric.png') repeat)
+        background: transparent
+        border-radius: 0px
+        // border-left: 2px orange solid
+        box-shadow: 0px 0px 0px black inset
+        height: 100%
+
+        .dave-data-item-graph
+          +span-columns(12)
+          background: transparent
+          border-radius: 10px
+          height: 100%
+          +pad()
+          border: 1px solid black
+          .waitingSymbol
+            +span-columns(12)
+            +align-items(center)
+            +display(flex)
+            +flex-direction(column)
+            +justify-content(center)
+            +flex-wrap(wrap)
+            height: 100%
+
+            .alert
               +span-columns(6)
-              background: transparent
-              .progressingStat
-                color: white
-            #container
-              height: 100%
+              +row()
+              margin-top: 5px
+          .progressbar-container
+            +span-columns(6)
+            background: transparent
+            .progressingStat
+              color: white
+          #container
+            height: 100%

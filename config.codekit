@@ -26844,15 +26844,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
-	"\/Importer\/changeDataItemModal.html": {
-		"fileType": 8192,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/Importer\/changeDataItemModal.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/Importer\/fieldFormTemplate.html": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -38545,6 +38536,22 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
+		},
+	"\/sass\/_dataItemDisplay.modal.sass": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 2,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/sass\/_dataItemDisplay.modal.sass",
+		"outputAbbreviatedPath": "\/css\/_dataItemDisplay.modal.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"shouldRunAutoprefixer": 0,
+		"shouldRunBless": 0,
+		"useLibsass": false
 		},
 	"\/sass\/_dataItemDisplay.sass": {
 		"createSourceMap": 0,

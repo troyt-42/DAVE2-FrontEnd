@@ -209,23 +209,25 @@ $importerWellHeight: 650px
               &:focus
                 outline-color: crimson
 
-          div.action
+          div.job-actions
             +span-columns(12)
             text-align: center
             font-size: 120%
             color: white
             margin-top: 10px
+            +span-columns(12)
             div
-              display: inline
+              display: inline-block
               color: gold
-            i:first-child
-              margin-right: 20px
+              +span-columns(4)
+            .ok
               color: greenyellow
               cursor: pointer
-            i:last-child
+              position: relative
+            .remove
               color: red
               cursor: pointer
-              margin-left: 20px
+              position: relative
         .waitingSymbol
           +span-columns(12)
           +align-items(center)

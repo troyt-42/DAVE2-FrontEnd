@@ -39,7 +39,7 @@
 
         </div>
       </div>
-      <div class="dataItemNameCard animated fadeIn" ng-repeat = "dataItem in daveDataItemDisplayPageCtrl.dataItemsToRequest">
+      <div class="dataItemNameCard animated fadeIn" ng-repeat = "dataItem in daveDataItemDisplayPageCtrl.dataItemsToRequest track by dataItem.name">
         <div class="info">
           <div>
             <span>Name: </span>
@@ -98,12 +98,12 @@
       -->
 
       <div class = "dave-data-item-graph">
-        <div class = "waitingSymbol" ng-show="daveDataItemDisplayPageCtrl.loading">
+        <div class = "waitingSymbol" ng-show="daveDataItemDisplayPageCtrl.loading" ng-repeat="dataItem in daveDataItemDisplayPageCtrl.dataItemsToRequest track by dataItem.name">
           <alert class="animated fadeInDown" id="dataItem{{$index}}" ng-repeat="alert in daveDataItemDisplayPageCtrl.alerts" type="{{alert.type}}" close="daveDataItemDisplayPageCtrl.closeAlert($index)">
             {{alert.msg}}
           </alert>
           <div class="progressbar-container" ng-show="daveDataItemDisplayPageCtrl.loading">
-            <div class="progressingStat"><span>Data Received: {{daveDataItemDisplayPageCtrl.dataItemData.length | number:0 }}</span></div>
+            <div class="progressingStat"><span>Data Received: {{daveDataItemDisplayPageCtrl.dataItemsData[dataItem.name].length | number:0 }} for {{dataItem.name}}</span></div>
             <progressbar max = "100" style="height:3em;background: transparent; border: 1px solid white" class="progress active" value="daveDataItemDisplayPageCtrl.completeState" type="info"><span style="font-size: 130%;font-style: normal;color: black;font-weight: bold;line-height: 2.6em;display: block">{{daveDataItemDisplayPageCtrl.waitingMessage}}</span></progressbar>
           </div>
         </div>

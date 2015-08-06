@@ -8,7 +8,9 @@
       restrict: "EA",
       templateUrl: "DataItemDisplay/DataItemDisplayDirectiveTemplates/daveDataItemDisplayListPage.html",
       controller: 'DaveDataItemDisplayListPageCtrl',
-      scope: {},
+      scope: {
+        options: "@options"
+      },
       controllerAs: "daveDataItemDisplayListPageCtrl",
       link: function(scope, element, attrs){
       }
@@ -20,7 +22,7 @@
       restrict: "E",
       templateUrl: "DataItemDisplay/DataItemDisplayDirectiveTemplates/daveDataItemDisplayPage.html",
       scope: {
-        dataItemToRequest:"@daveDataItem"
+        dataItemsToRequest:"@daveDataItems"
       },
       controller:"DaveDataItemDisplayPageCtrl",
       controllerAs: "daveDataItemDisplayPageCtrl",

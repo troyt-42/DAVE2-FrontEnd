@@ -352,7 +352,7 @@ html {
               background: #c61236; }
             .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.jobInfo button:focus {
               outline-color: crimson; }
-        .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action {
+        .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.job-actions {
           float: left;
           display: block;
           margin-right: 1.5333130693%;
@@ -360,20 +360,32 @@ html {
           text-align: center;
           font-size: 120%;
           color: white;
-          margin-top: 10px; }
-          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action:last-child {
+          margin-top: 10px;
+          float: left;
+          display: block;
+          margin-right: 1.5333130693%;
+          width: 100%; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.job-actions:last-child {
             margin-right: 0; }
-          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action div {
-            display: inline;
-            color: gold; }
-          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action i:first-child {
-            margin-right: 20px;
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.job-actions:last-child {
+            margin-right: 0; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.job-actions div {
+            display: inline-block;
+            color: gold;
+            float: left;
+            display: block;
+            margin-right: 1.5333130693%;
+            width: 32.3111246205%; }
+            .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.job-actions div:last-child {
+              margin-right: 0; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.job-actions .ok {
             color: greenyellow;
-            cursor: pointer; }
-          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.action i:last-child {
+            cursor: pointer;
+            position: relative; }
+          .importerContainer .importerContainerLeftMenu .panel .panel-body .createJobMode div.job-actions .remove {
             color: red;
             cursor: pointer;
-            margin-left: 20px; }
+            position: relative; }
         .importerContainer .importerContainerLeftMenu .panel .panel-body .waitingSymbol {
           float: left;
           display: block;
@@ -1621,410 +1633,376 @@ paper-ripple {
     clear: both;
     content: "";
     display: table; }
-  .dataItemDisplayContainer dave-data-item-display-list-page .dataItemSetUpButton {
-    position: relative;
-    cursor: pointer; }
-    .dataItemDisplayContainer dave-data-item-display-list-page .dataItemSetUpButton div {
-      display: inline;
-      padding: 5px 10px 20px;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
+
+dave-data-item-display-list-page .dataItemSetUpButton {
+  position: relative;
+  cursor: pointer; }
+  dave-data-item-display-list-page .dataItemSetUpButton div {
+    display: inline;
+    padding: 5px 10px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: gold;
+    color: black; }
+    dave-data-item-display-list-page .dataItemSetUpButton div:hover {
       background: gold;
       color: black; }
-      .dataItemDisplayContainer dave-data-item-display-list-page .dataItemSetUpButton div:hover {
-        background: gold;
-        color: black; }
-      .dataItemDisplayContainer dave-data-item-display-list-page .dataItemSetUpButton div:nth-child(2) {
-        background: skyblue;
-        color: black; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .dataItemSetUpButton div:nth-child(2):hover {
-          background: #4d004d;
-          color: skyblue; }
-      .dataItemDisplayContainer dave-data-item-display-list-page .dataItemSetUpButton div:last-child {
-        position: absolute;
-        right: 10px;
-        top: -10px;
-        border-radius: 5px;
-        box-shadow: 2px 2px 1px grey;
-        color: linen;
-        text-shadow: 1px 1px black;
-        font-weight: bold;
-        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/skin_side_up.png"), -webkit-linear-gradient(90deg, #00b300, #9cd908), center no-repeat #00b300 scroll;
-        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/skin_side_up.png"), linear-gradient(90deg, #00b300, #9cd908), center no-repeat #00b300 scroll; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .dataItemSetUpButton div:last-child i {
-          text-shadow: none; }
-  .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne {
-    float: left;
-    display: block;
-    margin-right: 2.3576515979%;
-    width: 100%; }
-    .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne:last-child {
-      margin-right: 0; }
-    .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell {
-      position: relative;
-      padding: 20px 20px;
-      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/double_lined.png"), -webkit-linear-gradient(270deg, black, black), center no-repeat black scroll;
-      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/double_lined.png"), linear-gradient(270deg, black, black), center no-repeat black scroll;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      height: 650px;
-      border: 1px lightgrey solid;
-      margin-bottom: 7px; }
-      .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell.search-mode {
-        display: -webkit-box;
-        display: -moz-box;
-        display: box;
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-pack: center;
-        -moz-box-pack: center;
-        box-pack: center;
-        -webkit-justify-content: center;
-        -moz-justify-content: center;
-        -ms-justify-content: center;
-        -o-justify-content: center;
-        justify-content: center;
-        -ms-flex-pack: center;
-        -webkit-box-align: center;
-        -moz-box-align: center;
-        box-align: center;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        -o-align-items: center;
-        align-items: center;
-        -ms-flex-align: center;
-        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), -webkit-linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll;
-        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll; }
-      .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol {
-        float: left;
-        display: block;
-        margin-right: 2.3576515979%;
-        width: 100%;
-        -webkit-box-align: center;
-        -moz-box-align: center;
-        box-align: center;
-        -webkit-align-items: center;
-        -moz-align-items: center;
-        -ms-align-items: center;
-        -o-align-items: center;
-        align-items: center;
-        -ms-flex-align: center;
-        display: -webkit-box;
-        display: -moz-box;
-        display: box;
-        display: -webkit-flex;
-        display: -moz-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -moz-box-orient: vertical;
-        box-orient: vertical;
-        -webkit-box-direction: normal;
-        -moz-box-direction: normal;
-        box-direction: normal;
-        -webkit-flex-direction: column;
-        -moz-flex-direction: column;
-        flex-direction: column;
-        -ms-flex-direction: column;
-        -webkit-box-pack: center;
-        -moz-box-pack: center;
-        box-pack: center;
-        -webkit-justify-content: center;
-        -moz-justify-content: center;
-        -ms-justify-content: center;
-        -o-justify-content: center;
-        justify-content: center;
-        -ms-flex-pack: center;
-        -webkit-box-lines: multiple;
-        -moz-box-lines: multiple;
-        box-lines: multiple;
-        -webkit-flex-wrap: wrap;
-        -moz-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-        height: 100%; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol:last-child {
-          margin-right: 0; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol .alert {
-          float: left;
-          display: block;
-          margin-right: 2.3576515979%;
-          width: 48.821174201%;
-          display: block;
-          margin-top: 5px; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol .alert:last-child {
-            margin-right: 0; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol .alert::after {
-            clear: both;
-            content: "";
-            display: table; }
-      .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable {
-        width: 100%; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th {
-          padding: 10px;
-          border-bottom: 3px solid silver;
-          vertical-align: center;
-          font-size: 110%;
-          border-collapse: collapse;
-          color: white; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label {
-            display: block; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label i {
-              font-size: 80%;
-              color: skyblue;
-              text-shadow: 1px 1px #0F4D92;
-              cursor: pointer; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label i.glyphicon-chevron-left:hover {
-                transform: translateX(-1px);
-                color: gold;
-                text-shadow: 1px 1px coral; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label i.glyphicon-chevron-right:hover {
-                transform: translateX(1px);
-                color: gold;
-                text-shadow: 1px 1px coral; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > input {
-            background: linen;
-            border: grey 1px solid;
-            border-radius: 5px;
-            width: 80%;
-            color: black; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > i {
-            -webkit-transition: all 0.25s linear;
-            -moz-transition: all 0.25s linear;
-            transition: all 0.25s linear;
-            color: LIMEGREEN;
-            cursor: pointer; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > i:hover {
-              color: grey; }
-          .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child {
-            text-align: center; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child a {
-              text-decoration: none;
-              color: gold; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child a:hover {
-                text-decoration: none; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child i {
-              color: gold;
-              font-size: 150%;
-              display: block; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child i:hover {
-                color: LIMEGREEN; }
-            .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu {
-              padding: 2px;
-              min-width: 300px;
-              color: #0F4D92;
-              right: 0;
-              left: auto;
-              background: silver;
-              border-radius: 5px;
-              border: 1px solid skyblue; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu.noAvaliableHeaders {
-                background: black;
-                color: white;
-                text-align: center; }
-              .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li {
-                width: auto;
-                padding: 2.3576515979%;
-                color: gold;
-                background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/ps_neutral.png"), -webkit-linear-gradient(180deg, #0F4D92, #0F4D92), center no-repeat #0F4D92 scroll;
-                background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/ps_neutral.png"), linear-gradient(180deg, #0F4D92, #0F4D92), center no-repeat #0F4D92 scroll;
-                display: -webkit-box;
-                display: -moz-box;
-                display: box;
-                display: -webkit-flex;
-                display: -moz-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-pack: justify;
-                -moz-box-pack: justify;
-                box-pack: justify;
-                -webkit-justify-content: space-between;
-                -moz-justify-content: space-between;
-                -ms-justify-content: space-between;
-                -o-justify-content: space-between;
-                justify-content: space-between;
-                -ms-flex-pack: justify;
-                -webkit-box-align: center;
-                -moz-box-align: center;
-                box-align: center;
-                -webkit-align-items: center;
-                -moz-align-items: center;
-                -ms-align-items: center;
-                -o-align-items: center;
-                align-items: center;
-                -ms-flex-align: center;
-                border-bottom: 1px skyblue solid;
-                font-weight: bold; }
-                .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
-                  display: inline;
-                  width: 65%;
-                  height: 1.5em; }
-                .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
-                  border-bottom: 0px; }
-                .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
-                  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), -webkit-linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
-                  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
-                  color: #0F4D92;
-                  cursor: pointer; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > tbody > tr > td {
-          padding: 10px;
-          border-top: 1px solid silver; }
-        .dataItemDisplayContainer dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > tbody > tr:hover {
-          background: black;
-          color: white;
-          cursor: pointer; }
-  .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB {
-    float: left;
-    display: block;
-    margin-right: 2.3576515979%;
-    width: 100%; }
-    .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB:last-child {
-      margin-right: 0; }
-    .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton {
-      cursor: pointer; }
-      .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div {
-        display: inline;
-        padding: 5px 10px 20px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        background: black;
-        color: white; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:hover {
-          background: white;
-          color: black; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(2) {
-          background: gold;
-          color: black; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(2):hover {
-            background: black;
-            color: gold; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(3) {
-          background: skyblue;
-          color: black; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(3):hover {
-            background: #4d004d;
-            color: skyblue; }
-    .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell {
+    dave-data-item-display-list-page .dataItemSetUpButton div:nth-child(2) {
+      background: skyblue;
+      color: black; }
+      dave-data-item-display-list-page .dataItemSetUpButton div:nth-child(2):hover {
+        background: #4d004d;
+        color: skyblue; }
+    dave-data-item-display-list-page .dataItemSetUpButton div:last-child {
+      position: absolute;
+      right: 10px;
+      top: -10px;
+      border-radius: 5px;
+      box-shadow: 2px 2px 1px grey;
+      color: linen;
+      text-shadow: 1px 1px black;
+      font-weight: bold;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/skin_side_up.png"), -webkit-linear-gradient(90deg, #00b300, #9cd908), center no-repeat #00b300 scroll;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/skin_side_up.png"), linear-gradient(90deg, #00b300, #9cd908), center no-repeat #00b300 scroll; }
+      dave-data-item-display-list-page .dataItemSetUpButton div:last-child i {
+        text-shadow: none; }
+dave-data-item-display-list-page .dataItemStepOne {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 100%;
+  float: none; }
+  dave-data-item-display-list-page .dataItemStepOne:last-child {
+    margin-right: 0; }
+  dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell {
+    position: relative;
+    padding: 20px 20px;
+    background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/double_lined.png"), -webkit-linear-gradient(270deg, black, black), center no-repeat black scroll;
+    background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/double_lined.png"), linear-gradient(270deg, black, black), center no-repeat black scroll;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 650px;
+    border: 1px lightgrey solid;
+    margin-bottom: 7px; }
+    dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell.search-mode {
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      box-pack: center;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      -o-justify-content: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      box-align: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      -ms-flex-align: center;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), -webkit-linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll;
+      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/graphy.png"), linear-gradient(0deg, #0F4D92, #4d004d), center no-repeat #0F4D92 scroll; }
+    dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol {
       float: left;
       display: block;
       margin-right: 2.3576515979%;
       width: 100%;
-      padding: 20px 20px;
-      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/struckaxiom.png"), -webkit-linear-gradient(180deg, #0F4D92, #30aadc), center no-repeat #0F4D92 scroll;
-      background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/struckaxiom.png"), linear-gradient(180deg, #0F4D92, #30aadc), center no-repeat #0F4D92 scroll;
-      border-bottom-left-radius: 10px;
-      border-top-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      border-top-right-radius: 10px;
-      display: block;
-      border: 2px orange solid;
-      text-align: left;
-      box-shadow: 0px 0px 0px #3A8AD3;
-      height: 650px; }
-      .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell:last-child {
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      box-align: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      -ms-flex-align: center;
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -moz-box-orient: vertical;
+      box-orient: vertical;
+      -webkit-box-direction: normal;
+      -moz-box-direction: normal;
+      box-direction: normal;
+      -webkit-flex-direction: column;
+      -moz-flex-direction: column;
+      flex-direction: column;
+      -ms-flex-direction: column;
+      -webkit-box-pack: center;
+      -moz-box-pack: center;
+      box-pack: center;
+      -webkit-justify-content: center;
+      -moz-justify-content: center;
+      -ms-justify-content: center;
+      -o-justify-content: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      -webkit-box-lines: multiple;
+      -moz-box-lines: multiple;
+      box-lines: multiple;
+      -webkit-flex-wrap: wrap;
+      -moz-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      height: 100%; }
+      dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol:last-child {
         margin-right: 0; }
-      .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell::after {
-        clear: both;
-        content: "";
-        display: table; }
-      .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft {
+      dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol .alert {
         float: left;
         display: block;
         margin-right: 2.3576515979%;
-        width: 31.7615656014%;
-        height: 100%;
-        border: 1px solid white;
-        border-radius: 5px; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft:last-child {
+        width: 48.821174201%;
+        display: block;
+        margin-top: 5px; }
+        dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol .alert:last-child {
           margin-right: 0; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader {
-          padding: 2.3576515979%;
-          float: left;
-          display: block;
-          margin-right: 2.3576515979%;
-          width: 100%;
-          color: white;
-          border-top-left-radius: 5px;
-          border-top-right-radius: 5px;
-          height: auto;
-          border: 0;
-          border-bottom: 1px solid white;
-          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), -webkit-linear-gradient(90deg, #0099cc, #ff9719), center no-repeat #0099cc scroll;
-          background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), linear-gradient(90deg, #0099cc, #ff9719), center no-repeat #0099cc scroll;
-          display: -webkit-box;
-          display: -moz-box;
-          display: box;
-          display: -webkit-flex;
-          display: -moz-flex;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-align: center;
-          -moz-box-align: center;
-          box-align: center;
-          -webkit-align-items: center;
-          -moz-align-items: center;
-          -ms-align-items: center;
-          -o-align-items: center;
-          align-items: center;
-          -ms-flex-align: center; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader:last-child {
-            margin-right: 0; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:first-child {
-            float: left;
-            display: block;
-            margin-right: 2.3576515979%;
-            width: 82.9403914003%;
-            font-size: 130%; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:first-child:last-child {
-              margin-right: 0; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child {
-            float: left;
-            display: block;
-            margin-right: 2.3576515979%;
-            width: 14.7019570017%;
+        dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .waitingSymbol .alert::after {
+          clear: both;
+          content: "";
+          display: table; }
+    dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable {
+      width: 100%; }
+      dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th {
+        padding: 10px;
+        border-bottom: 3px solid silver;
+        vertical-align: center;
+        font-size: 110%;
+        border-collapse: collapse;
+        color: white; }
+        dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label {
+          display: block; }
+          dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label i {
             font-size: 80%;
-            display: -webkit-box;
-            display: -moz-box;
-            display: box;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -moz-box-align: center;
-            box-align: center;
-            -webkit-align-items: center;
-            -moz-align-items: center;
-            -ms-align-items: center;
-            -o-align-items: center;
-            align-items: center;
-            -ms-flex-align: center;
-            color: black; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child:last-child {
-              margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child:hover {
-              color: linen; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child span {
-              margin-right: 5px;
-              cursor: pointer;
-              text-decoration: underline; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child i {
-              font-size: 144%;
-              cursor: pointer; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard {
+            color: skyblue;
+            text-shadow: 1px 1px #0F4D92;
+            cursor: pointer; }
+            dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label i.glyphicon-chevron-left:hover {
+              transform: translateX(-1px);
+              color: gold;
+              text-shadow: 1px 1px coral; }
+            dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > label i.glyphicon-chevron-right:hover {
+              transform: translateX(1px);
+              color: gold;
+              text-shadow: 1px 1px coral; }
+        dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > input {
+          background: linen;
+          border: grey 1px solid;
+          border-radius: 5px;
+          width: 80%;
+          color: black; }
+        dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > i {
+          -webkit-transition: all 0.25s linear;
+          -moz-transition: all 0.25s linear;
+          transition: all 0.25s linear;
+          color: LIMEGREEN;
+          cursor: pointer; }
+          dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th > i:hover {
+            color: grey; }
+        dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child {
+          text-align: center; }
+          dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child a {
+            text-decoration: none;
+            color: gold; }
+            dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child a:hover {
+              text-decoration: none; }
+          dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child i {
+            color: gold;
+            font-size: 150%;
+            display: block; }
+            dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child i:hover {
+              color: LIMEGREEN; }
+          dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu {
+            padding: 2px;
+            min-width: 300px;
+            color: #0F4D92;
+            right: 0;
+            left: auto;
+            background: silver;
+            border-radius: 5px;
+            border: 1px solid skyblue; }
+            dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu.noAvaliableHeaders {
+              background: black;
+              color: white;
+              text-align: center; }
+            dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li {
+              width: auto;
+              padding: 2.3576515979%;
+              color: gold;
+              background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/ps_neutral.png"), -webkit-linear-gradient(180deg, #0F4D92, #0F4D92), center no-repeat #0F4D92 scroll;
+              background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/ps_neutral.png"), linear-gradient(180deg, #0F4D92, #0F4D92), center no-repeat #0F4D92 scroll;
+              display: -webkit-box;
+              display: -moz-box;
+              display: box;
+              display: -webkit-flex;
+              display: -moz-flex;
+              display: -ms-flexbox;
+              display: flex;
+              -webkit-box-pack: justify;
+              -moz-box-pack: justify;
+              box-pack: justify;
+              -webkit-justify-content: space-between;
+              -moz-justify-content: space-between;
+              -ms-justify-content: space-between;
+              -o-justify-content: space-between;
+              justify-content: space-between;
+              -ms-flex-pack: justify;
+              -webkit-box-align: center;
+              -moz-box-align: center;
+              box-align: center;
+              -webkit-align-items: center;
+              -moz-align-items: center;
+              -ms-align-items: center;
+              -o-align-items: center;
+              align-items: center;
+              -ms-flex-align: center;
+              border-bottom: 1px skyblue solid;
+              font-weight: bold; }
+              dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li input.form-control {
+                display: inline;
+                width: 65%;
+                height: 1.5em; }
+              dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:last-child {
+                border-bottom: 0px; }
+              dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > thead > tr > th:last-child ul.dropdown-menu li:hover {
+                background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), -webkit-linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
+                background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/ps_neutral.png"), linear-gradient(180deg, gold, gold), center no-repeat gold scroll;
+                color: #0F4D92;
+                cursor: pointer; }
+      dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > tbody > tr > td {
+        padding: 10px;
+        border-top: 1px solid silver; }
+      dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell .dataItemListTable > tbody > tr:hover {
+        background: black;
+        color: white;
+        cursor: pointer; }
+
+dave-data-item-display-page .dataItemStepTwoB {
+  float: left;
+  display: block;
+  margin-right: 2.3576515979%;
+  width: 100%; }
+  dave-data-item-display-page .dataItemStepTwoB:last-child {
+    margin-right: 0; }
+  dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton {
+    cursor: pointer; }
+    dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div {
+      display: inline;
+      padding: 5px 10px 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      background: black;
+      color: white; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:hover {
+        background: white;
+        color: black; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(2) {
+        background: gold;
+        color: black; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(2):hover {
+          background: black;
+          color: gold; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(3) {
+        background: skyblue;
+        color: black; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemSetUpButton div:nth-child(3):hover {
+          background: #4d004d;
+          color: skyblue; }
+  dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell {
+    float: left;
+    display: block;
+    margin-right: 2.3576515979%;
+    width: 100%;
+    padding: 20px 20px;
+    background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/struckaxiom.png"), -webkit-linear-gradient(180deg, #0F4D92, #30aadc), center no-repeat #0F4D92 scroll;
+    background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/struckaxiom.png"), linear-gradient(180deg, #0F4D92, #30aadc), center no-repeat #0F4D92 scroll;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    display: block;
+    border: 2px orange solid;
+    text-align: left;
+    box-shadow: 0px 0px 0px #3A8AD3;
+    height: 650px; }
+    dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell:last-child {
+      margin-right: 0; }
+    dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell::after {
+      clear: both;
+      content: "";
+      display: table; }
+    dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 31.7615656014%;
+      height: 100%;
+      border: 1px solid white;
+      border-radius: 5px; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft:last-child {
+        margin-right: 0; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader {
+        padding: 2.3576515979%;
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 100%;
+        color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        height: auto;
+        border: 0;
+        border-bottom: 1px solid white;
+        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), -webkit-linear-gradient(90deg, #0099cc, #ff9719), center no-repeat #0099cc scroll;
+        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), linear-gradient(90deg, #0099cc, #ff9719), center no-repeat #0099cc scroll;
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        box-align: center;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center;
+        -ms-flex-align: center; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader:last-child {
+          margin-right: 0; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:first-child {
           float: left;
           display: block;
           margin-right: 2.3576515979%;
-          width: 100%;
-          padding: 0px 0px 0px 20px;
-          color: skyblue;
-          text-shadow: -1px 0px #0f4d92;
-          border-bottom: 1px solid white;
+          width: 82.9403914003%;
+          font-size: 130%; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:first-child:last-child {
+            margin-right: 0; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child {
+          float: left;
+          display: block;
+          margin-right: 2.3576515979%;
+          width: 14.7019570017%;
+          font-size: 80%;
           display: -webkit-box;
           display: -moz-box;
           display: box;
@@ -2041,244 +2019,296 @@ paper-ripple {
           -o-align-items: center;
           align-items: center;
           -ms-flex-align: center;
-          -webkit-box-pack: justify;
-          -moz-box-pack: justify;
-          box-pack: justify;
-          -webkit-justify-content: space-between;
-          -moz-justify-content: space-between;
-          -ms-justify-content: space-between;
-          -o-justify-content: space-between;
-          justify-content: space-between;
-          -ms-flex-pack: justify;
-          background: black; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard:last-child {
+          color: black; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child:last-child {
             margin-right: 0; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info {
-            float: left;
-            display: block;
-            margin-right: 2.3576515979%;
-            width: 70.1456849506%;
-            border-right: 1px solid greenyellow;
-            border-left: 1px solid greenyellow;
-            margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info:last-child {
-              margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div {
-              padding: 0px 10px; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div:first-child {
-                border-bottom: 1px solid greenyellow; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) {
-                font-size: 100%; }
-                .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) i {
-                  color: gold;
-                  font-size: 80%;
-                  text-shadow: none; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(2) {
-                font-size: 120%;
-                font-weight: bold;
-                color: white; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button {
-            float: left;
-            display: block;
-            margin-right: 2.3576515979%;
-            width: 14.7019570017%;
-            color: gold;
-            margin: 0;
-            text-shadow: 1px 1px black; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button:last-child {
-              margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button > paper-material {
-              padding: 0; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container {
-            padding: 10px 0px 10px 0px;
-            float: left;
-            display: block;
-            margin-right: 2.3576515979%;
-            width: 10.4370548518%; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container:last-child {
-              margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button {
-              float: left;
-              display: block;
-              margin-right: 2.3576515979%;
-              width: 100%;
-              color: white;
-              margin: 0;
-              border: 1px solid white;
-              border-right: 0;
-              min-width: 0;
-              border-radius: 5px;
-              background: crimson;
-              border-bottom-right-radius: 0px;
-              border-top-right-radius: 0px;
-              float: right; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button:last-child {
-                margin-right: 0; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button > paper-material {
-                padding: 0; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems {
-          float: left;
-          display: block;
-          margin-right: 2.3576515979%;
-          width: 100%;
-          padding: 10px 20px;
-          height: 32em;
-          background: transparent; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems:last-child {
-            margin-right: 0; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .title {
-            float: left;
-            display: block;
-            margin-right: 2.3576515979%;
-            width: 100%;
-            color: gold;
-            font-size: 200%;
-            font-weight: bold;
-            text-shadow: 0px -2px #1a001a; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .title:last-child {
-              margin-right: 0; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList {
-            float: left;
-            display: block;
-            margin-right: 2.3576515979%;
-            width: 100%;
-            margin-top: 10px;
-            height: 80%;
-            overflow-y: auto;
-            border-radius: 5px; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList:last-child {
-              margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem {
-              float: left;
-              display: block;
-              margin-right: 2.3576515979%;
-              width: 100%;
-              padding: 2.3576515979%;
-              background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/wavegrid.png"), -webkit-linear-gradient(90deg, gold, #ff5a1d), center no-repeat gold scroll;
-              background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/wavegrid.png"), linear-gradient(90deg, gold, #ff5a1d), center no-repeat gold scroll;
-              border-radius: 0px;
-              border-top: 1px solid white;
-              border-right: 1px solid white;
-              border-left: 1px solid white;
-              font-weight: bold;
-              font-size: 120%;
-              cursor: pointer;
-              color: white; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:last-child {
-                margin-right: 0; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:hover {
-                color: #0F4D92; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem.active {
-                background: -webkit-linear-gradient(135deg, #0F4D92, #4d99ed);
-                background: linear-gradient(135deg, #0F4D92, #4d99ed);
-                color: gold; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:first-child {
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:last-child {
-                border-bottom-left-radius: 5px;
-                border-bottom-right-radius: 5px;
-                border-bottom: 1px solid white; }
-      .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight {
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child:hover {
+            color: linen; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child span {
+            margin-right: 5px;
+            cursor: pointer;
+            text-decoration: underline; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBWellLeftHeader div:last-child i {
+            font-size: 144%;
+            cursor: pointer; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard {
         float: left;
         display: block;
         margin-right: 2.3576515979%;
-        width: 65.8807828007%;
-        background: url("../imgs/classy_fabric.png") repeat;
-        background: url("../imgs/classy_fabric.png") repeat;
-        background: transparent;
-        border-radius: 0px;
-        box-shadow: 0px 0px 0px black inset;
-        height: 100%; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight:last-child {
+        width: 100%;
+        padding: 0px 0px 0px 20px;
+        color: skyblue;
+        text-shadow: -1px 0px #0f4d92;
+        border-bottom: 1px solid white;
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        box-align: center;
+        -webkit-align-items: center;
+        -moz-align-items: center;
+        -ms-align-items: center;
+        -o-align-items: center;
+        align-items: center;
+        -ms-flex-align: center;
+        -webkit-box-pack: justify;
+        -moz-box-pack: justify;
+        box-pack: justify;
+        -webkit-justify-content: space-between;
+        -moz-justify-content: space-between;
+        -ms-justify-content: space-between;
+        -o-justify-content: space-between;
+        justify-content: space-between;
+        -ms-flex-pack: justify;
+        background: black; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard:last-child {
           margin-right: 0; }
-        .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph {
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info {
           float: left;
           display: block;
           margin-right: 2.3576515979%;
-          width: 100%;
-          background: transparent;
-          border-radius: 10px;
-          height: 100%;
-          padding: 2.3576515979%;
-          border: 1px solid black; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph:last-child {
+          width: 70.1456849506%;
+          border-right: 1px solid greenyellow;
+          border-left: 1px solid greenyellow;
+          margin-right: 0; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info:last-child {
             margin-right: 0; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol {
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div {
+            padding: 0px 10px; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div:first-child {
+              border-bottom: 1px solid greenyellow; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) {
+              font-size: 100%; }
+              dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(1) i {
+                color: gold;
+                font-size: 80%;
+                text-shadow: none; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard div.info div span:nth-child(2) {
+              font-size: 120%;
+              font-weight: bold;
+              color: white; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button {
+          float: left;
+          display: block;
+          margin-right: 2.3576515979%;
+          width: 14.7019570017%;
+          color: gold;
+          margin: 0;
+          text-shadow: 1px 1px black; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button:last-child {
+            margin-right: 0; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard #data-item-setting-paper-button > paper-material {
+            padding: 0; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container {
+          padding: 10px 0px 10px 0px;
+          float: left;
+          display: block;
+          margin-right: 2.3576515979%;
+          width: 10.4370548518%; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container:last-child {
+            margin-right: 0; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button {
             float: left;
             display: block;
             margin-right: 2.3576515979%;
             width: 100%;
-            -webkit-box-align: center;
-            -moz-box-align: center;
-            box-align: center;
-            -webkit-align-items: center;
-            -moz-align-items: center;
-            -ms-align-items: center;
-            -o-align-items: center;
-            align-items: center;
-            -ms-flex-align: center;
-            display: -webkit-box;
-            display: -moz-box;
-            display: box;
-            display: -webkit-flex;
-            display: -moz-flex;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -moz-box-orient: vertical;
-            box-orient: vertical;
-            -webkit-box-direction: normal;
-            -moz-box-direction: normal;
-            box-direction: normal;
-            -webkit-flex-direction: column;
-            -moz-flex-direction: column;
-            flex-direction: column;
-            -ms-flex-direction: column;
-            -webkit-box-pack: center;
-            -moz-box-pack: center;
-            box-pack: center;
-            -webkit-justify-content: center;
-            -moz-justify-content: center;
-            -ms-justify-content: center;
-            -o-justify-content: center;
-            justify-content: center;
-            -ms-flex-pack: center;
-            -webkit-box-lines: multiple;
-            -moz-box-lines: multiple;
-            box-lines: multiple;
-            -webkit-flex-wrap: wrap;
-            -moz-flex-wrap: wrap;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            height: 100%; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol:last-child {
+            color: white;
+            margin: 0;
+            border: 1px solid white;
+            border-right: 0;
+            min-width: 0;
+            border-radius: 5px;
+            background: crimson;
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            float: right; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button:last-child {
               margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol .alert {
-              float: left;
-              display: block;
-              margin-right: 2.3576515979%;
-              width: 48.821174201%;
-              display: block;
-              margin-top: 5px; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol .alert:last-child {
-                margin-right: 0; }
-              .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol .alert::after {
-                clear: both;
-                content: "";
-                display: table; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container {
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button > paper-material {
+              padding: 0; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 100%;
+        padding: 10px 20px;
+        height: 32em;
+        background: transparent; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems:last-child {
+          margin-right: 0; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .title {
+          float: left;
+          display: block;
+          margin-right: 2.3576515979%;
+          width: 100%;
+          color: gold;
+          font-size: 200%;
+          font-weight: bold;
+          text-shadow: 0px -2px #1a001a; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .title:last-child {
+            margin-right: 0; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList {
+          float: left;
+          display: block;
+          margin-right: 2.3576515979%;
+          width: 100%;
+          margin-top: 10px;
+          height: 80%;
+          overflow-y: auto;
+          border-radius: 5px; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList:last-child {
+            margin-right: 0; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem {
+            float: left;
+            display: block;
+            margin-right: 2.3576515979%;
+            width: 100%;
+            padding: 2.3576515979%;
+            background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/wavegrid.png"), -webkit-linear-gradient(90deg, gold, #ff5a1d), center no-repeat gold scroll;
+            background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/inverted/wavegrid.png"), linear-gradient(90deg, gold, #ff5a1d), center no-repeat gold scroll;
+            border-radius: 0px;
+            border-top: 1px solid white;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
+            font-weight: bold;
+            font-size: 120%;
+            cursor: pointer;
+            color: white; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:last-child {
+              margin-right: 0; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:hover {
+              color: #0F4D92; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem.active {
+              background: -webkit-linear-gradient(135deg, #0F4D92, #4d99ed);
+              background: linear-gradient(135deg, #0F4D92, #4d99ed);
+              color: gold; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:first-child {
+              border-top-left-radius: 5px;
+              border-top-right-radius: 5px; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems .dataItemStepTwoBDataItemsList .dataItemStepTwoBDataItem:last-child {
+              border-bottom-left-radius: 5px;
+              border-bottom-right-radius: 5px;
+              border-bottom: 1px solid white; }
+    dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight {
+      float: left;
+      display: block;
+      margin-right: 2.3576515979%;
+      width: 65.8807828007%;
+      background: url("../imgs/classy_fabric.png") repeat;
+      background: url("../imgs/classy_fabric.png") repeat;
+      background: transparent;
+      border-radius: 0px;
+      box-shadow: 0px 0px 0px black inset;
+      height: 100%; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight:last-child {
+        margin-right: 0; }
+      dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph {
+        float: left;
+        display: block;
+        margin-right: 2.3576515979%;
+        width: 100%;
+        background: transparent;
+        border-radius: 10px;
+        height: 100%;
+        padding: 2.3576515979%;
+        border: 1px solid black; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph:last-child {
+          margin-right: 0; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol {
+          float: left;
+          display: block;
+          margin-right: 2.3576515979%;
+          width: 100%;
+          -webkit-box-align: center;
+          -moz-box-align: center;
+          box-align: center;
+          -webkit-align-items: center;
+          -moz-align-items: center;
+          -ms-align-items: center;
+          -o-align-items: center;
+          align-items: center;
+          -ms-flex-align: center;
+          display: -webkit-box;
+          display: -moz-box;
+          display: box;
+          display: -webkit-flex;
+          display: -moz-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -moz-box-orient: vertical;
+          box-orient: vertical;
+          -webkit-box-direction: normal;
+          -moz-box-direction: normal;
+          box-direction: normal;
+          -webkit-flex-direction: column;
+          -moz-flex-direction: column;
+          flex-direction: column;
+          -ms-flex-direction: column;
+          -webkit-box-pack: center;
+          -moz-box-pack: center;
+          box-pack: center;
+          -webkit-justify-content: center;
+          -moz-justify-content: center;
+          -ms-justify-content: center;
+          -o-justify-content: center;
+          justify-content: center;
+          -ms-flex-pack: center;
+          -webkit-box-lines: multiple;
+          -moz-box-lines: multiple;
+          box-lines: multiple;
+          -webkit-flex-wrap: wrap;
+          -moz-flex-wrap: wrap;
+          -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+          height: 100%; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol:last-child {
+            margin-right: 0; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol .alert {
             float: left;
             display: block;
             margin-right: 2.3576515979%;
             width: 48.821174201%;
-            background: transparent; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container:last-child {
+            display: block;
+            margin-top: 5px; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol .alert:last-child {
               margin-right: 0; }
-            .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container .progressingStat {
-              color: white; }
-          .dataItemDisplayContainer dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph #container {
-            height: 100%; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .waitingSymbol .alert::after {
+              clear: both;
+              content: "";
+              display: table; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container {
+          float: left;
+          display: block;
+          margin-right: 2.3576515979%;
+          width: 48.821174201%;
+          background: transparent; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container:last-child {
+            margin-right: 0; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph .progressbar-container .progressingStat {
+            color: white; }
+        dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellRight .dave-data-item-graph #container {
+          height: 100%; }
+
+.add-data-item-modal {
+  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/pw_maze_white.png"), -webkit-linear-gradient(270deg, #1465c0, black), center no-repeat #1465c0 scroll;
+  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/pw_maze_white.png"), linear-gradient(270deg, #1465c0, black), center no-repeat #1465c0 scroll; }
+  .add-data-item-modal .modal-header {
+    position: relative;
+    border-bottom-color: #F5BA07; }
+    .add-data-item-modal .modal-header paper-ripple {
+      color: white; }
+    .add-data-item-modal .modal-header .modal-title {
+      color: white; }
+  .add-data-item-modal .modal-body {
+    color: white; }
+  .add-data-item-modal .modal-footer {
+    border-top-color: #F5BA07; }
 
 @-webkit-keyframes spin {
   from {
