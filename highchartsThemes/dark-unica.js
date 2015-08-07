@@ -16,7 +16,7 @@ Highcharts.createElement('link', {
 // 	}
 // })
 Highcharts.theme = {
-	colors: ["GREENYELLOW", "#905d2b", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+	colors: ["GREENYELLOW", "ORANGERED", "LAVENDER", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
 		"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
 	chart: {
 		backgroundColor: "transparent",

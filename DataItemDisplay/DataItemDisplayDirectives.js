@@ -22,7 +22,6 @@
       restrict: "E",
       templateUrl: "DataItemDisplay/DataItemDisplayDirectiveTemplates/daveDataItemDisplayPage.html",
       scope: {
-        dataItemsToRequest:"@daveDataItems"
       },
       controller:"DaveDataItemDisplayPageCtrl",
       controllerAs: "daveDataItemDisplayPageCtrl",

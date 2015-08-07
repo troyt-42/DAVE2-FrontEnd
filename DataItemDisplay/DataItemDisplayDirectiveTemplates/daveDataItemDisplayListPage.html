@@ -44,13 +44,35 @@
         </tr>
       </thead>
       <tbody style="color:white">
-        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search track by dataItem.name" ng-click="daveDataItemDisplayListPageCtrl.requestDataItem(dataItem)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))">
+        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search track by dataItem.name" ng-click="daveDataItemDisplayListPageCtrl.requestDataItem(dataItem)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))" ng-class="{'selected': daveDataItemDisplayListPageCtrl.selectedDataItems.indexOf(dataItem) !== -1}">
           <td ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name"  ng-show="column.status">{{dataItem[column.name]}}</td>
         </tr>
       </tbody>
     </table>
     <div ng-show="!daveDataItemDisplayListPageCtrl.loading">
-      <pagination id="js-pagination" total-items="daveDataItemDisplayListPageCtrl.dataItemList.length" ng-model="daveDataItemDisplayListPageCtrl.dataItemListCurrentPage" max-size="10" class="pagination-sm  " style="margin:0px;font-size:150%;display:inline;position:absolute;bottom: 10px;left: 10px" boundary-links="true" rotate="false" items-per-page="11"></pagination>
+      <pagination id="js-pagination" total-items="daveDataItemDisplayListPageCtrl.dataItemList.length" ng-model="daveDataItemDisplayListPageCtrl.dataItemListCurrentPage" max-size="10" class="pagination-sm  dave-pagination" boundary-links="true" rotate="false" items-per-page="11"></pagination>
+
+      <paper-button id="multiple-data-items-selection-button" ng-click="daveDataItemDisplayListPageCtrl.multipleSelectionMode = daveDataItemDisplayListPageCtrl.multipleSelectionMode ? false : true" ng-hide=" daveDataItemDisplayListPageCtrl.disableMultipleSelectionMode">Multiple?</paper-button>
+      <div id="multiple-data-items-selection-dialog" class="animated zoomIn" ng-show="daveDataItemDisplayListPageCtrl.multipleSelectionMode ">
+        <div class="dialog-header">Selected Items</div>
+        <div class="dialog-body">
+          <table class="selectedDataItemTable">
+            <tbody>
+              <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.selectedDataItems">
+                <td ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name"  ng-show="column.status">{{dataItem[column.name]}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="dialog-footer" ng-hide="daveDataItemDisplayListPageCtrl.disableMultipleSelectionMode">
+          <button class="btn btn-success" ng-click="daveDataItemDisplayListPageCtrl.requestMultipleDataItems()">
+            <iron-icon icon="check"></iron-icon> ok
+          </button>
+          <button class="btn btn-danger" ng-click="daveDataItemDisplayListPageCtrl.cancelMultipleDataItems()">
+            <iron-icon icon="close"></iron-icon> cancel
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

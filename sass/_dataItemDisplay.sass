@@ -68,6 +68,7 @@ dave-data-item-display-list-page
           margin-top: 5px
       .dataItemListTable
         width: 100%
+
         & > thead > tr > th
           +pad(10px)
           border-bottom: 3px solid silver
@@ -152,14 +153,76 @@ dave-data-item-display-list-page
                   +texture(180deg, gold,  gold , 26, 0)
                   color: $yale-blue
                   cursor: pointer
-        & > tbody > tr > td
-          +pad(10px)
-          border-top: 1px solid silver
+        & > tbody > tr
+          +transition(all 0.5s ease-in-out)
+          &.selected
+            background: rgba(deepskyblue,0.7)
+            color: white
+          td
+            +pad(10px)
+            border-top: 1px solid silver
         & > tbody > tr:hover
-          background: black
-          color: white
           cursor: pointer
+      .dave-pagination
+        margin: 0px
+        font-size: 150%
+        display: inline
+        position: absolute
+        bottom: 10px
+        left: 10px
+      #multiple-data-items-selection-button
+        color: white
+        background: orangered
+        margin: 0px
+        font-size: 100%
+        display: inline
+        position: absolute
+        bottom: 10px
+        right: 10px
+        text-transform: none
+        +pad(0)
+      #multiple-data-items-selection-dialog
+        +span-columns(6)
 
+        border-radius: 5px
+        border-bottom-right-radius: 0
+        position: absolute
+        bottom: 60px
+        right: 10px
+        +texture(270deg, darkorange, orangered , 73, 1)
+        border: 1px solid linen
+        .dialog-header
+          +span-columns(12)
+          +pad(5px default)
+          font-size: 130%
+          color: white
+          border-bottom: 1px solid white
+        .dialog-body
+          min-height: 250px
+          border-bottom: 1px solid white
+          .selectedDataItemTable
+            width: 100%
+            & > tbody > tr > td
+              +pad(10px)
+              border-top: 1px solid white
+              font-weight: bold
+              color: white
+        .dialog-footer
+          button
+            +span-columns(2)
+            background: transparent
+            color: greenyellow
+            border: 0
+            text-transform: uppercase
+            text-shadow: none
+            box-shadow: none
+            +display(flex)
+            +align-items(center)
+            +justify-content(center)
+            outline: none
+            position: relative
+            &:nth-child(2)
+              color: black
 dave-data-item-display-page
   .dataItemStepTwoB
     +span-columns(12)
@@ -199,7 +262,7 @@ dave-data-item-display-page
       height: $importerWellHeight
 
       .dataItemStepTwoBWellLeft
-        +span-columns(4)
+        +span-columns(3.5)
         height: 100%
         border: 1px solid white
         border-radius: 5px
@@ -248,15 +311,26 @@ dave-data-item-display-page
           +justify-content(space-between)
           background: black
           // +texture(90deg, contrast(gold),  contrast(darken(coral, 10%)) , 31, 0)
-          div.info
-            +span-columns(8.5)
+          &:nth-child(2) > div.info
             border-right: 1px solid greenyellow
             border-left: 1px solid greenyellow
+            div:first-child
+              border-bottom: 1px solid greenyellow
+          &:nth-child(3) > div.info
+            border-right: 1px solid orangered
+            border-left: 1px solid orangered
+            div:first-child
+              border-bottom: 1px solid orangered
+          &:nth-child(4) > div.info
+            border-right: 1px solid LAVENDER
+            border-left: 1px solid LAVENDER
+            div:first-child
+              border-bottom: 1px solid LAVENDER
+          div.info
+            +span-columns(8.5)
             margin-right: 0
             div
               +pad(0px 10px)
-              &:first-child
-                border-bottom: 1px solid greenyellow
               span:nth-child(1)
                 font-size: 100%
                 i
@@ -267,6 +341,7 @@ dave-data-item-display-page
                 font-size: 120%
                 font-weight: bold
                 color: white
+
           // div.action
           //   +span-columns(1)
           //   color: greenyellow
@@ -363,7 +438,7 @@ dave-data-item-display-page
                 +border-bottom-radius(5px)
                 border-bottom: 1px solid white
       .dataItemStepTwoBWellRight
-        +span-columns(8)
+        +span-columns(8.5)
         +background(url('../imgs/classy_fabric.png') repeat)
         background: transparent
         border-radius: 0px
@@ -378,19 +453,20 @@ dave-data-item-display-page
           height: 100%
           +pad()
           border: 1px solid black
+
+          +align-items(center)
+          +display(flex)
+          +flex-direction(column)
+          +justify-content(center)
+          +flex-wrap(wrap)
           .waitingSymbol
             +span-columns(12)
-            +align-items(center)
-            +display(flex)
-            +flex-direction(column)
-            +justify-content(center)
-            +flex-wrap(wrap)
-            height: 100%
 
             .alert
               +span-columns(6)
               +row()
               margin-top: 5px
+
           .progressbar-container
             +span-columns(6)
             background: transparent
@@ -398,3 +474,4 @@ dave-data-item-display-page
               color: white
           #container
             height: 100%
+            +span-columns(12)

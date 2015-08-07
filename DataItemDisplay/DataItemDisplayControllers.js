@@ -308,11 +308,13 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   vm.activate = activate;
   vm.addTableColumn = addTableColumn;
   vm.addTableColumnKeyPress = addTableColumnKeyPress;
+  vm.cancelMultipleDataItems = cancelMultipleDataItems;
   vm.closeAlert = closeAlert;
   vm.decreaseColumnIndex = decreaseColumnIndex;
   vm.increaseColumnIndex = increaseColumnIndex;
   vm.removeColumn = removeColumn;
   vm.requestDataItem = requestDataItem;
+  vm.requestMultipleDataItems = requestMultipleDataItems;
   vm.toggleLayOutMenu = toggleLayOutMenu;
   vm.toggleSearchMode = toggleSearchMode;
   //variables
@@ -328,8 +330,11 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
     {name: "unit", status: true, index: 4}
   ];
   vm.disableSetUpButton = false;
+  vm.disableMultipleSelectionMode = false;
+  vm.multipleSelectionMode = false;
   vm.promiseToSolve = '';
   vm.search = {};
+  vm.selectedDataItems = [];
   vm.systemStatus = 'Normal';
   vm.loading = true;
 
@@ -426,6 +431,13 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
     $cookies.putObject('avaliableDataItemTableColumns', vm.avaliableDataItemTableColumns);
   }
 
+  function cancelMultipleDataItems(){
+    vm.multipleSelectionMode = false;
+    DataItemDisplayRegistryService.clearDataItems();
+
+    vm.selectedDataItems = [];
+  }
+
   function closeAlert(index){
     angular.element('div.alert.animated#dataItemList'+index).removeClass("fadeInDown");
     angular.element('div.alert.animated#dataItemList'+index).addClass("fadeOutUp");
@@ -467,16 +479,43 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   }
 
   function requestDataItem(dataItem){
-    DataItemDisplayRegistryService.recordToDoItems([dataItem]);
-    if(angular.element('dave-data-item-display-page').length === 0){
+    console.log(vm.multipleSelectionMode);
+    if(vm.multipleSelectionMode){
+      if(vm.selectedDataItems.indexOf(dataItem) === -1){
+        vm.selectedDataItems.push(dataItem);
+      } else {
+        vm.selectedDataItems.splice(vm.selectedDataItems.indexOf(dataItem), 1);
+      }
 
-      var bindScope = $scope.$parent.$new(true);
-      bindScope.dataItemsToRequest = [dataItem];
-      DirectiveService.DestroyDirectiveService('dave-data-item-display-list-page', $scope);
+    } else {
+      DataItemDisplayRegistryService.recordToDoItems([dataItem]);
+      if(angular.element('dave-data-item-display-page').length === 0){
 
-      DirectiveService.AddDirectiveService('.dataItemDisplayContainer', '<dave-data-item-display-page class="angular-directive" dave-data-items="{{dataItemsToRequest}}"></dave-data-item-display-page>', bindScope, $compile);
+        var bindScope = $scope.$parent.$new(true);
+        DirectiveService.DestroyDirectiveService('dave-data-item-display-list-page', $scope);
+
+        DirectiveService.AddDirectiveService('.dataItemDisplayContainer', '<dave-data-item-display-page class="angular-directive"></dave-data-item-display-page>', bindScope, $compile);
+      }
     }
   }
+
+  function requestMultipleDataItems(){
+    console.log(vm.selectedDataItems.length);
+    if(vm.selectedDataItems.length !== 0){
+      DataItemDisplayRegistryService.recordToDoItems(vm.selectedDataItems);
+      console.log(DataItemDisplayRegistryService.readToDoItems());
+      if(angular.element('dave-data-item-display-page').length === 0){
+
+        var bindScope = $scope.$parent.$new(true);
+        DirectiveService.DestroyDirectiveService('dave-data-item-display-list-page', $scope);
+
+        DirectiveService.AddDirectiveService('.dataItemDisplayContainer', '<dave-data-item-display-page class="angular-directive"></dave-data-item-display-page>', bindScope, $compile);
+
+
+      }
+    }
+  }
+
   function toggleLayOutMenu(){
     angular.element('.js-layout').toggleClass('hidden');
   }
@@ -493,17 +532,17 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
   vm.addDataItem = addDataItem;
   vm.backToDataItemList = backToDataItemList;
   vm.closeAlert = closeAlert;
-  vm.removeData = removeData;
+  vm.hideDataItem = hideDataItem;
   vm.openSettingModal = openSettingModal;
   vm.toggleSearchMode = toggleSearchMode;
   //variables
   vm.alerts = [];
-  vm.completeState = 0;
+  vm.completeStates = [];
   vm.dataItemsData = [
 
   ];
-  vm.dataItemsToRequest = DataItemDisplayRegistryService.readToDoItems();
-
+  vm.currentDataItems = DataItemDisplayRegistryService.readToDoItems();
+  vm.dataItemsToWait = [];
   vm.loading = true;
   vm.systemStatus = "Normal";
 
@@ -526,12 +565,14 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
       }
       vm.systemStatus = "Error";
     } else {
-
       console.log(data.payload.name);
       if(data.completeState){
+        if(vm.completeStates[data.payload.name] === undefined){
+          vm.completeStates[data.payload.name] = 0;
+        }
         if(data.completeState !== 1){
-          if((data.completeState * 100 - vm.completeState) > 5 ){
-            vm.completeState = data.completeState * 100;
+          if((data.completeState * 100 - vm.completeStates[[data.payload.name]]) > 5 ){
+            vm.completeStates[data.payload.name] = data.completeState * 100;
           }
           vm.dataItemsData[data.payload.name] = vm.dataItemsData[data.payload.name].concat(data.list_out);
         } else {
@@ -541,274 +582,292 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
           console.log(vm.dataItemsData[data.payload.name].length);
           console.log("First Value: " + vm.dataItemsData[data.payload.name][0]);
           console.log("Last Value: " + vm.dataItemsData[data.payload.name][vm.dataItemsData[data.payload.name].length - 1]);
-          vm.loading = false;
 
-          if(highchartsContainer.highcharts() === undefined){
-            var highOptions = {
-              chart:{
-                zoomType:'x',
-                type:"spline"
-              },
-              title: {
-                text: vm.dataItemsToRequest[0].name
-              },
-              tooltip:{
-                pointFormat: ' | <span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b>',
-                positioner:function(){
-                  return { x: 0, y: 0 };
-                },
-                crosshairs: {
-                  // dashStyle: 'dash',
-                  color:'black'
-                }
-              },
-              plotOptions: {
-                series: {
-                  tooltip:{
-                    dateTimeLabelFormats:{
-                      millisecond:"%A, %b %e, %H:%M:%S.%L"
-                    }
-                  },
-                  marker:{
-                    states:{
-                      hover:{
-                        // fillColor:'greenyellow'
-                      }
-                    }
-                  },
-                  animation:true,
-                  states:{
-                    hover:false
-                  },
-                  lineWidth: 1
-                }
+          vm.dataItemsToWait.forEach(function(element, index, array){
+            if(element.name === data.payload.name){
+              array.splice(index, 1);
+            }
+          });
 
-              },
-              xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: {
-                  day: '%e  %b %Y',
-                  month: '%b'
-                },
-                events:{
-                  afterSetExtremes: function(){
-                    // highchartsContainer.highcharts().showLoading('Loading data from server...');
-                    // DataItemDisplaySocket.emit("ipAsychLoadingDataRequest", {min: this.min, max: this.max, name: vm.dataItemsToRequest.name, location: vm.dataItemsToRequest.location});
-                  }
-                },
-                minRange: 10000
-              },
-              navigator : {
-              },
-              scrollbar: {
-                liveRedraw: false
-              },
-
-              rangeSelector: {
-                enabled:true,
-                buttonTheme: { // styles for the buttons
-                  fill: 'orange',
-                  stroke: 'none',
-                  'stroke-width': 0,
-                  r: 8,
-                  style: {
-                    color: '#000',
-                    fontWeight: 'bold'
-                  },
-                  states: {
-                    hover: {
-                    },
-                    select: {
-                      fill: 'black',
-                      style: {
-                        color: 'white'
-                      }
-                    }
-                  }
-                },
-                buttons: [{
-                  type: 'second',
-                  count: 30,
-                  text: '30s'
-                }, {
-                  type: 'minute',
-                  count: 1,
-                  text: '1m'
-                }, {
-                  type: 'minute',
-                  count: 30,
-                  text: '30m'
-                }, {
-                  type: 'hour',
-                  count: 1,
-                  text: '1h'
-                }, {
-                  type: 'hour',
-                  count: 3,
-                  text: '3h'
-                }, {
-                  type: 'all',
-                  text: 'All'
-                }],
-                selected: 2
-              },
-
-
-              series: [{
-                name: data.payload.name,
-                data:vm.dataItemsData[data.payload.name]
-              }]
-            };
-            highchartsContainer.highcharts('StockChart', highOptions);
-          } else {
-            highchartsContainer.highcharts().addSeries({
-              name: data.payload.name,
-              data:vm.dataItemsData[data.payload.name]});
+          if(vm.dataItemsToWait.length === 0){
+            var temp = [];
+            for(var key in vm.dataItemsData){
+              temp.push({
+                name: key,
+                data: vm.dataItemsData[key]
+              });
             }
 
-          }
-        } else if (data.list_out){
-          for( var p = 0; p < data.list_out.length; p ++){
-            highchartsContainer.highcharts().series[0].addPoint(data.list_out[p], true, true);
+            temp.forEach(function(element, array, index){
+              highchartsContainer.highcharts().addSeries(element);
+            });
+            vm.loading = false;
+
+
+
+
           }
 
+
+        }
+      } else if (data.list_out){
+        for( var p = 0; p < data.list_out.length; p ++){
+
+          for(var p0 = 0; p0 < highchartsContainer.highcharts().series.length; p0++){
+            if(highchartsContainer.highcharts().series[p0].name === data.payload.name){
+              highchartsContainer.highcharts().series[p0].addPoint(data.list_out[p], true, true);
+            }
+          }
         }
 
       }
-    });
 
-    $scope.$on('socket:ipAsychLoadingDataResponse', function(event, data){
-      console.log(event.name);
-      highchartsContainer.highcharts().series[0].setData(data);
-      highchartsContainer.highcharts().hideLoading();
-    });
-
-    $scope.$on('$destroy', function(){
-      DataItemDisplaySocket.emit('stopDataItemConnection');
-    });
-
-    $scope.$watch(function(){
-      return DataItemDisplayRegistryService.readToDoItems();
-    }, function(newValue, OldValue){
-      console.log(newValue);
-      vm.dataItemsToRequest = DataItemDisplayRegistryService.readfinishedItems().concat(newValue);
-      for(var i = 0; i < newValue.length; i++){
-        DataItemDisplaySocket.emit('requestDataItem', newValue[i]);
-        vm.dataItemsData[newValue[i].name] = [];
-        DataItemDisplayRegistryService.clearToDoItems(newValue[i]);
-      }
-    }, true);
-    vm.activate();
-    //////////////////////////
-
-    function activate(){
-      // if($cookies.getObject('requestedDataItems') === undefined){
-      //   $cookies.putObject('requestedDataItems', vm.dataItemsToRequest);
-      // }
-      // vm.dataItemsToRequest = $cookies.getObject('requestedDataItems');
-      // $cookies.remove('requestedDataItems');
-      vm.dataItemsToRequest = DataItemDisplayRegistryService.readToDoItems();
-      for(var i = 0; i < vm.dataItemsToRequest.length; i ++){
-        DataItemDisplaySocket.emit('requestDataItem', vm.dataItemsToRequest[i]);
-        vm.dataItemsData[vm.dataItemsToRequest[i].name] = [];
-        DataItemDisplayRegistryService.clearToDoItems(vm.dataItemsToRequest[i]);
-        console.log(vm.dataItemsToRequest);
-      }
     }
+  });
 
-    function addDataItem(){
-      var addDataItemInterface = $modal.open({
-        templateUrl:"DataItemDisplay/DataItemModalViews/addDataItem.html",
-        controller: "AddDataItemModalCtrl as addDataItemModalCtrl",
-        size: "lg",
-        resolve :{
-          currentDataItems : function(){
-            return vm.dataItemsToRequest;
+  $scope.$on('socket:ipAsychLoadingDataResponse', function(event, data){
+    console.log(event.name);
+    highchartsContainer.highcharts().series[0].setData(data);
+    highchartsContainer.highcharts().hideLoading();
+  });
+
+  $scope.$on('$destroy', function(){
+    DataItemDisplaySocket.emit('stopDataItemConnection');
+  });
+
+  vm.activate();
+  //////////////////////////
+
+  function activate(){
+    var dataItemsToRequest= DataItemDisplayRegistryService.readToDoItems();
+    for(var i = 0; i < dataItemsToRequest.length; i++){
+      DataItemDisplaySocket.emit('requestDataItem', dataItemsToRequest[i]);
+      DataItemDisplayRegistryService.clearToDoItem(dataItemsToRequest[i]);
+      vm.dataItemsData[dataItemsToRequest[i].name] = [];
+      vm.dataItemsToWait.push(dataItemsToRequest[i]);
+      console.log(vm.dataItemsToWait);
+    }
+    vm.currentDataItems = DataItemDisplayRegistryService.readCurrentDataItems();
+
+    var highOptions = {
+      chart:{
+        zoomType:'x',
+        type:"spline"
+      },
+      title: {
+        text: vm.currentDataItems[0].name
+      },
+      tooltip:{
+        pointFormat: ' | <span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> <br/>',
+        positioner:function(){
+          return { x: 0, y: 0 };
+        },
+        hideDelay: 100000,
+        crosshairs: {
+          // dashStyle: 'dash',
+          color:'black',
+          hideDelay: 100000,
+        }
+      },
+      plotOptions: {
+        series: {
+          tooltip:{
+            dateTimeLabelFormats:{
+              millisecond:"%A, %b %e, %H:%M:%S.%L"
+            }
+          },
+          marker:{
+            states:{
+              hover:{
+                // fillColor:'greenyellow'
+              }
+            }
+          },
+          animation:true,
+          states:{
+            hover:false
+          },
+          lineWidth: 2,
+          gapSize: 2
+
+        }
+
+      },
+      xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+          day: '%e  %b %Y',
+          month: '%b'
+        },
+        events:{
+          afterSetExtremes: function(){
+            // highchartsContainer.highcharts().showLoading('Loading data from server...');
+            // DataItemDisplaySocket.emit("ipAsychLoadingDataRequest", {min: this.min, max: this.max, name: vm.currentDataItems.name, location: vm.currentDataItems.location});
           }
+        },
+        minRange: 10000
+      },
+      navigator : {
+        // enabled: false
+      },
+      scrollbar: {
+        liveRedraw: true
+      },
+
+      rangeSelector: {
+        enabled:true,
+        buttonTheme: { // styles for the buttons
+          fill: 'orange',
+          stroke: 'none',
+          'stroke-width': 0,
+          r: 8,
+          style: {
+            color: '#000',
+            fontWeight: 'bold'
+          },
+          states: {
+            hover: {
+            },
+            select: {
+              fill: 'black',
+              style: {
+                color: 'white'
+              }
+            }
+          }
+        },
+        buttons: [{
+          type: 'second',
+          count: 30,
+          text: '30s'
+        }, {
+          type: 'minute',
+          count: 1,
+          text: '1m'
+        }, {
+          type: 'minute',
+          count: 30,
+          text: '30m'
+        }, {
+          type: 'hour',
+          count: 1,
+          text: '1h'
+        }, {
+          type: 'hour',
+          count: 3,
+          text: '3h'
+        }, {
+          type: 'all',
+          text: 'All'
+        }],
+        selected: 2
+      },
+    };
+    highchartsContainer.highcharts('StockChart', highOptions);
+  }
+
+  function addDataItem(){
+    var addDataItemInterface = $modal.open({
+      templateUrl:"DataItemDisplay/DataItemModalViews/addDataItem.html",
+      controller: "AddDataItemModalCtrl as addDataItemModalCtrl",
+      size: "lg",
+      resolve :{
+        currentDataItems : function(){
+          return vm.currentDataItems;
+        }
+      }
+    });
+
+    addDataItemInterface.result.then(function(data){
+      console.log(data);
+    });
+  }
+
+  function backToDataItemList(){
+    var bindScope = $scope.$parent.$new(true);
+    DirectiveService.DestroyDirectiveService('dave-data-item-display-page', $scope);
+    DirectiveService.AddDirectiveService('.dataItemDisplayContainer','<dave-data-item-display-list-page  class="angular-directive"></dave-data-item-display-list-page>',bindScope, $compile);
+    DataItemDisplayRegistryService.clearDataItems();
+  }
+
+  function closeAlert(index){
+    angular.element('div.alert.animated#dataItem'+index).removeClass("fadeInDown");
+    angular.element('div.alert.animated#dataItem'+index).addClass("fadeOutUp");
+    vm.alerts.splice(index, 1);
+  }
+
+  function hideDataItem(dataItem){
+    if(highchartsContainer.highcharts()){
+      var answer = 0;
+      highchartsContainer.highcharts().series.forEach(function(element, index, array){
+        if(element.name === dataItem.name){
+          answer = index;
         }
       });
 
-      addDataItemInterface.result.then(function(data){
-        console.log(data);
-      });
+      highchartsContainer.highcharts().series[answer].hide();
     }
+  }
 
-    function backToDataItemList(){
-      var bindScope = $scope.$parent.$new(true);
-      DirectiveService.DestroyDirectiveService('dave-data-item-display-page', $scope);
-      DirectiveService.AddDirectiveService('.dataItemDisplayContainer','<dave-data-item-display-list-page  class="angular-directive"></dave-data-item-display-list-page>',bindScope, $compile);
-      DataItemDisplayRegistryService.clearDataItems();
-    }
-
-    function closeAlert(index){
-      angular.element('div.alert.animated#dataItem'+index).removeClass("fadeInDown");
-      angular.element('div.alert.animated#dataItem'+index).addClass("fadeOutUp");
-      vm.alerts.splice(index, 1);
-    }
-
-    function removeData(){
-      highchartsContainer.highcharts().series[0].setData([]);
-    }
-
-    function openSettingModal(index){
-      var dataItemSettingInterface = $modal.open({
-        templateUrl:"DataItemDisplay/DataItemModalViews/dataItemSetting.html",
-        controller: "DataItemSettingModalCtrl as dataItemSettingModalCtrl",
-        resolve :{
-          currentDataItem : function(){
-            return vm.dataItemsToRequest[index];
-          }
+  function openSettingModal(index){
+    var dataItemSettingInterface = $modal.open({
+      templateUrl:"DataItemDisplay/DataItemModalViews/dataItemSetting.html",
+      controller: "DataItemSettingModalCtrl as dataItemSettingModalCtrl",
+      resolve :{
+        currentDataItem : function(){
+          return vm.currentDataItems[index];
         }
-      });
+      }
+    });
 
-      dataItemSettingInterface.result.then(function(data){
-        console.log(data);
-      });
-    }
-
-    function toggleSearchMode(){
-      // $cookies.putObject('requestedDataItems', vm.dataItemsToRequest);
-      DirectiveService.EnterSearchMode('dave-data-item-display-page', '<dave-data-item-display-page></dave-data-item-display-page>', '.dataItemDisplayContainer',$scope, $compile);
-    }
+    dataItemSettingInterface.result.then(function(data){
+      console.log(data);
+    });
   }
 
-  function AddDataItemModalCtrl($scope, $modalInstance, currentDataItems, DataItemDisplaySocket){
-    var vm = this;
+  function toggleSearchMode(){
+    // $cookies.putObject('requestedDataItems', vm.currentDataItems);
+    DirectiveService.EnterSearchMode('dave-data-item-display-page', '<dave-data-item-display-page></dave-data-item-display-page>', '.dataItemDisplayContainer',$scope, $compile);
+  }
+}
 
-    //functions
-    vm.activate = activate;
-    vm.cancel = cancel;
-    //variables
+function AddDataItemModalCtrl($scope, $modalInstance, currentDataItems, DataItemDisplaySocket){
+  var vm = this;
 
-    vm.activate();
-    //////////////////////////////
-    function activate(){
-      console.log(currentDataItems);
-    }
+  //functions
+  vm.activate = activate;
+  vm.cancel = cancel;
+  //variables
 
-    function cancel(){
-      console.log('called');
-      $modalInstance.dismiss('cancel');
-    }
+  vm.activate();
+  //////////////////////////////
+  function activate(){
+    console.log(currentDataItems);
   }
 
-  function DataItemSettingModalCtrl($scope, $modalInstance, currentDataItem, DataItemDisplaySocket){
-    var vm = this;
-
-    //functions
-    vm.activate = activate;
-    vm.cancel = cancel;
-    //variables
-
-    //////////////////////////////
-
-    function activate(){
-
-    }
-
-    function cancel(){
-      console.log('called');
-      $modalInstance.dismiss('cancel');
-    }
+  function cancel(){
+    console.log('called');
+    $modalInstance.dismiss('cancel');
   }
+}
+
+function DataItemSettingModalCtrl($scope, $modalInstance, currentDataItem, DataItemDisplaySocket){
+  var vm = this;
+
+  //functions
+  vm.activate = activate;
+  vm.cancel = cancel;
+  //variables
+
+  //////////////////////////////
+
+  function activate(){
+
+  }
+
+  function cancel(){
+    console.log('called');
+    $modalInstance.dismiss('cancel');
+  }
+}
 }());

@@ -21,23 +21,30 @@
     var finishedItems = [];
     var toDoItems = [];
     var currentDataItemNames = [];
+    var currentDataItems = [];
+    
     return {
       recordToDoItems: function(dataItems){
         for(var i = 0; i < dataItems.length; i++){
           var dataItem = dataItems[i];
           if(currentDataItemNames.indexOf(dataItem.name) === -1){
             currentDataItemNames.push(dataItem.name);
+            currentDataItems.push(dataItem);
             toDoItems.push(dataItem);
+
           }
         }
       },
-      readfinishedItems : function(){
+      readCurrentDataItems : function(){
+        return angular.copy(currentDataItems);
+      },
+      readFinishedItems : function(){
         return angular.copy(finishedItems) ;
       },
       readToDoItems : function(){
         return angular.copy(toDoItems);
       },
-      clearToDoItems : function(dataItem){
+      clearToDoItem : function(dataItem){
         for(var i = 0; i < toDoItems.length; i++){
           if(dataItem.name === toDoItems[i].name){
             toDoItems.splice(i, 1);
@@ -49,6 +56,7 @@
         finishedItems = [];
         currentDataItemNames = [];
         toDoItems = [];
+        currentDataItems = [];
       }
     };
   }
