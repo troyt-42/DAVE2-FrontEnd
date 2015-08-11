@@ -95,6 +95,9 @@ These dependencies installed through bower/npm are all recorded in the bower.jso
 ```
 For the sake of clearity, this project follows the stylling rules created by [john_papa](https://github.com/johnpapa/angular-styleguide) and is divided based on funcitonality differences.
 
-**Data Flow**
+**Data Flow Through Sockets in NodeJS**
 
-![Angular Structure](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/master/DAVE2%20Angular%20Structure.jpg)
+![Data Flow Through Sockets in NodeJS](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/master/DAVE2%20Angular%20Structure.jpg)
+
+**Data Flow in AngularJS**
+![Data Flow in AngularJS](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/master/DAVE2%20Angular%20Structure%202.jpg)
