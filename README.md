@@ -100,4 +100,4 @@ For the sake of clearity, this project follows the stylling rules created by [jo
 ![Data Flow Through Sockets in NodeJS](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/master/DAVE2%20Angular%20Structure.jpg)
 
 **Data Flow in AngularJS**
-![Data Flow in AngularJS](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/b9781d4a003b19032348f094ade399aa6c450c1a/DAVE2%20Angular%20Structure%202.jpg)
+![Data Flow in AngularJS](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/master/DAVE2%20Angular%20Structure%202.jpg)
