@@ -45,7 +45,7 @@
         </tr>
       </thead>
       <tbody style="color:white">
-        <tr ng-repeat = "importer in daveImporterListPageCtrl.importerList | filter:daveImporterListPageCtrl.search" ng-click="daveImporterListPageCtrl.requestImporter(importer)" ng-show="((daveImporterListPageCtrl.importerListCurrentPage * 11 - 11) <= $index) && ($index < (daveImporterListPageCtrl.importerListCurrentPage * 11))">
+        <tr ng-repeat = "importer in daveImporterListPageCtrl.importerList | filter:daveImporterListPageCtrl.search | orderBy: '-Name'" ng-click="daveImporterListPageCtrl.requestImporter(importer)" ng-show="((daveImporterListPageCtrl.importerListCurrentPage * 11 - 11) <= $index) && ($index < (daveImporterListPageCtrl.importerListCurrentPage * 11))">
           <td ng-repeat="column in daveImporterListPageCtrl.importerListTableColumns track by column.name"  ng-show="column.status">{{importer[column.name]}}</td>
         </tr>
       </tbody>

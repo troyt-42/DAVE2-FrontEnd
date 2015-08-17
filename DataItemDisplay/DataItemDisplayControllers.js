@@ -253,7 +253,7 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
   vm.addDataItem = addDataItem;
   vm.backToDataItemList = backToDataItemList;
   vm.closeAlert = closeAlert;
-  vm.hideDataItem = hideDataItem;
+  vm.changeDataItemStatusTo = changeDataItemStatusTo;
   vm.openSettingModal = openSettingModal;
   vm.toggleSearchMode = toggleSearchMode;
   //variables
@@ -262,7 +262,8 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
   vm.dataItemsData = [
 
   ];
-  vm.currentDataItems = DataItemDisplayRegistryService.readToDoItems();
+  vm.currentDataItems = DataItemDisplayRegistryService.readCurrentDataItems();
+  vm.currentDataItemsStatus = [];
   vm.dataItemsToWait = [];
   vm.loading = true;
   vm.systemStatus = "Normal";
@@ -317,15 +318,13 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
                 name: key,
                 data: vm.dataItemsData[key]
               });
+
             }
 
             temp.forEach(function(element, array, index){
               highchartsContainer.highcharts().addSeries(element);
             });
             vm.loading = false;
-
-
-
 
           }
 
@@ -367,6 +366,7 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
       vm.dataItemsData[dataItemsToRequest[i].name] = [];
       vm.dataItemsToWait.push(dataItemsToRequest[i]);
       console.log(vm.dataItemsToWait);
+      vm.currentDataItemsStatus.push(true);
     }
     vm.currentDataItems = DataItemDisplayRegistryService.readCurrentDataItems();
 
@@ -517,7 +517,7 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
     vm.alerts.splice(index, 1);
   }
 
-  function hideDataItem(dataItem){
+  function changeDataItemStatusTo(dataItem, index, status){
     if(highchartsContainer.highcharts()){
       var answer = 0;
       highchartsContainer.highcharts().series.forEach(function(element, index, array){
@@ -525,8 +525,14 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
           answer = index;
         }
       });
+      vm.currentDataItemsStatus[index] = status;
+      if(status){
+        highchartsContainer.highcharts().series[answer].show();
+      } else {
+        highchartsContainer.highcharts().series[answer].hide();
+      }
 
-      highchartsContainer.highcharts().series[answer].hide();
+
     }
   }
 
@@ -545,6 +551,7 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
       console.log(data);
     });
   }
+
 
   function toggleSearchMode(){
     // $cookies.putObject('requestedDataItems', vm.currentDataItems);

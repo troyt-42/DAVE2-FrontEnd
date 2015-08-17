@@ -44,7 +44,7 @@
         </tr>
       </thead>
       <tbody style="color:white">
-        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search track by dataItem.name" ng-click="daveDataItemDisplayListPageCtrl.requestDataItem(dataItem)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))" ng-class="{'selected': daveDataItemDisplayListPageCtrl.selectedDataItems.indexOf(dataItem) !== -1}">
+        <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.dataItemList| filter: daveDataItemDisplayListPageCtrl.search | orderBy: '-name' track by dataItem.name" ng-click="daveDataItemDisplayListPageCtrl.requestDataItem(dataItem)" ng-show="((daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11 - 11) <= $index) && ($index < (daveDataItemDisplayListPageCtrl.dataItemListCurrentPage * 11))" ng-class="{'selected': daveDataItemDisplayListPageCtrl.selectedDataItems.indexOf(dataItem) !== -1}">
           <td ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name"  ng-show="column.status">{{dataItem[column.name]}}</td>
         </tr>
       </tbody>
@@ -58,7 +58,7 @@
         <div class="dialog-body">
           <table class="selectedDataItemTable">
             <tbody>
-              <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.selectedDataItems">
+              <tr ng-repeat = "dataItem in daveDataItemDisplayListPageCtrl.selectedDataItems | orderBy: '-name'">
                 <td ng-repeat="column in daveDataItemDisplayListPageCtrl.dataItemListTableColumns track by column.name"  ng-show="column.status">{{dataItem[column.name]}}</td>
               </tr>
             </tbody>

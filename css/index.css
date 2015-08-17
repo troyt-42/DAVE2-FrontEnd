@@ -182,8 +182,8 @@ html {
             position: relative;
             outline: none; }
             .importerContainer .importerContainerLeftMenu .panel .panel-body .queryJobs button:focus {
-              outline-color: #9be52a;
-              background: #9be52a; }
+              outline-color: #9ce62a;
+              background: #9ce62a; }
         .importerContainer .importerContainerLeftMenu .panel .panel-body .jobList {
           float: left;
           display: block;
@@ -2070,8 +2070,8 @@ dave-data-item-display-page .dataItemStepTwoB {
         height: auto;
         border: 0;
         border-bottom: 1px solid white;
-        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), -webkit-linear-gradient(90deg, #0099cc, #ff9719), center no-repeat #0099cc scroll;
-        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), linear-gradient(90deg, #0099cc, #ff9719), center no-repeat #0099cc scroll;
+        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), -webkit-linear-gradient(90deg, #0099cc, #ff981a), center no-repeat #0099cc scroll;
+        background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/noisy_grid.png"), linear-gradient(90deg, #0099cc, #ff981a), center no-repeat #0099cc scroll;
         display: -webkit-box;
         display: -moz-box;
         display: box;
@@ -2242,6 +2242,25 @@ dave-data-item-display-page .dataItemStepTwoB {
             dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button:last-child {
               margin-right: 0; }
             dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-cancel-paper-button > paper-material {
+              padding: 0; }
+          dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-add-paper-button {
+            float: left;
+            display: block;
+            margin-right: 2.3576515979%;
+            width: 100%;
+            color: white;
+            margin: 0;
+            border: 1px solid white;
+            border-right: 0;
+            min-width: 0;
+            border-radius: 5px;
+            background: crimson;
+            border-bottom-right-radius: 0px;
+            border-top-right-radius: 0px;
+            float: right; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-add-paper-button:last-child {
+              margin-right: 0; }
+            dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemNameCard .paper-button-container #data-item-add-paper-button > paper-material {
               padding: 0; }
       dave-data-item-display-page .dataItemStepTwoB .dataItemStepTwoBWell .dataItemStepTwoBWellLeft .dataItemStepTwoBDataItems {
         float: left;
@@ -2583,7 +2602,7 @@ dave-data-item-display-page .dataItemStepTwoB {
   0% {
     height: 5px;
     -webkit-transform: translateY(0px);
-    background: #8acc25; }
+    background: #8acc26; }
   25% {
     height: 30px;
     -webkit-transform: translateY(15px);
@@ -2591,16 +2610,16 @@ dave-data-item-display-page .dataItemStepTwoB {
   50% {
     height: 5px;
     -webkit-transform: translateY(0px);
-    background: #8acc25; }
+    background: #8acc26; }
   100% {
     height: 5px;
     -webkit-transform: translateY(0px);
-    background: #8acc25; } }
+    background: #8acc26; } }
 @-moz-keyframes preloader_2 {
   0% {
     height: 5px;
     -moz-transform: translateY(0px);
-    background: #8acc25; }
+    background: #8acc26; }
   25% {
     height: 30px;
     -moz-transform: translateY(15px);
@@ -2608,11 +2627,11 @@ dave-data-item-display-page .dataItemStepTwoB {
   50% {
     height: 5px;
     -moz-transform: translateY(0px);
-    background: #8acc25; }
+    background: #8acc26; }
   100% {
     height: 5px;
     -moz-transform: translateY(0px);
-    background: #8acc25; } }
+    background: #8acc26; } }
 @keyframes preloader_2 {
   0% {
     height: 5px;
@@ -2621,7 +2640,7 @@ dave-data-item-display-page .dataItemStepTwoB {
     -ms-transform: translateY(0px);
     -o-transform: translateY(0px);
     transform: translateY(0px);
-    background: #8acc25; }
+    background: #8acc26; }
   25% {
     height: 30px;
     -webkit-transform: translateY(15px);
@@ -2637,7 +2656,7 @@ dave-data-item-display-page .dataItemStepTwoB {
     -ms-transform: translateY(0px);
     -o-transform: translateY(0px);
     transform: translateY(0px);
-    background: #8acc25; }
+    background: #8acc26; }
   100% {
     height: 5px;
     -webkit-transform: translateY(0px);
@@ -2645,7 +2664,7 @@ dave-data-item-display-page .dataItemStepTwoB {
     -ms-transform: translateY(0px);
     -o-transform: translateY(0px);
     transform: translateY(0px);
-    background: #8acc25; } }
+    background: #8acc26; } }
 body {
   font-family: "Dosis";
   background: url("../imgs/diagonal_striped_brick.png") repeat;

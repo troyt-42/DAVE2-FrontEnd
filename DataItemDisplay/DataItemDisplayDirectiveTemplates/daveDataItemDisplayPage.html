@@ -28,7 +28,13 @@
         </div>
 
         <paper-button id="data-item-setting-paper-button" ng-click="daveDataItemDisplayPageCtrl.openSettingModal($index)"><iron-icon icon="settings"></iron-icon>Setting</paper-button>
-        <div class="paper-button-container" ng-click="daveDataItemDisplayPageCtrl.hideDataItem(dataItem)"><paper-button id="data-item-cancel-paper-button"><iron-icon icon="cancel"></iron-icon></paper-button></div>
+
+        <div ng-if="daveDataItemDisplayPageCtrl.currentDataItemsStatus[$index]" class="paper-button-container" ng-click="daveDataItemDisplayPageCtrl.changeDataItemStatusTo(dataItem, $index, false)"><paper-button id="data-item-cancel-paper-button">
+          <iron-icon icon="cancel"></iron-icon></paper-button>
+        </div>
+        <div ng-if="!daveDataItemDisplayPageCtrl.currentDataItemsStatus[$index]"  class="paper-button-container" ng-click="daveDataItemDisplayPageCtrl.changeDataItemStatusTo(dataItem, $index, true)"><paper-button id="data-item-add-paper-button">
+          <iron-icon icon="add-circle"></iron-icon></paper-button>
+        </div>
       </div>
 
     </div>
