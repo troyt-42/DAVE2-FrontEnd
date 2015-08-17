@@ -14,6 +14,7 @@
           for(var i = 0; i < dataToParse.length; i++){
             var singleForm = [];
             var topic = '';
+            var name = '';
             for(var p in dataToParse[i].availableOptions){
               var rawOption = dataToParse[i].availableOptions[p];
               var translatedField = {};
@@ -38,11 +39,19 @@
                 case "note":
                 translatedField.type = "textarea2";
                 break;
+                case "location":
+                translatedField.type = "input2";
+                break;
+                case "name": // a backend field
+                name = rawOption.value;
+                useful = false;
+                break;
                 case "topic": // a backend field
                 topic = rawOption.value;
                 useful = false;
                 break;
                 default:
+                console.log(rawOption.name);
                 break;
               }
               if(useful){
@@ -50,7 +59,7 @@
               }
 
             }
-            formCollection[dataToParse[i].fieldName] = { fields : singleForm, checked : dataToParse[i].checked, 'topic' : topic};
+            formCollection[dataToParse[i].fieldName] = { fields : singleForm, checked : dataToParse[i].checked, 'topic' : topic, 'name' : name};
 
           }
           return formCollection;
