@@ -76,7 +76,6 @@
     vm.activate = activate;
     vm.cancelFile = cancelFile;
     vm.cancelJobCreation = cancelJobCreation;
-    vm.changeDataItemConfig = changeDataItemConfig;
     vm.createNewJob = createNewJob;
     vm.deleteJob = deleteJob;
     vm.modifyJob = modifyJob;
@@ -381,27 +380,6 @@
       vm.modifyJobMode =false;
     }
 
-    function changeDataItemConfig(dataItem){
-      var loginInterface = $modal.open({
-        templateUrl:"Importer/changeDataItemModal.html",
-        controller:["$scope","$modalInstance", function($scope, $modalInstance){
-          $scope.dataItem = dataItem;
-          $scope.type = "text";
-          $scope.ok = function(){
-            $modalInstance.close({name:$scope.dataItem.name, value:$scope.dataItem.value});
-          };
-
-          $scope.cancel = function(){
-            $modalInstance.dismiss('cancel');
-          };
-        }]
-      });
-
-      loginInterface.result.then(function(data){
-        console.log(data);
-      });
-    }
-
 
     function createNewJob(){
       vm.createJobMode = true;
@@ -626,11 +604,7 @@
         }
       }
     });
-    $scope.$watch(function(){
-      return vm.search;
-    }, function(){
-      console.log(vm.search);
-    }, true);
+
 
     vm.activate();
     ///////////////////////////////////
@@ -983,11 +957,10 @@
     //functions
     vm.activate = activate;
     vm.back = back;
-    vm.hasMenu = '';
-    console.log(vm.hasMenu);
     vm.toggleLeftMenu = toggleLeftMenu;
     //variables
     vm.backDirective = $scope.backDirective;
+    vm.hasMenu = '';
     vm.targetContainer = $scope.targetContainer;
     console.log($scope.targetContainer);
     console.log(vm.targetContainer);
