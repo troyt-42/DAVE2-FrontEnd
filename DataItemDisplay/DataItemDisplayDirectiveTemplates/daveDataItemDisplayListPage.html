@@ -53,7 +53,7 @@
       <pagination id="js-pagination" total-items="daveDataItemDisplayListPageCtrl.dataItemList.length" ng-model="daveDataItemDisplayListPageCtrl.dataItemListCurrentPage" max-size="10" class="pagination-sm  dave-pagination" boundary-links="true" rotate="false" items-per-page="11"></pagination>
 
       <paper-button id="multiple-data-items-selection-button" ng-click="daveDataItemDisplayListPageCtrl.multipleSelectionMode = daveDataItemDisplayListPageCtrl.multipleSelectionMode ? false : true" ng-hide=" daveDataItemDisplayListPageCtrl.disableMultipleSelectionMode">Multiple?</paper-button>
-      <div id="multiple-data-items-selection-dialog" class="animated zoomIn" ng-show="daveDataItemDisplayListPageCtrl.multipleSelectionMode ">
+      <div id="multiple-data-items-selection-dialog" class="animated fadeIn" ng-show="daveDataItemDisplayListPageCtrl.multipleSelectionMode ">
         <div class="dialog-header">Selected Items</div>
         <div class="dialog-body">
           <table class="selectedDataItemTable">
