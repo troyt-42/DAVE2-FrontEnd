@@ -59,7 +59,7 @@
           <span>Job List<span>
           </div>
           <ul ng-show="importerUploadCtrl.jobs.length">
-            <li ng-repeat="job in importerUploadCtrl.jobs" ng-click = "importerUploadCtrl.modifyJob($index)"><span>ID: {{job.jobID}}</span> <span>To {{job.targetDataItem}}</span>
+            <li ng-repeat="job in importerUploadCtrl.jobs " ng-click = "importerUploadCtrl.modifyJob($index)"><span>ID: {{job.jobID}}</span> <span>To {{job.targetDataItem}}</span>
               <div class="type" ng-show="job.type === 'Static/Fast Generation'">FAST</div>
               <div class="type" ng-show="job.type === 'Live/Slow Generation'">SLOW</div>
             </li>

@@ -73,6 +73,10 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
     }
   });
 
+  $scope.$on('ok', function(){
+    console.log('ok');
+    vm.requestMultipleDataItems();
+  });
   vm.activate();
   /////////////////
 
@@ -262,9 +266,11 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
   vm.dataItemsData = [
 
   ];
+
   vm.currentDataItems = DataItemDisplayRegistryService.readCurrentDataItems();
   vm.currentDataItemsStatus = [];
   vm.dataItemsToWait = [];
+  vm.dataItemsToLoadIntoHighcharts = [];
   vm.loading = true;
   vm.systemStatus = "Normal";
 
@@ -313,10 +319,10 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
 
           if(vm.dataItemsToWait.length === 0){
             var temp = [];
-            for(var key in vm.dataItemsData){
+            for(var key in vm.dataItemsToLoadIntoHighcharts){
               temp.push({
-                name: key,
-                data: vm.dataItemsData[key]
+                name: vm.dataItemsToLoadIntoHighcharts[key],
+                data: vm.dataItemsData[vm.dataItemsToLoadIntoHighcharts[key]]
               });
 
             }
@@ -325,6 +331,7 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
               highchartsContainer.highcharts().addSeries(element);
             });
             vm.loading = false;
+            vm.dataItemsToLoadIntoHighcharts = [];
 
           }
 
@@ -359,132 +366,135 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
   //////////////////////////
 
   function activate(){
+    vm.loading = true;
     var dataItemsToRequest= DataItemDisplayRegistryService.readToDoItems();
     for(var i = 0; i < dataItemsToRequest.length; i++){
       DataItemDisplaySocket.emit('requestDataItem', dataItemsToRequest[i]);
       DataItemDisplayRegistryService.clearToDoItem(dataItemsToRequest[i]);
       vm.dataItemsData[dataItemsToRequest[i].name] = [];
       vm.dataItemsToWait.push(dataItemsToRequest[i]);
+      vm.dataItemsToLoadIntoHighcharts.push(dataItemsToRequest[i].name);
       console.log(vm.dataItemsToWait);
       vm.currentDataItemsStatus.push(true);
     }
     vm.currentDataItems = DataItemDisplayRegistryService.readCurrentDataItems();
-
-    var highOptions = {
-      chart:{
-        zoomType:'x',
-        type:"spline"
-      },
-      title: {
-        text: vm.currentDataItems[0].name
-      },
-      tooltip:{
-        pointFormat: ' | <span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> <br/>',
-        positioner:function(){
-          return { x: 0, y: 0 };
+    if(highchartsContainer.highcharts() === undefined){
+      var highOptions = {
+        chart:{
+          zoomType:'x',
+          type:"spline"
         },
-        hideDelay: 100000,
-        crosshairs: {
-          // dashStyle: 'dash',
-          color:'black',
+        title: {
+          text: "Data Items"
+        },
+        tooltip:{
+          pointFormat: ' | <span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> <br/>',
+          positioner:function(){
+            return { x: 0, y: 0 };
+          },
           hideDelay: 100000,
-        }
-      },
-      plotOptions: {
-        series: {
-          tooltip:{
-            dateTimeLabelFormats:{
-              millisecond:"%A, %b %e, %H:%M:%S.%L"
-            }
-          },
-          marker:{
-            states:{
-              hover:{
-                // fillColor:'greenyellow'
-              }
-            }
-          },
-          animation:true,
-          states:{
-            hover:false
-          },
-          lineWidth: 2,
-          gapSize: 2
-
-        }
-
-      },
-      xAxis: {
-        type: 'datetime',
-        dateTimeLabelFormats: {
-          day: '%e  %b %Y',
-          month: '%b'
-        },
-        events:{
-          afterSetExtremes: function(){
-            // highchartsContainer.highcharts().showLoading('Loading data from server...');
-            // DataItemDisplaySocket.emit("ipAsychLoadingDataRequest", {min: this.min, max: this.max, name: vm.currentDataItems.name, location: vm.currentDataItems.location});
+          crosshairs: {
+            // dashStyle: 'dash',
+            color:'black',
+            hideDelay: 100000,
           }
         },
-        minRange: 10000
-      },
-      navigator : {
-        // enabled: false
-      },
-      scrollbar: {
-        liveRedraw: true
-      },
-
-      rangeSelector: {
-        enabled:true,
-        buttonTheme: { // styles for the buttons
-          fill: 'orange',
-          stroke: 'none',
-          'stroke-width': 0,
-          r: 8,
-          style: {
-            color: '#000',
-            fontWeight: 'bold'
-          },
-          states: {
-            hover: {
+        plotOptions: {
+          series: {
+            tooltip:{
+              dateTimeLabelFormats:{
+                millisecond:"%A, %b %e, %H:%M:%S.%L"
+              }
             },
-            select: {
-              fill: 'black',
-              style: {
-                color: 'white'
+            marker:{
+              states:{
+                hover:{
+                  // fillColor:'greenyellow'
+                }
+              }
+            },
+            animation:true,
+            states:{
+              hover:false
+            },
+            lineWidth: 2,
+            gapSize: 2
+
+          }
+
+        },
+        xAxis: {
+          type: 'datetime',
+          dateTimeLabelFormats: {
+            day: '%e  %b %Y',
+            month: '%b'
+          },
+          events:{
+            afterSetExtremes: function(){
+              // highchartsContainer.highcharts().showLoading('Loading data from server...');
+              // DataItemDisplaySocket.emit("ipAsychLoadingDataRequest", {min: this.min, max: this.max, name: vm.currentDataItems.name, location: vm.currentDataItems.location});
+            }
+          },
+          minRange: 10000
+        },
+        navigator : {
+          // enabled: false
+        },
+        scrollbar: {
+          liveRedraw: true
+        },
+
+        rangeSelector: {
+          enabled:true,
+          buttonTheme: { // styles for the buttons
+            fill: 'orange',
+            stroke: 'none',
+            'stroke-width': 0,
+            r: 8,
+            style: {
+              color: '#000',
+              fontWeight: 'bold'
+            },
+            states: {
+              hover: {
+              },
+              select: {
+                fill: 'black',
+                style: {
+                  color: 'white'
+                }
               }
             }
-          }
+          },
+          buttons: [{
+            type: 'second',
+            count: 30,
+            text: '30s'
+          }, {
+            type: 'minute',
+            count: 1,
+            text: '1m'
+          }, {
+            type: 'minute',
+            count: 30,
+            text: '30m'
+          }, {
+            type: 'hour',
+            count: 1,
+            text: '1h'
+          }, {
+            type: 'hour',
+            count: 3,
+            text: '3h'
+          }, {
+            type: 'all',
+            text: 'All'
+          }],
+          selected: 2
         },
-        buttons: [{
-          type: 'second',
-          count: 30,
-          text: '30s'
-        }, {
-          type: 'minute',
-          count: 1,
-          text: '1m'
-        }, {
-          type: 'minute',
-          count: 30,
-          text: '30m'
-        }, {
-          type: 'hour',
-          count: 1,
-          text: '1h'
-        }, {
-          type: 'hour',
-          count: 3,
-          text: '3h'
-        }, {
-          type: 'all',
-          text: 'All'
-        }],
-        selected: 2
-      },
-    };
-    highchartsContainer.highcharts('StockChart', highOptions);
+      };
+      highchartsContainer.highcharts('StockChart', highOptions);
+    }
   }
 
   function addDataItem(){
@@ -501,6 +511,9 @@ function DaveDataItemDisplayPageCtrl($scope, $timeout, $compile, $cookies, $moda
 
     addDataItemInterface.result.then(function(data){
       console.log(data);
+      if(data === 'success'){
+        vm.activate();
+      }
     });
   }
 
@@ -564,6 +577,7 @@ function AddDataItemModalCtrl($scope, $modalInstance, currentDataItems, DataItem
 
   //functions
   vm.activate = activate;
+  vm.ok = ok;
   vm.cancel = cancel;
   //variables
 
@@ -571,6 +585,11 @@ function AddDataItemModalCtrl($scope, $modalInstance, currentDataItems, DataItem
   //////////////////////////////
   function activate(){
     console.log(currentDataItems);
+  }
+
+  function ok(){
+    $scope.$broadcast('ok');
+    $modalInstance.close('success');
   }
 
   function cancel(){

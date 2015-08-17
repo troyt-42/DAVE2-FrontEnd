@@ -28183,11 +28183,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/Importer\/Importer.html": {
+	"\/Importer\/importer.html": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/Importer\/Importer.html",
+		"inputAbbreviatedPath": "\/Importer\/importer.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
@@ -40493,7 +40493,7 @@
 	"javascriptCreateSourceMap": 1,
 	"javascriptOutputStyle": 1,
 	"javascriptSyntaxCheckerStyle": 1,
-	"jsCheckerReservedNamesString": "",
+	"jsCheckerReservedNamesString": "angular",
 	"jsHintFlags2": {
 		"asi": {
 			"active": 0,
@@ -40532,7 +40532,7 @@
 			"flagValue": -1
 			},
 		"devel": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"dojo": {
@@ -40612,7 +40612,7 @@
 			"flagValue": -1
 			},
 		"latedef": {
-			"active": 1,
+			"active": 0,
 			"flagValue": -1
 			},
 		"laxbreak": {
@@ -40676,7 +40676,7 @@
 			"flagValue": -1
 			},
 		"node": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"noempty": {
@@ -40772,7 +40772,7 @@
 			"flagValue": -1
 			},
 		"unused": {
-			"active": 1,
+			"active": 0,
 			"flagValue": -1
 			},
 		"varstmt": {
@@ -40810,7 +40810,7 @@
 			"flagValue": -1
 			},
 		"devel": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"es6": {
@@ -40830,7 +40830,7 @@
 			"flagValue": 150
 			},
 		"node": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"this": {

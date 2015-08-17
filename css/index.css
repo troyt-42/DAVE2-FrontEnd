@@ -1920,7 +1920,7 @@ dave-data-item-display-list-page .dataItemStepOne {
       display: block;
       margin-right: 2.3576515979%;
       width: 48.821174201%;
-      border-radius: 10px;
+      border-radius: 8px;
       border-bottom-left-radius: 0;
       border-top-right-radius: 0;
       position: absolute;
@@ -1928,7 +1928,9 @@ dave-data-item-display-list-page .dataItemStepOne {
       right: 0px;
       background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/pw_maze_white.png"), -webkit-linear-gradient(270deg, darkorange, orangered), center no-repeat darkorange scroll;
       background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/textures/pw_maze_white.png"), linear-gradient(270deg, darkorange, orangered), center no-repeat darkorange scroll;
-      border: 1px solid linen; }
+      border: 1px solid linen;
+      border-right: 0;
+      border-bottom: 0; }
       dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell #multiple-data-items-selection-dialog:last-child {
         margin-right: 0; }
       dave-data-item-display-list-page .dataItemStepOne .dataItemStepOneWell #multiple-data-items-selection-dialog .dialog-header {

@@ -52,8 +52,7 @@
             <progressbar max = "100" style="height:3em;background: transparent; border: 1px solid white" class="progress active" value="daveDataItemDisplayPageCtrl.completeStates[dataItem.name]" type="info"><span style="font-size: 130%;font-style: normal;color: black;font-weight: bold;line-height: 2.6em;display: block">{{daveDataItemDisplayPageCtrl.waitingMessage}}</span></progressbar>
           </div>
         </div>
-        <div id="container"></div>
-        <div id="container2"></div>
+        <div id="container" ng-hide = "daveDataItemDisplayPageCtrl.loading"></div>
       </div>
 
 
