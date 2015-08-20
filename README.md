@@ -1,7 +1,7 @@
 # DAVE2_Front_End
 A project aims to demonstrate how to use Angularjs and Nodejs for DAVE2 front end design.
 
-**Folder Structure**
+##Folder Structure
 
 Folder and Files can be divided into two catagories according to their content: 
 * Dependencies or tools
@@ -95,9 +95,45 @@ These dependencies installed through bower/npm are all recorded in the bower.jso
 ```
 For the sake of clearity, this project follows the stylling rules created by [john_papa](https://github.com/johnpapa/angular-styleguide) and is divided based on funcitonality differences.
 
-**Data Flow Through Sockets in NodeJS**
+## Installation
 
-![Data Flow Through Sockets in NodeJS](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/master/DAVE2%20Angular%20Structure.jpg)
+* Requirement: 
+  * Nodejs and npm installed
+  * Have the Dave2_Front_End folder
+  
+* Steps:
+  * Install bower globally using npm:
+  <br><br>
+  ```
+  npm install bower -g
+  ```
+  * Change current directory to Dave2_UI folder in terminal
+  * Use bower to install dependencies for client-side (dependecies are recorded in the bower.json file):
+  <br><br>
+  ```
+  bower install
+  ```
+  * Change current directory to serverSideNodejs
+  * Use npm to install dependencies for Nodejs (dependecies are recorded in the package.json file):
+  <br><br>
+  ```
+  npm install
+  ```
+  * Start the server:
+  <br><br>
+  ```
+  node server.js
+  Express server is listenning at 3000
+  ```
+  
+##Data Flow Through Sockets in NodeJS
 
-**Data Flow in AngularJS**
+![Data Flow Through Sockets in NodeJS](https://github.com/watrool/DAVE2_Front_End_Documents/blob/master/DAVE2%20Angular%20Structure.jpg)
+
+##Data Flow in AngularJS
+
 ![Data Flow in AngularJS](https://raw.githubusercontent.com/watrool/DAVE2_Front_End_Documents/master/DAVE2%20Angular%20Structure%202.jpg)
+
+##General Data Flow Chart
+
+![General Data Flow Chart](https://github.com/watrool/DAVE2_Front_End_Documents/blob/master/DAVE2%20Angular%20Structure%203.jpg)
