@@ -21,7 +21,7 @@ Folder and Files can be divided into two catagories according to their content:
 ├── bower.json                 # bower config file
 └── ...
 ```
-These dependencies installed through bower/npm are all recorded in the bower.json/package.json and can be easily managed through `bower` commands/ `npm` commands
+These dependencies installed through bower/npm are all recorded in the bower.json/package.json and can be easily managed through `bower` / `npm` commands
 * Non-Dependencies (project content)
 ```
 .
@@ -107,7 +107,7 @@ For the sake of clearity, this project follows the stylling rules created by [jo
   ```
   npm install bower -g
   ```
-  * Change current directory to Dave2_UI folder in terminal
+  * Change current directory to Dave2_Front_End folder in terminal
   * Use bower to install dependencies for client-side (dependecies are recorded in the bower.json file):
   <br><br>
   ```
@@ -119,7 +119,7 @@ For the sake of clearity, this project follows the stylling rules created by [jo
   ```
   npm install
   ```
-  * Start the server:
+  * Start the Nodejs server:
   <br><br>
   ```
   node server.js
