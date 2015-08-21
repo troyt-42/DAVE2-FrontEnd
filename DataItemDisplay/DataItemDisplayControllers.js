@@ -45,8 +45,8 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   vm.dataItemListCurrentPage = 1;
   vm.dataItemListTableColumns = [
     {name: "name", status: true, index: 0},
-    {name:  "location", status: true, index: 1},
-    {name:  "note", status: true, index: 2},
+    {name: "location", status: true, index: 1},
+    {name: "note", status: true, index: 2},
     {name: "precision", status: true, index: 3},
     {name: "unit", status: true, index: 4}
   ];
@@ -81,7 +81,7 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
   /////////////////
 
   function activate(){
-    $cookies.remove('dataItemListTableColumns');
+    // $cookies.remove('dataItemListTableColumns');
     if($cookies.getObject('dataItemListTableColumns') === undefined){
       $cookies.putObject('dataItemListTableColumns', vm.dataItemListTableColumns);
     }
@@ -200,6 +200,7 @@ function DaveDataItemDisplayListPageCtrl($scope, $timeout,$compile,$cookies, Dat
     vm.avaliableDataItemTableColumns.push({index: index + 1, value: vm.dataItemListTableColumns[index].name, newIndex : index + 1});
     console.log(vm.avaliableDataItemTableColumns);
     $cookies.putObject('dataItemListTableColumns', vm.dataItemListTableColumns);
+
     $cookies.putObject('avaliableDataItemTableColumns', vm.avaliableDataItemTableColumns);
   }
 
