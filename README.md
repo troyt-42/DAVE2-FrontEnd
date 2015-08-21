@@ -125,7 +125,12 @@ For the sake of clearity, this project follows the stylling rules created by [jo
   node server.js
   Express server is listenning at 3000
   ```
-  
+  Note: To let the socket be able to connect to correct io server, there are serveral places that need to be changed according to the ip address of the server:
+  -  DataItemDisplay/DataItemDisplayServices.js 10:34
+  -  Importer/ImporterServices.js 70:34
+  -  Dave2Services.js 11:34
+  -  Dave2Services.js 19:34
+ 
 ##Data Flow Through Sockets in NodeJS
 
 ![Data Flow Through Sockets in NodeJS](https://github.com/watrool/DAVE2_Front_End_Documents/blob/master/DAVE2%20Angular%20Structure.jpg)
